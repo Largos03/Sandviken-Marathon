@@ -51,9 +51,9 @@
 			<div>
 				<h3 class="text-xl font-bold mb-2">Follow Us</h3>
 				<div class="flex space-x-4">
-					<a href="#" class="text-blue-600 hover:text-blue-800">Facebook</a>
-					<a href="#" class="text-blue-400 hover:text-blue-600">Twitter</a>
-					<a href="#" class="text-pink-600 hover:text-pink-800">Instagram</a>
+					<a href="https://facebook.com" class="text-blue-600 hover:text-blue-800">Facebook</a>
+					<a href="https://twitter.com" class="text-blue-400 hover:text-blue-600">Twitter</a>
+					<a href="https://instagram.com" class="text-pink-600 hover:text-pink-800">Instagram</a>
 				</div>
 			</div>
 		</div>

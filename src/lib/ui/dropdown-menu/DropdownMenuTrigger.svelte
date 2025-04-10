@@ -6,11 +6,23 @@
     function toggleDropdown() {
         $dropdownOpen = !$dropdownOpen;
     }
+
+    function handleKeyDown(event) {
+        // Toggle on Enter or Space key
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            toggleDropdown();
+        }
+    }
 </script>
 
-<div 
+<button 
+    type="button"
     on:click={toggleDropdown}
-    class="inline-flex cursor-pointer"
+    on:keydown={handleKeyDown}
+    aria-expanded={$dropdownOpen}
+    aria-haspopup="true"
+    class="inline-flex cursor-pointer border-none bg-transparent p-0"
 >
     <slot />
-</div> 
+</button> 

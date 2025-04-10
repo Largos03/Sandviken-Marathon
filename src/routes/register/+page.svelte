@@ -4,7 +4,7 @@
 </div>
 
 <style>
-    h1, h2 {
+    h1 {
         color: #333;
     }
     

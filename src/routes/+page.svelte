@@ -21,7 +21,7 @@
   
   <section class="course-details">
     <h2>The Course</h2>
-    <img src="/sandviken map.jpg" alt="Map of Sandviken" style="display: block; height: 300px; width: 500px; align-self: center; margin: 0 auto;" />
+    <img src="/sandviken-map.jpg" alt="Map of Sandviken" style="display: block; height: 300px; width: 500px; align-self: center; margin: 0 auto;" />
     <p>
       Experience a scenic route that showcases the beauty of Sandviken, passing iconic landmarks and picturesque landscapes.
     </p>

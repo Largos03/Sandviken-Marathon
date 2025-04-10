@@ -50,6 +50,8 @@ body {
   .hero {
     position: relative;
     height: 90vh;
+    margin-top: 0;
+    padding-top: 0;
     background-image: url('/running.gif'); /* Replace with a real image */
     background-size: cover;
     background-position: center;

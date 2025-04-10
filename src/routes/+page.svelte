@@ -2,7 +2,7 @@
     // Add JavaScript here if needed
   </script>
   
-  <section class="hero"></section>
+  <section class="hero" style="margin-top: 0; padding-top: 0;"></section>
   
   <div class="hero-content" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
     <h1>SANDVIKEN MARATHON</h1>

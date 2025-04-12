@@ -1,11 +1,9 @@
 <script>
-    import { createEventDispatcher } from 'svelte';
+    import { dispatch } from 'svelte';
     import { writable } from 'svelte/store';
 
     export let open = false;
 
-    const dispatch = createEventDispatcher();
-    
     export const dropdownOpen = writable(open);
     
     // Watch for changes to the open prop

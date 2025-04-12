@@ -4,12 +4,12 @@
   
   <section class="hero" style="margin-top: 0; padding-top: 0;"></section>
   
-  <div class="hero-content" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+  <div class="hero-content">
     <h1>SANDVIKEN MARATHON</h1>
-    <p style="font-size: 20px">Mar 01, 2025</p>
+    <p>Mar 01, 2025</p>
   </div>
 
-<div class="container" >
+<div class="container">
 
   <section class="event-details">
     <h2>About the Race</h2>
@@ -21,7 +21,7 @@
   
   <section class="course-details">
     <h2>The Course</h2>
-    <img src="/sandviken-map.jpg" alt="Map of Sandviken" style="display: block; height: 300px; width: 500px; align-self: center; margin: 0 auto;" />
+    <img src="/sandviken-map.jpg" alt="Map of Sandviken" />
     <p>
       Experience a scenic route that showcases the beauty of Sandviken, passing iconic landmarks and picturesque landscapes.
     </p>

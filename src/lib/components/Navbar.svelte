@@ -74,7 +74,7 @@
 </script>
 
 <!-- Enhanced navbar with improved translucent styling -->
-<div id="navbar" style="position: fixed; top: 0; left: 0; width: 100%; background-color: rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px); box-shadow: 0 4px 20px rgba(0,0,0,0.02); border-bottom: 1px solid rgba(255, 255, 255, 0.1); z-index: 999; padding: 5px 15px; transition: transform 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;">
+<div id="navbar" style="position: sticky; top: 0; left: 0; width: 100%; background-color: rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px); box-shadow: 0 4px 20px rgba(0,0,0,0.02); border-bottom: 1px solid rgba(255, 255, 255, 0.1); z-index: 999; padding: 5px 15px; transition: transform 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;">
   <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; position: relative;">
     <!-- Logo (left-aligned) -->
     <div style="position: relative; left: 0; display: flex; align-items: center;">

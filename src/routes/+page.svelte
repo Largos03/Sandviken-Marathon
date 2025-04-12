@@ -10,7 +10,6 @@
     faChevronRight,
     faClock
   } from '@fortawesome/free-solid-svg-icons';
-  import './home.css';
   
   let visible = false;
   
@@ -213,40 +212,18 @@
     </div>
     
     <div class="results-slider">
-      <div class="result-card">
-        <div class="result-year">2026</div>
-        <div class="result-details">
-          <div class="result-category">Event Highlights</div>
-          <div class="winner-name">IAAF Certified Course</div>
-          <div class="winner-time">
-            <FontAwesomeIcon icon={faClock} />
-            <span>April 1, 2026</span>
-          </div>
-          <div class="winner-badge">Inaugural</div>
-        </div>
-      </div>
+      <div class="result-year-badge">2026</div>
+      <h3>Don't Miss This Historic Opportunity</h3>
+      <p>Join us for the inaugural Sandviken Marathon and become one of our founding participants. Limited spots available.</p>
       
-      <div class="result-card">
-        <div class="result-year">2026</div>
-        <div class="result-details">
-          <div class="result-category">Premium Experience</div>
-          <div class="winner-name">Professional Timing & Support</div>
-          <div class="winner-time">
-            <FontAwesomeIcon icon={faClock} />
-            <span>Live Tracking</span>
-          </div>
+      <div class="inaugural-highlights">
+        <div class="highlight-item">
+          <h4>Premium Experience</h4>
+          <p>Professional timing, live tracking and full route support</p>
         </div>
-      </div>
-      
-      <div class="result-card">
-        <div class="result-year">2026</div>
-        <div class="result-details">
-          <div class="result-category">Special Recognition</div>
-          <div class="winner-name">Founding Participants Medal</div>
-          <div class="winner-time">
-            <FontAwesomeIcon icon={faClock} />
-            <span>Limited Edition</span>
-          </div>
+        <div class="highlight-item">
+          <h4>Special Recognition</h4>
+          <p>Exclusive founding participant medal and certificate</p>
         </div>
       </div>
     </div>
@@ -270,6 +247,8 @@
 </section>
 
 <style>
+  @import './home.css';
+  
   /* Styles for FontAwesome icons in Svelte components */
   .date-badge :global(svg) {
     margin-right: 0.75rem;

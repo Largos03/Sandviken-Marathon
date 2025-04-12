@@ -14,13 +14,15 @@
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);    /* Small shadow */
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);     /* Medium shadow */
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);   /* Large shadow */
+  --section-spacing: 5rem;      /* Reduced from 10rem to 7rem */
+  --card-spacing: 1.5rem;          /* Spacing between cards */
 }
 
 /* Hero Section */
 /* Styles for the main hero banner at the top of the page */
 .hero-section {
   position: relative;
-  height: 100vh;                 /* Full viewport height */
+  height: 90vh;                 /* Full viewport height */
   width: 100%;
   background-image: url('/running.gif');  /* Background image of runners */
   background-size: cover;
@@ -48,12 +50,12 @@
   position: relative;
   z-index: 2;                    /* Position above the overlay */
   text-align: center;
-  max-width: 850px;
+  max-width: 800px;
   width: 90%;
-  padding: 3.5rem 3rem;
+  padding: 3rem 2.5rem;          /* Increased padding */
   backdrop-filter: blur(3px);    /* Slight blur effect for depth */
   background-color: rgba(0,0,0,0.3);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   border: 1px solid rgba(255,255,255,0.1);
   opacity: 0;                    /* Start invisible for animation */
   transform: translateY(20px);   /* Start slightly below for animation */
@@ -70,7 +72,7 @@
 /* "Official Event" badge at top of hero content */
 .hero-badge {
   position: absolute;
-  top: -15px;
+  top: -15px;                    /* Positioned higher */
   left: 50%;
   transform: translateX(-50%);   /* Center horizontally */
   background-color: var(--highlight-color);
@@ -85,11 +87,11 @@
 }
 
 .hero-content h1 {
-  font-size: 4.5rem;
+  font-size: 4rem;
   font-weight: 800;
-  letter-spacing: 3px;
-  margin-top: 1.5rem;
-  margin-bottom: 1.75rem;
+  letter-spacing: 2px;
+  margin-top: 1.5rem;              /* More space at top */
+  margin-bottom: 1.5rem;           /* More space at bottom */
   text-shadow: 0 2px 4px rgba(0,0,0,0.3);
   background: linear-gradient(to right, white, #e6e6e6);
   -webkit-background-clip: text;
@@ -103,11 +105,11 @@
   align-items: center;
   background-color: var(--highlight-color);
   color: var(--primary-color);
-  padding: 0.65rem 1.75rem;
+  padding: 0.6rem 1.5rem;
   border-radius: 50px;
   font-weight: 700;
-  font-size: 1.35rem;
-  margin-bottom: 1.75rem;
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;           /* More space below */
   box-shadow: var(--shadow-md);
 }
 
@@ -116,8 +118,8 @@
 }
 
 .hero-subtitle {
-  font-size: 1.35rem;
-  margin-bottom: 2.5rem;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;           /* More space below */
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
@@ -126,16 +128,16 @@
 
 .hero-cta {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.25rem;
   justify-content: center;
-  margin-bottom: 3.5rem;
+  margin-bottom: 3rem;           /* More space below */
 }
 
 .cta-button {
-  padding: 1rem 2.25rem;
+  padding: 0.875rem 2rem;
   border-radius: 50px;
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1rem;
   text-decoration: none;
   transition: all 0.3s ease;
   display: inline-block;
@@ -166,15 +168,15 @@
 
 .countdown-timer {
   display: flex;
-  gap: 1.25rem;
+  gap: 1rem;
   justify-content: center;
 }
 
 .countdown-item {
   background-color: rgba(0, 0, 0, 0.6);
-  padding: 1rem 0.5rem;
+  padding: 0.875rem 0.5rem;
   border-radius: var(--radius-md);
-  min-width: 90px;
+  min-width: 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -183,13 +185,13 @@
 }
 
 .count {
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: 700;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.25rem;
 }
 
 .label {
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   opacity: 0.8;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -197,7 +199,7 @@
 
 .scroll-indicator {
   position: absolute;
-  bottom: 30px;
+  bottom: 25px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
@@ -241,9 +243,9 @@
 /* Styles for the information section with feature cards */
 .info-section {
   background-color: var(--bg-light);
-  padding: 8rem 0;
-  opacity: 0;                   /* Start invisible for animation */
-  transform: translateY(20px);  /* Start slightly below for animation */
+  padding: var(--section-spacing) 0;
+  opacity: 0;
+  transform: translateY(20px);
   transition: opacity 0.8s ease, transform 0.8s ease;
   position: relative;
   border-bottom: 1px solid rgba(0,0,0,0.05);
@@ -257,83 +259,110 @@
 
 /* Container for content sections */
 .container {
-  max-width: 1240px;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 0 30px;
+  padding: 0 1.5rem;
   overflow: visible;
 }
 
-/* Section header styling - used in multiple sections */
+/* Section header styling */
 .section-header {
   text-align: center;
-  max-width: 900px;
-  margin: 0 auto 4.5rem;
+  max-width: 700px;
+  margin: 0 auto 3rem;
 }
 
 .section-header h2 {
-  font-size: 2.75rem;
+  font-size: 2.25rem;
   font-weight: 800;
   color: var(--primary-color);
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.875rem;
   line-height: 1.2;
 }
 
 /* Yellow divider line below section titles */
 .section-divider {
-  width: 80px;
-  height: 4px;
+  width: 50px;
+  height: 3px;
   background-color: var(--highlight-color);
-  margin: 0 auto 1.75rem;
+  margin: 0 auto 1rem;
 }
 
 .section-intro {
-  font-size: 1.2rem;
+  font-size: 1.05rem;
   color: var(--text-secondary);
-  line-height: 1.7;
-  max-width: 800px;
+  line-height: 1.6;
+  max-width: 650px;
   margin: 0 auto;
 }
 
-/* Grid layout for feature cards - 1 column on mobile, 3 on desktop */
+/* Grid layout for feature cards */
 .feature-cards {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  gap: 2.5rem;
-  margin-top: 8rem; /* Increased to accommodate the overlapping icons */
-  align-items: stretch; /* Ensure all cards have the same height */
+  gap: var(--card-spacing);
+  margin-top: 2.5rem;
+  align-items: stretch;
 }
 
 @media (min-width: 768px) {
   .feature-cards {
-    grid-template-columns: repeat(3, 1fr); /* 3 columns on larger screens */
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--card-spacing);
   }
 }
 
 /* Individual feature card styling */
 .feature-card {
-  background-color: #ffffff; /* White card background */
-  border-radius: 12px; /* Slightly larger border radius */
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
   display: flex;
   flex-direction: column;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
-  overflow: visible; /* Changed to visible to show the icon */
+  overflow: visible;
   border: 1px solid rgba(0,0,0,0.05);
-  height: 100%; /* Full height to ensure all cards are equal */
-  margin-top: 40px; /* Space for the icon */
+  height: 100%;
+  margin-top: 35px;
   text-align: center;
+  width: 100%;
 }
 
 /* Content wrapper inside feature card */
 .card-content {
-  padding: 4rem 2rem 1.5rem; /* Increased top padding for icon space */
-  flex: 1; /* Take up available space */
+  padding: 3rem 1.75rem 1.25rem;
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   text-align: center;
+}
+
+/* Circular icon at the top of each feature card */
+.feature-icon {
+  width: 60px;
+  height: 60px;
+  background-color: #000000;
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.375rem;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+/* Scale up icon on hover */
+.feature-card:hover .feature-icon {
+  transform: translateX(-50%) scale(1.05);
 }
 
 /* Yellow highlight bar that appears on hover */
@@ -343,65 +372,44 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 4px; /* Slightly thicker highlight bar */
+  height: 3px;
   background-color: var(--highlight-color);
-  opacity: 0; /* Hidden by default */
+  opacity: 0;
   transition: opacity 0.3s ease;
 }
 
 /* Hover effect for feature cards */
 .feature-card:hover {
-  transform: translateY(-8px); /* Slight upward movement on hover */
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12); /* Stronger shadow on hover */
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
 }
 
 .feature-card:hover::after {
-  opacity: 1; /* Show yellow highlight bar on hover */
-}
-
-/* Circular icon at the top of each feature card */
-.feature-icon {
-  width: 80px; /* Larger icon */
-  height: 80px;
-  background-color: #000000; /* Black circle */
-  color: #ffffff; /* White icon */
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem; /* Larger icon size */
-  transition: transform 0.3s ease;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15); /* Better shadow */
-  position: absolute;
-  top: -40px; /* Position icon to overlap top of card */
-  left: 50%;
-  transform: translateX(-50%); /* Center horizontally */
-  z-index: 2; /* Stay above card */
-}
-
-/* Scale up icon on hover */
-.feature-card:hover .feature-icon {
-  transform: translateX(-50%) scale(1.1); /* Keep centered while scaling */
+  opacity: 1;
 }
 
 /* Feature card title styling */
 .feature-card h3 {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
   margin-top: 0.5rem;
-  margin-bottom: 1rem;
-  color: #000000;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
   text-align: center;
+  line-height: 1.3;
 }
 
 /* Feature card description text */
 .feature-card p {
-  color: #4b5563; /* Gray text color */
-  margin-bottom: 2rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
   line-height: 1.6;
-  font-size: 1rem;
-  flex: 1; /* Take up available space */
+  font-size: 0.925rem;
+  flex: 1;
   text-align: center;
+  word-wrap: break-word;
+  hyphens: auto;
+  max-width: 100%;
 }
 
 /* Link at the bottom of each feature card */
@@ -409,26 +417,26 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #000000;
+  color: var(--text-primary);
   font-weight: 600;
   text-decoration: none;
   transition: color 0.2s ease;
-  padding: 1.25rem 2rem;
-  border-top: 1px solid rgba(0,0,0,0.1); /* Slightly darker separator */
-  font-size: 1.05rem;
+  padding: 0.875rem 1.5rem;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  font-size: 0.925rem;
   width: 100%;
-  margin-top: auto; /* Push to bottom of card */
-  background: rgba(0,0,0,0.01); /* Very subtle background */
+  margin-top: auto;
+  background: rgba(0,0,0,0.01);
 }
 
 .feature-link:hover {
-  color: var(--highlight-color);  /* Yellow text on hover */
+  color: var(--highlight-color);
 }
 
 /* Arrow icon in feature link */
 .feature-link svg {
   margin-left: 0.5rem;
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   transition: transform 0.2s ease;
 }
 
@@ -440,10 +448,10 @@
 /* Course Section */
 /* Styles for the course preview section with map */
 .course-section {
-  padding: 8rem 0;
-  background-color: var(--accent-color);  /* White background */
-  opacity: 0;                   /* Start invisible for animation */
-  transform: translateY(20px);  /* Start slightly below for animation */
+  padding: var(--section-spacing) 0;
+  background-color: var(--accent-color);
+  opacity: 0;
+  transform: translateY(20px);
   transition: opacity 0.8s ease, transform 0.8s ease;
   border-bottom: 1px solid rgba(0,0,0,0.05);
 }
@@ -457,40 +465,40 @@
 .course-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 4rem;
+  gap: 2.5rem;
   align-items: center;
-  margin-top: 4rem;
+  margin-top: 2rem;
 }
 
 @media (min-width: 768px) {
   .course-grid {
-    grid-template-columns: 1fr 1fr;  /* Two columns on desktop */
+    grid-template-columns: 1fr 1fr;
   }
 }
 
 /* Introduction text for course section */
 .course-intro {
-  font-size: 1.2rem;
-  margin-bottom: 2.5rem;
+  font-size: 1.05rem;
+  margin-bottom: 1.75rem;
   color: var(--text-secondary);
-  line-height: 1.7;
+  line-height: 1.6;
   text-align: center;
 }
 
 /* Box containing course features/highlights */
 .course-features {
-  background-color: var(--bg-light);  /* Light gray background */
-  padding: 2rem;
-  border-radius: var(--radius-lg);
-  margin-bottom: 2.5rem;
-  border-left: 4px solid var(--highlight-color);  /* Yellow accent border */
+  background-color: var(--bg-light);
+  padding: 1.5rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 1.5rem;
+  border-left: 3px solid var(--highlight-color);
 }
 
 /* Individual course feature item */
 .course-feature {
   display: flex;
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .course-feature:last-child {
@@ -499,16 +507,17 @@
 
 /* Yellow bullet point for each feature */
 .feature-bullet {
-  width: 12px;
-  height: 12px;
+  width: 8px;
+  height: 8px;
   background-color: var(--highlight-color);
   border-radius: 50%;
-  margin-right: 1.25rem;
+  margin-right: 0.875rem;
+  flex-shrink: 0;
 }
 
 /* Text for each course feature */
 .course-feature span {
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   color: var(--text-primary);
   line-height: 1.5;
 }
@@ -516,23 +525,24 @@
 /* Button to view detailed course map */
 .course-btn {
   display: inline-block;
-  padding: 1rem 2.25rem;
-  background-color: var(--primary-color);  /* Black button */
-  color: var(--accent-color);              /* White text */
+  padding: 0.875rem 2rem;
+  background-color: var(--primary-color);
+  color: var(--accent-color);
   text-decoration: none;
   font-weight: 600;
   border-radius: 50px;
   transition: all 0.3s ease;
   letter-spacing: 0.5px;
   box-shadow: var(--shadow-md);
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   text-align: center;
+  margin-top: 1rem;
 }
 
 .course-btn:hover {
-  background-color: var(--secondary-color);  /* Slightly lighter on hover */
-  transform: translateY(-3px);               /* Slight upward movement */
-  box-shadow: var(--shadow-lg);              /* Stronger shadow */
+  background-color: var(--secondary-color);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
 }
 
 /* Center the course content on mobile */
@@ -546,10 +556,22 @@
 @media (min-width: 768px) {
   .course-content {
     align-items: flex-start;
+    text-align: left;
+    padding-right: 2rem;      /* Add spacing between columns */
   }
   
   .course-intro {
     text-align: left;
+  }
+  
+  /* Make sure text is properly aligned in cards */
+  .feature-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .feature-card p {
+    line-height: 1.6;
   }
 }
 
@@ -561,9 +583,9 @@
   box-shadow: var(--shadow-lg);
   transform: perspective(800px) rotateY(-5deg);  /* 3D effect */
   transition: transform 0.5s ease;
-  border: 6px solid white;
+  border: 8px solid white;     /* Thicker border */
   width: 100%;
-  margin: 0 auto;
+  margin: 2rem auto 0;         /* Add top margin */
   max-width: 500px;
 }
 
@@ -574,6 +596,7 @@
 @media (min-width: 768px) {
   .course-map {
     max-width: none;
+    margin-top: 0;
   }
 }
 
@@ -592,17 +615,17 @@
 /* Stats overlay on the map */
 .map-overlay {
   position: absolute;
-  bottom: 25px;
-  right: 25px;
+  bottom: 30px;              /* Position lower */
+  right: 30px;               /* Position further right */
   display: flex;
-  gap: 1.25rem;
+  gap: 1.5rem;               /* More space between stats */
 }
 
 /* Individual stat box on the map */
 .map-stat {
   background-color: rgba(0, 0, 0, 0.8);
   color: var(--accent-color);
-  padding: 0.85rem 1.25rem;
+  padding: 1rem 1.5rem;      /* More padding */
   border-radius: var(--radius-md);
   text-align: center;
   box-shadow: var(--shadow-md);
@@ -612,15 +635,15 @@
 /* Value in the stat box (e.g., 42.2) */
 .stat-value {
   display: block;
-  font-size: 1.75rem;
+  font-size: 2rem;           /* Larger value */
   font-weight: 700;
   line-height: 1;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.5rem;     /* More space below */
 }
 
 /* Label in the stat box (e.g., KM) */
 .stat-label {
-  font-size: 0.85rem;
+  font-size: 0.9rem;         /* Slightly larger text */
   opacity: 0.8;
   letter-spacing: 1px;
 }
@@ -628,12 +651,13 @@
 /* Results Section */
 /* Styles for the inaugural event cards section (black background) */
 .results-section {
-  background-color: var(--primary-color);  /* Black background */
-  color: var(--accent-color);              /* White text */
-  padding: 8rem 0;
-  opacity: 0;                   /* Start invisible for animation */
-  transform: translateY(20px);  /* Start slightly below for animation */
+  padding: var(--section-spacing);
+  background-color: var(--primary-color);
+  color: var(--accent-color);
+  opacity: 0;
+  transform: translateY(20px);
   transition: opacity 0.8s ease, transform 0.8s ease;
+  text-align: center;
 }
 
 .results-section.visible {
@@ -641,479 +665,388 @@
   transform: translateY(0);    /* Move to final position when visible */
 }
 
-/* Override header colors for dark background */
-.results-section .section-header h2,
-.results-section .section-intro {
-  color: var(--accent-color);  /* White text on dark background */
-}
-
-.results-section .section-divider {
-  background-color: var(--highlight-color);  /* Yellow divider */
-}
-
-/* Grid layout for result cards */
+/* Replace the card grid with a more compact and impactful CTA layout */
 .results-slider {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);  /* Single column on mobile */
-  gap: 2rem;
-  margin: 4rem 0;
-  align-items: stretch;
-}
-
-@media (min-width: 768px) {
-  .results-slider {
-    grid-template-columns: repeat(3, 1fr);  /* Three columns on desktop */
-    align-items: stretch;
-  }
-}
-
-/* Individual result card */
-.result-card {
-  background-color: rgba(255, 255, 255, 0.05);  /* Slightly lighter than background */
-  border-radius: 12px;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-}
-
-.result-card:hover {
-  transform: translateY(-8px);   /* Slight upward movement on hover */
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);  /* Stronger shadow */
-  background-color: rgba(255, 255, 255, 0.08);  /* Slightly lighter on hover */
-}
-
-/* Year header at the top of each result card */
-.result-year {
-  background-color: var(--highlight-color);  /* Yellow background */
-  color: var(--primary-color);               /* Black text */
-  font-weight: 700;
-  padding: 0.75rem 1.25rem;
-  font-size: 1.25rem;
-  position: relative;
-  text-align: center;
-}
-
-/* Arrow shape pointing down from the year header */
-.result-year::after {
-  content: '';
-  position: absolute;
-  bottom: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-top: 8px solid var(--highlight-color);  /* Creates a yellow triangle */
-}
-
-/* Main content area of the result card */
-.result-details {
+  margin: 2rem 0;
   padding: 2rem;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  align-items: center;
-  justify-content: flex-start;
-  text-align: center;
-}
-
-/* Category text (e.g., "Event Highlights") */
-.result-category {
-  font-size: 0.9rem;
-  opacity: 0.7;
-  margin-bottom: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-/* Main heading in the result card */
-.winner-name {
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin-bottom: 1.25rem;
-  line-height: 1.3;
-  text-align: center;
-}
-
-/* Time/date display with icon */
-.winner-time {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.25rem;
-  font-weight: 500;
-  margin-top: auto;
-  width: 100%;
-  text-align: center;
-}
-
-.winner-time svg {
-  margin-right: 0.75rem;
-  opacity: 0.7;
-}
-
-/* "Inaugural" badge on the first card */
-.winner-badge {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background-color: rgba(255, 230, 0, 0.9);  /* Semi-transparent yellow */
-  color: var(--primary-color);
-  padding: 0.35rem 0.8rem;
+  background-color: white;
   border-radius: var(--radius-md);
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  box-shadow: var(--shadow-md);
+  text-align: center;
 }
 
-/* Container for the "Register Now" button */
+.result-year-badge {
+  display: inline-block;
+  background-color: var(--highlight-color);
+  color: var(--primary-color);
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 0.4rem 1.2rem;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+}
+
+.results-slider h3 {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+  color: var(--primary-color);
+}
+
+.results-slider p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.inaugural-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.highlight-item {
+  flex: 1;
+  min-width: 280px;
+  max-width: 400px;
+  padding: 1.5rem;
+  background-color: var(--bg-light);
+  border-radius: var(--radius-md);
+}
+
+.highlight-item h4 {
+  color: var(--primary-color);
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.highlight-item p {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
 .results-action {
   text-align: center;
-  margin-top: 4rem;
+  margin-top: 2rem;
 }
 
-/* "Register Now" button */
 .view-all-btn {
   display: inline-block;
-  padding: 1rem 2.5rem;
-  background-color: transparent;
-  color: var(--accent-color);    /* White text */
-  border: 2px solid var(--accent-color);  /* White border */
+  background-color: var(--highlight-color);
+  color: var(--primary-color);
+  font-weight: bold;
+  padding: 1rem 2rem;
+  border-radius: 30px;
   text-decoration: none;
-  font-weight: 600;
-  border-radius: 50px;
-  transition: all 0.3s ease;
-  letter-spacing: 0.75px;
   font-size: 1.1rem;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: var(--shadow-md);
 }
 
 .view-all-btn:hover {
-  background-color: var(--accent-color);  /* White background on hover */
-  color: var(--primary-color);            /* Black text on hover */
-  transform: translateY(-3px);            /* Slight upward movement */
-  box-shadow: var(--shadow-lg);           /* Shadow on hover */
+  background-color: var(--secondary-color);
+  color: var(--accent-color);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Remove the old result card styles that are no longer needed */
+.result-card {
+  display: none;
 }
 
 /* CTA Section */
-/* Styles for the call-to-action section with registration button */
+/* Styles for the call-to-action section at the bottom */
 .cta-section {
-  background-image: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url('/running.gif');  /* Dark overlay on background image */
+  position: relative;
+  padding: var(--section-spacing) 0;
+  background-color: var(--primary-color);
+  background-image: linear-gradient(45deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.7) 100%), url('/running.gif');
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;  /* Parallax effect */
-  padding: 10rem 0;
+  color: var(--accent-color);
   text-align: center;
-  color: var(--accent-color);    /* White text */
-  opacity: 0;                    /* Start invisible for animation */
-  transform: translateY(20px);   /* Start slightly below for animation */
+  opacity: 0;
+  transform: translateY(20px);
   transition: opacity 0.8s ease, transform 0.8s ease;
-  position: relative;
 }
 
-/* Gradient line at the top of the CTA section */
+/* Overlay for the CTA section */
 .cta-section::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  height: 5px;
-  background: linear-gradient(to right, transparent, var(--highlight-color), transparent);  /* Fade in/out yellow line */
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) 100%);
+  z-index: 1;
 }
 
 .cta-section.visible {
   opacity: 1;
-  transform: translateY(0);     /* Move to final position when visible */
+  transform: translateY(0);
 }
 
-/* Main content container for CTA */
+/* Content container for the CTA */
 .cta-content {
   position: relative;
-  max-width: 750px;
+  z-index: 2;
+  max-width: 550px;
   margin: 0 auto;
-  padding: 4rem 3.5rem;
-  background-color: rgba(0, 0, 0, 0.5);  /* Semi-transparent background */
-  border-radius: var(--radius-lg);
-  backdrop-filter: blur(10px);   /* Blur effect for depth */
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
-  text-align: center;
+  padding: 2.25rem 2rem;
+  background-color: rgba(0,0,0,0.5);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  backdrop-filter: blur(5px);
 }
 
-/* "Limited Spots" badge at the top of CTA */
+/* "Limited Spots" badge */
 .cta-badge {
-  position: absolute;
-  top: -18px;
-  left: 50%;
-  transform: translateX(-50%);   /* Center horizontally */
-  background-color: var(--highlight-color);  /* Yellow background */
-  color: var(--primary-color);               /* Black text */
-  padding: 0.5rem 1.5rem;
-  border-radius: 50px;
+  display: inline-block;
+  background-color: var(--highlight-color);
+  color: var(--primary-color);
   font-weight: 700;
-  font-size: 0.95rem;
-  letter-spacing: 1.5px;
-  box-shadow: var(--shadow-md);
+  font-size: 0.875rem;
+  padding: 0.4rem 1.25rem;
+  border-radius: 50px;
+  margin-bottom: 1.25rem;
   text-transform: uppercase;
+  letter-spacing: 1.5px;
+  box-shadow: var(--shadow-sm);
 }
 
-/* Main heading in the CTA section */
+/* Main heading in CTA */
 .cta-content h2 {
-  font-size: 3rem;
+  font-size: 2.125rem;
   font-weight: 800;
-  margin-bottom: 1.5rem;
-  background: linear-gradient(to right, white, #e6e6e6);  /* Subtle gradient text */
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  background: linear-gradient(to right, white, #e6e6e6);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
-/* Description text in the CTA section */
+/* Paragraph text in CTA */
 .cta-content p {
-  font-size: 1.35rem;
-  margin-bottom: 3rem;
-  max-width: 550px;
+  font-size: 1.05rem;
+  margin-bottom: 1.75rem;
+  line-height: 1.6;
+  max-width: 450px;
   margin-left: auto;
   margin-right: auto;
-  line-height: 1.6;
 }
 
-/* Main registration button */
+/* Register button */
 .register-btn {
   display: inline-block;
-  padding: 1.15rem 3rem;
-  background-color: var(--highlight-color);  /* Yellow button */
-  color: var(--primary-color);               /* Black text */
-  text-decoration: none;
+  padding: 0.875rem 2.25rem;
+  background-color: var(--highlight-color);
+  color: var(--primary-color);
   font-weight: 700;
-  font-size: 1.35rem;
+  font-size: 1rem;
+  text-decoration: none;
   border-radius: 50px;
   transition: all 0.3s ease;
-  box-shadow: var(--shadow-md);
-  letter-spacing: 0.75px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 .register-btn:hover {
-  transform: translateY(-5px) scale(1.05);  /* Move up and grow slightly */
-  box-shadow: var(--shadow-lg);             /* Stronger shadow */
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
 /* Responsive adjustments */
 /* Styles for tablets and smaller screens */
 @media (max-width: 768px) {
-  /* Reduce font sizes for smaller screens */
+  :root {
+    --section-spacing: 4rem;
+  }
+  
   .hero-content h1 {
-    font-size: 3.5rem;
+    font-size: 3.25rem;
   }
   
-  .hero-subtitle {
+  .section-header {
+    margin-bottom: 2.5rem;
+  }
+  
+  .section-header h2 {
+    font-size: 2rem;
+  }
+  
+  .feature-card {
+    margin-top: 30px;
+  }
+  
+  .feature-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.125rem;
+    top: -25px;
+  }
+  
+  .card-content {
+    padding: 2.5rem 1.5rem 1.25rem;
+  }
+  
+  .feature-card h3 {
     font-size: 1.2rem;
   }
   
-  .date-badge {
-    font-size: 1.2rem;
+  .feature-card p {
+    font-size: 0.9rem;
   }
   
-  /* Smaller countdown timer for tablets */
-  .countdown-item {
-    min-width: 75px;
-    padding: 0.75rem 0.5rem;
+  .feature-link {
+    padding: 0.75rem 1.25rem;
   }
   
-  .count {
+  .results-slider {
+    padding: 2rem 1.5rem;
+    margin: 2rem auto;
+  }
+  
+  .results-slider h3 {
     font-size: 1.75rem;
   }
   
-  /* Reduce heading sizes */
-  .section-header h2, 
-  .course-content h2, 
-  .results-section h2, 
+  .highlight-item {
+    min-width: 180px;
+  }
+  
   .cta-content h2 {
-    font-size: 2.5rem;
-  }
-  
-  /* Reduce padding on sections */
-  .course-section,
-  .info-section,
-  .results-section {
-    padding: 6rem 0;
-  }
-  
-  .cta-section {
-    padding: 8rem 0;
-  }
-  
-  /* Adjust CTA content for tablets */
-  .cta-content {
-    padding: 3.5rem 2.5rem;
-    max-width: 90%;
-  }
-  
-  .cta-content p {
-    font-size: 1.25rem;
-  }
-  
-  .register-btn {
-    font-size: 1.25rem;
-    padding: 1rem 2.5rem;
+    font-size: 1.875rem;
   }
 }
 
 /* Styles for mobile phones */
 @media (max-width: 480px) {
-  /* Adjust hero section for mobile */
+  :root {
+    --section-spacing: 3.5rem;
+  }
+  
+  .hero-section {
+    height: 85vh;
+  }
+  
   .hero-content {
-    padding: 2.5rem 1.75rem;
-    width: 95%;
+    padding: 2.5rem 1.5rem;
   }
   
   .hero-content h1 {
     font-size: 2.5rem;
-    margin-top: 1.5rem;
-    letter-spacing: 2px;
-  }
-  
-  .hero-subtitle {
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
   }
   
   .date-badge {
-    font-size: 1.1rem;
+    font-size: 1rem;
     padding: 0.5rem 1.25rem;
   }
   
-  /* Stack CTA buttons on mobile */
+  .hero-subtitle {
+    font-size: 1rem;
+    margin-bottom: 1.75rem;
+  }
+  
   .hero-cta {
     flex-direction: column;
-    margin-bottom: 2.5rem;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
   }
   
   .cta-button {
     width: 100%;
-    text-align: center;
-    margin-bottom: 0.75rem;
-    padding: 0.85rem 0;
-  }
-  
-  /* Adjust countdown timer for mobile */
-  .countdown-timer {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.75rem;
+    padding: 0.75rem 0;
+    font-size: 0.95rem;
   }
   
   .countdown-item {
     min-width: 65px;
-    margin-bottom: 0;
+    padding: 0.75rem 0.375rem;
   }
   
   .count {
     font-size: 1.5rem;
   }
   
-  /* Reduce section heading sizes for mobile */
-  .section-header h2, 
-  .cta-content h2 {
-    font-size: 2rem;
+  .label {
+    font-size: 0.75rem;
+  }
+  
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .section-header h2 {
+    font-size: 1.75rem;
   }
   
   .section-intro {
-    font-size: 1.05rem;
+    font-size: 0.95rem;
   }
   
-  /* Center align grid elements on mobile */
-  .feature-cards, .results-slider {
-    justify-items: center;
-  }
-  
-  /* Adjust feature cards for mobile */
-  .feature-card {
-    max-width: 320px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .feature-icon {
-    width: 65px;
-    height: 65px;
-    font-size: 1.5rem;
-    top: -32.5px;
-  }
-  
-  .card-content {
-    padding: 3rem 1.5rem 1rem;
+  .feature-cards {
+    gap: 1.5rem;
   }
   
   .feature-card h3 {
-    font-size: 1.4rem;
+    font-size: 1.1rem;
   }
   
   .feature-card p {
-    font-size: 1rem;
+    font-size: 0.875rem;
+    margin-bottom: 1.25rem;
   }
   
-  /* Adjust result cards for mobile */
-  .result-card {
-    max-width: 320px;
-    margin-left: auto;
-    margin-right: auto;
+  .inaugural-highlights {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
   }
   
-  .result-details {
-    padding: 1.75rem;
-  }
-  
-  .winner-name {
-    font-size: 1.4rem;
-  }
-  
-  .winner-time {
-    font-size: 1.1rem;
-  }
-  
-  /* Adjust course section for mobile */
-  .course-features {
-    padding: 1.5rem;
-  }
-  
-  .course-feature span {
-    font-size: 1rem;
-  }
-  
-  /* Make buttons full width on mobile */
-  .course-btn,
-  .view-all-btn {
+  .highlight-item {
     width: 100%;
-    text-align: center;
-    padding: 0.85rem 0;
-    font-size: 1rem;
+    max-width: 100%;
   }
   
-  /* Adjust CTA section for mobile */
+  .results-slider h3 {
+    font-size: 1.5rem;
+  }
+  
+  .register-btn, .course-btn, .view-all-btn {
+    width: 100%;
+    padding: 0.75rem 0;
+    font-size: 0.95rem;
+  }
+  
   .cta-content {
-    padding: 3rem 1.5rem;
-    width: 95%;
-    margin: 0 auto;
+    padding: 2rem 1.25rem;
+  }
+  
+  .cta-content h2 {
+    font-size: 1.625rem;
   }
   
   .cta-content p {
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
+    font-size: 0.95rem;
   }
-  
-  .register-btn {
-    width: 100%;
-    font-size: 1.2rem;
-    padding: 1rem 0;
-  }
+}
+
+/* Ensure button styles remain consistent */
+button, .btn, .cta-button, .register-btn, .view-all-btn, .course-btn {
+  cursor: pointer;
+  outline: none;
+  border: none;
 } 

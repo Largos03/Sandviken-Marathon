@@ -1,5 +1,4 @@
 <script>
-	import "./style.css";
 	import "../app.css";
 	import { Navbar } from "$lib";
 	import { FontAwesomeIcon as Fa } from '@fortawesome/svelte-fontawesome';

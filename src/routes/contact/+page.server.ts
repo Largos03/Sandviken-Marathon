@@ -11,15 +11,7 @@ type Actions = {
 
 export const load: PageServerLoad = async () => {
   // Initialize the form with empty values
-  const form = await superValidate(
-    {
-      name: '',
-      email: '',
-      subject: '',
-      message: ''
-    },
-    zod(contactSchema)
-  );
+  const form = await superValidate(zod(contactSchema));
   
   return { form };
 };

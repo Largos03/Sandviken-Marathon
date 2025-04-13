@@ -16,6 +16,7 @@
 	} from '@fortawesome/free-brands-svg-icons';
 	import type { SuperValidated } from 'sveltekit-superforms';
 	import type { z } from 'zod';
+	import { language, translations } from '$lib/stores/i18n.js';
 	
 	type FormData = {
 		name: string;
@@ -28,7 +29,17 @@
 		form: SuperValidated<FormData>;
 	}
 	
+	// Accept data from page.server.js
 	export let data: PageData;
+	
+	// Direct translation function
+	$: t = (key: string): string => {
+	  if (!translations[$language] || !translations[$language][key]) {
+	    // Fallback to English or just the key itself if not found
+	    return translations['en']?.[key] || key;
+	  }
+	  return translations[$language][key];
+	};
 	
 	// Track form status and touched fields
 	let formSubmitted = false;
@@ -66,10 +77,10 @@
 	$: message = $form?.message ?? '';
 
 	// Type assertion for error fields
-	$: nameError = $errors?.name ?? '';
-	$: emailError = $errors?.email ?? '';
-	$: subjectError = $errors?.subject ?? '';
-	$: messageError = $errors?.message ?? '';
+	$: nameError = $errors?.name ? String($errors.name) : '';
+	$: emailError = $errors?.email ? String($errors.email) : '';
+	$: subjectError = $errors?.subject ? String($errors.subject) : '';
+	$: messageError = $errors?.message ? String($errors.message) : '';
 	
 	// Create a safe constraints object
 	$: safeConstraints = {
@@ -86,7 +97,22 @@
 	
 	// Helper to determine if we should show an error
 	function shouldShowError(field: keyof typeof touchedFields, error: string) {
-		return (formSubmitted || touchedFields[field]) && error;
+		// Only show errors if the field has been touched or form was submitted
+		if ((formSubmitted || touchedFields[field]) && error) {
+			// Translate the error message
+			return true;
+		}
+		return false;
+	}
+	
+	// Translate error message
+	function translateError(error: string): string {
+		// If the error message is a translation key, translate it
+		if (error && translations[$language] && translations[$language][error]) {
+			return translations[$language][error];
+		}
+		// Otherwise return the original error
+		return error;
 	}
 </script>
 
@@ -95,8 +121,8 @@
 	<div class="hero-section">
 		<div class="container">
 			<div class="hero-content">
-				<h1>Contact Us</h1>
-				<p>We're here to help with any questions about the Sandviken Marathon</p>
+				<h1>{t('contactTitle')}</h1>
+				<p>{t('contactSubtitle')}</p>
 			</div>
 			<div class="hero-pattern"></div>
 		</div>
@@ -107,8 +133,8 @@
 			<!-- Contact Information Card -->
 			<div class="info-card">
 				<div class="card-header">
-					<h2>Get in Touch</h2>
-					<p>Have questions about the Sandviken Marathon? We're here to help!</p>
+					<h2>{t('getInTouch')}</h2>
+					<p>{t('contactDesc')}</p>
 				</div>
 				
 				<div class="contact-info">
@@ -117,7 +143,7 @@
 							<Fa icon={faEnvelope} />
 						</div>
 						<div class="info-content">
-							<h3>Email</h3>
+							<h3>{t('email')}</h3>
 							<p>info@sandvikenmarathon.se</p>
 						</div>
 					</div>
@@ -127,7 +153,7 @@
 							<Fa icon={faPhone} />
 						</div>
 						<div class="info-content">
-							<h3>Phone</h3>
+							<h3>{t('phone')}</h3>
 							<p>+46 (0) 123 456 789</p>
 						</div>
 					</div>
@@ -137,7 +163,7 @@
 							<Fa icon={faLocationDot} />
 						</div>
 						<div class="info-content">
-							<h3>Address</h3>
+							<h3>{t('address')}</h3>
 							<p>Marathon Office, Sandviken City Center, 811 80 Sandviken, Sweden</p>
 						</div>
 					</div>
@@ -147,15 +173,15 @@
 							<Fa icon={faClock} />
 						</div>
 						<div class="info-content">
-							<h3>Office Hours</h3>
-							<p>Monday to Friday: 9:00 - 17:00</p>
-							<p>Saturday and Sunday: Closed</p>
+							<h3>{t('officeHours')}</h3>
+							<p>{t('monToFri')}</p>
+							<p>{t('weekends')}</p>
 						</div>
 					</div>
 				</div>
 				
 				<div class="social-links">
-					<h3>Follow Us</h3>
+					<h3>{t('followUs')}</h3>
 					<div class="social-icons">
 						<a href="https://facebook.com" class="social-icon">
 							<Fa icon={faFacebookF} />
@@ -173,8 +199,8 @@
 			<!-- Contact Form Card -->
 			<div class="form-card">
 				<div class="card-header">
-					<h2>Send Us a Message</h2>
-					<p>Fill out the form below and we'll get back to you as soon as possible.</p>
+					<h2>{t('sendMessage')}</h2>
+					<p>{t('messageDesc')}</p>
 				</div>
 				
 				{#if showSuccess}
@@ -182,13 +208,13 @@
 						<svg class="success-icon" fill="currentColor" viewBox="0 0 20 20">
 							<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
 						</svg>
-						<p>Thank you for your message! We'll get back to you soon.</p>
+						<p>{t('successMessage')}</p>
 					</div>
 				{/if}
 				
 				<form method="POST" use:enhance class="contact-form">
 					<div class="form-group">
-						<label for="name">Name</label>
+						<label for="name">{t('formName')}</label>
 						<input 
 							type="text" 
 							id="name" 
@@ -196,16 +222,16 @@
 							bind:value={name}
 							class="form-input {shouldShowError('name', nameError) ? 'error' : ''}"
 							{...safeConstraints.name}
-							placeholder="Your name"
+							placeholder={t('formName')}
 							on:blur={() => handleBlur('name')}
 						/>
 						{#if shouldShowError('name', nameError)}
-							<p class="error-message">{nameError}</p>
+							<p class="error-message">{translateError(nameError)}</p>
 						{/if}
 					</div>
 					
 					<div class="form-group">
-						<label for="email">Email</label>
+						<label for="email">{t('formEmail')}</label>
 						<input 
 							type="email" 
 							id="email" 
@@ -213,16 +239,16 @@
 							bind:value={email}
 							class="form-input {shouldShowError('email', emailError) ? 'error' : ''}"
 							{...safeConstraints.email}
-							placeholder="Your email address"
+							placeholder={t('formEmail')}
 							on:blur={() => handleBlur('email')}
 						/>
 						{#if shouldShowError('email', emailError)}
-							<p class="error-message">{emailError}</p>
+							<p class="error-message">{translateError(emailError)}</p>
 						{/if}
 					</div>
 					
 					<div class="form-group">
-						<label for="subject">Subject</label>
+						<label for="subject">{t('formSubject')}</label>
 						<input 
 							type="text" 
 							id="subject" 
@@ -230,16 +256,16 @@
 							bind:value={subject}
 							class="form-input {shouldShowError('subject', subjectError) ? 'error' : ''}"
 							{...safeConstraints.subject}
-							placeholder="What is this regarding?"
+							placeholder={t('formSubject')}
 							on:blur={() => handleBlur('subject')}
 						/>
 						{#if shouldShowError('subject', subjectError)}
-							<p class="error-message">{subjectError}</p>
+							<p class="error-message">{translateError(subjectError)}</p>
 						{/if}
 					</div>
 					
 					<div class="form-group">
-						<label for="message">Message</label>
+						<label for="message">{t('formMessage')}</label>
 						<textarea 
 							id="message" 
 							name="message" 
@@ -247,11 +273,11 @@
 							rows="5" 
 							class="form-input {shouldShowError('message', messageError) ? 'error' : ''}"
 							{...safeConstraints.message}
-							placeholder="Your message here..."
+							placeholder={t('formMessage')}
 							on:blur={() => handleBlur('message')}
 						></textarea>
 						{#if shouldShowError('message', messageError)}
-							<p class="error-message">{messageError}</p>
+							<p class="error-message">{translateError(messageError)}</p>
 						{/if}
 					</div>
 					
@@ -260,7 +286,7 @@
 						class="submit-button"
 						disabled={formSubmitted}
 					>
-						{formSubmitted ? 'Sending...' : 'Send Message'}
+						{formSubmitted ? t('sending') : t('sendButton')}
 					</button>
 				</form>
 			</div>
@@ -447,6 +473,7 @@
 		background-color: #000;
 		color: white;
 		flex-shrink: 0;
+		border-radius: 50%;
 	}
 	
 	.info-content {
@@ -505,6 +532,7 @@
 		background-color: white;
 		border: 1px solid #eaeaea;
 		transition: all 0.2s ease;
+		border-radius: 50%;
 	}
 	
 	.social-icon:hover {
@@ -520,6 +548,7 @@
 		padding: 1rem;
 		margin-bottom: 1.5rem;
 		border: 1px solid #d0e9d0;
+		border-radius: 6px;
 	}
 	
 	.success-icon {
@@ -543,6 +572,7 @@
 		display: grid;
 		gap: 0.5rem;
 		width: 100%;
+		margin-bottom: 0;
 	}
 	
 	.form-group label {
@@ -551,6 +581,7 @@
 		color: #000;
 		text-transform: uppercase;
 		letter-spacing: 0.05em;
+		display: block;
 	}
 	
 	.form-input {
@@ -560,6 +591,7 @@
 		transition: all 0.2s ease;
 		background-color: #fff;
 		width: 100%;
+		border-radius: 0;
 	}
 	
 	.form-input:focus {

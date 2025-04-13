@@ -12,6 +12,19 @@
 		faDatabase,
 		faChevronRight
 	} from '@fortawesome/free-solid-svg-icons';
+	import { language, translations } from '$lib/stores/i18n.js';
+    import { T } from '$lib';
+    
+    // Accept data from page.server.js
+    export let data;
+    
+    // Direct translation function
+    $: t = (key) => {
+      if (!translations[$language] || !translations[$language][key]) {
+        return key;
+      }
+      return translations[$language][key];
+    };
 	
 	let visible = false;
 	
@@ -23,10 +36,10 @@
 <div class="privacy-page" in:fade>
 	<!-- Hero Section -->
 	<div class="hero-section">
-		<div class="container mx-auto px-4 py-16 md:py-24 text-center">
-			<h1 class="text-4xl md:text-6xl font-bold mb-6 text-white">Privacy Policy</h1>
-			<div class="w-24 h-1 bg-white mx-auto mb-6"></div>
-			<p class="text-lg md:text-xl max-w-2xl mx-auto leading-relaxed text-white">We value your privacy and are committed to protecting your personal information</p>
+		<div class="container mx-auto px-4 py-10 md:py-14 text-center">
+			<h1 class="text-4xl md:text-6xl font-bold mb-4">{t('privacyPolicy')}</h1>
+			<div class="w-24 h-1 bg-white mx-auto mb-4"></div>
+			<p class="text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">{t('privacyIntro')}</p>
 		</div>
 	</div>
 	
@@ -34,16 +47,16 @@
 	<div class="policy-wrapper">
 		<!-- Last Updated Badge -->
 		<div class="update-badge">
-			<span>Last updated: May 1, 2025</span>
+			<span>{t('privacyLastUpdated')} {t('privacyDate')}</span>
 		</div>
 		
 		<!-- Introduction -->
 		<section class="policy-card intro-card" class:visible>
 			<div class="card-content">
-				<h2>Introduction</h2>
-				<p class="mb-6">Sandviken Marathon ("we," "our," or "us") respects your privacy and is committed to protecting your personal data. This privacy policy will inform you about how we look after your personal data when you visit our website and tell you about your privacy rights.</p>
+				<h2>{t('privacyIntroTitle')}</h2>
+				<p class="mb-6">{t('privacyIntroText')}</p>
 				<div class="highlight-box">
-					<p>This document explains how we collect, use, and protect your personal information. By using our website, you agree to the terms outlined in this policy.</p>
+					<p>{t('privacyHighlight')}</p>
 				</div>
 			</div>
 			<div class="card-icon">
@@ -61,38 +74,38 @@
 					<div class="icon-wrapper small">
 						<FontAwesomeIcon icon={faUserLock} />
 					</div>
-					<h2>Information We Collect</h2>
+					<h2>{t('infoCollectTitle')}</h2>
 				</div>
 				<div class="card-body">
-					<p class="mb-6">We may collect the following types of information:</p>
+					<p class="mb-6">{t('infoCollectText')}</p>
 					<div class="info-grid">
 						<div class="info-item">
 							<div class="info-item-header">
 								<span class="info-number">01</span>
-								<h3>Personal Information</h3>
+								<h3>{t('personalInfoTitle')}</h3>
 							</div>
-							<p>Name, email address, phone number when you register for our events</p>
+							<p>{t('personalInfoText')}</p>
 						</div>
 						<div class="info-item">
 							<div class="info-item-header">
 								<span class="info-number">02</span>
-								<h3>Contact Information</h3>
+								<h3>{t('contactInfoTitle')}</h3>
 							</div>
-							<p>Details provided when you fill out our contact form</p>
+							<p>{t('contactInfoText')}</p>
 						</div>
 						<div class="info-item">
 							<div class="info-item-header">
 								<span class="info-number">03</span>
-								<h3>Technical Data</h3>
+								<h3>{t('technicalDataTitle')}</h3>
 							</div>
-							<p>IP address, browser type, operating system information</p>
+							<p>{t('technicalDataText')}</p>
 						</div>
 						<div class="info-item">
 							<div class="info-item-header">
 								<span class="info-number">04</span>
-								<h3>Usage Data</h3>
+								<h3>{t('usageDataTitle')}</h3>
 							</div>
-							<p>Information about how you interact with our website</p>
+							<p>{t('usageDataText')}</p>
 						</div>
 					</div>
 				</div>
@@ -104,18 +117,18 @@
 					<div class="icon-wrapper small">
 						<FontAwesomeIcon icon={faServer} />
 					</div>
-					<h2>How We Use Your Information</h2>
+					<h2>{t('infoUseTitle')}</h2>
 				</div>
 				<div class="card-body">
-					<p class="mb-6">We use your data for the following purposes:</p>
+					<p class="mb-6">{t('infoUseText')}</p>
 					<div class="usage-list">
 						<div class="usage-item">
 							<div class="usage-icon">
 								<span>01</span>
 							</div>
 							<div class="usage-content">
-								<h3>Event Registration</h3>
-								<p>To register you as a participant in our marathons and events</p>
+								<h3>{t('eventRegTitle')}</h3>
+								<p>{t('eventRegText')}</p>
 							</div>
 						</div>
 						<div class="usage-item">
@@ -123,8 +136,8 @@
 								<span>02</span>
 							</div>
 							<div class="usage-content">
-								<h3>Relationship Management</h3>
-								<p>To maintain our relationship with you and provide support</p>
+								<h3>{t('relationshipTitle')}</h3>
+								<p>{t('relationshipText')}</p>
 							</div>
 						</div>
 						<div class="usage-item">
@@ -132,8 +145,8 @@
 								<span>03</span>
 							</div>
 							<div class="usage-content">
-								<h3>Communication</h3>
-								<p>To send you information about our events and services</p>
+								<h3>{t('communicationTitle')}</h3>
+								<p>{t('communicationText')}</p>
 							</div>
 						</div>
 						<div class="usage-item">
@@ -141,8 +154,8 @@
 								<span>04</span>
 							</div>
 							<div class="usage-content">
-								<h3>Website Improvement</h3>
-								<p>To improve our website and services based on user experience</p>
+								<h3>{t('websiteImprovementTitle')}</h3>
+								<p>{t('websiteImprovementText')}</p>
 							</div>
 						</div>
 						<div class="usage-item">
@@ -150,8 +163,8 @@
 								<span>05</span>
 							</div>
 							<div class="usage-content">
-								<h3>Security</h3>
-								<p>To ensure the security and proper functioning of our website</p>
+								<h3>{t('securityTitle')}</h3>
+								<p>{t('securityText')}</p>
 							</div>
 						</div>
 					</div>
@@ -165,18 +178,18 @@
 				<div class="icon-wrapper small">
 					<FontAwesomeIcon icon={faCookieBite} />
 				</div>
-				<h2>Cookies</h2>
+				<h2>{t('cookiesTitle')}</h2>
 			</div>
 			<div class="card-body">
-				<p class="mb-6">Our website uses cookies to distinguish you from other users. This helps us provide you with a good experience and allows us to improve our site.</p>
+				<p class="mb-6">{t('cookiesText')}</p>
 				<div class="cookie-types">
 					<div class="cookie-type">
 						<div class="cookie-icon essential">
 							<span class="cookie-dot"></span>
 						</div>
 						<div class="cookie-content">
-							<h3>Essential</h3>
-							<p>Required for basic functionality</p>
+							<h3>{t('essentialTitle')}</h3>
+							<p>{t('essentialText')}</p>
 						</div>
 					</div>
 					<div class="cookie-type">
@@ -184,8 +197,8 @@
 							<span class="cookie-dot"></span>
 						</div>
 						<div class="cookie-content">
-							<h3>Functional</h3>
-							<p>Remember your preferences</p>
+							<h3>{t('functionalTitle')}</h3>
+							<p>{t('functionalText')}</p>
 						</div>
 					</div>
 					<div class="cookie-type">
@@ -193,8 +206,8 @@
 							<span class="cookie-dot"></span>
 						</div>
 						<div class="cookie-content">
-							<h3>Analytics</h3>
-							<p>Help us improve our website</p>
+							<h3>{t('analyticsTitle')}</h3>
+							<p>{t('analyticsText')}</p>
 						</div>
 					</div>
 					<div class="cookie-type">
@@ -202,12 +215,11 @@
 							<span class="cookie-dot"></span>
 						</div>
 						<div class="cookie-content">
-							<h3>Marketing</h3>
-							<p>Track your activities across websites</p>
+							<h3>{t('marketingTitle')}</h3>
+							<p>{t('marketingText')}</p>
 						</div>
 					</div>
 				</div>
-				<p class="mt-6">You can set your browser to refuse all or some browser cookies, or to alert you when websites set or access cookies.</p>
 			</div>
 		</section>
 		
@@ -219,32 +231,32 @@
 					<div class="icon-wrapper small">
 						<FontAwesomeIcon icon={faDatabase} />
 					</div>
-					<h2>Data Retention</h2>
+					<h2>{t('dataRetentionTitle')}</h2>
 				</div>
 				<div class="card-body">
-					<p class="mb-6">We will only retain your personal data for as long as necessary to fulfill the purposes we collected it for.</p>
+					<p class="mb-6">{t('dataRetentionText')}</p>
 					<div class="retention-card">
-						<h3>Retention Periods</h3>
+						<h3>{t('retentionPeriodsTitle')}</h3>
 						<ul class="modern-list">
 							<li>
 								<FontAwesomeIcon icon={faChevronRight} />
-								<span><strong>Account information:</strong> Stored while your account is active</span>
+								<span><strong>{t('accountInfoTitle')}:</strong> {t('accountInfoText')}</span>
 							</li>
 							<li>
 								<FontAwesomeIcon icon={faChevronRight} />
-								<span><strong>Event registration:</strong> Kept for 2 years after the event</span>
+								<span><strong>{t('eventRegRetentionTitle')}:</strong> {t('eventRegRetentionText')}</span>
 							</li>
 							<li>
 								<FontAwesomeIcon icon={faChevronRight} />
-								<span><strong>Marketing preferences:</strong> Retained until you opt-out</span>
+								<span><strong>{t('marketingPrefsTitle')}:</strong> {t('marketingPrefsText')}</span>
 							</li>
 							<li>
 								<FontAwesomeIcon icon={faChevronRight} />
-								<span><strong>Payment information:</strong> Never stored on our servers</span>
+								<span><strong>{t('paymentInfoTitle')}:</strong> {t('paymentInfoText')}</span>
 							</li>
 						</ul>
 						<div class="retention-tagline">
-							<p>Data minimization is our priority</p>
+							<p>{t('dataMinimizationTagline')}</p>
 						</div>
 					</div>
 				</div>
@@ -256,30 +268,30 @@
 					<div class="icon-wrapper small">
 						<FontAwesomeIcon icon={faUserLock} />
 					</div>
-					<h2>Your Rights</h2>
+					<h2>{t('yourRightsTitle')}</h2>
 				</div>
 				<div class="card-body">
-					<p class="mb-6">Under data protection laws, you have rights related to your personal data:</p>
+					<p class="mb-6">{t('yourRightsText')}</p>
 					<div class="rights-grid">
 						<div class="right-item">
-							<h3>Access</h3>
-							<p>Request access to your personal data</p>
+							<h3>{t('accessTitle')}</h3>
+							<p>{t('accessText')}</p>
 						</div>
 						<div class="right-item">
-							<h3>Correction</h3>
-							<p>Request correction of inaccurate data</p>
+							<h3>{t('correctionTitle')}</h3>
+							<p>{t('correctionText')}</p>
 						</div>
 						<div class="right-item">
-							<h3>Deletion</h3>
-							<p>Request erasure of your personal data</p>
+							<h3>{t('deletionTitle')}</h3>
+							<p>{t('deletionText')}</p>
 						</div>
 						<div class="right-item">
-							<h3>Restriction</h3>
-							<p>Request restriction of processing</p>
+							<h3>{t('restrictionTitle')}</h3>
+							<p>{t('restrictionText')}</p>
 						</div>
 					</div>
 					<div class="rights-note">
-						<p>You will not have to pay a fee to access your personal data. However, we may charge a reasonable fee if your request is clearly unfounded, repetitive or excessive.</p>
+						<p>{t('rightsNoteText')}</p>
 					</div>
 				</div>
 			</section>
@@ -291,18 +303,18 @@
 				<div class="icon-wrapper small">
 					<FontAwesomeIcon icon={faLock} />
 				</div>
-				<h2>Data Security</h2>
+				<h2>{t('dataSecurityTitle')}</h2>
 			</div>
 			<div class="card-body">
-				<p class="mb-6">We have put in place appropriate security measures to protect your personal data:</p>
+				<p class="mb-6">{t('dataSecurityText')}</p>
 				<div class="security-features">
 					<div class="security-feature">
 						<div class="security-icon">
 							<span>🔒</span>
 						</div>
 						<div class="security-content">
-							<h3>Secure Storage</h3>
-							<p>Data is stored securely with encryption</p>
+							<h3>{t('secureStorageTitle')}</h3>
+							<p>{t('secureStorageText')}</p>
 						</div>
 					</div>
 					<div class="security-feature">
@@ -310,8 +322,8 @@
 							<span>🛡️</span>
 						</div>
 						<div class="security-content">
-							<h3>Access Control</h3>
-							<p>Strict access restrictions to your data</p>
+							<h3>{t('accessControlTitle')}</h3>
+							<p>{t('accessControlText')}</p>
 						</div>
 					</div>
 					<div class="security-feature">
@@ -319,8 +331,8 @@
 							<span>🔄</span>
 						</div>
 						<div class="security-content">
-							<h3>Regular Updates</h3>
-							<p>Frequent security updates and patches</p>
+							<h3>{t('regularUpdatesTitle')}</h3>
+							<p>{t('regularUpdatesText')}</p>
 						</div>
 					</div>
 					<div class="security-feature">
@@ -328,8 +340,8 @@
 							<span>📊</span>
 						</div>
 						<div class="security-content">
-							<h3>Data Minimization</h3>
-							<p>We only collect what's necessary</p>
+							<h3>{t('dataMinimizationTitle')}</h3>
+							<p>{t('dataMinimizationText')}</p>
 						</div>
 					</div>
 				</div>
@@ -339,15 +351,15 @@
 		<!-- Contact -->
 		<section class="policy-card contact-card" class:visible>
 			<div class="contact-content">
-				<h2>Contact Us</h2>
-				<p class="mb-6">If you have any questions about this privacy policy or our privacy practices, please contact us at:</p>
+				<h2>{t('privacyContactTitle')}</h2>
+				<p class="mb-6">{t('privacyContactText')}</p>
 				<div class="contact-info">
-					<p><strong>Email:</strong> privacy@sandvikenmarathon.com</p>
-					<p><strong>Address:</strong> Sandviken Marathon, PO Box 123, Sandviken, Sweden</p>
+					<p><strong>{t('privacyContactEmail')}</strong> {t('privacyContactEmailAddress')}</p>
+					<p><strong>{t('privacyContactAddress')}</strong> {t('privacyContactAddressText')}</p>
 				</div>
 			</div>
 			<div class="contact-action">
-				<a href="/contact" class="contact-btn">Contact Us</a>
+				<a href="/contact" class="contact-btn">{t('privacyContactBtn')}</a>
 			</div>
 		</section>
 	</div>
@@ -376,9 +388,35 @@
 	}
 	
 	.hero-section {
-		background-color: var(--primary-color);
+		background-color: #000;
+		color: white;
+		padding: 2.5rem 0;
 		position: relative;
-		overflow: hidden;
+	}
+	
+	.hero-section:before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+		opacity: 0.1;
+	}
+	
+	.hero-section h1 {
+		color: #ffffff;
+	}
+	
+	.hero-section p {
+		color: #E0E0E0;
+		font-size: 1.25rem;
+		line-height: 1.7;
+		max-width: 700px;
+		margin: 0 auto;
+		font-weight: 400;
+		text-shadow: 0 1px 2px rgba(0,0,0,0.1);
 	}
 	
 	.policy-wrapper {
@@ -466,11 +504,12 @@
 		display: grid;
 		grid-template-columns: 1fr;
 		gap: 1.5rem;
+		margin-bottom: 1.5rem;
 	}
 	
 	@media (min-width: 768px) {
 		.policy-grid {
-			grid-template-columns: 1fr 1fr;
+			grid-template-columns: repeat(2, 1fr);
 		}
 	}
 	
@@ -495,12 +534,12 @@
 	.info-grid {
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: 1rem;
+		gap: 1.5rem;
 	}
 	
 	@media (min-width: 640px) {
 		.info-grid {
-			grid-template-columns: 1fr 1fr;
+			grid-template-columns: repeat(2, 1fr);
 		}
 	}
 	
@@ -510,6 +549,9 @@
 		border-radius: var(--radius-md);
 		box-shadow: var(--shadow-sm);
 		border-left: 4px solid var(--primary-color);
+		height: 100%;
+		display: flex;
+		flex-direction: column;
 	}
 	
 	.info-item-header {
@@ -539,17 +581,19 @@
 	}
 	
 	.usage-list {
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1.5rem;
 	}
 	
 	.usage-item {
 		display: flex;
+		align-items: flex-start;
 		background-color: var(--bg-light);
-		padding: 1.25rem;
+		padding: 1.5rem;
 		border-radius: var(--radius-md);
 		box-shadow: var(--shadow-sm);
+		border-left: 4px solid var(--primary-color);
 	}
 	
 	.usage-icon {
@@ -583,22 +627,22 @@
 	.cookie-types {
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: 1rem;
+		gap: 1.5rem;
 	}
 	
 	@media (min-width: 640px) {
 		.cookie-types {
-			grid-template-columns: 1fr 1fr;
+			grid-template-columns: repeat(2, 1fr);
 		}
 	}
 	
 	.cookie-type {
 		display: flex;
-		background-color: var(--bg-light);
-		padding: 1.25rem;
+		align-items: flex-start;
+		padding: 1.5rem;
 		border-radius: var(--radius-md);
 		box-shadow: var(--shadow-sm);
-		align-items: center;
+		height: 100%;
 	}
 	
 	.cookie-icon {

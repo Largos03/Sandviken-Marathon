@@ -10,6 +10,10 @@
     faChevronRight,
     faClock
   } from '@fortawesome/free-solid-svg-icons';
+  import { language, translations } from '$lib/stores/i18n.js';
+  
+  // Accept data from page.server.js
+  export let data;
   
   let visible = false;
   
@@ -51,39 +55,48 @@
       clearInterval(countdownInterval);
     };
   });
+  
+  // Get translation based on current language
+  $: t = (key) => {
+    if (!translations[$language] || !translations[$language][key]) {
+      // Fallback to English or just the key itself if not found
+      return translations['en']?.[key] || key;
+    }
+    return translations[$language][key];
+  };
 </script>
 
 <!-- Hero Section -->
 <section class="hero-section">
   <div class="hero-overlay"></div>
   <div class="hero-content" class:visible>
-    <div class="hero-badge">Official Event</div>
-    <h1>SANDVIKEN MARATHON</h1>
+    <div class="hero-badge">{t('officialEvent')}</div>
+    <h1>{t('marathon')}</h1>
     <div class="date-badge">
       <FontAwesomeIcon icon={faCalendarAlt} />
-      <span>Apr 01, 2026</span>
+      <span>{t('eventDate')}</span>
     </div>
-    <p class="hero-subtitle">Experience the beauty of Sandviken in this unforgettable running event</p>
+    <p class="hero-subtitle">{t('heroSubtitle')}</p>
     <div class="hero-cta">
-      <a href="/register" class="cta-button primary">Register Now</a>
-      <a href="/course" class="cta-button secondary">View Course</a>
+      <a href="/register" class="cta-button primary">{t('registerNow')}</a>
+      <a href="/course" class="cta-button secondary">{t('viewCourse')}</a>
     </div>
     <div class="countdown-timer">
       <div class="countdown-item">
         <span class="count">{days.toString().padStart(2, '0')}</span>
-        <span class="label">Days</span>
+        <span class="label">{t('days')}</span>
       </div>
       <div class="countdown-item">
         <span class="count">{hours.toString().padStart(2, '0')}</span>
-        <span class="label">Hours</span>
+        <span class="label">{t('hours')}</span>
       </div>
       <div class="countdown-item">
         <span class="count">{minutes.toString().padStart(2, '0')}</span>
-        <span class="label">Minutes</span>
+        <span class="label">{t('minutes')}</span>
       </div>
       <div class="countdown-item">
         <span class="count">{seconds.toString().padStart(2, '0')}</span>
-        <span class="label">Seconds</span>
+        <span class="label">{t('seconds')}</span>
       </div>
     </div>
   </div>
@@ -98,9 +111,9 @@
 <section class="info-section" class:visible>
   <div class="container">
     <div class="section-header">
-      <h2>The Premier Running Event in Sweden</h2>
+      <h2>{t('premierEvent')}</h2>
       <div class="section-divider"></div>
-      <p class="section-intro">Join thousands of runners from around the world in this prestigious marathon through Sandviken's most scenic routes</p>
+      <p class="section-intro">{t('joinThousands')}</p>
     </div>
     
     <div class="feature-cards">
@@ -109,11 +122,11 @@
           <div class="feature-icon">
             <FontAwesomeIcon icon={faRunning} />
           </div>
-          <h3>Race Categories</h3>
-          <p>Choose from Full Marathon (42.2km), Half Marathon (21.1km), or 10K Race</p>
+          <h3>{t('raceCategories')}</h3>
+          <p>{t('raceDescription')}</p>
         </div>
         <a href="/register" class="feature-link">
-          <span>View Categories</span>
+          <span>{t('viewCategories')}</span>
           <FontAwesomeIcon icon={faChevronRight} />
         </a>
       </div>
@@ -123,11 +136,11 @@
           <div class="feature-icon">
             <FontAwesomeIcon icon={faMapMarkerAlt} />
           </div>
-          <h3>Scenic Route</h3>
-          <p>Run through picturesque landscapes and iconic landmarks in Sandviken</p>
+          <h3>{t('scenicRoute')}</h3>
+          <p>{t('routeDescription')}</p>
         </div>
         <a href="/course" class="feature-link">
-          <span>Explore Route</span>
+          <span>{t('exploreRoute')}</span>
           <FontAwesomeIcon icon={faChevronRight} />
         </a>
       </div>
@@ -137,11 +150,11 @@
           <div class="feature-icon">
             <FontAwesomeIcon icon={faMedal} />
           </div>
-          <h3>Prizes & Awards</h3>
-          <p>Exclusive medals for all finishers and special prizes for top performers</p>
+          <h3>{t('prizesAwards')}</h3>
+          <p>{t('prizesDescription')}</p>
         </div>
         <a href="/about" class="feature-link">
-          <span>Learn More</span>
+          <span>{t('learnMore')}</span>
           <FontAwesomeIcon icon={faChevronRight} />
         </a>
       </div>
@@ -153,36 +166,36 @@
 <section class="course-section" class:visible>
   <div class="container">
     <div class="section-header">
-      <h2>The Course</h2>
+      <h2>{t('theCourse')}</h2>
       <div class="section-divider"></div>
     </div>
     
     <div class="course-grid">
       <div class="course-content">
         <p class="course-intro">
-          Experience a scenic route that showcases the beauty of Sandviken, passing iconic landmarks and picturesque landscapes. Our carefully designed course offers a perfect balance of challenge and enjoyment.
+          {t('courseIntro')}
         </p>
         
         <div class="course-features">
           <div class="course-feature">
             <div class="feature-bullet"></div>
-            <span>AIMS/IAAF certified route</span>
+            <span>{t('certifiedRoute')}</span>
           </div>
           <div class="course-feature">
             <div class="feature-bullet"></div>
-            <span>8 hydration stations along the route</span>
+            <span>{t('hydrationStations')}</span>
           </div>
           <div class="course-feature">
             <div class="feature-bullet"></div>
-            <span>Mostly flat terrain with gentle elevation</span>
+            <span>{t('flatTerrain')}</span>
           </div>
           <div class="course-feature">
             <div class="feature-bullet"></div>
-            <span>Medical support throughout the course</span>
+            <span>{t('medicalSupport')}</span>
           </div>
         </div>
         
-        <a href="/course" class="course-btn">View Detailed Map</a>
+        <a href="/course" class="course-btn">{t('viewDetailedMap')}</a>
       </div>
       
       <div class="course-map">
@@ -199,44 +212,44 @@
 </section>
 
 <!-- Inaugural Event Section -->
-<section class="results-section" class:visible>
+<section class="results-section" class:visible style="background-color: black !important; background-image: none !important;">
   <div class="container">
     <div class="section-header">
-      <h2 style="color: white !important;">Inaugural Event</h2>
+      <h2 style="color: white !important;">{t('inauguralEvent')}</h2>
       <div class="section-divider"></div>
-      <p class="section-intro" style="color: white !important;">Be part of history in the first-ever Sandviken Marathon</p>
+      <p class="section-intro" style="color: white !important;">{t('bePartOf')}</p>
     </div>
     
     <div class="results-slider">
       <div class="result-year-badge">2026</div>
-      <h3>Be Part of Something Historic</h3>
-      <p>Join us for the inaugural Sandviken Marathon and become one of our founding participants. This is your chance to make history in Sandviken's first major marathon event.</p>
+      <h3>{t('historicOpportunity')}</h3>
+      <p>{t('joinUs')}</p>
       
       <div class="inaugural-highlights">
         <div class="highlight-item" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
-          <h4 style="width: 100%; text-align: center;">Premium Experience</h4>
-          <p style="width: 100%; text-align: center;">Professional timing, live tracking and full route support</p>
+          <h4 style="width: 100%; text-align: center;">{t('premiumExperience')}</h4>
+          <p style="width: 100%; text-align: center;">{t('experienceDescription')}</p>
         </div>
         <div class="highlight-item" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
-          <h4 style="width: 100%; text-align: center;">Founding Participant Status</h4>
-          <p style="width: 100%; text-align: center;">Exclusive first-year medal and commemorative certificate</p>
+          <h4 style="width: 100%; text-align: center;">{t('foundingStatus')}</h4>
+          <p style="width: 100%; text-align: center;">{t('foundingDescription')}</p>
         </div>
       </div>
     </div> 
     <div class="results-action">
-      <a href="/register" class="view-all-btn">Secure Your Spot</a>
+      <a href="/register" class="view-all-btn">{t('secureSpot')}</a>
     </div>
   </div>
 </section>
 
 <!-- Registration CTA -->
-<section class="cta-section" class:visible>
+<section class="cta-section" class:visible style="background-color: black !important; background-image: none !important;">
   <div class="container">
     <div class="cta-content">
-      <div class="cta-badge">Limited Spots</div>
-      <h2>Secure Your Spot Today</h2>
-      <p>Registration is open with early bird prices until October 31, 2025</p>
-      <a href="/register" class="register-btn">Register Now</a>
+      <div class="cta-badge">{t('limitedSpots')}</div>
+      <h2>{t('secureSpotToday')}</h2>
+      <p>{t('earlyBird')}</p>
+      <a href="/register" class="register-btn">{t('learnMore')}</a>
     </div>
   </div>
 </section>

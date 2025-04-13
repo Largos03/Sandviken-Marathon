@@ -12,8 +12,23 @@
 		faEnvelope,
 		faChevronRight,
 		faGavel,
-		faShieldAlt
+		faShieldAlt,
+		faShieldHalved,
+		faInfoCircle
 	} from '@fortawesome/free-solid-svg-icons';
+	import { language, translations } from '$lib/stores/i18n.js';
+    import { T } from '$lib';
+    
+    // Accept data from page.server.js
+    export let data;
+    
+    // Direct translation function
+    $: t = (key) => {
+      if (!translations[$language] || !translations[$language][key]) {
+        return key;
+      }
+      return translations[$language][key];
+    };
 	
 	let visible = false;
 	
@@ -25,10 +40,10 @@
 <div class="terms-page" in:fade>
 	<!-- Hero Section -->
 	<div class="hero-section">
-		<div class="container mx-auto px-4 py-16 md:py-24 text-center">
-			<h1 class="text-4xl md:text-6xl font-bold mb-6 text-white">Terms & Conditions</h1>
-			<div class="w-24 h-1 bg-white mx-auto mb-6"></div>
-			<p class="text-lg md:text-xl max-w-2xl mx-auto leading-relaxed text-white">Please read our terms and conditions before using our website or registering for events</p>
+		<div class="container mx-auto px-4 py-10 md:py-14 text-center">
+			<h1 class="text-4xl md:text-6xl font-bold mb-4">{t('terms')}</h1>
+			<div class="w-24 h-1 bg-white mx-auto mb-4"></div>
+			<p class="text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">{t('termsIntro')}</p>
 		</div>
 	</div>
 	
@@ -36,16 +51,16 @@
 	<div class="terms-wrapper">
 		<!-- Last Updated Badge -->
 		<div class="update-badge">
-			<span>Last updated: May 1, 2025</span>
+			<span>{t('lastUpdated')} {t('termsDate')}</span>
 		</div>
 		
 		<!-- Introduction -->
 		<section class="terms-card intro-card" class:visible>
 			<div class="card-content">
-				<h2>Agreement to Terms</h2>
-				<p class="mb-6">These Terms and Conditions constitute a legally binding agreement made between you and Sandviken Marathon concerning your use of our website and participation in our events. By using our website or registering for our events, you agree to be bound by these Terms.</p>
+				<h2>{t('agreementToTerms')}</h2>
+				<p class="mb-6">{t('termsAgreementText')}</p>
 				<div class="highlight-box">
-					<p>Please review these terms carefully. By accessing this website or registering for our events, you acknowledge that you have read, understood, and agree to be bound by all terms stated herein.</p>
+					<p>{t('termsReviewText')}</p>
 				</div>
 			</div>
 			<div class="card-icon">
@@ -63,45 +78,45 @@
 					<div class="icon-wrapper small">
 						<FontAwesomeIcon icon={faRunning} />
 					</div>
-					<h2>Event Registration</h2>
+					<h2>{t('eventRegistration')}</h2>
 				</div>
 				<div class="card-body">
-					<p class="mb-6">By registering for Sandviken Marathon events, you acknowledge and agree to the following:</p>
+					<p class="mb-6">{t('registrationText')}</p>
 					<div class="registration-grid">
 						<div class="registration-item">
 							<div class="registration-item-header">
 								<span class="registration-number">01</span>
-								<h3>Physical Fitness</h3>
+								<h3>{t('physicalFitness')}</h3>
 							</div>
-							<p>You are physically fit and have no medical conditions that would prevent safe participation</p>
+							<p>{t('physicalFitnessText')}</p>
 						</div>
 						<div class="registration-item">
 							<div class="registration-item-header">
 								<span class="registration-number">02</span>
-								<h3>Risk Acceptance</h3>
+								<h3>{t('riskAcceptance')}</h3>
 							</div>
-							<p>You understand that participating in athletic events involves risk of serious injury</p>
+							<p>{t('riskAcceptanceText')}</p>
 						</div>
 						<div class="registration-item">
 							<div class="registration-item-header">
 								<span class="registration-number">03</span>
-								<h3>Non-Refundable Fees</h3>
+								<h3>{t('nonRefundableFees')}</h3>
 							</div>
-							<p>Registration fees are non-refundable unless stated otherwise in our refund policy</p>
+							<p>{t('nonRefundableFeesText')}</p>
 						</div>
 						<div class="registration-item">
 							<div class="registration-item-header">
 								<span class="registration-number">04</span>
-								<h3>Schedule Changes</h3>
+								<h3>{t('scheduleChanges')}</h3>
 							</div>
-							<p>Event dates and times may be subject to change due to various circumstances</p>
+							<p>{t('scheduleChangesText')}</p>
 						</div>
 						<div class="registration-item">
 							<div class="registration-item-header">
 								<span class="registration-number">05</span>
-								<h3>Rule Compliance</h3>
+								<h3>{t('ruleCompliance')}</h3>
 							</div>
-							<p>You agree to follow all rules, regulations, and instructions of event organizers</p>
+							<p>{t('ruleComplianceText')}</p>
 						</div>
 					</div>
 				</div>
@@ -113,25 +128,25 @@
 					<div class="icon-wrapper small">
 						<FontAwesomeIcon icon={faCopyright} />
 					</div>
-					<h2>Intellectual Property Rights</h2>
+					<h2>{t('intellectualProperty')}</h2>
 				</div>
 				<div class="card-body">
-					<p class="mb-6">The content on our website, including without limitation text, graphics, logos, images, audio clips, and software, is owned by Sandviken Marathon and is protected by copyright and other intellectual property laws.</p>
+					<p class="mb-6">{t('intellectualPropertyText')}</p>
 					<div class="ip-grid">
 						<div class="ip-item">
-							<h3>Copyright</h3>
-							<p>All content is protected by copyright laws and treaties around the world</p>
+							<h3>{t('copyright')}</h3>
+							<p>{t('copyrightText')}</p>
 						</div>
 						<div class="ip-item">
-							<h3>Limited License</h3>
-							<p>You may view and use our content for personal, non-commercial purposes only</p>
+							<h3>{t('limitedLicense')}</h3>
+							<p>{t('limitedLicenseText')}</p>
 						</div>
 						<div class="ip-item">
-							<h3>Restrictions</h3>
-							<p>You may not reproduce, distribute, modify, or create derivative works from any content</p>
+							<h3>{t('restrictions')}</h3>
+							<p>{t('restrictionsText')}</p>
 						</div>
 					</div>
-					<p class="mt-6">Any unauthorized use of our intellectual property may violate copyright, trademark, and other laws and could result in legal action.</p>
+					<p class="mt-6">{t('ipConclusion')}</p>
 				</div>
 			</section>
 		</div>
@@ -142,17 +157,17 @@
 				<div class="icon-wrapper small">
 					<FontAwesomeIcon icon={faUserShield} />
 				</div>
-				<h2>User Conduct</h2>
+				<h2>{t('userConduct')}</h2>
 			</div>
 			<div class="card-body">
-				<p class="mb-6">When using our website, you agree not to engage in any of the following prohibited activities:</p>
+				<p class="mb-6">{t('userConductText')}</p>
 				<div class="conduct-cards">
 					<div class="conduct-card">
 						<div class="conduct-icon">
 							<span class="conduct-dot"></span>
 						</div>
 						<div class="conduct-content">
-							<p>Use the website in any way that violates any applicable law</p>
+							<p>{t('conductRule1')}</p>
 						</div>
 					</div>
 					<div class="conduct-card">
@@ -160,7 +175,7 @@
 							<span class="conduct-dot"></span>
 						</div>
 						<div class="conduct-content">
-							<p>Attempt to gain unauthorized access to any portion of the website</p>
+							<p>{t('conductRule2')}</p>
 						</div>
 					</div>
 					<div class="conduct-card">
@@ -168,7 +183,7 @@
 							<span class="conduct-dot"></span>
 						</div>
 						<div class="conduct-content">
-							<p>Use the website to transmit any virus, worm, or other malicious code</p>
+							<p>{t('conductRule3')}</p>
 						</div>
 					</div>
 					<div class="conduct-card">
@@ -176,7 +191,7 @@
 							<span class="conduct-dot"></span>
 						</div>
 						<div class="conduct-content">
-							<p>Impersonate or attempt to impersonate Sandviken Marathon</p>
+							<p>{t('conductRule4')}</p>
 						</div>
 					</div>
 				</div>
@@ -189,33 +204,33 @@
 			<section class="terms-card" class:visible>
 				<div class="card-header">
 					<div class="icon-wrapper small">
-						<FontAwesomeIcon icon={faExclamationTriangle} />
+						<FontAwesomeIcon icon={faShieldHalved} />
 					</div>
-					<h2>Limitation of Liability</h2>
+					<h2>{t('limitationOfLiability')}</h2>
 				</div>
 				<div class="card-body">
-					<p class="mb-6">In no event shall Sandviken Marathon, nor its directors, employees, partners, agents, or suppliers, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from:</p>
+					<p class="mb-6">{t('liabilityText')}</p>
 					<div class="liability-list">
 						<ul class="modern-list">
 							<li>
 								<FontAwesomeIcon icon={faChevronRight} />
-								<span>Your access to or use of or inability to access or use the website</span>
+								<span>{t('liabilityItem1')}</span>
 							</li>
 							<li>
 								<FontAwesomeIcon icon={faChevronRight} />
-								<span>Any conduct or content of any third party on the website</span>
+								<span>{t('liabilityItem2')}</span>
 							</li>
 							<li>
 								<FontAwesomeIcon icon={faChevronRight} />
-								<span>Any content obtained from the website</span>
+								<span>{t('liabilityItem3')}</span>
 							</li>
 							<li>
 								<FontAwesomeIcon icon={faChevronRight} />
-								<span>Unauthorized access, use or alteration of your transmissions or content</span>
+								<span>{t('liabilityItem4')}</span>
 							</li>
 							<li>
 								<FontAwesomeIcon icon={faChevronRight} />
-								<span>Participation in any Sandviken Marathon events</span>
+								<span>{t('liabilityItem5')}</span>
 							</li>
 						</ul>
 					</div>
@@ -228,33 +243,33 @@
 					<div class="icon-wrapper small">
 						<FontAwesomeIcon icon={faEdit} />
 					</div>
-					<h2>Modifications</h2>
+					<h2>{t('modifications')}</h2>
 				</div>
 				<div class="card-body">
-					<p class="mb-6">We reserve the right to modify these Terms at any time. We will provide notice of any changes by updating the "Last Updated" date.</p>
+					<p class="mb-6">{t('modificationsText')}</p>
 					<div class="change-grid">
 						<div class="change-item">
 							<div class="change-number">1</div>
 							<div class="change-content">
-								<p>We post updates on this page</p>
+								<p>{t('modificationStep1')}</p>
 							</div>
 						</div>
 						<div class="change-item">
 							<div class="change-number">2</div>
 							<div class="change-content">
-								<p>We update the "Last Updated" date</p>
+								<p>{t('modificationStep2')}</p>
 							</div>
 						</div>
 						<div class="change-item">
 							<div class="change-number">3</div>
 							<div class="change-content">
-								<p>We may notify you via email for significant changes</p>
+								<p>{t('modificationStep3')}</p>
 							</div>
 						</div>
 						<div class="change-item">
 							<div class="change-number">4</div>
 							<div class="change-content">
-								<p>Continued use constitutes acceptance of changes</p>
+								<p>{t('modificationStep4')}</p>
 							</div>
 						</div>
 					</div>
@@ -268,18 +283,18 @@
 				<div class="icon-wrapper small">
 					<FontAwesomeIcon icon={faShieldAlt} />
 				</div>
-				<h2>Data Security</h2>
+				<h2>{t('dataSecurity')}</h2>
 			</div>
 			<div class="card-body">
-				<p class="mb-6">We have put in place appropriate security measures to protect your personal data:</p>
+				<p class="mb-6">{t('dataSecurityText')}</p>
 				<div class="security-features">
 					<div class="security-feature">
 						<div class="security-icon">
 							<span>🔒</span>
 						</div>
 						<div class="security-content">
-							<h3>Secure Storage</h3>
-							<p>Data is stored securely with encryption</p>
+							<h3>{t('secureStorage')}</h3>
+							<p>{t('secureStorageText')}</p>
 						</div>
 					</div>
 					<div class="security-feature">
@@ -287,8 +302,8 @@
 							<span>🛡️</span>
 						</div>
 						<div class="security-content">
-							<h3>Access Control</h3>
-							<p>Strict access restrictions to your data</p>
+							<h3>{t('accessControl')}</h3>
+							<p>{t('accessControlText')}</p>
 						</div>
 					</div>
 					<div class="security-feature">
@@ -296,8 +311,8 @@
 							<span>🔄</span>
 						</div>
 						<div class="security-content">
-							<h3>Regular Updates</h3>
-							<p>Frequent security updates and patches</p>
+							<h3>{t('regularUpdates')}</h3>
+							<p>{t('regularUpdatesText')}</p>
 						</div>
 					</div>
 					<div class="security-feature">
@@ -305,8 +320,8 @@
 							<span>📊</span>
 						</div>
 						<div class="security-content">
-							<h3>Data Minimization</h3>
-							<p>We only collect what's necessary</p>
+							<h3>{t('dataMinimization')}</h3>
+							<p>{t('dataMinimizationText')}</p>
 						</div>
 					</div>
 				</div>
@@ -316,15 +331,15 @@
 		<!-- Contact -->
 		<section class="terms-card contact-card" class:visible>
 			<div class="contact-content">
-				<h2>Contact Us</h2>
-				<p class="mb-6">If you have any questions about these Terms, please contact us at:</p>
+				<h2>{t('termsContactUs')}</h2>
+				<p class="mb-6">{t('termsContactText')}</p>
 				<div class="contact-info">
-					<p><strong>Email:</strong> terms@sandvikenmarathon.com</p>
-					<p><strong>Address:</strong> Sandviken Marathon, PO Box 123, Sandviken, Sweden</p>
+					<p><strong>{t('termsEmail')}</strong> {t('termsEmailAddress')}</p>
+					<p><strong>{t('termsAddress')}</strong> {t('termsAddressText')}</p>
 				</div>
 			</div>
 			<div class="contact-action">
-				<a href="/contact" class="contact-btn">Contact Us</a>
+				<a href="/contact" class="contact-btn">{t('termsContactBtn')}</a>
 			</div>
 		</section>
 	</div>
@@ -353,9 +368,35 @@
 	}
 	
 	.hero-section {
-		background-color: var(--primary-color);
+		background-color: #000;
+		color: white;
+		padding: 2.5rem 0;
 		position: relative;
-		overflow: hidden;
+	}
+	
+	.hero-section:before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+		opacity: 0.1;
+	}
+	
+	.hero-section h1 {
+		color: #ffffff;
+	}
+	
+	.hero-section p {
+		color: #E0E0E0;
+		font-size: 1.25rem;
+		line-height: 1.7;
+		max-width: 700px;
+		margin: 0 auto;
+		font-weight: 400;
+		text-shadow: 0 1px 2px rgba(0,0,0,0.1);
 	}
 	
 	.terms-wrapper {
@@ -443,11 +484,12 @@
 		display: grid;
 		grid-template-columns: 1fr;
 		gap: 1.5rem;
+		margin-bottom: 1.5rem;
 	}
 	
 	@media (min-width: 768px) {
 		.terms-grid {
-			grid-template-columns: 1fr 1fr;
+			grid-template-columns: repeat(2, 1fr);
 		}
 	}
 	
@@ -472,12 +514,12 @@
 	.registration-grid {
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: 1rem;
+		gap: 1.5rem;
 	}
 	
 	@media (min-width: 640px) {
 		.registration-grid {
-			grid-template-columns: 1fr 1fr;
+			grid-template-columns: repeat(2, 1fr);
 		}
 	}
 	
@@ -487,12 +529,15 @@
 		border-radius: var(--radius-md);
 		box-shadow: var(--shadow-sm);
 		border-left: 4px solid var(--primary-color);
+		height: 100%;
+		display: flex;
+		flex-direction: column;
 	}
 	
 	.registration-item-header {
 		display: flex;
 		align-items: center;
-		margin-bottom: 0.75rem;
+		margin-bottom: 1rem;
 	}
 	
 	.registration-number {
@@ -546,7 +591,7 @@
 	.conduct-cards {
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: 1rem;
+		gap: 1.5rem;
 	}
 	
 	@media (min-width: 640px) {
@@ -558,15 +603,22 @@
 	.conduct-card {
 		display: flex;
 		background-color: var(--bg-light);
-		padding: 1.25rem;
+		padding: 1.5rem;
 		border-radius: var(--radius-md);
 		box-shadow: var(--shadow-sm);
 		border-left: 4px solid var(--primary-color);
+		height: 100%;
+		align-items: flex-start;
 	}
 	
 	.conduct-icon {
-		margin-right: 1rem;
+		margin-right: 1.25rem;
 		flex-shrink: 0;
+		margin-top: 0.25rem;
+	}
+	
+	.conduct-content {
+		flex: 1;
 	}
 	
 	.conduct-dot {
@@ -637,7 +689,7 @@
 	.security-features {
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: 1rem;
+		gap: 1.5rem;
 	}
 	
 	@media (min-width: 640px) {
@@ -648,12 +700,13 @@
 	
 	.security-feature {
 		display: flex;
-		align-items: center;
+		align-items: flex-start;
 		background-color: var(--bg-light);
-		padding: 1.25rem;
+		padding: 1.5rem;
 		border-radius: var(--radius-md);
 		box-shadow: var(--shadow-sm);
 		border-left: 4px solid var(--primary-color);
+		height: 100%;
 	}
 	
 	.security-icon {
@@ -664,9 +717,9 @@
 		height: 3rem;
 		background-color: var(--primary-color);
 		border-radius: 50%;
-		margin-right: 1rem;
+		margin-right: 1.25rem;
 		flex-shrink: 0;
-		color: var(--accent-color);
+		font-size: 1.5rem;
 	}
 	
 	.security-content h3 {
@@ -753,5 +806,9 @@
 	p {
 		line-height: 1.6;
 		color: inherit;
+	}
+	
+	.liability-list {
+		margin-top: 1.5rem;
 	}
 </style> 

@@ -7,6 +7,29 @@
 		faTwitter,
 		faInstagram
 	} from '@fortawesome/free-brands-svg-icons';
+	import { language, translations } from '$lib/stores/i18n.js';
+	import { onMount } from 'svelte';
+	
+	// Accept data from layout.js
+	export let data;
+	
+	// Initialize language from server data if available
+	if (data.lang) {
+		language.set(data.lang);
+	}
+	
+	// Direct translation function
+	$: t = (key) => {
+	  if (!translations[$language] || !translations[$language][key]) {
+	    return key;
+	  }
+	  return translations[$language][key];
+	};
+	
+	onMount(() => {
+		// Update the html lang attribute when language changes
+		document.documentElement.lang = $language;
+	});
 </script>
 
 <div class="flex flex-col min-h-screen">
@@ -30,13 +53,13 @@
 				</a>
 			</div>
 			<div class="footer-links mb-3 text-xs md:text-sm">
-				<a href="/contact" class="mx-2 hover:underline">Contact</a>
+				<a href="/contact" class="mx-2 hover:underline">{t('contact')}</a>
 				<span>|</span>
-				<a href="/privacy" class="mx-2 hover:underline">Privacy Policy</a>
+				<a href="/privacy" class="mx-2 hover:underline">{t('privacyPolicy')}</a>
 				<span>|</span>
-				<a href="/terms" class="mx-2 hover:underline">Terms</a>
+				<a href="/terms" class="mx-2 hover:underline">{t('terms')}</a>
 			</div>
-			<p class="text-center text-xs md:text-sm opacity-80">&copy; 2025 Sandviken Marathon. All rights reserved.</p>
+			<p class="text-center text-xs md:text-sm opacity-80">{t('copyright')}</p>
 		</div>
 	</footer>
 </div>

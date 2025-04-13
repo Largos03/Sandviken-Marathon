@@ -12,8 +12,12 @@
         faMedal, 
         faPhone, 
         faBars,
-        faTimes
+        faTimes,
+        faGlobe
     } from '@fortawesome/free-solid-svg-icons';
+    
+    // Import language store
+    import { language, translations } from '$lib/stores/i18n.js';
     
     // Hover state for items
     let logoHovered = false;
@@ -34,12 +38,29 @@
         mobileMenuOpen = !mobileMenuOpen;
     }
     
+    // Language toggle function
+    function toggleLanguage() {
+        $language = $language === 'en' ? 'sv' : 'en';
+        // Store language preference in localStorage
+        if (typeof localStorage !== 'undefined') {
+            localStorage.setItem('language', $language);
+        }
+    }
+    
     onMount(() => {
         // Get the navbar element
         const navbar = document.getElementById('navbar');
         
         // Track scroll position
         let lastScrollY = 0;
+        
+        // Load language preference from localStorage
+        if (typeof localStorage !== 'undefined') {
+            const savedLanguage = localStorage.getItem('language');
+            if (savedLanguage) {
+                $language = savedLanguage;
+            }
+        }
         
         // Function to update navbar on scroll
         function handleScroll() {
@@ -71,6 +92,15 @@
             window.removeEventListener('scroll', handleScroll);
         };
     });
+    
+    // Get translation based on current language
+    $: t = (key) => {
+      if (!translations[$language] || !translations[$language][key]) {
+        // Fallback to English or just the key itself if not found
+        return translations['en']?.[key] || key;
+      }
+      return translations[$language][key];
+    };
 </script>
 
 <!-- Enhanced navbar with improved translucent styling -->
@@ -92,58 +122,84 @@
          on:mouseenter={() => setHovered(0)} 
          on:mouseleave={clearHovered}>
         <span style="display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; opacity: 0.8;"><Fa icon={faHome} /></span>
-        <span>Home</span>
+        <span>{t('home')}</span>
       </a>
       
       <a href="/about" style="text-decoration: none; color: rgba(0,0,0,0.8); padding: 6px 10px; border-radius: 6px; font-weight: 500; font-size: 14px; display: flex; align-items: center; gap: 6px; transition: all 0.2s ease; {hoveredItem === 1 ? 'background-color: rgba(0,0,0,0.05); box-shadow: 0 2px 5px rgba(0,0,0,0.03);' : ''}" 
          on:mouseenter={() => setHovered(1)} 
          on:mouseleave={clearHovered}>
         <span style="display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; opacity: 0.8;"><Fa icon={faInfoCircle} /></span>
-        <span>About</span>
+        <span>{t('about')}</span>
       </a>
       
       <a href="/course" style="text-decoration: none; color: rgba(0,0,0,0.8); padding: 6px 10px; border-radius: 6px; font-weight: 500; font-size: 14px; display: flex; align-items: center; gap: 6px; transition: all 0.2s ease; {hoveredItem === 2 ? 'background-color: rgba(0,0,0,0.05); box-shadow: 0 2px 5px rgba(0,0,0,0.03);' : ''}" 
          on:mouseenter={() => setHovered(2)} 
          on:mouseleave={clearHovered}>
         <span style="display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; opacity: 0.8;"><Fa icon={faMapMarkerAlt} /></span>
-        <span>Course</span>
+        <span>{t('course')}</span>
       </a>
       
       <a href="/register" style="text-decoration: none; color: rgba(0,0,0,0.8); padding: 6px 10px; border-radius: 6px; font-weight: 500; font-size: 14px; display: flex; align-items: center; gap: 6px; transition: all 0.2s ease; {hoveredItem === 3 ? 'background-color: rgba(0,0,0,0.05); box-shadow: 0 2px 5px rgba(0,0,0,0.03);' : ''}" 
          on:mouseenter={() => setHovered(3)} 
          on:mouseleave={clearHovered}>
         <span style="display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; opacity: 0.8;"><Fa icon={faClipboard} /></span>
-        <span>Register</span>
+        <span>{t('register')}</span>
       </a>
       
       <a href="/results" style="text-decoration: none; color: rgba(0,0,0,0.8); padding: 6px 10px; border-radius: 6px; font-weight: 500; font-size: 14px; display: flex; align-items: center; gap: 6px; transition: all 0.2s ease; {hoveredItem === 4 ? 'background-color: rgba(0,0,0,0.05); box-shadow: 0 2px 5px rgba(0,0,0,0.03);' : ''}" 
          on:mouseenter={() => setHovered(4)} 
          on:mouseleave={clearHovered}>
         <span style="display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; opacity: 0.8;"><Fa icon={faMedal} /></span>
-        <span>Results</span>
+        <span>{t('results')}</span>
       </a>
       
       <a href="/contact" style="text-decoration: none; color: rgba(0,0,0,0.8); padding: 6px 10px; border-radius: 6px; font-weight: 500; font-size: 14px; display: flex; align-items: center; gap: 6px; transition: all 0.2s ease; {hoveredItem === 5 ? 'background-color: rgba(0,0,0,0.05); box-shadow: 0 2px 5px rgba(0,0,0,0.03);' : ''}" 
          on:mouseenter={() => setHovered(5)} 
          on:mouseleave={clearHovered}>
         <span style="display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; opacity: 0.8;"><Fa icon={faPhone} /></span>
-        <span>Contact</span>
+        <span>{t('contact')}</span>
       </a>
+      
+      <!-- Language Toggle Button -->
+      <button
+        on:click={toggleLanguage}
+        style="margin-left: 8px; background-color: rgba(0,0,0,0.05); color: rgba(0,0,0,0.8); border: none; border-radius: 6px; padding: 6px 10px; font-weight: 500; font-size: 14px; display: flex; align-items: center; gap: 6px; cursor: pointer; transition: all 0.2s ease; {hoveredItem === 'lang' ? 'background-color: rgba(0,0,0,0.1); box-shadow: 0 2px 5px rgba(0,0,0,0.03);' : ''}"
+        on:mouseenter={() => setHovered('lang')}
+        on:mouseleave={clearHovered}
+        aria-label="Switch Language"
+      >
+        <span style="display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; opacity: 0.8;"><Fa icon={faGlobe} /></span>
+        <span>{t('switchToSwedish')}</span>
+      </button>
     </div>
     
     <!-- Mobile Menu Button (right-aligned) -->
-    <div class="mobile-menu" role="button" tabindex="0" style="display: none; cursor: pointer; padding: 6px; border-radius: 50%; transition: background-color 0.2s ease; {hoveredItem === 'menu' ? 'background-color: rgba(0,0,0,0.05);' : ''}; position: absolute; right: 0;"
-         on:mouseenter={() => setHovered('menu')} 
-         on:mouseleave={clearHovered}
-         on:click={toggleMobileMenu}
-         on:keydown={(e) => e.key === 'Enter' && toggleMobileMenu()}>
-      <span style="display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; opacity: 0.8;">
-        {#if mobileMenuOpen}
-          <Fa icon={faTimes} />
-        {:else}
-          <Fa icon={faBars} />
-        {/if}
-      </span>
+    <div class="mobile-menu-container" style="display: flex; align-items: center; gap: 10px;">
+      <!-- Language Toggle Button for Mobile -->
+      <button
+        on:click={toggleLanguage}
+        style="background-color: rgba(0,0,0,0.05); color: rgba(0,0,0,0.8); border: none; border-radius: 6px; padding: 6px 10px; font-weight: 500; font-size: 14px; display: flex; align-items: center; gap: 6px; cursor: pointer; transition: all 0.2s ease; {hoveredItem === 'lang-mobile' ? 'background-color: rgba(0,0,0,0.1);' : ''}"
+        on:mouseenter={() => setHovered('lang-mobile')}
+        on:mouseleave={clearHovered}
+        aria-label="Switch Language"
+        class="mobile-lang-toggle"
+      >
+        <span style="display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; opacity: 0.8;"><Fa icon={faGlobe} /></span>
+      </button>
+      
+      <div class="mobile-menu" role="button" tabindex="0" style="display: none; cursor: pointer; padding: 6px; border-radius: 50%; transition: background-color 0.2s ease; {hoveredItem === 'menu' ? 'background-color: rgba(0,0,0,0.05);' : ''};"
+           on:mouseenter={() => setHovered('menu')} 
+           on:mouseleave={clearHovered}
+           on:click={toggleMobileMenu}
+           on:keydown={(e) => e.key === 'Enter' && toggleMobileMenu()}>
+        <span style="display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; opacity: 0.8;">
+          {#if mobileMenuOpen}
+            <Fa icon={faTimes} />
+          {:else}
+            <Fa icon={faBars} />
+          {/if}
+        </span>
+      </div>
     </div>
   </div>
   
@@ -168,7 +224,7 @@
            on:mouseleave={clearHovered}
            on:click={() => mobileMenuOpen = false}>
           <span style="display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; opacity: 0.8;"><Fa icon={faHome} /></span>
-          <span>Home</span>
+          <span>{t('home')}</span>
         </a>
         
         <a href="/about" style="text-decoration: none; color: rgba(0,0,0,0.8); padding: 8px 12px; display: flex; align-items: center; gap: 10px; transition: all 0.2s ease; border-radius: 6px; margin-bottom: 2px; font-size: 14px; {hoveredItem === 'mobile-1' ? 'background-color: rgba(0,0,0,0.05);' : ''}" 
@@ -176,7 +232,7 @@
            on:mouseleave={clearHovered}
            on:click={() => mobileMenuOpen = false}>
           <span style="display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; opacity: 0.8;"><Fa icon={faInfoCircle} /></span>
-          <span>About</span>
+          <span>{t('about')}</span>
         </a>
         
         <a href="/course" style="text-decoration: none; color: rgba(0,0,0,0.8); padding: 8px 12px; display: flex; align-items: center; gap: 10px; transition: all 0.2s ease; border-radius: 6px; margin-bottom: 2px; font-size: 14px; {hoveredItem === 'mobile-2' ? 'background-color: rgba(0,0,0,0.05);' : ''}" 
@@ -184,7 +240,7 @@
            on:mouseleave={clearHovered}
            on:click={() => mobileMenuOpen = false}>
           <span style="display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; opacity: 0.8;"><Fa icon={faMapMarkerAlt} /></span>
-          <span>Course</span>
+          <span>{t('course')}</span>
         </a>
         
         <a href="/register" style="text-decoration: none; color: rgba(0,0,0,0.8); padding: 8px 12px; display: flex; align-items: center; gap: 10px; transition: all 0.2s ease; border-radius: 6px; margin-bottom: 2px; font-size: 14px; {hoveredItem === 'mobile-3' ? 'background-color: rgba(0,0,0,0.05);' : ''}" 
@@ -192,7 +248,7 @@
            on:mouseleave={clearHovered}
            on:click={() => mobileMenuOpen = false}>
           <span style="display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; opacity: 0.8;"><Fa icon={faClipboard} /></span>
-          <span>Register</span>
+          <span>{t('register')}</span>
         </a>
         
         <a href="/results" style="text-decoration: none; color: rgba(0,0,0,0.8); padding: 8px 12px; display: flex; align-items: center; gap: 10px; transition: all 0.2s ease; border-radius: 6px; margin-bottom: 2px; font-size: 14px; {hoveredItem === 'mobile-4' ? 'background-color: rgba(0,0,0,0.05);' : ''}" 
@@ -200,7 +256,7 @@
            on:mouseleave={clearHovered}
            on:click={() => mobileMenuOpen = false}>
           <span style="display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; opacity: 0.8;"><Fa icon={faMedal} /></span>
-          <span>Results</span>
+          <span>{t('results')}</span>
         </a>
         
         <a href="/contact" style="text-decoration: none; color: rgba(0,0,0,0.8); padding: 8px 12px; display: flex; align-items: center; gap: 10px; transition: all 0.2s ease; border-radius: 6px; margin-bottom: 2px; font-size: 14px; {hoveredItem === 'mobile-5' ? 'background-color: rgba(0,0,0,0.05);' : ''}" 
@@ -208,7 +264,7 @@
            on:mouseleave={clearHovered}
            on:click={() => mobileMenuOpen = false}>
           <span style="display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; opacity: 0.8;"><Fa icon={faPhone} /></span>
-          <span>Contact</span>
+          <span>{t('contact')}</span>
         </a>
       </div>
     </div>
@@ -226,6 +282,17 @@
         }
         .mobile-menu-dropdown {
             display: block !important;
+        }
+    }
+    
+    /* Show language toggle on mobile */
+    .mobile-lang-toggle {
+        display: none !important;
+    }
+    
+    @media (max-width: 768px) {
+        .mobile-lang-toggle {
+            display: flex !important;
         }
     }
     

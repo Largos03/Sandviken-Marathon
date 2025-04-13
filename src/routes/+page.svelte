@@ -192,44 +192,39 @@
             <span class="stat-value">42.2</span>
             <span class="stat-label">KM</span>
           </div>
-          <div class="map-stat">
-            <span class="stat-value">135</span>
-            <span class="stat-label">M ELEVATION</span>
-          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Past Results Section -->
+<!-- Inaugural Event Section -->
 <section class="results-section" class:visible>
   <div class="container">
     <div class="section-header">
-      <h2>Inaugural Event</h2>
+      <h2 style="color: white !important;">Inaugural Event</h2>
       <div class="section-divider"></div>
-      <p class="section-intro">Be part of history in the first-ever Sandviken Marathon</p>
+      <p class="section-intro" style="color: white !important;">Be part of history in the first-ever Sandviken Marathon</p>
     </div>
     
     <div class="results-slider">
       <div class="result-year-badge">2026</div>
-      <h3>Don't Miss This Historic Opportunity</h3>
-      <p>Join us for the inaugural Sandviken Marathon and become one of our founding participants. Limited spots available.</p>
+      <h3>Be Part of Something Historic</h3>
+      <p>Join us for the inaugural Sandviken Marathon and become one of our founding participants. This is your chance to make history in Sandviken's first major marathon event.</p>
       
       <div class="inaugural-highlights">
-        <div class="highlight-item">
-          <h4>Premium Experience</h4>
-          <p>Professional timing, live tracking and full route support</p>
+        <div class="highlight-item" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+          <h4 style="width: 100%; text-align: center;">Premium Experience</h4>
+          <p style="width: 100%; text-align: center;">Professional timing, live tracking and full route support</p>
         </div>
-        <div class="highlight-item">
-          <h4>Special Recognition</h4>
-          <p>Exclusive founding participant medal and certificate</p>
+        <div class="highlight-item" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+          <h4 style="width: 100%; text-align: center;">Founding Participant Status</h4>
+          <p style="width: 100%; text-align: center;">Exclusive first-year medal and commemorative certificate</p>
         </div>
       </div>
-    </div>
-    
+    </div> 
     <div class="results-action">
-      <a href="/register" class="view-all-btn">Register Now</a>
+      <a href="/register" class="view-all-btn">Secure Your Spot</a>
     </div>
   </div>
 </section>

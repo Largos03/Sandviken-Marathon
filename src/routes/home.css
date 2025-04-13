@@ -22,51 +22,56 @@
 /* Styles for the main hero banner at the top of the page */
 .hero-section {
   position: relative;
-  height: 90vh;                 /* Full viewport height */
-  width: 100%;
-  background-image: url('/running.gif');  /* Background image of runners */
-  background-size: cover;
-  background-position: center;
+  height: 100vh;
+  background-color: #000;
+  color: var(--accent-color);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--accent-color);
   overflow: hidden;
+  padding: 2rem;
+  text-align: center;
 }
 
-/* Semi-transparent overlay for better text readability over the background image */
 .hero-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.85) 100%);
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)), url('/running.gif');
+  background-size: cover;
+  background-position: center 30%;
+  opacity: 0.85;
   z-index: 1;
 }
 
-/* Main hero content container */
 .hero-content {
   position: relative;
-  z-index: 2;                    /* Position above the overlay */
-  text-align: center;
-  max-width: 800px;
-  width: 90%;
-  padding: 3rem 2.5rem;          /* Increased padding */
-  backdrop-filter: blur(3px);    /* Slight blur effect for depth */
-  background-color: rgba(0,0,0,0.3);
-  border-radius: var(--radius-md);
-  border: 1px solid rgba(255,255,255,0.1);
-  opacity: 0;                    /* Start invisible for animation */
-  transform: translateY(20px);   /* Start slightly below for animation */
+  z-index: 2;
+  max-width: 960px;
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(20px);
   transition: opacity 0.8s ease, transform 0.8s ease;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Makes the hero content visible when the 'visible' class is added */
 .hero-content.visible {
   opacity: 1;
-  transform: translateY(0);      /* Move to final position when visible */
+  transform: translateY(0);    /* Move to final position when visible */
+}
+
+.hero-content h1 {
+  font-size: 4rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transform: translateZ(0);  /* Force GPU acceleration */
 }
 
 /* "Official Event" badge at top of hero content */
@@ -84,20 +89,6 @@
   text-transform: uppercase;
   letter-spacing: 1.5px;
   box-shadow: var(--shadow-md);
-}
-
-.hero-content h1 {
-  font-size: 4rem;
-  font-weight: 800;
-  letter-spacing: 2px;
-  margin-top: 1.5rem;              /* More space at top */
-  margin-bottom: 1.5rem;           /* More space at bottom */
-  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-  background: linear-gradient(to right, white, #e6e6e6);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  line-height: 1.1;
 }
 
 .date-badge {
@@ -278,6 +269,12 @@
   color: var(--primary-color);
   margin-bottom: 0.875rem;
   line-height: 1.2;
+}
+
+/* Special styling for dark sections */
+.results-section .section-header h2,
+.results-section .section-intro {
+  color: white;
 }
 
 /* Yellow divider line below section titles */
@@ -648,12 +645,15 @@
   letter-spacing: 1px;
 }
 
-/* Results Section */
-/* Styles for the inaugural event cards section (black background) */
+/* Inaugural Event Section (formerly Results Section) */
 .results-section {
   padding: var(--section-spacing);
-  background-color: var(--primary-color);
-  color: var(--accent-color);
+  background-color: #000000;
+  color: #ffffff !important;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.8)), url('/running.gif');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.8s ease, transform 0.8s ease;
@@ -662,13 +662,25 @@
 
 .results-section.visible {
   opacity: 1;
-  transform: translateY(0);    /* Move to final position when visible */
+  transform: translateY(0);
 }
 
-/* Replace the card grid with a more compact and impactful CTA layout */
+.results-section .section-header h2 {
+  color: #ffffff !important;
+}
+
+.results-section .section-intro {
+  color: #ffffff !important;
+}
+
+.results-section .section-divider {
+  background-color: var(--highlight-color);
+}
+
 .results-slider {
-  margin: 2rem 0;
-  padding: 2rem;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  max-width: 900px;
   background-color: white;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-md);
@@ -681,24 +693,25 @@
   color: var(--primary-color);
   font-weight: bold;
   font-size: 1.2rem;
-  padding: 0.4rem 1.2rem;
-  border-radius: 20px;
-  margin-bottom: 1rem;
+  padding: 0.5rem 1.5rem;
+  border-radius: 30px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .results-slider h3 {
-  font-size: 2rem;
-  margin-bottom: 0.75rem;
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
   color: var(--primary-color);
 }
 
 .results-slider p {
   font-size: 1.1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   max-width: 80%;
   margin-left: auto;
   margin-right: auto;
-  line-height: 1.5;
+  line-height: 1.6;
   color: var(--text-secondary);
 }
 
@@ -706,34 +719,48 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2rem;
-  margin-bottom: 1.5rem;
+  gap: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 .highlight-item {
   flex: 1;
   min-width: 280px;
   max-width: 400px;
-  padding: 1.5rem;
+  padding: 2rem;
   background-color: var(--bg-light);
   border-radius: var(--radius-md);
+  text-align: center;
+  margin: 0 auto;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.highlight-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .highlight-item h4 {
   color: var(--primary-color);
-  font-size: 1.25rem;
-  margin-bottom: 0.75rem;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  width: 100%;
 }
 
 .highlight-item p {
-  margin: 0;
-  font-size: 1rem;
+  margin: 0 auto;
+  font-size: 1.05rem;
   color: var(--text-secondary);
+  text-align: center;
+  width: 100%;
+  line-height: 1.5;
 }
 
 .results-action {
   text-align: center;
-  margin-top: 2rem;
+  margin-top: 2.5rem;
 }
 
 .view-all-btn {
@@ -741,24 +768,19 @@
   background-color: var(--highlight-color);
   color: var(--primary-color);
   font-weight: bold;
-  padding: 1rem 2rem;
+  padding: 1rem 2.5rem;
   border-radius: 30px;
   text-decoration: none;
-  font-size: 1.1rem;
-  transition: background-color 0.3s, transform 0.2s;
+  font-size: 1.15rem;
+  transition: all 0.3s ease;
   box-shadow: var(--shadow-md);
 }
 
 .view-all-btn:hover {
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   color: var(--accent-color);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   box-shadow: var(--shadow-lg);
-}
-
-/* Remove the old result card styles that are no longer needed */
-.result-card {
-  display: none;
 }
 
 /* CTA Section */
@@ -766,27 +788,19 @@
 .cta-section {
   position: relative;
   padding: var(--section-spacing) 0;
-  background-color: var(--primary-color);
+  background-color: #000000;
+  color: #ffffff !important;
   background-image: linear-gradient(45deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.7) 100%), url('/running.gif');
   background-size: cover;
   background-position: center;
-  color: var(--accent-color);
-  text-align: center;
+  background-attachment: fixed;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-/* Overlay for the CTA section */
-.cta-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(45deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) 100%);
-  z-index: 1;
+  text-align: center;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .cta-section.visible {
@@ -794,33 +808,29 @@
   transform: translateY(0);
 }
 
-/* Content container for the CTA */
 .cta-content {
-  position: relative;
-  z-index: 2;
-  max-width: 550px;
+  max-width: 800px;
   margin: 0 auto;
-  padding: 2.25rem 2rem;
-  background-color: rgba(0,0,0,0.5);
-  border-radius: var(--radius-md);
-  border: 1px solid rgba(255,255,255,0.1);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-  backdrop-filter: blur(5px);
+  padding: 0 2rem;
 }
 
-/* "Limited Spots" badge */
 .cta-badge {
   display: inline-block;
+  padding: 0.5rem 1.5rem;
   background-color: var(--highlight-color);
   color: var(--primary-color);
-  font-weight: 700;
-  font-size: 0.875rem;
-  padding: 0.4rem 1.25rem;
-  border-radius: 50px;
-  margin-bottom: 1.25rem;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  box-shadow: var(--shadow-sm);
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.cta-section h2 {
+  font-size: 2.75rem;
+  margin-bottom: 1.5rem;
+  color: var(--accent-color);
+  font-weight: 800;
+  transform: translateZ(0);  /* Force GPU acceleration */
 }
 
 /* Main heading in CTA */
@@ -873,8 +883,22 @@
     --section-spacing: 4rem;
   }
   
+  .hero-content h1, 
+  .cta-section h2 {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    will-change: transform;
+  }
+  
   .hero-content h1 {
-    font-size: 3.25rem;
+    font-size: 2.5rem;
+    letter-spacing: 0.03em;
+  }
+  
+  .cta-section h2 {
+    font-size: 2rem;
+    letter-spacing: 0.02em;
   }
   
   .section-header {

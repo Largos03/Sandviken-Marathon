@@ -30,9 +30,15 @@
 	
 	export let data: PageData;
 	
-	// Track form status manually
+	// Track form status and touched fields
 	let formSubmitted = false;
 	let showSuccess = false;
+	let touchedFields = {
+		name: false,
+		email: false,
+		subject: false,
+		message: false
+	};
 	
 	const { form, enhance, errors, constraints } = superForm<FormData>(data.form, {
 		validators: zodClient(contactSchema),
@@ -43,6 +49,13 @@
 		},
 		onResult: () => {
 			showSuccess = true;
+			// Reset touched state when form is successfully submitted
+			touchedFields = {
+				name: false,
+				email: false,
+				subject: false,
+				message: false
+			};
 		}
 	});
 
@@ -65,6 +78,16 @@
 		subject: $constraints?.subject || {},
 		message: $constraints?.message || {}
 	};
+	
+	// Handle field blur events to mark them as touched
+	function handleBlur(field: keyof typeof touchedFields) {
+		touchedFields[field] = true;
+	}
+	
+	// Helper to determine if we should show an error
+	function shouldShowError(field: keyof typeof touchedFields, error: string) {
+		return (formSubmitted || touchedFields[field]) && error;
+	}
 </script>
 
 <div class="contact-page">
@@ -171,11 +194,12 @@
 							id="name" 
 							name="name" 
 							bind:value={name}
-							class="form-input {nameError ? 'error' : ''}"
+							class="form-input {shouldShowError('name', nameError) ? 'error' : ''}"
 							{...safeConstraints.name}
 							placeholder="Your name"
+							on:blur={() => handleBlur('name')}
 						/>
-						{#if nameError}
+						{#if shouldShowError('name', nameError)}
 							<p class="error-message">{nameError}</p>
 						{/if}
 					</div>
@@ -187,11 +211,12 @@
 							id="email" 
 							name="email" 
 							bind:value={email}
-							class="form-input {emailError ? 'error' : ''}"
+							class="form-input {shouldShowError('email', emailError) ? 'error' : ''}"
 							{...safeConstraints.email}
 							placeholder="Your email address"
+							on:blur={() => handleBlur('email')}
 						/>
-						{#if emailError}
+						{#if shouldShowError('email', emailError)}
 							<p class="error-message">{emailError}</p>
 						{/if}
 					</div>
@@ -203,11 +228,12 @@
 							id="subject" 
 							name="subject" 
 							bind:value={subject}
-							class="form-input {subjectError ? 'error' : ''}"
+							class="form-input {shouldShowError('subject', subjectError) ? 'error' : ''}"
 							{...safeConstraints.subject}
 							placeholder="What is this regarding?"
+							on:blur={() => handleBlur('subject')}
 						/>
-						{#if subjectError}
+						{#if shouldShowError('subject', subjectError)}
 							<p class="error-message">{subjectError}</p>
 						{/if}
 					</div>
@@ -219,11 +245,12 @@
 							name="message" 
 							bind:value={message}
 							rows="5" 
-							class="form-input {messageError ? 'error' : ''}"
+							class="form-input {shouldShowError('message', messageError) ? 'error' : ''}"
 							{...safeConstraints.message}
 							placeholder="Your message here..."
+							on:blur={() => handleBlur('message')}
 						></textarea>
-						{#if messageError}
+						{#if shouldShowError('message', messageError)}
 							<p class="error-message">{messageError}</p>
 						{/if}
 					</div>

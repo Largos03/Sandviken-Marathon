@@ -1,5 +1,4 @@
-<script>
-  import { fade, fly, scale } from 'svelte/transition';
+<script lang="ts">
   import { onMount } from 'svelte';
   import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
   import { 
@@ -7,13 +6,12 @@
     faMapMarkerAlt, 
     faMedal,
     faRunning,
-    faChevronRight,
-    faClock
+    faChevronRight
   } from '@fortawesome/free-solid-svg-icons';
   import { language, translations } from '$lib/stores/i18n.js';
   
   // Accept data from page.server.js
-  export let data;
+  export const data = {};
   
   let visible = false;
   
@@ -23,7 +21,7 @@
   let hours = 0;
   let minutes = 0;
   let seconds = 0;
-  let countdownInterval;
+  let countdownInterval: ReturnType<typeof setInterval> | null = null;
   
   function updateCountdown() {
     const now = new Date().getTime();
@@ -39,7 +37,9 @@
       hours = 0;
       minutes = 0;
       seconds = 0;
-      clearInterval(countdownInterval);
+      if (countdownInterval) {
+        clearInterval(countdownInterval);
+      }
     }
   }
   
@@ -52,17 +52,21 @@
     
     // Clean up interval on component unmount
     return () => {
-      clearInterval(countdownInterval);
+      if (countdownInterval) {
+        clearInterval(countdownInterval);
+      }
     };
   });
   
   // Get translation based on current language
-  $: t = (key) => {
-    if (!translations[$language] || !translations[$language][key]) {
+  $: t = (key: string) => {
+    const currentLang = $language as keyof typeof translations;
+    
+    if (!translations[currentLang] || !translations[currentLang][key as keyof (typeof translations)[typeof currentLang]]) {
       // Fallback to English or just the key itself if not found
-      return translations['en']?.[key] || key;
+      return translations['en']?.[key as keyof (typeof translations)['en']] || key;
     }
-    return translations[$language][key];
+    return translations[currentLang][key as keyof (typeof translations)[typeof currentLang]];
   };
 </script>
 
@@ -70,10 +74,10 @@
 <section class="hero-section">
   <div class="hero-overlay"></div>
   <div class="hero-content" class:visible>
-    <div class="hero-badge">{t('officialEvent')}</div>
+    <div class="hero-badge bg-gray-100 text-gray-900">{t('officialEvent')}</div>
     <h1>{t('marathon')}</h1>
-    <div class="date-badge">
-      <FontAwesomeIcon icon={faCalendarAlt} />
+    <div class="date-badge bg-gray-100 text-gray-900">
+      <FontAwesomeIcon icon={faCalendarAlt} style="margin-right: 0.75rem;" />
       <span>{t('eventDate')}</span>
     </div>
     <p class="hero-subtitle">{t('heroSubtitle')}</p>
@@ -127,7 +131,7 @@
         </div>
         <a href="/register" class="feature-link">
           <span>{t('viewCategories')}</span>
-          <FontAwesomeIcon icon={faChevronRight} />
+          <FontAwesomeIcon icon={faChevronRight} style="margin-left: 0.5rem; font-size: 0.875rem; transition: transform 0.2s ease;" />
         </a>
       </div>
       
@@ -141,7 +145,7 @@
         </div>
         <a href="/course" class="feature-link">
           <span>{t('exploreRoute')}</span>
-          <FontAwesomeIcon icon={faChevronRight} />
+          <FontAwesomeIcon icon={faChevronRight} style="margin-left: 0.5rem; font-size: 0.875rem; transition: transform 0.2s ease;" />
         </a>
       </div>
       
@@ -155,7 +159,7 @@
         </div>
         <a href="/about" class="feature-link">
           <span>{t('learnMore')}</span>
-          <FontAwesomeIcon icon={faChevronRight} />
+          <FontAwesomeIcon icon={faChevronRight} style="margin-left: 0.5rem; font-size: 0.875rem; transition: transform 0.2s ease;" />
         </a>
       </div>
     </div>
@@ -212,12 +216,12 @@
 </section>
 
 <!-- Inaugural Event Section -->
-<section class="results-section" class:visible style="background-color: black !important; background-image: none !important;">
+<section class="results-section" class:visible>
   <div class="container">
     <div class="section-header">
-      <h2 style="color: white !important;">{t('inauguralEvent')}</h2>
+      <h2>{t('inauguralEvent')}</h2>
       <div class="section-divider"></div>
-      <p class="section-intro" style="color: white !important;">{t('bePartOf')}</p>
+      <p class="section-intro">{t('bePartOf')}</p>
     </div>
     
     <div class="results-slider">
@@ -243,7 +247,7 @@
 </section>
 
 <!-- Registration CTA -->
-<section class="cta-section" class:visible style="background-color: black !important; background-image: none !important;">
+<section class="cta-section" class:visible>
   <div class="container">
     <div class="cta-content">
       <div class="cta-badge">{t('limitedSpots')}</div>
@@ -254,26 +258,7 @@
   </div>
 </section>
 
+<!-- svelte-ignore css-unused-selector -->
 <style>
   @import './home.css';
-  
-  /* Styles for FontAwesome icons in Svelte components */
-  .date-badge :global(svg) {
-    margin-right: 0.75rem;
-  }
-  
-  .feature-link :global(svg) {
-    margin-left: 0.5rem;
-    font-size: 0.875rem;
-    transition: transform 0.2s ease;
-  }
-  
-  .feature-link:hover :global(svg) {
-    transform: translateX(5px);
-  }
-  
-  .winner-time :global(svg) {
-    margin-right: 0.75rem;
-    opacity: 0.7;
-  }
 </style>

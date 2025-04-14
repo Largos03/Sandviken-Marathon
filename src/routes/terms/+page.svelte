@@ -1,33 +1,32 @@
-<script>
+<script lang="ts">
 	import { fade } from 'svelte/transition';
 	import { onMount } from 'svelte';
 	import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
 	import { 
-		faFileContract, 
 		faRunning, 
 		faCopyright, 
 		faUserShield, 
-		faExclamationTriangle, 
 		faEdit,
-		faEnvelope,
 		faChevronRight,
 		faGavel,
 		faShieldAlt,
 		faShieldHalved,
-		faInfoCircle
+		faExclamationCircle,
+		faCheckCircle
 	} from '@fortawesome/free-solid-svg-icons';
 	import { language, translations } from '$lib/stores/i18n.js';
-    import { T } from '$lib';
     
     // Accept data from page.server.js
-    export let data;
+    export const data = {};
     
     // Direct translation function
-    $: t = (key) => {
-      if (!translations[$language] || !translations[$language][key]) {
+    $: t = (key: string): string => {
+      // Type assertion for translations
+      const trans = translations as Record<string, Record<string, string>>;
+      if (!trans[$language] || !trans[$language][key]) {
         return key;
       }
-      return translations[$language][key];
+      return trans[$language][key];
     };
 	
 	let visible = false;
@@ -39,312 +38,206 @@
 
 <div class="terms-page" in:fade>
 	<!-- Hero Section -->
-	<div class="hero-section">
-		<div class="container mx-auto px-4 py-10 md:py-14 text-center">
-			<h1 class="text-4xl md:text-6xl font-bold mb-4">{t('terms')}</h1>
-			<div class="w-24 h-1 bg-white mx-auto mb-4"></div>
-			<p class="text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">{t('termsIntro')}</p>
+	<div class="hero-section relative overflow-hidden">
+		<div class="hero-pattern absolute inset-0 opacity-10"></div>
+		<div class="container mx-auto px-4 py-16 md:py-20 text-center relative z-10">
+			<div class="bg-gray-100 text-gray-900 inline-block px-4 py-1 rounded-full text-sm font-semibold mb-6 tracking-wide">
+				{t('lastUpdated')} {t('termsDate')}
+			</div>
+			<h1 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight">{t('terms')}</h1>
+			<div class="w-20 h-1 bg-gray-100 mx-auto mb-6"></div>
+			<p class="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed opacity-90">{t('termsIntro')}</p>
 		</div>
 	</div>
 	
 	<!-- Content Wrapper -->
-	<div class="terms-wrapper">
-		<!-- Last Updated Badge -->
-		<div class="update-badge">
-			<span>{t('lastUpdated')} {t('termsDate')}</span>
-		</div>
-		
+	<div class="terms-wrapper max-w-7xl mx-auto px-4 py-12 md:py-16">
 		<!-- Introduction -->
-		<section class="terms-card intro-card" class:visible>
-			<div class="card-content">
-				<h2>{t('agreementToTerms')}</h2>
-				<p class="mb-6">{t('termsAgreementText')}</p>
-				<div class="highlight-box">
-					<p>{t('termsReviewText')}</p>
+		<section class="terms-card intro-card bg-white rounded-2xl p-8 shadow-lg mb-12" class:visible>
+			<div class="flex flex-col md:flex-row gap-8 items-center">
+				<div class="flex-1">
+					<h2 class="text-2xl md:text-3xl font-bold mb-4">{t('agreementToTerms')}</h2>
+					<p class="text-gray-600 mb-6 leading-relaxed">{t('termsAgreementText')}</p>
+					<div class="bg-gray-50 border-l-4 border-gray-900 p-4 rounded-r-lg">
+						<div class="flex items-start">
+							<FontAwesomeIcon icon={faExclamationCircle} class="text-gray-900 mt-1 mr-3" />
+							<p class="text-gray-700">{t('termsReviewText')}</p>
+						</div>
+					</div>
 				</div>
-			</div>
-			<div class="card-icon">
-				<div class="icon-wrapper">
-					<FontAwesomeIcon icon={faGavel} />
+				<div class="flex-shrink-0">
+					<div class="w-20 h-20 md:w-24 md:h-24 bg-gray-900 text-white rounded-2xl flex items-center justify-center">
+						<FontAwesomeIcon icon={faGavel} class="text-3xl md:text-4xl" />
+					</div>
 				</div>
 			</div>
 		</section>
 		
-		<!-- Main Grid -->
-		<div class="terms-grid">
-			<!-- Event Registration -->
-			<section class="terms-card" class:visible>
-				<div class="card-header">
-					<div class="icon-wrapper small">
-						<FontAwesomeIcon icon={faRunning} />
-					</div>
-					<h2>{t('eventRegistration')}</h2>
+		<!-- Event Registration -->
+		<section class="terms-card bg-white rounded-2xl p-8 shadow-lg mb-12" class:visible>
+			<div class="card-header flex items-center gap-4 mb-8">
+				<div class="w-12 h-12 bg-gray-900 text-white rounded-xl flex items-center justify-center">
+					<FontAwesomeIcon icon={faRunning} />
 				</div>
-				<div class="card-body">
-					<p class="mb-6">{t('registrationText')}</p>
-					<div class="registration-grid">
-						<div class="registration-item">
-							<div class="registration-item-header">
-								<span class="registration-number">01</span>
-								<h3>{t('physicalFitness')}</h3>
-							</div>
-							<p>{t('physicalFitnessText')}</p>
-						</div>
-						<div class="registration-item">
-							<div class="registration-item-header">
-								<span class="registration-number">02</span>
-								<h3>{t('riskAcceptance')}</h3>
-							</div>
-							<p>{t('riskAcceptanceText')}</p>
-						</div>
-						<div class="registration-item">
-							<div class="registration-item-header">
-								<span class="registration-number">03</span>
-								<h3>{t('nonRefundableFees')}</h3>
-							</div>
-							<p>{t('nonRefundableFeesText')}</p>
-						</div>
-						<div class="registration-item">
-							<div class="registration-item-header">
-								<span class="registration-number">04</span>
-								<h3>{t('scheduleChanges')}</h3>
-							</div>
-							<p>{t('scheduleChangesText')}</p>
-						</div>
-						<div class="registration-item">
-							<div class="registration-item-header">
-								<span class="registration-number">05</span>
-								<h3>{t('ruleCompliance')}</h3>
-							</div>
-							<p>{t('ruleComplianceText')}</p>
-						</div>
-					</div>
-				</div>
-			</section>
-			
-			<!-- Intellectual Property Rights -->
-			<section class="terms-card" class:visible>
-				<div class="card-header">
-					<div class="icon-wrapper small">
-						<FontAwesomeIcon icon={faCopyright} />
-					</div>
-					<h2>{t('intellectualProperty')}</h2>
-				</div>
-				<div class="card-body">
-					<p class="mb-6">{t('intellectualPropertyText')}</p>
-					<div class="ip-grid">
-						<div class="ip-item">
-							<h3>{t('copyright')}</h3>
-							<p>{t('copyrightText')}</p>
-						</div>
-						<div class="ip-item">
-							<h3>{t('limitedLicense')}</h3>
-							<p>{t('limitedLicenseText')}</p>
-						</div>
-						<div class="ip-item">
-							<h3>{t('restrictions')}</h3>
-							<p>{t('restrictionsText')}</p>
-						</div>
-					</div>
-					<p class="mt-6">{t('ipConclusion')}</p>
-				</div>
-			</section>
-		</div>
-		
-		<!-- User Conduct -->
-		<section class="terms-card" class:visible>
-			<div class="card-header">
-				<div class="icon-wrapper small">
-					<FontAwesomeIcon icon={faUserShield} />
-				</div>
-				<h2>{t('userConduct')}</h2>
+				<h2 class="text-2xl md:text-3xl font-bold">{t('eventRegistration')}</h2>
 			</div>
 			<div class="card-body">
-				<p class="mb-6">{t('userConductText')}</p>
-				<div class="conduct-cards">
-					<div class="conduct-card">
-						<div class="conduct-icon">
-							<span class="conduct-dot"></span>
+				<p class="text-gray-600 mb-8 leading-relaxed">{t('registrationText')}</p>
+				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+					{#each Array(5) as _, i}
+						<div class="registration-item bg-gray-50 rounded-xl p-6 hover:shadow-md transition-shadow">
+							<div class="flex items-center gap-4 mb-4">
+								<span class="text-3xl font-bold text-gray-200">0{i + 1}</span>
+								<h3 class="text-lg font-semibold">{t([
+									'physicalFitness',
+									'riskAcceptance',
+									'nonRefundableFees',
+									'scheduleChanges',
+									'ruleCompliance'
+								][i])}</h3>
+							</div>
+							<p class="text-gray-600">{t([
+								'physicalFitnessText',
+								'riskAcceptanceText',
+								'nonRefundableFeesText',
+								'scheduleChangesText',
+								'ruleComplianceText'
+							][i])}</p>
 						</div>
-						<div class="conduct-content">
-							<p>{t('conductRule1')}</p>
-						</div>
-					</div>
-					<div class="conduct-card">
-						<div class="conduct-icon">
-							<span class="conduct-dot"></span>
-						</div>
-						<div class="conduct-content">
-							<p>{t('conductRule2')}</p>
-						</div>
-					</div>
-					<div class="conduct-card">
-						<div class="conduct-icon">
-							<span class="conduct-dot"></span>
-						</div>
-						<div class="conduct-content">
-							<p>{t('conductRule3')}</p>
-						</div>
-					</div>
-					<div class="conduct-card">
-						<div class="conduct-icon">
-							<span class="conduct-dot"></span>
-						</div>
-						<div class="conduct-content">
-							<p>{t('conductRule4')}</p>
-						</div>
-					</div>
+					{/each}
 				</div>
 			</div>
 		</section>
 		
-		<!-- 2-Column Cards -->
-		<div class="terms-grid">
+		<!-- Intellectual Property -->
+		<section class="terms-card bg-white rounded-2xl p-8 shadow-lg mb-12" class:visible>
+			<div class="card-header flex items-center gap-4 mb-8">
+				<div class="w-12 h-12 bg-gray-900 text-white rounded-xl flex items-center justify-center">
+					<FontAwesomeIcon icon={faCopyright} />
+				</div>
+				<h2 class="text-2xl md:text-3xl font-bold">{t('intellectualProperty')}</h2>
+			</div>
+			<div class="card-body">
+				<p class="text-gray-600 mb-8 leading-relaxed">{t('intellectualPropertyText')}</p>
+				<div class="grid md:grid-cols-3 gap-6 mb-8">
+					{#each ['copyright', 'limitedLicense', 'restrictions'] as item}
+						<div class="ip-item bg-gray-50 rounded-xl p-6">
+							<h3 class="text-lg font-semibold mb-3">{t(item)}</h3>
+							<p class="text-gray-600">{t(`${item}Text`)}</p>
+						</div>
+					{/each}
+				</div>
+				<p class="text-gray-600 italic">{t('ipConclusion')}</p>
+			</div>
+		</section>
+		
+		<!-- User Conduct -->
+		<section class="terms-card bg-white rounded-2xl p-8 shadow-lg mb-12" class:visible>
+			<div class="card-header flex items-center gap-4 mb-8">
+				<div class="w-12 h-12 bg-gray-900 text-white rounded-xl flex items-center justify-center">
+					<FontAwesomeIcon icon={faUserShield} />
+				</div>
+				<h2 class="text-2xl md:text-3xl font-bold">{t('userConduct')}</h2>
+			</div>
+			<div class="card-body">
+				<p class="text-gray-600 mb-8 leading-relaxed">{t('userConductText')}</p>
+				<div class="grid gap-4">
+					{#each Array(4) as _, i}
+						<div class="conduct-card bg-gray-50 rounded-xl p-6 flex items-start gap-4">
+							<div class="flex-shrink-0">
+								<FontAwesomeIcon icon={faCheckCircle} class="text-gray-900 text-xl" />
+							</div>
+							<p class="text-gray-700">{t(`conductRule${i + 1}`)}</p>
+						</div>
+					{/each}
+				</div>
+			</div>
+		</section>
+		
+		<!-- Two Column Section -->
+		<div class="grid md:grid-cols-2 gap-8">
 			<!-- Limitation of Liability -->
-			<section class="terms-card" class:visible>
-				<div class="card-header">
-					<div class="icon-wrapper small">
+			<section class="terms-card bg-white rounded-2xl p-8 shadow-lg" class:visible>
+				<div class="card-header flex items-center gap-4 mb-8">
+					<div class="w-12 h-12 bg-gray-900 text-white rounded-xl flex items-center justify-center">
 						<FontAwesomeIcon icon={faShieldHalved} />
 					</div>
-					<h2>{t('limitationOfLiability')}</h2>
+					<h2 class="text-2xl font-bold">{t('limitationOfLiability')}</h2>
 				</div>
 				<div class="card-body">
-					<p class="mb-6">{t('liabilityText')}</p>
-					<div class="liability-list">
-						<ul class="modern-list">
-							<li>
-								<FontAwesomeIcon icon={faChevronRight} />
-								<span>{t('liabilityItem1')}</span>
+					<p class="text-gray-600 mb-6 leading-relaxed">{t('liabilityText')}</p>
+					<ul class="space-y-4">
+						{#each Array(5) as _, i}
+							<li class="flex items-start gap-3">
+								<FontAwesomeIcon icon={faChevronRight} class="text-gray-900 mt-1 flex-shrink-0" />
+								<span class="text-gray-700">{t(`liabilityItem${i + 1}`)}</span>
 							</li>
-							<li>
-								<FontAwesomeIcon icon={faChevronRight} />
-								<span>{t('liabilityItem2')}</span>
-							</li>
-							<li>
-								<FontAwesomeIcon icon={faChevronRight} />
-								<span>{t('liabilityItem3')}</span>
-							</li>
-							<li>
-								<FontAwesomeIcon icon={faChevronRight} />
-								<span>{t('liabilityItem4')}</span>
-							</li>
-							<li>
-								<FontAwesomeIcon icon={faChevronRight} />
-								<span>{t('liabilityItem5')}</span>
-							</li>
-						</ul>
-					</div>
+						{/each}
+					</ul>
 				</div>
 			</section>
 			
 			<!-- Modifications -->
-			<section class="terms-card" class:visible>
-				<div class="card-header">
-					<div class="icon-wrapper small">
+			<section class="terms-card bg-white rounded-2xl p-8 shadow-lg" class:visible>
+				<div class="card-header flex items-center gap-4 mb-8">
+					<div class="w-12 h-12 bg-gray-900 text-white rounded-xl flex items-center justify-center">
 						<FontAwesomeIcon icon={faEdit} />
 					</div>
-					<h2>{t('modifications')}</h2>
+					<h2 class="text-2xl font-bold">{t('modifications')}</h2>
 				</div>
 				<div class="card-body">
-					<p class="mb-6">{t('modificationsText')}</p>
-					<div class="change-grid">
-						<div class="change-item">
-							<div class="change-number">1</div>
-							<div class="change-content">
-								<p>{t('modificationStep1')}</p>
+					<p class="text-gray-600 mb-6 leading-relaxed">{t('modificationsText')}</p>
+					<div class="space-y-6">
+						<div class="bg-gray-50 rounded-xl p-6">
+							<div class="flex items-start gap-4">
+								<div class="w-8 h-8 bg-gray-900 text-white rounded-full flex items-center justify-center flex-shrink-0">
+									<span class="font-semibold">1</span>
+								</div>
+								<div class="flex-1">
+									<h3 class="text-lg font-semibold mb-2">{t('modificationNotice')}</h3>
+									<p class="text-gray-600">{t('modificationPoint1')}</p>
+								</div>
 							</div>
 						</div>
-						<div class="change-item">
-							<div class="change-number">2</div>
-							<div class="change-content">
-								<p>{t('modificationStep2')}</p>
+						
+						<div class="bg-gray-50 rounded-xl p-6">
+							<div class="flex items-start gap-4">
+								<div class="w-8 h-8 bg-gray-900 text-white rounded-full flex items-center justify-center flex-shrink-0">
+									<span class="font-semibold">2</span>
+								</div>
+								<div class="flex-1">
+									<h3 class="text-lg font-semibold mb-2">{t('modificationEffect')}</h3>
+									<p class="text-gray-600">{t('modificationPoint2')}</p>
+								</div>
 							</div>
 						</div>
-						<div class="change-item">
-							<div class="change-number">3</div>
-							<div class="change-content">
-								<p>{t('modificationStep3')}</p>
+						
+						<div class="bg-gray-50 rounded-xl p-6">
+							<div class="flex items-start gap-4">
+								<div class="w-8 h-8 bg-gray-900 text-white rounded-full flex items-center justify-center flex-shrink-0">
+									<span class="font-semibold">3</span>
+								</div>
+								<div class="flex-1">
+									<h3 class="text-lg font-semibold mb-2">{t('modificationAcceptance')}</h3>
+									<p class="text-gray-600">{t('modificationPoint3')}</p>
+								</div>
 							</div>
 						</div>
-						<div class="change-item">
-							<div class="change-number">4</div>
-							<div class="change-content">
-								<p>{t('modificationStep4')}</p>
-							</div>
+					</div>
+					
+					<div class="mt-8 p-4 bg-gray-900 text-white rounded-xl">
+						<div class="flex items-start gap-3">
+							<FontAwesomeIcon icon={faExclamationCircle} class="text-white mt-1 flex-shrink-0" />
+							<p class="text-sm">{t('modificationDisclaimer')}</p>
 						</div>
 					</div>
 				</div>
 			</section>
 		</div>
-		
-		<!-- Security Feature -->
-		<section class="terms-card security-card" class:visible>
-			<div class="card-header">
-				<div class="icon-wrapper small">
-					<FontAwesomeIcon icon={faShieldAlt} />
-				</div>
-				<h2>{t('dataSecurity')}</h2>
-			</div>
-			<div class="card-body">
-				<p class="mb-6">{t('dataSecurityText')}</p>
-				<div class="security-features">
-					<div class="security-feature">
-						<div class="security-icon">
-							<span>🔒</span>
-						</div>
-						<div class="security-content">
-							<h3>{t('secureStorage')}</h3>
-							<p>{t('secureStorageText')}</p>
-						</div>
-					</div>
-					<div class="security-feature">
-						<div class="security-icon">
-							<span>🛡️</span>
-						</div>
-						<div class="security-content">
-							<h3>{t('accessControl')}</h3>
-							<p>{t('accessControlText')}</p>
-						</div>
-					</div>
-					<div class="security-feature">
-						<div class="security-icon">
-							<span>🔄</span>
-						</div>
-						<div class="security-content">
-							<h3>{t('regularUpdates')}</h3>
-							<p>{t('regularUpdatesText')}</p>
-						</div>
-					</div>
-					<div class="security-feature">
-						<div class="security-icon">
-							<span>📊</span>
-						</div>
-						<div class="security-content">
-							<h3>{t('dataMinimization')}</h3>
-							<p>{t('dataMinimizationText')}</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		
-		<!-- Contact -->
-		<section class="terms-card contact-card" class:visible>
-			<div class="contact-content">
-				<h2>{t('termsContactUs')}</h2>
-				<p class="mb-6">{t('termsContactText')}</p>
-				<div class="contact-info">
-					<p><strong>{t('termsEmail')}</strong> {t('termsEmailAddress')}</p>
-					<p><strong>{t('termsAddress')}</strong> {t('termsAddressText')}</p>
-				</div>
-			</div>
-			<div class="contact-action">
-				<a href="/contact" class="contact-btn">{t('termsContactBtn')}</a>
-			</div>
-		</section>
 	</div>
 </div>
 
+<!-- svelte-ignore css-unused-selector -->
 <style>
 	:root {
 		--primary-color: #000;
@@ -362,41 +255,17 @@
 	}
 
 	.terms-page {
-		background-color: #f5f5f5;
-		color: var(--text-primary);
-		font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+		background-color: #f9fafb;
+		min-height: 100vh;
 	}
 	
 	.hero-section {
 		background-color: #000;
 		color: white;
-		padding: 2.5rem 0;
-		position: relative;
 	}
 	
-	.hero-section:before {
-		content: "";
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-		opacity: 0.1;
-	}
-	
-	.hero-section h1 {
-		color: #ffffff;
-	}
-	
-	.hero-section p {
-		color: #E0E0E0;
-		font-size: 1.25rem;
-		line-height: 1.7;
-		max-width: 700px;
-		margin: 0 auto;
-		font-weight: 400;
-		text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+	.hero-pattern {
+		background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 	}
 	
 	.terms-wrapper {
@@ -408,28 +277,10 @@
 		padding-bottom: 3rem;
 	}
 	
-	.update-badge {
-		display: inline-block;
-		padding: 0.5rem 1rem;
-		background-color: var(--accent-color);
-		color: var(--primary-color);
-		border-radius: var(--radius-md);
-		font-size: 0.875rem;
-		font-weight: 500;
-		box-shadow: var(--shadow-md);
-		margin-bottom: 1.5rem;
-		border: 1px solid rgba(0, 0, 0, 0.1);
-	}
-	
 	.terms-card {
-		background-color: var(--accent-color);
-		border-radius: var(--radius-lg);
-		box-shadow: var(--shadow-md);
-		margin-bottom: 1.5rem;
 		opacity: 0;
 		transform: translateY(20px);
-		transition: opacity 0.5s ease, transform 0.5s ease;
-		overflow: hidden;
+		transition: all 0.6s ease;
 	}
 	
 	.terms-card.visible {
@@ -810,5 +661,10 @@
 	
 	.liability-list {
 		margin-top: 1.5rem;
+	}
+	
+	:global(.fa-icon) {
+		width: 1em;
+		height: 1em;
 	}
 </style> 

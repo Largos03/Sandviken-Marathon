@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import "../app.css";
 	import { Navbar } from "$lib";
 	import { FontAwesomeIcon as Fa } from '@fortawesome/svelte-fontawesome';
@@ -7,7 +7,7 @@
 		faTwitter,
 		faInstagram
 	} from '@fortawesome/free-brands-svg-icons';
-	import { language, translations } from '$lib/stores/i18n.js';
+	import { language, tStore } from '$lib/stores/i18n.js';
 	import { onMount } from 'svelte';
 	
 	// Accept data from layout.js
@@ -18,13 +18,8 @@
 		language.set(data.lang);
 	}
 	
-	// Direct translation function
-	$: t = (key) => {
-	  if (!translations[$language] || !translations[$language][key]) {
-	    return key;
-	  }
-	  return translations[$language][key];
-	};
+	// Use the derived translation store
+	$: t = $tStore;
 	
 	onMount(() => {
 		// Update the html lang attribute when language changes

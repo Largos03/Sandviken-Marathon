@@ -75,7 +75,15 @@ export const translations = {
     // About page
     aboutTitle: 'About Sandviken Marathon',
     aboutIntro: 'Welcome to the Sandviken Marathon, a premier running event in the heart of Sweden. Our marathon offers a beautiful course through scenic landscapes and historic areas.',
-    aboutMission: 'Founded in 2023, the Sandviken Marathon has quickly become a favorite among runners from around the world. Our mission is to promote health, fitness, and community through the joy of running.',
+    aboutMission: 'Our Mission',
+    aboutHistoryTitle: 'Our History',
+    aboutHistoryDesc: 'The Sandviken Marathon was established in 2023 with a vision to bring the community together through the power of running.',
+    aboutValuesTitle: 'Our Values',
+    aboutValuesDesc: 'We believe in promoting health, fitness, and community spirit through the joy of running.',
+    aboutCommunityTitle: 'Our Community',
+    aboutCommunityDesc: 'The Sandviken Marathon brings together runners, volunteers, and spectators from all walks of life.',
+    aboutFutureTitle: 'Our Future',
+    aboutFutureDesc: 'We are committed to growing the Sandviken Marathon while maintaining its community spirit and commitment to excellence.',
     eventDetailsTitle: 'Event Details',
     eventDetailsDesc: 'The marathon typically takes place in the summer, offering perfect running conditions with mild temperatures and beautiful surroundings.',
     
@@ -120,7 +128,8 @@ export const translations = {
     
     // Register page
     registerTitle: 'Registration',
-    registerIntro: 'Join us for the Sandviken Marathon on April 1, 2026. Secure your spot today!',
+    comingSoon: 'Coming Soon',
+    registrationInfo: 'Registration will be available through our official registration platform. Stay tuned!',
     registrationType: 'Registration Type',
     fullMarathon: 'Full Marathon (42.2km)',
     halfMarathon: 'Half Marathon (21.1km)',
@@ -162,6 +171,19 @@ export const translations = {
     elevationProfilePlaceholder: 'Elevation profile placeholder',
     raceDayInfo: 'Race Day Information',
     raceDayDetails: 'The marathon starts at 8:00 AM with a time limit of 6 hours. Participants should arrive at least 1 hour before the start time for check-in and warm-up.',
+    
+    // Additional course page keys
+    waterStations: 'Water Stations',
+    waterStationDetails: 'Water stations are available every 5km along the course',
+    medicalStations: 'Medical Stations',
+    medicalStationDetails: 'Medical support and first aid available at designated stations',
+    courseMapAlt: 'Sandviken Marathon Course Map',
+    startAnimation: 'Start Animation',
+    pauseAnimation: 'Pause Animation',
+    startTime: 'Start Time',
+    startTimeDetails: '8:00 AM - Full Marathon',
+    startLocation: 'Start Location',
+    startLocationDetails: 'City Center, Sandviken',
     
     // Privacy page
     privacyLastUpdated: 'Last updated:',
@@ -218,6 +240,17 @@ export const translations = {
     termsAgreementText: 'These Terms and Conditions constitute a legally binding agreement made between you and Sandviken Marathon concerning your use of our website and participation in our events. By using our website or registering for our events, you agree to be bound by these Terms.',
     termsReviewText: 'Please review these terms carefully. By accessing this website or registering for our events, you acknowledge that you have read, understood, and agree to be bound by all terms stated herein.',
     
+    // Modifications section
+    modifications: 'Modifications to Terms',
+    modificationsText: 'We reserve the right to modify these Terms at any time. Your continued use of the website following any changes indicates your acceptance of the modified Terms.',
+    modificationNotice: 'Notice of Changes',
+    modificationPoint1: 'We will notify registered users of any material changes to these Terms via email at least 30 days before they take effect.',
+    modificationEffect: 'Effect of Changes',
+    modificationPoint2: 'Changes will not apply retroactively and will only affect future use of our services. Previous versions of the Terms will remain available upon request.',
+    modificationAcceptance: 'Your Acceptance',
+    modificationPoint3: 'If you do not agree with the updated Terms, you should discontinue using our services. Continued use after modifications indicates acceptance of the new Terms.',
+    modificationDisclaimer: 'It is your responsibility to review these Terms periodically. Your continued use of the website constitutes acceptance of any modifications.',
+    
     // Event Registration
     eventRegistration: 'Event Registration',
     registrationText: 'By registering for Sandviken Marathon events, you acknowledge and agree to the following:',
@@ -259,14 +292,6 @@ export const translations = {
     liabilityItem3: 'Any content obtained from the website',
     liabilityItem4: 'Unauthorized access, use or alteration of your transmissions or content',
     liabilityItem5: 'Participation in any Sandviken Marathon events',
-    
-    // Modifications
-    modifications: 'Modifications',
-    modificationsText: 'We reserve the right to modify these Terms at any time. We will provide notice of any changes by updating the "Last Updated" date.',
-    modificationStep1: 'We post updates on this page',
-    modificationStep2: 'We update the "Last Updated" date',
-    modificationStep3: 'We may notify you via email for significant changes',
-    modificationStep4: 'Continued use constitutes acceptance of changes',
     
     // Data Security
     dataSecurity: 'Data Security',
@@ -377,6 +402,7 @@ export const translations = {
     privacyContactAddress: 'Address:',
     privacyContactAddressText: 'Sandviken Marathon, PO Box 123, Sandviken, Sweden',
     privacyContactBtn: 'Contact Us',
+    cookieNoticeText: 'Cookies are enabled by default. You can manage your preferences in the Privacy Policy.',
   },
   sv: {
     // Navbar
@@ -495,7 +521,8 @@ export const translations = {
     
     // Register page
     registerTitle: 'Anmälan',
-    registerIntro: 'Delta i Sandviken Marathon den 1 april 2026. Säkra din plats idag!',
+    comingSoon: 'Kommer Snart',
+    registrationInfo: 'Anmälan kommer att vara tillgänglig via vår officiella anmälningsplattform. Håll utkik!',
     registrationType: 'Anmälningstyp',
     fullMarathon: 'Helmaraton (42,2 km)',
     halfMarathon: 'Halvmaraton (21,1 km)',
@@ -537,6 +564,19 @@ export const translations = {
     elevationProfilePlaceholder: 'Höjdprofil kommer snart',
     raceDayInfo: 'Tävlingsdagsinformation',
     raceDayDetails: 'Maratonloppet startar kl 08:00 med en tidsgräns på 6 timmar. Deltagare bör anlända minst 1 timme före starttiden för incheckning och uppvärmning.',
+    
+    // Additional course page keys
+    waterStations: 'Vattenstationer',
+    waterStationDetails: 'Vattenstationer finns ungefär var 5:e kilometer längs banan',
+    medicalStations: 'Medicinska stationer',
+    medicalStationDetails: 'Medicinsk support och första hjälp tillgänglig vid utsedda stationer',
+    courseMapAlt: 'Sandviken Marathon Course Map',
+    startAnimation: 'Start Animation',
+    pauseAnimation: 'Pause Animation',
+    startTime: 'Start Time',
+    startTimeDetails: '8:00 AM - Full Marathon',
+    startLocation: 'Start Location',
+    startLocationDetails: 'City Center, Sandviken',
     
     // Privacy page
     privacyLastUpdated: 'Senast uppdaterad:',
@@ -593,6 +633,17 @@ export const translations = {
     termsAgreementText: 'Dessa villkor utgör ett juridiskt bindande avtal mellan dig och Sandviken Marathon gällande din användning av vår webbplats och deltagande i våra evenemang. Genom att använda vår webbplats eller registrera dig för våra evenemang, samtycker du till att vara bunden av dessa villkor.',
     termsReviewText: 'Vänligen läs dessa villkor noggrant. Genom att besöka denna webbplats eller registrera dig för våra evenemang, bekräftar du att du har läst, förstått och samtycker till att vara bunden av alla villkor som anges häri.',
     
+    // Modifications section
+    modifications: 'Ändringar',
+    modificationsText: 'Vi förbehåller oss rätten att ändra dessa villkor när som helst. Vi kommer att meddela om eventuella ändringar genom att uppdatera datumet "Senast uppdaterad".',
+    modificationNotice: 'Notice of Changes',
+    modificationPoint1: 'We will notify registered users of any material changes to these Terms via email at least 30 days before they take effect.',
+    modificationEffect: 'Effect of Changes',
+    modificationPoint2: 'Changes will not apply retroactively and will only affect future use of our services. Previous versions of the Terms will remain available upon request.',
+    modificationAcceptance: 'Your Acceptance',
+    modificationPoint3: 'If you do not agree with the updated Terms, you should discontinue using our services. Continued use after modifications indicates acceptance of the new Terms.',
+    modificationDisclaimer: 'It is your responsibility to review these Terms periodically. Your continued use of the website constitutes acceptance of any modifications.',
+    
     // Event Registration
     eventRegistration: 'Evenemangsregistrering',
     registrationText: 'Genom att registrera dig för Sandviken Marathons evenemang, bekräftar och godkänner du följande:',
@@ -634,14 +685,6 @@ export const translations = {
     liabilityItem3: 'Något innehåll som erhålls från webbplatsen',
     liabilityItem4: 'Obehörig åtkomst, användning eller ändring av dina överföringar eller innehåll',
     liabilityItem5: 'Deltagande i Sandviken Marathons evenemang',
-    
-    // Modifications
-    modifications: 'Ändringar',
-    modificationsText: 'Vi förbehåller oss rätten att ändra dessa villkor när som helst. Vi kommer att meddela om eventuella ändringar genom att uppdatera datumet "Senast uppdaterad".',
-    modificationStep1: 'Vi publicerar uppdateringar på denna sida',
-    modificationStep2: 'Vi uppdaterar datumet "Senast uppdaterad"',
-    modificationStep3: 'Vi kan meddela dig via e-post om betydande ändringar',
-    modificationStep4: 'Fortsatt användning utgör godkännande av ändringar',
     
     // Data Security
     dataSecurity: 'Datasäkerhet',
@@ -752,6 +795,7 @@ export const translations = {
     privacyContactAddress: 'Adress:',
     privacyContactAddressText: 'Sandviken Marathon, PO Box 123, Sandviken, Sweden',
     privacyContactBtn: 'Kontakta oss',
+    cookieNoticeText: 'Cookies är aktiverade som standard. Du kan hantera dina inställningar i Integritetspolicyn.',
   }
 };
 

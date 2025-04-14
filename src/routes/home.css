@@ -4,7 +4,7 @@
   --primary-color: #000;         /* Black - primary color for text and backgrounds */
   --secondary-color: #333;       /* Dark gray - secondary color for subtle elements */
   --accent-color: #fff;          /* White - used for text on dark backgrounds and card backgrounds */
-  --highlight-color: #ffe600;    /* Bright yellow - used for accents and highlights */
+  --highlight-color: #f5f5f5;    /* Light gray - used for accents and highlights */
   --text-primary: #111827;       /* Dark text color for headings */
   --text-secondary: #4b5563;     /* Medium gray for paragraph text */
   --bg-light: #f5f5f5;           /* Light gray background */
@@ -77,10 +77,10 @@
 /* "Official Event" badge at top of hero content */
 .hero-badge {
   position: absolute;
-  top: -15px;                    /* Positioned higher */
+  top: -15px;
   left: 50%;
-  transform: translateX(-50%);   /* Center horizontally */
-  background-color: var(--highlight-color);
+  transform: translateX(-50%);
+  background-color: var(--bg-light);    /* Changed from accent-color to light gray */
   color: var(--primary-color);
   font-weight: 700;
   font-size: 0.875rem;
@@ -94,13 +94,11 @@
 .date-badge {
   display: inline-flex;
   align-items: center;
-  background-color: var(--highlight-color);
+  background-color: var(--bg-light);    /* Changed from accent-color to light gray */
   color: var(--primary-color);
   padding: 0.6rem 1.5rem;
   border-radius: 50px;
-  font-weight: 700;
-  font-size: 1.2rem;
-  margin-bottom: 1.5rem;           /* More space below */
+  font-weight: 600;
   box-shadow: var(--shadow-md);
 }
 
@@ -136,25 +134,25 @@
 }
 
 .cta-button.primary {
-  background-color: var(--highlight-color);
-  color: var(--primary-color);
-  box-shadow: var(--shadow-md);
+  background-color: var(--primary-color);
+  color: var(--accent-color);
+  border: 2px solid var(--primary-color);
 }
 
 .cta-button.primary:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-lg);
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
 }
 
 .cta-button.secondary {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: transparent;
   color: var(--accent-color);
   border: 2px solid var(--accent-color);
 }
 
 .cta-button.secondary:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-3px);
+  background-color: var(--accent-color);
+  color: var(--primary-color);
 }
 
 .countdown-timer {
@@ -277,11 +275,11 @@
   color: white;
 }
 
-/* Yellow divider line below section titles */
+/* Section divider line below section titles */
 .section-divider {
   width: 50px;
   height: 3px;
-  background-color: var(--highlight-color);
+  background-color: var(--secondary-color);
   margin: 0 auto 1rem;
 }
 
@@ -341,20 +339,15 @@
 .feature-icon {
   width: 60px;
   height: 60px;
-  background-color: #000000;
-  color: #ffffff;
+  background-color: var(--primary-color);
+  color: var(--accent-color);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.375rem;
-  transition: transform 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  position: absolute;
-  top: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
 }
 
 /* Scale up icon on hover */
@@ -362,7 +355,7 @@
   transform: translateX(-50%) scale(1.05);
 }
 
-/* Yellow highlight bar that appears on hover */
+/* Highlight bar that appears on hover */
 .feature-card::after {
   content: '';
   position: absolute;
@@ -370,7 +363,7 @@
   left: 0;
   width: 100%;
   height: 3px;
-  background-color: var(--highlight-color);
+  background-color: var(--secondary-color);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -427,7 +420,7 @@
 }
 
 .feature-link:hover {
-  color: var(--highlight-color);
+  color: var(--secondary-color);
 }
 
 /* Arrow icon in feature link */
@@ -482,13 +475,13 @@
   text-align: center;
 }
 
-/* Box containing course features/highlights */
+/* Course features box */
 .course-features {
   background-color: var(--bg-light);
   padding: 1.5rem;
   border-radius: var(--radius-md);
   margin-bottom: 1.5rem;
-  border-left: 3px solid var(--highlight-color);
+  border-left: 3px solid var(--secondary-color);
 }
 
 /* Individual course feature item */
@@ -502,11 +495,11 @@
   margin-bottom: 0;
 }
 
-/* Yellow bullet point for each feature */
+/* Bullet point for each feature */
 .feature-bullet {
   width: 8px;
   height: 8px;
-  background-color: var(--highlight-color);
+  background-color: var(--secondary-color);
   border-radius: 50%;
   margin-right: 0.875rem;
   flex-shrink: 0;
@@ -522,24 +515,22 @@
 /* Button to view detailed course map */
 .course-btn {
   display: inline-block;
-  padding: 0.875rem 2rem;
   background-color: var(--primary-color);
   color: var(--accent-color);
-  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
   font-weight: 600;
-  border-radius: 50px;
+  text-decoration: none;
   transition: all 0.3s ease;
-  letter-spacing: 0.5px;
-  box-shadow: var(--shadow-md);
-  font-size: 0.95rem;
-  text-align: center;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
+  border: 2px solid var(--primary-color);
 }
 
 .course-btn:hover {
   background-color: var(--secondary-color);
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-lg);
+  border-color: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 /* Center the course content on mobile */
@@ -620,13 +611,17 @@
 
 /* Individual stat box on the map */
 .map-stat {
-  background-color: rgba(0, 0, 0, 0.8);
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--primary-color);
   color: var(--accent-color);
-  padding: 1rem 1.5rem;      /* More padding */
+  padding: 0.75rem 1.5rem;
   border-radius: var(--radius-md);
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   box-shadow: var(--shadow-md);
-  backdrop-filter: blur(5px);
 }
 
 /* Value in the stat box (e.g., 42.2) */
@@ -689,7 +684,7 @@
 
 .result-year-badge {
   display: inline-block;
-  background-color: var(--highlight-color);
+  background-color: var(--accent-color);
   color: var(--primary-color);
   font-weight: bold;
   font-size: 1.2rem;
@@ -765,22 +760,21 @@
 
 .view-all-btn {
   display: inline-block;
-  background-color: var(--highlight-color);
+  background-color: var(--accent-color);
   color: var(--primary-color);
-  font-weight: bold;
-  padding: 1rem 2.5rem;
-  border-radius: 30px;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
   text-decoration: none;
-  font-size: 1.15rem;
   transition: all 0.3s ease;
-  box-shadow: var(--shadow-md);
+  border: 2px solid var(--accent-color);
 }
 
 .view-all-btn:hover {
-  background-color: var(--primary-color);
+  background-color: transparent;
   color: var(--accent-color);
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 /* CTA Section */
@@ -817,7 +811,7 @@
 .cta-badge {
   display: inline-block;
   padding: 0.5rem 1.5rem;
-  background-color: var(--highlight-color);
+  background-color: var(--accent-color);
   color: var(--primary-color);
   font-weight: 600;
   font-size: 1rem;
@@ -859,21 +853,21 @@
 /* Register button */
 .register-btn {
   display: inline-block;
-  padding: 0.875rem 2.25rem;
-  background-color: var(--highlight-color);
+  background-color: var(--accent-color);
   color: var(--primary-color);
-  font-weight: 700;
-  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
   text-decoration: none;
-  border-radius: 50px;
   transition: all 0.3s ease;
-  letter-spacing: 0.5px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border: 2px solid var(--accent-color);
 }
 
 .register-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  background-color: transparent;
+  color: var(--accent-color);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 /* Responsive adjustments */
@@ -1073,4 +1067,12 @@ button, .btn, .cta-button, .register-btn, .view-all-btn, .course-btn {
   cursor: pointer;
   outline: none;
   border: none;
+}
+
+/* Update hover effects for consistency */
+.hero-badge:hover,
+.date-badge:hover {
+  background-color: var(--secondary-color);
+  color: var(--accent-color);
+  transition: all 0.3s ease;
 } 

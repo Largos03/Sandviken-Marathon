@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     // Using vanilla JavaScript in the onMount lifecycle
     import { onMount } from 'svelte';
     
@@ -19,27 +19,31 @@
     // Import language store
     import { language, translations } from '$lib/stores/i18n.js';
     
+    // Define types for better TypeScript support
+    type Language = 'en' | 'sv';
+    type HoverItemType = number | string | null;
+    
     // Hover state for items
     let logoHovered = false;
-    let hoveredItem = null;
+    let hoveredItem: HoverItemType = null;
     
     // Mobile menu state
     let mobileMenuOpen = false;
     
-    function setHovered(index) {
+    function setHovered(index: HoverItemType): void {
         hoveredItem = index;
     }
     
-    function clearHovered() {
+    function clearHovered(): void {
         hoveredItem = null;
     }
     
-    function toggleMobileMenu() {
+    function toggleMobileMenu(): void {
         mobileMenuOpen = !mobileMenuOpen;
     }
     
     // Language toggle function
-    function toggleLanguage() {
+    function toggleLanguage(): void {
         $language = $language === 'en' ? 'sv' : 'en';
         // Store language preference in localStorage
         if (typeof localStorage !== 'undefined') {
@@ -50,6 +54,7 @@
     onMount(() => {
         // Get the navbar element
         const navbar = document.getElementById('navbar');
+        if (!navbar) return;
         
         // Track scroll position
         let lastScrollY = 0;
@@ -63,21 +68,21 @@
         }
         
         // Function to update navbar on scroll
-        function handleScroll() {
+        function handleScroll(): void {
             const scrollY = window.scrollY;
             
             // Only hide navbar once scrolled down a bit
             if (scrollY > 100) {
                 if (scrollY > lastScrollY) {
                     // Scrolling down - hide navbar
-                    navbar.style.transform = 'translateY(-100%)';
+                    if (navbar) navbar.style.transform = 'translateY(-100%)';
                 } else {
                     // Scrolling up - show navbar
-                    navbar.style.transform = 'translateY(0)';
+                    if (navbar) navbar.style.transform = 'translateY(0)';
                 }
             } else {
                 // At the top - always show
-                navbar.style.transform = 'translateY(0)';
+                if (navbar) navbar.style.transform = 'translateY(0)';
             }
             
             // Update last position
@@ -94,12 +99,16 @@
     });
     
     // Get translation based on current language
-    $: t = (key) => {
-      if (!translations[$language] || !translations[$language][key]) {
+    $: t = (key: string): string => {
+      const currentLang = $language as Language;
+      const currentTranslations = translations[currentLang] as Record<string, string>;
+      
+      if (!currentTranslations || !currentTranslations[key]) {
         // Fallback to English or just the key itself if not found
-        return translations['en']?.[key] || key;
+        const englishTranslations = translations['en'] as Record<string, string>;
+        return englishTranslations?.[key] || key;
       }
-      return translations[$language][key];
+      return currentTranslations[key];
     };
 </script>
 

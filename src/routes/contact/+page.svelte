@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { superForm } from 'sveltekit-superforms/client';
 	import { zodClient } from 'sveltekit-superforms/adapters';
-	import { contactSchema } from './schema';
+	import { contactSchema } from '../Contact/schema';
 	import { FontAwesomeIcon as Fa } from '@fortawesome/svelte-fontawesome';
 	import { 
 		faEnvelope, 
@@ -32,13 +32,18 @@
 	// Accept data from page.server.js
 	export let data: PageData;
 	
-	// Direct translation function
-	$: t = (key: string): string => {
-	  if (!translations[$language] || !translations[$language][key]) {
-	    // Fallback to English or just the key itself if not found
-	    return translations['en']?.[key] || key;
-	  }
-	  return translations[$language][key];
+	// Type definitions for translations
+	type Language = 'en' | 'sv';
+	type TranslationKeys = keyof typeof translations.en;
+	
+	// Direct translation function with proper typing
+	$: t = (key: TranslationKeys): string => {
+		const currentLang = $language as Language;
+		if (!translations[currentLang] || !translations[currentLang][key]) {
+			// Fallback to English or just the key itself if not found
+			return translations['en']?.[key] || key;
+		}
+		return translations[currentLang][key];
 	};
 	
 	// Track form status and touched fields
@@ -108,8 +113,8 @@
 	// Translate error message
 	function translateError(error: string): string {
 		// If the error message is a translation key, translate it
-		if (error && translations[$language] && translations[$language][error]) {
-			return translations[$language][error];
+		if (error && translations[$language as Language] && translations[$language as Language][error as TranslationKeys]) {
+			return translations[$language as Language][error as TranslationKeys];
 		}
 		// Otherwise return the original error
 		return error;

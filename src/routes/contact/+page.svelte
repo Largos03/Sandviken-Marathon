@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { superForm } from 'sveltekit-superforms/client';
 	import { zodClient } from 'sveltekit-superforms/adapters';
-	import { contactSchema } from '../Contact/schema';
+	import { contactSchema } from './schema';
 	import { FontAwesomeIcon as Fa } from '@fortawesome/svelte-fontawesome';
 	import { 
 		faEnvelope, 
@@ -16,7 +16,7 @@
 	} from '@fortawesome/free-brands-svg-icons';
 	import type { SuperValidated } from 'sveltekit-superforms';
 	import type { z } from 'zod';
-	import { language, translations } from '$lib/stores/i18n.js';
+	import { language, translations } from '$lib/stores/i18n';
 	
 	type FormData = {
 		name: string;
@@ -34,16 +34,17 @@
 	
 	// Type definitions for translations
 	type Language = 'en' | 'sv';
-	type TranslationKeys = keyof typeof translations.en;
+	type TranslationKeys = string;
 	
 	// Direct translation function with proper typing
-	$: t = (key: TranslationKeys): string => {
+	$: t = (key: string): string => {
 		const currentLang = $language as Language;
-		if (!translations[currentLang] || !translations[currentLang][key]) {
+		const translationsObj = translations as Record<Language, Record<string, string>>;
+		if (!translationsObj[currentLang] || !translationsObj[currentLang][key]) {
 			// Fallback to English or just the key itself if not found
-			return translations['en']?.[key] || key;
+			return translationsObj['en']?.[key] || key;
 		}
-		return translations[currentLang][key];
+		return translationsObj[currentLang][key];
 	};
 	
 	// Track form status and touched fields
@@ -113,8 +114,9 @@
 	// Translate error message
 	function translateError(error: string): string {
 		// If the error message is a translation key, translate it
-		if (error && translations[$language as Language] && translations[$language as Language][error as TranslationKeys]) {
-			return translations[$language as Language][error as TranslationKeys];
+		const translationsObj = translations as Record<Language, Record<string, string>>;
+		if (error && translationsObj[$language as Language] && translationsObj[$language as Language][error]) {
+			return translationsObj[$language as Language][error];
 		}
 		// Otherwise return the original error
 		return error;

@@ -30,15 +30,7 @@
 		marketing: true
 	};
 
-	let showCookieNotice = false;
-
 	onMount(() => {
-		// Check if user has seen the notice before
-		const hasSeenNotice = localStorage.getItem('cookieNoticeSeen');
-		if (!hasSeenNotice) {
-			showCookieNotice = true;
-		}
-
 		// Load saved preferences if they exist
 		const savedPreferences = localStorage.getItem('cookiePreferences');
 		if (savedPreferences) {
@@ -51,28 +43,12 @@
 		cookiePreferences[type] = !cookiePreferences[type];
 		localStorage.setItem('cookiePreferences', JSON.stringify(cookiePreferences));
 	}
-
-	function dismissNotice() {
-		showCookieNotice = false;
-		localStorage.setItem('cookieNoticeSeen', 'true');
-	}
 </script>
 
 <svelte:head>
 	<title>{t('privacyPolicy')} | Sandviken Marathon</title>
 	<meta name="description" content={t('privacyIntro')} />
 </svelte:head>
-
-{#if showCookieNotice}
-	<div class="cookie-notice" transition:fade>
-		<div class="notice-content">
-			<p>{t('cookieNoticeText')}</p>
-			<button class="dismiss-button" on:click={dismissNotice}>
-				<FontAwesomeIcon icon={faTimes} />
-			</button>
-		</div>
-	</div>
-{/if}
 
 <div class="privacy-page" in:fade>
 	<div class="hero-section">
@@ -849,57 +825,6 @@
 		.update-badge {
 			padding: 0.5rem 1rem;
 			font-size: 0.75rem;
-		}
-	}
-
-	.cookie-notice {
-		position: fixed;
-		bottom: 2rem;
-		right: 2rem;
-		z-index: 1000;
-		max-width: 400px;
-		background: white;
-		border-radius: 1rem;
-		box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-		border: 1px solid rgba(0,0,0,0.1);
-		overflow: hidden;
-		transition: opacity 0.2s ease;
-	}
-
-	.notice-content {
-		padding: 1rem 1.5rem;
-		display: flex;
-		align-items: center;
-		gap: 1rem;
-	}
-
-	.notice-content p {
-		margin: 0;
-		font-size: 0.9rem;
-		line-height: 1.5;
-		color: #4b5563;
-	}
-
-	.dismiss-button {
-		background: none;
-		border: none;
-		padding: 0.5rem;
-		cursor: pointer;
-		color: #9ca3af;
-		transition: color 0.2s ease;
-		flex-shrink: 0;
-	}
-
-	.dismiss-button:hover {
-		color: #4b5563;
-	}
-
-	@media (max-width: 640px) {
-		.cookie-notice {
-			bottom: 1rem;
-			right: 1rem;
-			left: 1rem;
-			max-width: none;
 		}
 	}
 </style> 

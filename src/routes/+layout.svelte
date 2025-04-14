@@ -9,6 +9,7 @@
 	} from '@fortawesome/free-brands-svg-icons';
 	import { language, tStore } from '$lib/stores/i18n.js';
 	import { onMount } from 'svelte';
+	import CookieConsent from '$lib/components/CookieConsent.svelte';
 	
 	// Accept data from layout.js
 	export let data;
@@ -33,6 +34,8 @@
 	<main class="flex-grow">
 		<slot />
 	</main>
+	
+	<CookieConsent />
 	
 	<footer class="bg-gray-900 text-white py-4 md:py-5 mt-auto">
 		<div class="container mx-auto px-4 flex flex-col items-center">

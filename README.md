@@ -84,10 +84,10 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 👥 Authors
 
-- Your Name - Initial work and maintenance
+- Largo (Largosemaan73@gmail.com) - Initial work and maintenance
 
 ## 🙏 Acknowledgments
 
 - SvelteKit team for the amazing framework
 - TailwindCSS team for the utility-first CSS framework
-- All contributors and supporters of the project
+- All contributors and supporters of the project - AI!!!!

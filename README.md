@@ -1,93 +1,115 @@
-# Sandviken Marathon 🏃‍♂️
+# Sandviken Marathon Website
 
-A modern web application built for the Sandviken Marathon event, providing race information, registration, and community engagement features. Built with SvelteKit and modern web technologies.
+A modern, responsive website for the Sandviken Marathon event built with SvelteKit.
 
-## 🌟 Features
+## Features
 
-- **Interactive Race Information**: Detailed course maps and event details
-- **Responsive Design**: Fully responsive layout that works on all devices
-- **Modern UI**: Built with TailwindCSS for a clean, modern look
-- **Dynamic Content**: Real-time updates and interactive components
-- **Form Handling**: Secure and validated form submissions using Superforms and Zod
-- **Icon Integration**: Beautiful icons using FontAwesome
+- Multi-language support (English and Swedish)
+- Responsive design for all devices
+- Modular component architecture
+- Accessible web design
 
-## 🚀 Tech Stack
+## Project Structure
 
-- **Framework**: [SvelteKit](https://kit.svelte.dev/)
-- **Styling**: [TailwindCSS](https://tailwindcss.com/)
-- **UI Components**: 
-  - SMUI (Svelte Material UI)
-  - Custom components
-- **Form Handling**: 
-  - Superforms
-  - Formsnap
-  - Zod validation
-- **Icons**: FontAwesome
+This project follows a component-based architecture using SvelteKit:
 
-## 📦 Installation
+- `src/` - Source code
+  - `routes/` - SvelteKit routes (pages)
+  - `lib/` - Reusable libraries and components
+    - `components/` - UI components
+    - `stores/` - State management
+    - `styles/` - CSS styles and utilities
+    - `utils/` - Helper functions
+    - `docs/` - Project documentation
 
-1. Clone the repository:
+## Component Library
+
+We've built a comprehensive set of reusable components to ensure consistency:
+
+- **Core UI Components**: Button, Card, Section, Hero, Navbar, etc.
+- **Form Components**: Input, TextArea, etc.
+- **Utility Components**: Translation component, Icon wrapper, etc.
+
+See `src/lib/docs/COMPONENTS.md` for detailed component documentation.
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (version 16 or higher)
+- npm or pnpm
+
+### Installation
+
 ```bash
+# Clone the repository
 git clone https://github.com/yourusername/sandviken-marathon.git
 cd sandviken-marathon
-```
 
-2. Install dependencies:
-```bash
+# Install dependencies
 npm install
-```
+# or
+pnpm install
 
-3. Start the development server:
-```bash
+# Start the development server
 npm run dev
+# or
+pnpm run dev
 ```
 
-The application will be available at `http://localhost:5173`
+## Development
 
-## 🛠️ Available Scripts
+### Language Support
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run check` - Run type checking
-- `npm run format` - Format code with Prettier
-- `npm run lint` - Run linting checks
+The website supports English and Swedish. All text content is managed through the translation system:
 
-## 🎨 Development
+```svelte
+<script>
+  import { T } from '$lib';
+</script>
 
-The project uses:
-- TypeScript for type safety
-- ESLint for code linting
-- Prettier for code formatting
-- TailwindCSS for styling
+<!-- Simple usage -->
+<T key="welcomeMessage" />
 
-## 🌐 Deployment
+<!-- For more complex components -->
+<script>
+  import { tStore } from '$lib/stores/i18n';
+  
+  // Use the translation store
+  $: t = $tStore;
+</script>
 
-The application can be built for production using:
+<p>{t('welcomeMessage')}</p>
+```
+
+New translations should be added to the `src/lib/stores/i18n.ts` file.
+
+### Styling
+
+We use a combination of Tailwind CSS and custom CSS. Common utility classes are defined in `src/lib/styles/utilities.css`.
+
+### Code Cleanup
+
+For identifying potential unused code or duplications, run:
+
+```bash
+node src/lib/scripts/cleanup.js
+```
+
+## Building for Production
+
 ```bash
 npm run build
+# or
+pnpm run build
 ```
 
-## 🤝 Contributing
+## Deployment
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+The site is deployed automatically when changes are pushed to the main branch.
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+## Documentation
 
-## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 👥 Authors
-
-- Largo (Largosemaan73@gmail.com) - Initial work and maintenance
-
-## 🙏 Acknowledgments
-
-- SvelteKit team for the amazing framework
-- TailwindCSS team for the utility-first CSS framework
-- All contributors and supporters of the project - AI!!!!
+- `src/lib/docs/CODEBASE_STRUCTURE.md` - Overall codebase structure
+- `src/lib/docs/COMPONENTS.md` - Component documentation
+- `src/lib/docs/TRANSLATION.md` - Translation system guide

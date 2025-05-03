@@ -1,7 +1,12 @@
 import { writable, derived } from 'svelte/store';
 
+// Define types
+export type Language = 'en' | 'sv';
+export type TranslationKey = string;
+export type TranslationRecord = Record<string, string>;
+
 // Default language
-export const language = writable('en');
+export const language = writable<Language>('en');
 
 // Translations for the site
 export const translations = {
@@ -683,8 +688,13 @@ export const translations = {
   }
 };
 
-// Helper function to get translation
-export function t(key, lang) {
+/**
+ * Helper function to get translation with proper type safety
+ * @param key The translation key to look up
+ * @param lang Optional language override (defaults to current store value)
+ * @returns The translated string or the key if not found
+ */
+export function t(key: TranslationKey, lang?: Language): string {
   if (!key) return '';
   
   const currentLang = lang || 'en';
@@ -703,19 +713,32 @@ export function t(key, lang) {
   return key;
 }
 
-// Create a derived store that provides the current translation function
+/**
+ * A derived store that provides the current translation function
+ * This allows components to access translations reactively
+ */
 export const tStore = derived(
   language,
-  ($language) => (key) => translations[$language]?.[key] || key
+  ($language) => (key: TranslationKey) => translations[$language]?.[key] || translations['en']?.[key] || key
 );
 
-// Helper to detect browser language
-export function detectBrowserLanguage() {
-  if (typeof window === 'undefined') return 'en';
+/**
+ * Detect the browser language and return a supported language code
+ * @returns The detected language code (en or sv)
+ */
+export function detectBrowserLanguage(): Language {
+  if (typeof window === 'undefined') {
+    return 'en'; // Default to English on the server
+  }
+
+  // Get browser language
+  const browserLang = navigator.language.split('-')[0].toLowerCase();
   
-  const browserLang = navigator.language || navigator.userLanguage;
-  if (browserLang && browserLang.startsWith('sv')) {
+  // Check if it's one of our supported languages
+  if (browserLang === 'sv') {
     return 'sv';
   }
+  
+  // Default to English
   return 'en';
 } 

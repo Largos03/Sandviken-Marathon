@@ -12,8 +12,10 @@
   // Get translation based on current language
   $: text = getTranslation(key, $language as Language);
   
-  // Helper function to safely get translations
+  // Helper function to safely get translations with optional parameters support
   function getTranslation(key: TranslationKey, lang: Language): string {
+    if (!key) return fallback;
+    
     // Check if the language exists in translations
     const currentTranslations = translations[lang] as TranslationRecord;
     if (currentTranslations && currentTranslations[key]) {

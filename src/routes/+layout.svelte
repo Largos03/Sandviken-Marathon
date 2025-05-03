@@ -10,13 +10,14 @@
 	import { language, tStore } from '$lib/stores/i18n.js';
 	import { onMount } from 'svelte';
 	import CookieConsent from '$lib/components/CookieConsent.svelte';
+	import '$lib/styles/Layout.css';
 	
 	// Accept data from layout.js
 	export let data;
 	
 	// Initialize language from server data if available
 	if (data.lang) {
-		language.set(data.lang);
+		language.set(data.lang as 'en' | 'sv');
 	}
 	
 	// Use the derived translation store
@@ -61,41 +62,4 @@
 		</div>
 	</footer>
 </div>
-
-<style>
-	.social-links {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-	
-	.social-icon {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 1.75rem;
-		height: 1.75rem;
-		color: white;
-		background-color: rgba(255, 255, 255, 0.1);
-		border-radius: 50%;
-		transition: all 0.2s ease;
-	}
-	
-	.social-icon:hover {
-		background-color: rgba(255, 255, 255, 0.2);
-		transform: translateY(-2px);
-	}
-	
-	.footer-links {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		color: rgba(255, 255, 255, 0.8);
-	}
-	
-	:global(.fa-icon) {
-		width: 0.8em;
-		height: 0.8em;
-	}
-</style>
   

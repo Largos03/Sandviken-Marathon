@@ -1,212 +1,151 @@
-/* Utility classes for common patterns across the site */
+/* ========== UTILITY STYLES ========== */
+/* This file contains reusable styles that can be applied throughout the Sandviken Marathon website */
+/* These utility classes help maintain consistency and reduce repetition in the stylesheets */
 
-/* Animation utilities */
+/* ========== ANIMATION UTILITIES ========== */
+/* 
+ * NOTE: This is the canonical location for animation utilities.
+ * These same animations are defined in app.css and Navbar.css, but should be
+ * consolidated here to avoid duplication.
+ */
+
+/* Base animation settings for smooth transitions */
 .animate-in {
-  animation-duration: 150ms;
-  animation-timing-function: cubic-bezier(0.1, 0.99, 0.1, 1);
-  animation-fill-mode: both;
+  animation-duration: 150ms;     /* How long the animation lasts */
+  animation-timing-function: cubic-bezier(0.1, 0.99, 0.1, 1); /* Custom speed curve for natural movement */
+  animation-fill-mode: both;     /* Ensures element retains the animation's final state */
 }
 
+/* Simple fade-in animation */
 .fade-in {
-  animation-name: fadeIn;
-  animation-duration: 0.3s;
+  animation-name: fadeIn;        /* Uses the fadeIn keyframe animation defined below */
+  animation-duration: 0.3s;      /* Animation lasts 0.3 seconds */
 }
 
+/* Animation that slides in from the top */
 .slide-in-from-top {
-  animation-name: slideInFromTop;
-  animation-duration: 0.3s;
+  animation-name: slideInFromTop; /* Uses the slideInFromTop keyframe animation defined below */
+  animation-duration: 0.3s;      /* Animation lasts 0.3 seconds */
 }
 
+/* Animation that slides in from the bottom */
 .slide-in-from-bottom {
-  animation-name: slideInFromBottom;
-  animation-duration: 0.3s;
+  animation-name: slideInFromBottom; /* Uses the slideInFromBottom keyframe animation defined below */
+  animation-duration: 0.3s;      /* Animation lasts 0.3 seconds */
 }
 
-/* Animation keyframes */
+/* ========== ANIMATION DEFINITIONS ========== */
+/* Defines exactly how each animation works */
+
+/* Fade-in effect: from transparent to fully visible */
 @keyframes fadeIn {
   from {
-    opacity: 0;
+    opacity: 0;                  /* Starts completely transparent */
   }
   to {
-    opacity: 1;
+    opacity: 1;                  /* Ends fully visible */
   }
 }
 
+/* Slide-in from top effect: moves from above its final position while fading in */
 @keyframes slideInFromTop {
   from {
-    transform: translateY(-0.5rem);
-    opacity: 0;
+    transform: translateY(-0.5rem); /* Starts 0.5rem (8px) above final position */
+    opacity: 0;                  /* Starts completely transparent */
   }
   to {
-    transform: translateY(0);
-    opacity: 1;
+    transform: translateY(0);    /* Ends at proper position */
+    opacity: 1;                  /* Ends fully visible */
   }
 }
 
+/* Slide-in from bottom effect: moves from below its final position while fading in */
 @keyframes slideInFromBottom {
   from {
-    transform: translateY(0.5rem);
-    opacity: 0;
+    transform: translateY(0.5rem); /* Starts 0.5rem (8px) below final position */
+    opacity: 0;                  /* Starts completely transparent */
   }
   to {
-    transform: translateY(0);
-    opacity: 1;
+    transform: translateY(0);    /* Ends at proper position */
+    opacity: 1;                  /* Ends fully visible */
   }
 }
 
-/* Button styles */
-.btn {
-  display: inline-block;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  border-radius: 0.5rem;
-  padding: 0.75rem 1.5rem;
-}
-
-.btn-primary {
-  background-color: var(--primary-color, #000);
-  color: white;
-  border: 2px solid var(--primary-color, #000);
-}
-
-.btn-primary:hover {
-  background-color: var(--secondary-color, #333);
-  border-color: var(--secondary-color, #333);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.btn-secondary {
-  background-color: transparent;
-  color: white;
-  border: 2px solid white;
-}
-
-.btn-secondary:hover {
-  background-color: white;
-  color: var(--primary-color, #000);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.btn-light {
-  background-color: white;
-  color: var(--primary-color, #000);
-  border: 2px solid white;
-}
-
-.btn-light:hover {
-  background-color: transparent;
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Section utilities */
+/* ========== SECTION UTILITIES ========== */
+/* Styling for major page sections */
 .section {
-  padding: var(--section-spacing, 5rem) 0;
-  position: relative;
+  padding: var(--section-spacing, 5rem) 0; /* Vertical padding based on variable or 5rem default */
+  position: relative;            /* Creates positioning context for absolute elements inside */
 }
 
-.section-fade {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.section-fade.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Container */
+/* ========== LAYOUT CONTAINERS ========== */
+/* Standard content container - centers content and limits maximum width */
 .container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
+  max-width: 1100px;             /* Maximum width for content */
+  margin: 0 auto;                /* Centers the container horizontally */
+  padding: 0 1.5rem;             /* Adds space on the left and right sides */
 }
 
-/* Section headers */
+/* ========== SECTION HEADERS ========== */
+/* Styling for section titles */
 .section-header {
-  text-align: center;
-  max-width: 700px;
-  margin: 0 auto 3rem;
+  text-align: center;            /* Centers the text */
+  max-width: 700px;              /* Limits width for readability */
+  margin: 0 auto 3rem;           /* Centers horizontally with space below */
 }
 
+/* Decorative divider line below section titles */
 .section-divider {
-  width: 50px;
-  height: 3px;
-  background-color: var(--secondary-color, #333);
-  margin: 0 auto 1rem;
+  width: 50px;                   /* Width of the divider */
+  height: 3px;                   /* Height/thickness of the divider */
+  background-color: var(--secondary-color, #333); /* Dark gray color */
+  margin: 0 auto 1rem;           /* Centered horizontally with space below */
 }
 
-/* Cards and grids */
+/* ========== CARDS AND GRIDS ========== */
+/* Card component for displaying content in a box */
 .card {
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: white;       /* White background */
+  border-radius: 8px;            /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04); /* Subtle shadow */
+  border: 1px solid rgba(0, 0, 0, 0.05); /* Very subtle border */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation */
 }
 
+/* Hover effect for cards */
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);   /* Card lifts up slightly */
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* Stronger shadow for more depth */
 }
 
+/* Basic grid layout for arranging elements in rows and columns */
 .grid {
-  display: grid;
-  gap: 1.5rem;
+  display: grid;                 /* Creates a grid layout */
+  gap: 1.5rem;                   /* Space between grid items */
 }
 
+/* Two-column grid (defaults to one column on mobile) */
 .grid-2 {
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr;    /* Single column layout by default */
 }
 
+/* Changes to two columns on larger screens */
 @media (min-width: 768px) {
   .grid-2 {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr; /* Two equal columns on larger screens */
   }
 }
 
+/* Three-column grid (defaults to one column on mobile) */
 .grid-3 {
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr;    /* Single column layout by default */
 }
 
+/* Changes to three columns on larger screens */
 @media (min-width: 768px) {
   .grid-3 {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr); /* Three equal columns on larger screens */
   }
 }
 
-/* Form elements */
-.form-group {
-  margin-bottom: 1.5rem;
-}
-
-.form-input {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.form-input:focus {
-  outline: none;
-  border-color: var(--primary-color, #000);
-  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
-}
-
-.form-input.error {
-  border-color: #ef4444;
-}
-
-.error-message {
-  color: #ef4444;
-  font-size: 0.875rem;
-  margin-top: 0.5rem;
-} 
+/* Note: Form element styles were removed as they're already defined in FormControls.css */ 

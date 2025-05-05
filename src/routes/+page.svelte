@@ -260,5 +260,5 @@
 
 <!-- svelte-ignore css-unused-selector -->
 <style>
-  @import './home.css';
+  @import '$lib/styles/home.css';
 </style>

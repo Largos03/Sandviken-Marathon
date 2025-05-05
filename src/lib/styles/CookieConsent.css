@@ -1,50 +1,78 @@
+/* ========== COOKIE CONSENT STYLING ========== */
+/* This file contains styles for the cookie consent notice that appears for new visitors */
+/* The cookie notice informs users about the website's use of cookies and privacy practices */
+
+/* 
+ * Main container for the cookie consent popup
+ * Positions the notice at the bottom right corner of the screen
+ */
 .cookie-notice {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    z-index: 1000;
-    max-width: 400px;
-    background: white;
-    border-radius: 1rem;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    border: 1px solid rgba(0,0,0,0.1);
-    overflow: hidden;
-    transition: opacity 0.2s ease;
+    position: fixed;             /* Stays in place even when scrolling */
+    bottom: 2rem;                /* 2rem (32px) from the bottom of the screen */
+    right: 2rem;                 /* 2rem (32px) from the right of the screen */
+    z-index: 1000;               /* Ensures the notice appears above other content */
+    max-width: 400px;            /* Limits width for readability */
+    background: white;           /* White background for the popup */
+    border-radius: 1rem;         /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    border: 1px solid rgba(0,0,0,0.1); /* Very subtle border */
+    overflow: hidden;            /* Ensures content doesn't spill outside the rounded corners */
+    transition: opacity 0.2s ease; /* Smooth fade effect when appearing/disappearing */
 }
 
+/* 
+ * Inner content container of the cookie notice
+ * Holds the text and dismiss button
+ */
 .notice-content {
-    padding: 1rem 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+    padding: 1rem 1.5rem;        /* Space inside the container */
+    display: flex;               /* Uses flexible box layout */
+    align-items: center;         /* Centers items vertically */
+    gap: 1rem;                   /* Space between text and dismiss button */
 }
 
+/* 
+ * Text paragraph explaining cookie usage
+ * Contains the main message about cookies and privacy
+ */
 .notice-content p {
-    margin: 0;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    color: #4b5563;
+    margin: 0;                   /* Removes default paragraph spacing */
+    font-size: 0.9rem;           /* Slightly smaller text size */
+    line-height: 1.5;            /* Increased line height for readability */
+    color: #4b5563;              /* Medium gray text color */
 }
 
+/* 
+ * Close/dismiss button to hide the cookie notice
+ * Typically appears as an "X" icon
+ */
 .dismiss-button {
-    background: none;
-    border: none;
-    padding: 0.5rem;
-    cursor: pointer;
-    color: #9ca3af;
-    transition: color 0.2s ease;
-    flex-shrink: 0;
+    background: none;            /* No background color */
+    border: none;                /* No border */
+    padding: 0.5rem;             /* Space inside the button */
+    cursor: pointer;             /* Shows hand cursor on hover */
+    color: #9ca3af;              /* Light gray color for the icon */
+    transition: color 0.2s ease; /* Smooth color change animation */
+    flex-shrink: 0;              /* Prevents the button from shrinking */
 }
 
+/* 
+ * Hover effect for the dismiss button
+ * Darkens the button when hovering to show it's interactive
+ */
 .dismiss-button:hover {
-    color: #4b5563;
+    color: #4b5563;              /* Darker gray on hover */
 }
 
+/* 
+ * Responsive adjustments for smaller screens (mobile devices)
+ * Makes the notice wider to improve readability on narrow screens
+ */
 @media (max-width: 640px) {
     .cookie-notice {
-        bottom: 1rem;
-        right: 1rem;
-        left: 1rem;
-        max-width: none;
+        bottom: 1rem;            /* Less space from bottom on small screens */
+        right: 1rem;             /* Less space from right on small screens */
+        left: 1rem;              /* Extends to the left side on small screens */
+        max-width: none;         /* Removes the width limit on small screens */
     }
 } 

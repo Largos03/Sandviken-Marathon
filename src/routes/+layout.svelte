@@ -1,5 +1,5 @@
 <script lang="ts">
-	import "../app.css";
+	import "$lib/styles/app.css";
 	import { Navbar } from "$lib";
 	import { FontAwesomeIcon as Fa } from '@fortawesome/svelte-fontawesome';
 	import {

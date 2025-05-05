@@ -1,0 +1,1137 @@
+/* ========== HOME PAGE STYLING ========== */
+/* This file contains all the styles specific to the home page of the Sandviken Marathon website */
+
+/* Base Styles */
+/* Defines CSS variables used throughout the site for consistent colors, spacing, and effects */
+:root {
+  --primary-color: #000;         /* Black - primary color for text and backgrounds */
+  --secondary-color: #333;       /* Dark gray - secondary color for subtle elements */
+  --accent-color: #fff;          /* White - used for text on dark backgrounds and card backgrounds */
+  --highlight-color: #f5f5f5;    /* Light gray - used for accents and highlights */
+  --text-primary: #111827;       /* Dark text color for headings */
+  --text-secondary: #4b5563;     /* Medium gray for paragraph text */
+  --bg-light: #f5f5f5;           /* Light gray background */
+  --radius-sm: 0.25rem;          /* Small border radius - for slight rounding of corners */
+  --radius-md: 0.5rem;           /* Medium border radius - more noticeable rounding */
+  --radius-lg: 0.75rem;          /* Large border radius - significant rounding */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);    /* Small shadow - subtle depth effect */
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);     /* Medium shadow - moderate depth */
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);   /* Large shadow - pronounced depth */
+  --section-spacing: 5rem;       /* Vertical spacing between major sections */
+  --card-spacing: 1.5rem;        /* Spacing between cards in grid layouts */
+}
+
+/* ========== HERO SECTION ========== */
+/* This is the large banner section at the top of the home page with background image */
+.hero-section {
+  position: relative;            /* Creates a positioning context for child elements */
+  height: 100vh;                 /* Takes up the full height of the browser window */
+  background-color: #000;        /* Black background (will be mostly covered by the image) */
+  color: var(--accent-color);    /* White text color on dark background */
+  display: flex;                 /* Uses flexible box layout */
+  align-items: center;           /* Centers content vertically */
+  justify-content: center;       /* Centers content horizontally */
+  overflow: hidden;              /* Hides anything that might overflow outside this section */
+  padding: 2rem;                 /* Adds space inside the hero section */
+  text-align: center;            /* Centers all text horizontally */
+}
+
+/* Dark overlay with background image - adds a running image with darkened effect */
+.hero-overlay {
+  position: absolute;            /* Takes this element out of normal flow and positions it absolutely */
+  top: 0;                        /* Aligned to the top of the hero section */
+  left: 0;                       /* Aligned to the left of the hero section */
+  width: 100%;                   /* Takes full width of the hero section */
+  height: 100%;                  /* Takes full height of the hero section */
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)), url('/running.gif');
+                                 /* Gradient overlay on top of the running image - darker at bottom */
+  background-size: cover;        /* Makes sure the image covers the entire area */
+  background-position: center 30%; /* Positions the background image slightly above center */
+  opacity: 0.85;                 /* Makes the overlay slightly transparent */
+  z-index: 1;                    /* Sets the stack order - elements with higher z-index appear on top */
+}
+
+/* The main content container inside the hero section */
+.hero-content {
+  position: relative;            /* Creates a positioning context for children */
+  z-index: 2;                    /* Places this above the overlay (which has z-index 1) */
+  max-width: 960px;              /* Limits the width for better readability */
+  margin: 0 auto;                /* Centers the content horizontally */
+  opacity: 0;                    /* Starts completely invisible - for fade-in animation */
+  transform: translateY(20px);   /* Starts 20px below final position - for slide-up animation */
+  transition: opacity 0.8s ease, transform 0.8s ease; /* Smooth animation for fade and slide */
+  text-rendering: optimizeLegibility; /* Improves text appearance for legibility */
+  -webkit-font-smoothing: antialiased; /* Better text rendering on WebKit browsers */
+  -moz-osx-font-smoothing: grayscale; /* Better text rendering on Firefox */
+}
+
+/* When this class is added (by JavaScript), the content fades in and slides up */
+.hero-content.visible {
+  opacity: 1;                    /* Fully visible */
+  transform: translateY(0);      /* Moved to final position */
+}
+
+/* Main heading (the marathon name) */
+.hero-content h1 {
+  font-size: 4rem;               /* Very large text size for main heading */
+  font-weight: 900;              /* Extra bold text weight */
+  letter-spacing: 0.05em;        /* Slightly increased spacing between letters */
+  margin-bottom: 1.5rem;         /* Space below the heading */
+  text-transform: uppercase;     /* Makes all letters capital */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Adds shadow to text for better readability */
+  transform: translateZ(0);      /* Forces GPU acceleration for smoother animations */
+}
+
+/* "Official Event" badge at top of hero content */
+.hero-badge {
+  position: absolute;            /* Positions the badge independently */
+  top: -15px;                    /* Moves the badge up 15px from its normal position */
+  left: 50%;                     /* Centers horizontally */
+  transform: translateX(-50%);   /* Fine-tunes the centering (shifts left by half its width) */
+  background-color: var(--bg-light); /* Light gray background */
+  color: var(--primary-color);   /* Black text color */
+  font-weight: 700;              /* Bold text */
+  font-size: 0.875rem;           /* Slightly smaller text size */
+  padding: 0.35rem 1.5rem;       /* Space inside the badge */
+  border-radius: 50px;           /* Fully rounded corners for pill shape */
+  text-transform: uppercase;     /* All capital letters */
+  letter-spacing: 1.5px;         /* Wide spacing between letters */
+  box-shadow: var(--shadow-md);  /* Medium shadow for depth */
+}
+
+/* Date indicator badge for the event */
+.date-badge {
+  display: inline-flex;          /* Flexible layout that keeps it inline */
+  align-items: center;           /* Centers items vertically */
+  background-color: var(--bg-light); /* Light gray background */
+  color: var(--primary-color);   /* Black text */
+  padding: 0.6rem 1.5rem;        /* Space inside the badge */
+  border-radius: 50px;           /* Fully rounded corners for pill shape */
+  font-weight: 600;              /* Semi-bold text */
+  box-shadow: var(--shadow-md);  /* Medium shadow for depth */
+}
+
+/* Calendar icon in the date badge */
+.date-badge svg {
+  margin-right: 0.75rem;         /* Space to the right of the icon */
+}
+
+/* Subtitle under the main heading - descriptive text about the marathon */
+.hero-subtitle {
+  font-size: 1.2rem;             /* Larger than normal text */
+  margin-bottom: 2rem;           /* Space below the subtitle */
+  max-width: 700px;              /* Limits width for readability */
+  margin-left: auto;             /* Centers horizontally */
+  margin-right: auto;            /* Centers horizontally */
+  line-height: 1.6;              /* Increased space between lines */
+}
+
+/* Container for the call-to-action buttons */
+.hero-cta {
+  display: flex;                 /* Flexible box layout */
+  gap: 1.25rem;                  /* Space between the buttons */
+  justify-content: center;       /* Centers the buttons horizontally */
+  margin-bottom: 3rem;           /* Space below the buttons */
+}
+
+/* Base style for call-to-action buttons */
+.cta-button {
+  padding: 0.875rem 2rem;        /* Space inside the buttons */
+  border-radius: 50px;           /* Fully rounded corners */
+  font-weight: 600;              /* Semi-bold text */
+  font-size: 1rem;               /* Normal text size */
+  text-decoration: none;         /* Removes underline from links */
+  transition: all 0.3s ease;     /* Smooth animation for all changes */
+  display: inline-block;         /* Inline element that can have width/height */
+  letter-spacing: 0.5px;         /* Slightly increased space between letters */
+}
+
+/* Primary button - filled with black background */
+.cta-button.primary {
+  background-color: var(--primary-color); /* Black background */
+  color: var(--accent-color);    /* White text */
+  border: 2px solid var(--primary-color); /* Black border */
+}
+
+/* Hover effect for primary button */
+.cta-button.primary:hover {
+  background-color: var(--secondary-color); /* Darkens to dark gray on hover */
+  border-color: var(--secondary-color);      /* Border also darkens */
+}
+
+/* Secondary button - outlined with white */
+.cta-button.secondary {
+  background-color: transparent; /* No background color */
+  color: var(--accent-color);    /* White text */
+  border: 2px solid var(--accent-color); /* White border */
+}
+
+/* Hover effect for secondary button */
+.cta-button.secondary:hover {
+  background-color: var(--accent-color); /* White background on hover */
+  color: var(--primary-color);           /* Black text on hover */
+}
+
+/* Countdown timer display showing days, hours, minutes, seconds until the event */
+.countdown-timer {
+  display: flex;                 /* Flexible box layout */
+  gap: 1rem;                     /* Space between countdown items */
+  justify-content: center;       /* Centers horizontally */
+}
+
+/* Individual countdown box (days, hours, minutes, seconds) */
+.countdown-item {
+  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+  padding: 0.875rem 0.5rem;      /* Space inside the box */
+  border-radius: var(--radius-md); /* Medium rounded corners */
+  min-width: 80px;               /* Minimum width to prevent squishing */
+  display: flex;                 /* Flexible box layout */
+  flex-direction: column;        /* Stacks children vertically */
+  align-items: center;           /* Centers children horizontally */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Very subtle white border */
+  backdrop-filter: blur(5px);    /* Blurs content behind this element */
+}
+
+/* The actual number in the countdown */
+.count {
+  font-size: 1.75rem;            /* Large text size */
+  font-weight: 700;              /* Bold text */
+  margin-bottom: 0.25rem;        /* Small space below */
+}
+
+/* The label below the number (days, hours, etc.) */
+.label {
+  font-size: 0.85rem;            /* Small text size */
+  opacity: 0.8;                  /* Slightly transparent */
+  text-transform: uppercase;     /* All capital letters */
+  letter-spacing: 1px;           /* Increased space between letters */
+}
+
+/* Scroll indicator - the mouse icon at bottom of hero section */
+.scroll-indicator {
+  position: absolute;            /* Positioned independently */
+  bottom: 25px;                  /* 25px from bottom of hero section */
+  left: 50%;                     /* Centered horizontally */
+  transform: translateX(-50%);   /* Fine-tunes centering */
+  z-index: 2;                    /* Appears above the overlay */
+  animation: bounce 2s infinite; /* Continuous bouncing animation */
+}
+
+/* Mouse icon outline */
+.mouse {
+  display: block;                /* Block-level element */
+  width: 26px;                   /* Width of the mouse shape */
+  height: 40px;                  /* Height of the mouse shape */
+  border: 2px solid var(--accent-color); /* White border */
+  border-radius: 20px;           /* Rounded to look like a mouse */
+  position: relative;            /* Creates positioning context for the wheel */
+}
+
+/* Scrolling wheel inside the mouse icon */
+.wheel {
+  display: block;                /* Block-level element */
+  position: absolute;            /* Positioned inside the mouse */
+  width: 6px;                    /* Width of the wheel */
+  height: 6px;                   /* Height of the wheel */
+  background: var(--accent-color); /* White wheel */
+  border-radius: 50%;            /* Circular shape */
+  top: 8px;                      /* Initial position at top of mouse */
+  left: 50%;                     /* Centered horizontally */
+  transform: translateX(-50%);   /* Fine-tunes centering */
+  animation: scroll 1.5s infinite; /* Continuous scrolling animation */
+}
+
+/* Animation for the wheel scrolling down */
+@keyframes scroll {
+  0% { opacity: 1; top: 8px; }   /* Start: fully visible at top position */
+  100% { opacity: 0; top: 20px; } /* End: fade out and move down */
+}
+
+/* Animation for the mouse icon bouncing */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); } /* Normal position */
+  40% { transform: translateY(-10px) translateX(-50%); }                 /* Move up 10px */
+  60% { transform: translateY(-5px) translateX(-50%); }                  /* Move up 5px */
+}
+
+/* ========== INFO SECTION ========== */
+/* Styles for the information section with feature cards */
+.info-section {
+  background-color: var(--bg-light); /* Light gray background */
+  padding: var(--section-spacing) 0; /* Vertical padding, no horizontal padding */
+  opacity: 0;                    /* Starts invisible - for fade-in animation */
+  transform: translateY(20px);   /* Starts 20px below final position - for slide-up animation */
+  transition: opacity 0.8s ease, transform 0.8s ease; /* Smooth animation for appearance */
+  position: relative;            /* Creates positioning context for absolute elements */
+  border-bottom: 1px solid rgba(0,0,0,0.05); /* Very subtle bottom border */
+  overflow: hidden;              /* Hides anything that goes outside this section */
+}
+
+/* When this class is added (by JavaScript), the section fades in and slides up */
+.info-section.visible {
+  opacity: 1;                    /* Fully visible */
+  transform: translateY(0);      /* At final position */
+}
+
+/* Container for content sections - limits width and centers content */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  overflow: visible;
+}
+
+/* ========== SECTION HEADER ========== */
+/* Common styling for all section headers throughout the page */
+.section-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 3rem;
+}
+
+.section-header h2 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  margin-bottom: 0.875rem;
+  line-height: 1.2;
+}
+
+/* Special styling for section headers in the results section */
+.results-section .section-header h2,
+.results-section .section-intro {
+  color: white;
+}
+
+/* Decorative divider between sections */
+.section-divider {
+  width: 50px;
+  height: 3px;
+  background-color: var(--secondary-color);
+  margin: 0 auto 1rem;
+}
+
+/* Introductory text beneath section headers */
+.section-intro {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+/* ========== FEATURE CARDS ========== */
+/* Grid layout for the feature/info cards */
+.feature-cards {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--card-spacing);
+  margin-top: 2.5rem;
+  align-items: stretch;
+}
+
+/* Responsive layout for larger screens */
+@media (min-width: 768px) {
+  .feature-cards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--card-spacing);
+  }
+}
+
+/* Individual feature card styling */
+.feature-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: visible;
+  border: 1px solid rgba(0,0,0,0.05);
+  height: 100%;
+  margin-top: 35px;
+  text-align: center;
+  width: 100%;
+}
+
+/* Content area within each feature card */
+.card-content {
+  padding: 3rem 1.75rem 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+}
+
+/* Icon within feature cards */
+.feature-icon {
+  width: 60px;
+  height: 60px;
+  background-color: var(--primary-color);
+  color: var(--accent-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect for feature card icons */
+.feature-card:hover .feature-icon {
+  transform: translateX(-50%) scale(1.05);
+}
+
+/* Decorative pseudo-element for feature cards */
+.feature-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: var(--secondary-color);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Hover effect for feature cards */
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* Hover effect for the decorative element */
+.feature-card:hover::after {
+  opacity: 1;
+}
+
+/* Heading within feature cards */
+.feature-card h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* Paragraph text within feature cards */
+.feature-card p {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  font-size: 0.925rem;
+  flex: 1;
+  text-align: center;
+  word-wrap: break-word;
+  hyphens: auto;
+  max-width: 100%;
+}
+
+/* "Learn More" link styling within feature cards */
+.feature-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--text-primary);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  padding: 0.875rem 1.5rem;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  font-size: 0.925rem;
+  width: 100%;
+  margin-top: auto;
+  background: rgba(0,0,0,0.01);
+}
+
+/* Hover effect for "Learn More" links */
+.feature-link:hover {
+  color: var(--secondary-color);
+}
+
+/* Arrow icon within "Learn More" links */
+.feature-link svg {
+  margin-left: 0.5rem;
+  font-size: 0.8rem;
+  transition: transform 0.2s ease;
+}
+
+/* Hover effect for arrow icons */
+.feature-link:hover svg {
+  transform: translateX(5px);
+}
+
+/* ========== COURSE SECTION ========== */
+/* Section showcasing the marathon course details */
+.course-section {
+  padding: var(--section-spacing) 0;
+  background-color: var(--accent-color);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+/* When this class is added (by JavaScript), the section fades in and slides up */
+.course-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Grid layout for course section content */
+.course-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+/* Responsive layout for larger screens */
+@media (min-width: 768px) {
+  .course-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Introductory text for course section */
+.course-intro {
+  font-size: 1.05rem;
+  margin-bottom: 1.75rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* List of course features/highlights */
+.course-features {
+  background-color: var(--bg-light);
+  padding: 1.5rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 1.5rem;
+  border-left: 3px solid var(--secondary-color);
+}
+
+/* Individual course feature item */
+.course-feature {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+/* Removes extra spacing from last feature item */
+.course-feature:last-child {
+  margin-bottom: 0;
+}
+
+/* Bullet point for each feature */
+.feature-bullet {
+  width: 8px;
+  height: 8px;
+  background-color: var(--secondary-color);
+  border-radius: 50%;
+  margin-right: 0.875rem;
+  flex-shrink: 0;
+}
+
+/* Text within each course feature */
+.course-feature span {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+/* Button to view course details */
+.course-btn {
+  display: inline-block;
+  background-color: var(--primary-color);
+  color: var(--accent-color);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-top: 1.5rem;
+  border: 2px solid var(--primary-color);
+}
+
+/* Hover effect for course button */
+.course-btn:hover {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Content container within course section */
+.course-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Responsive layout for larger screens */
+@media (min-width: 768px) {
+  .course-content {
+    align-items: flex-start;
+    text-align: left;
+    padding-right: 2rem;      /* Add spacing between columns */
+  }
+  
+  .course-intro {
+    text-align: left;
+  }
+  
+  .feature-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .feature-card p {
+    line-height: 1.6;
+  }
+}
+
+/* Course map container */
+.course-map {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  transform: perspective(800px) rotateY(-5deg);  /* 3D effect */
+  transition: transform 0.5s ease;
+  border: 8px solid white;     /* Thicker border */
+  width: 100%;
+  margin: 2rem auto 0;         /* Add top margin */
+  max-width: 500px;
+}
+
+/* Hover effect for course map container */
+.course-map:hover {
+  transform: perspective(800px) rotateY(0);  /* Flatten on hover */
+}
+
+/* Responsive layout for course map on larger screens */
+@media (min-width: 768px) {
+  .course-map {
+    max-width: none;
+    margin-top: 0;
+  }
+}
+
+/* Course map image */
+.course-map img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+/* Hover effect for course map image */
+.course-map:hover img {
+  transform: scale(1.05);  /* Slight zoom on hover */
+}
+
+/* Overlay for the course map with statistics */
+.map-overlay {
+  position: absolute;
+  bottom: 30px;              /* Position lower */
+  right: 30px;               /* Position further right */
+  display: flex;
+  gap: 1.5rem;               /* More space between stats */
+}
+
+/* Individual statistics for the course (elevation, distance, etc.) */
+.map-stat {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--primary-color);
+  color: var(--accent-color);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: var(--shadow-md);
+}
+
+/* Value of each statistic (the numbers) */
+.stat-value {
+  display: block;
+  font-size: 2rem;           /* Larger value */
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 0.5rem;     /* More space below */
+}
+
+/* Label for each statistic (what the number represents) */
+.stat-label {
+  font-size: 0.9rem;         /* Slightly larger text */
+  opacity: 0.8;
+  letter-spacing: 1px;
+}
+
+/* ========== RESULTS SECTION ========== */
+/* Section showing past race results */
+.results-section {
+  padding: var(--section-spacing);
+  background-color: #000000;
+  color: #ffffff !important;
+  background-image: none !important;
+  background-size: auto;
+  background-position: static;
+  background-attachment: scroll;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  text-align: center;
+}
+
+/* When this class is added (by JavaScript), the section fades in and slides up */
+.results-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Special styling for results section headers */
+.results-section .section-header h2 {
+  color: #ffffff !important;
+}
+
+/* Special styling for results section intro text */
+.results-section .section-intro {
+  color: #ffffff !important;
+}
+
+/* Special styling for results section divider */
+.results-section .section-divider {
+  background-color: var(--highlight-color);
+}
+
+/* Slider/carousel for past results */
+.results-slider {
+  margin: 2rem auto;
+  padding: 2.5rem;
+  max-width: 900px;
+  background-color: white;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+}
+
+/* Year badge for results */
+.result-year-badge {
+  display: inline-block;
+  background-color: var(--accent-color);
+  color: var(--primary-color);
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 0.5rem 1.5rem;
+  border-radius: 30px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings within results slider */
+.results-slider h3 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+/* Paragraph text within results slider */
+.results-slider p {
+  font-size: 1.1rem;
+  margin-bottom: 2.5rem;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* Container for inaugural race highlights */
+.inaugural-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Individual highlight items */
+.highlight-item {
+  flex: 1;
+  min-width: 280px;
+  max-width: 400px;
+  padding: 2rem;
+  background-color: var(--bg-light);
+  border-radius: var(--radius-md);
+  text-align: center;
+  margin: 0 auto;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect for highlight items */
+.highlight-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings within highlight items */
+.highlight-item h4 {
+  color: var(--primary-color);
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  width: 100%;
+}
+
+/* Paragraph text within highlight items */
+.highlight-item p {
+  margin: 0 auto;
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  text-align: center;
+  width: 100%;
+  line-height: 1.5;
+}
+
+/* Container for the "View All" button */
+.results-action {
+  text-align: center;
+  margin-top: 2.5rem;
+}
+
+/* "View All Results" button styling */
+.view-all-btn {
+  display: inline-block;
+  background-color: var(--accent-color);
+  color: var(--primary-color);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 2px solid var(--accent-color);
+}
+
+/* Hover effect for "View All" button */
+.view-all-btn:hover {
+  background-color: transparent;
+  color: var(--accent-color);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ========== CTA SECTION ========== */
+/* Call-to-action section at bottom of page to encourage registration */
+.cta-section {
+  position: relative;
+  padding: var(--section-spacing) 0;
+  background-color: #000000;
+  color: #ffffff !important;
+  background-image: none !important;
+  background-size: auto;
+  background-position: static;
+  background-attachment: scroll;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  text-align: center;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* When this class is added (by JavaScript), the section fades in and slides up */
+.cta-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Content container within CTA section */
+.cta-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Badge for the CTA section (e.g. "Limited Spots") */
+.cta-badge {
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  background-color: var(--accent-color);
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Heading for CTA section */
+.cta-section h2 {
+  font-size: 2.75rem;
+  margin-bottom: 1.5rem;
+  color: var(--accent-color);
+  font-weight: 800;
+  transform: translateZ(0);  /* Force GPU acceleration */
+}
+
+/* Alternate styling for CTA heading */
+.cta-content h2 {
+  font-size: 2.125rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  background: linear-gradient(to right, white, #e6e6e6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Paragraph text within CTA section */
+.cta-content p {
+  font-size: 1.05rem;
+  margin-bottom: 1.75rem;
+  line-height: 1.6;
+  max-width: 450px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Registration button styling */
+.register-btn {
+  display: inline-block;
+  background-color: var(--accent-color);
+  color: var(--primary-color);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 2px solid var(--accent-color);
+}
+
+/* Hover effect for registration button */
+.register-btn:hover {
+  background-color: transparent;
+  color: var(--accent-color);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ========== RESPONSIVE LAYOUTS ========== */
+/* Tablet-size screen adjustments */
+@media (max-width: 768px) {
+  :root {
+    --section-spacing: 4rem;
+  }
+  
+  .hero-content h1, 
+  .cta-section h2,
+  .section-header h2 {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    will-change: transform;
+  }
+  
+  .hero-content h1 {
+    font-size: 2.5rem;
+    letter-spacing: 0.03em;
+  }
+  
+  .cta-section h2 {
+    font-size: 2rem;
+    letter-spacing: 0.02em;
+  }
+  
+  .section-header {
+    margin-bottom: 2.5rem;
+  }
+  
+  .section-header h2 {
+    font-size: 2rem;
+  }
+  
+  .feature-card {
+    margin-top: 30px;
+  }
+  
+  .feature-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.125rem;
+    top: -25px;
+  }
+  
+  .card-content {
+    padding: 2.5rem 1.5rem 1.25rem;
+  }
+  
+  .feature-card h3 {
+    font-size: 1.2rem;
+  }
+  
+  .feature-card p {
+    font-size: 0.9rem;
+  }
+  
+  .feature-link {
+    padding: 0.75rem 1.25rem;
+  }
+  
+  .results-slider {
+    padding: 2rem 1.5rem;
+    margin: 2rem auto;
+  }
+  
+  .results-slider h3 {
+    font-size: 1.75rem;
+  }
+  
+  .highlight-item {
+    min-width: 180px;
+  }
+  
+  .cta-content h2 {
+    font-size: 1.875rem;
+  }
+}
+
+/* Mobile-size screen adjustments */
+@media (max-width: 480px) {
+  :root {
+    --section-spacing: 3.5rem;
+  }
+  
+  .hero-section {
+    height: 85vh;
+  }
+  
+  .hero-content {
+    padding: 2.5rem 1.5rem;
+  }
+  
+  .hero-content h1 {
+    font-size: 2.5rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .date-badge {
+    font-size: 1rem;
+    padding: 0.5rem 1.25rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+    margin-bottom: 1.75rem;
+  }
+  
+  .hero-cta {
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+  
+  .cta-button {
+    width: 100%;
+    padding: 0.75rem 0;
+    font-size: 0.95rem;
+  }
+  
+  .countdown-item {
+    min-width: 65px;
+    padding: 0.75rem 0.375rem;
+  }
+  
+  .count {
+    font-size: 1.5rem;
+  }
+  
+  .label {
+    font-size: 0.75rem;
+  }
+  
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .section-header h2 {
+    font-size: 1.75rem;
+  }
+  
+  .section-intro {
+    font-size: 0.95rem;
+  }
+  
+  .feature-cards {
+    gap: 1.5rem;
+  }
+  
+  .feature-card h3 {
+    font-size: 1.1rem;
+  }
+  
+  .feature-card p {
+    font-size: 0.875rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .inaugural-highlights {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .highlight-item {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .results-slider h3 {
+    font-size: 1.5rem;
+  }
+  
+  .register-btn, .course-btn, .view-all-btn {
+    width: 100%;
+    padding: 0.75rem 0;
+    font-size: 0.95rem;
+  }
+  
+  .cta-content {
+    padding: 2rem 1.25rem;
+  }
+  
+  .cta-content h2 {
+    font-size: 1.625rem;
+  }
+  
+  .cta-content p {
+    font-size: 0.95rem;
+  }
+}
+
+/* Note: Common button styling has been removed as we now use the Button component */
+/* This reduces duplication and ensures consistency across the site */
+
+/* Special hover effects for badges */
+.hero-badge:hover,
+.date-badge:hover {
+  background-color: var(--secondary-color);
+  color: var(--accent-color);
+  transition: all 0.3s ease;
+} 

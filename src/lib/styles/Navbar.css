@@ -1,16 +1,20 @@
-/* Navbar styles */
+/* ========== NAVIGATION BAR STYLING ========== */
+/* This file contains all styles for the website's navigation bar (header) */
+
+/* Main navigation bar container */
+/* This creates the top bar that stays at the top of the screen as you scroll */
 .navbar {
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.02);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    z-index: 999;
-    padding: 5px 15px;
-    transition: transform 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
+    position: sticky;            /* Makes the navbar "stick" to the top of the screen when scrolling */
+    top: 0;                      /* Positions it at the top of the viewport */
+    left: 0;                     /* Aligns it to the left edge */
+    width: 100%;                 /* Takes up the full width of the screen */
+    background-color: rgba(255, 255, 255, 0.1); /* Nearly transparent white background */
+    backdrop-filter: blur(15px); /* Creates a frosted glass effect */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02); /* Subtle shadow below the navbar */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Very subtle bottom border */
+    z-index: 999;                /* Ensures the navbar appears above other content */
+    padding: 5px 15px;           /* Space inside the navbar: 5px top/bottom, 15px left/right */
+    transition: transform 0.3s ease, background-color 0.3s ease, opacity 0.3s ease; /* Smooth transitions for animations */
 }
 
 .navbar-container {
@@ -22,12 +26,13 @@
     position: relative;
 }
 
-/* Logo styles */
+/* ========== LOGO STYLING ========== */
+/* Container for the website logo */
 .logo-container {
-    position: relative;
-    left: 0;
-    display: flex;
-    align-items: center;
+    position: relative;          /* Creates positioning context */
+    left: 0;                     /* Aligns to the left side */
+    display: flex;               /* Uses flexible box layout */
+    align-items: center;         /* Centers logo vertically */
 }
 
 .logo-link {
@@ -47,7 +52,8 @@
     transform: scale(1.05);
 }
 
-/* Desktop nav styles */
+/* ========== DESKTOP NAVIGATION ========== */
+/* Container for the navigation links that appear on larger screens */
 .desktop-nav {
     display: flex;
     gap: 15px;
@@ -98,13 +104,15 @@
     transition: all 0.2s ease;
 }
 
-/* Mobile menu container styles */
+/* ========== MOBILE MENU ========== */
+/* Container for mobile menu elements (only visible on small screens) */
 .mobile-menu-container {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
+/* Hamburger menu button for mobile */
 .mobile-menu-button {
     display: none;
     cursor: pointer;
@@ -113,6 +121,7 @@
     transition: background-color 0.2s ease;
 }
 
+/* Hamburger icon within the menu button */
 .menu-icon {
     display: inline-flex;
     align-items: center;
@@ -122,6 +131,7 @@
     opacity: 0.8;
 }
 
+/* Mobile version of language toggle */
 .mobile-lang-toggle {
     background-color: rgba(0,0,0,0.05);
     color: rgba(0,0,0,0.8);
@@ -138,7 +148,8 @@
     display: none !important;
 }
 
-/* Mobile dropdown styles */
+/* ========== MOBILE DROPDOWN MENU ========== */
+/* Dropdown menu that appears on small screens when hamburger is clicked */
 .mobile-menu-dropdown {
     position: absolute;
     top: 100%;
@@ -191,7 +202,8 @@
     opacity: 0.8;
 }
 
-/* Responsive adjustments */
+/* ========== RESPONSIVE LAYOUT ========== */
+/* Rules that apply on smaller screens (tablets, phones) */
 @media (max-width: 768px) {
     .desktop-nav {
         display: none !important;
@@ -207,7 +219,8 @@
     }
 }
 
-/* Fix icon sizing */
+/* ========== ICON STYLING ========== */
+/* General fixes for Font Awesome or other icon fonts */
 .fa-icon {
     display: inline-block;
     height: 1em;
@@ -215,7 +228,8 @@
     vertical-align: -0.125em;
 }
 
-/* Screen reader only class */
+/* ========== ACCESSIBILITY ========== */
+/* Class for screen reader text (visible to assistive technology but not visually) */
 .sr-only {
     position: absolute;
     width: 1px;
@@ -228,41 +242,15 @@
     border-width: 0;
 }
 
-/* Animation classes */
-.animate-in {
-    animation: fadeIn 0.2s ease-out;
-}
-
-.animate-out {
-    animation: fadeOut 0.2s ease-in;
-}
-
-.fade-in-0 {
-    opacity: 1;
-}
-
-.fade-out-0 {
-    opacity: 0;
-}
-
-.zoom-in-95 {
-    transform: scale(1);
-}
-
-.zoom-out-95 {
-    transform: scale(0.95);
-}
-
-.slide-in-from-top-2 {
-    transform: translateY(0);
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px) scale(0.95); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-@keyframes fadeOut {
-    from { opacity: 1; transform: translateY(0) scale(1); }
-    to { opacity: 0; transform: translateY(-10px) scale(0.95); }
-} 
+/* Note: Animation classes are now imported from utilities.css or app.css */
+/* The following animation classes were removed to eliminate duplication:
+   - .animate-in
+   - .animate-out
+   - .fade-in-0
+   - .fade-out-0
+   - .zoom-in-95
+   - .zoom-out-95
+   - .slide-in-from-top-2
+   - @keyframes fadeIn
+   - @keyframes fadeOut
+*/ 

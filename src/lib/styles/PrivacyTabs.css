@@ -1,0 +1,115 @@
+/**
+ * Privacy Tabs Styles
+ *
+ * This file contains styles for the tab navigation component used in the privacy policy.
+ * It handles both desktop (vertical sidebar) and mobile (horizontal tabs) layouts.
+ */
+
+/* ====== Tab Navigation Container ====== */
+.policy-tabs {
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa;
+  width: 250px;
+  padding: 1.5rem 0;
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1; /* Lower z-index than navbar */
+}
+
+/* ====== Tab Button Styles ====== */
+.tab-button {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  color: #4b5563;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.tab-button:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+  color: #000;
+}
+
+.tab-button.active {
+  color: #000;
+  font-weight: 600;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.tab-button.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: #000;
+}
+
+/* ====== Tab Icon Styles ====== */
+.tab-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.75rem;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.05);
+  color: inherit;
+}
+
+.tab-button.active .tab-icon {
+  background-color: #000;
+  color: white;
+}
+
+/* ====== Responsive Styles ====== */
+@media (max-width: 768px) {
+  .policy-tabs {
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 0.75rem;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  
+  .policy-tabs::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .tab-button {
+    padding: 0.5rem 1rem;
+    scroll-snap-align: start;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  
+  .tab-button.active::before {
+    left: 0;
+    right: 0;
+    top: auto;
+    bottom: -1px;
+    width: auto;
+    height: 3px;
+  }
+}
+
+/* ====== Focus Styles for Accessibility ====== */
+.tab-button:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+} 

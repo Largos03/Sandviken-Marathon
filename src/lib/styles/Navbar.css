@@ -12,27 +12,31 @@
     backdrop-filter: blur(15px); /* Creates a frosted glass effect */
     box-shadow: 0 4px 20px rgba(0,0,0,0.02); /* Subtle shadow below the navbar */
     border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Very subtle bottom border */
-    z-index: 999;                /* Ensures the navbar appears above other content */
+    z-index: 9999;               /* Increased z-index to ensure the navbar appears above ALL other content */
     padding: 5px 15px;           /* Space inside the navbar: 5px top/bottom, 15px left/right */
     transition: transform 0.3s ease, background-color 0.3s ease, opacity 0.3s ease; /* Smooth transitions for animations */
+    /* Ensure the navbar is visible and working correctly on all pages */
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex !important;
 }
 
 .navbar-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Change back to space-between */
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
     position: relative;
+    width: 100%;
 }
 
 /* ========== LOGO STYLING ========== */
 /* Container for the website logo */
 .logo-container {
-    position: relative;          /* Creates positioning context */
-    left: 0;                     /* Aligns to the left side */
-    display: flex;               /* Uses flexible box layout */
-    align-items: center;         /* Centers logo vertically */
+    position: relative;
+    display: flex;
+    flex: 0 0 auto; /* Don't grow or shrink, stay at auto width */
 }
 
 .logo-link {
@@ -58,7 +62,8 @@
     display: flex;
     gap: 15px;
     align-items: center;
-    margin: 0 auto;
+    flex: 1; /* Take up available space */
+    justify-content: center; /* Center the navigation items */
 }
 
 .nav-link {

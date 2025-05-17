@@ -88,12 +88,17 @@
 	}
 </script>
 
-<!-- Tabs Navigation Component -->
-<div class="policy-tabs" role="tablist" aria-label={ariaLabel}>
+<div 
+    class="flex flex-col bg-gray-50 w-64 py-6 border-r border-gray-100 flex-shrink-0 overflow-y-auto 
+            scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-transparent"
+    role="tablist" 
+    aria-label={ariaLabel}
+>
 	{#each tabs as tab, index}
 		<button 
-			class="tab-button" 
-			class:active={activeTab === tab.id}
+			class="flex items-center px-6 py-3 text-left w-full text-gray-700 font-medium transition-colors duration-200
+                  hover:bg-gray-100 hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-0 focus-visible:z-10
+                  relative {activeTab === tab.id ? 'text-black font-semibold bg-gray-100 before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 before:bg-black' : ''}"
 			on:click={() => setActiveTab(tab.id)}
 			on:keydown={(e) => handleTabKeydown(e, index)}
 			role="tab"
@@ -102,143 +107,12 @@
 			id={`tab-${tab.id}`}
 			tabindex={activeTab === tab.id ? 0 : -1}
 		>
-			<div class="tab-icon" aria-hidden="true">
+			<div class="w-8 h-8 flex items-center justify-center rounded mr-3 
+                      {activeTab === tab.id ? 'bg-black text-white' : 'bg-gray-200 text-gray-600'}" 
+                 aria-hidden="true">
 				<FontAwesomeIcon icon={tab.icon} />
 			</div>
 			<span>{tab.label}</span>
 		</button>
 	{/each}
-</div>
-
-<style>
-  /* Scoped styles for PolicyTabs component */
-  .policy-tabs {
-    display: flex;
-    flex-direction: column;
-    background-color: #f8f9fa;
-    width: 250px;
-    padding: 1.5rem 0;
-    border-right: 1px solid rgba(0, 0, 0, 0.05);
-    flex-shrink: 0;
-    overflow-y: auto;
-    scrollbar-width: thin; /* For Firefox */
-    scrollbar-color: rgba(0,0,0,0.2) transparent; /* For Firefox */
-  }
-  
-  /* Custom scrollbar for WebKit browsers */
-  .policy-tabs::-webkit-scrollbar {
-    width: 4px;
-  }
-  
-  .policy-tabs::-webkit-scrollbar-track {
-    background: transparent; 
-  }
-  
-  .policy-tabs::-webkit-scrollbar-thumb {
-    background-color: rgba(0,0,0,0.2);
-    border-radius: 4px;
-  }
-
-  .tab-button {
-    display: flex;
-    align-items: center;
-    padding: 0.75rem 1.5rem;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    text-align: left;
-    width: 100%;
-    color: #4b5563;
-    font-weight: 500;
-    transition: all 0.2s ease;
-    position: relative;
-    font: inherit;
-  }
-
-  .tab-button:hover {
-    background-color: rgba(0, 0, 0, 0.03);
-    color: #000;
-  }
-
-  .tab-button.active {
-    color: #000;
-    font-weight: 600;
-    background-color: rgba(0, 0, 0, 0.05);
-  }
-
-  .tab-button.active::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    background-color: #000;
-  }
-
-  .tab-icon {
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 0.75rem;
-    border-radius: 4px;
-    background-color: rgba(0, 0, 0, 0.05);
-    color: inherit;
-    flex-shrink: 0;
-  }
-
-  .tab-button.active .tab-icon {
-    background-color: #000;
-    color: white;
-  }
-  
-  /* Focus styles for keyboard navigation */
-  .tab-button:focus-visible {
-    outline: 2px solid #000;
-    outline-offset: -2px;
-    z-index: 1;
-  }
-
-  @media (max-width: 768px) {
-    .policy-tabs {
-      width: 100%;
-      flex-direction: row;
-      overflow-x: auto;
-      padding: 0.75rem;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      border-right: none;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    }
-    
-    .policy-tabs::-webkit-scrollbar {
-      display: none;
-    }
-    
-    .tab-button {
-      padding: 0.5rem 1rem;
-      scroll-snap-align: start;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    
-    .tab-button.active::before {
-      left: 0;
-      right: 0;
-      top: auto;
-      bottom: -1px;
-      width: auto;
-      height: 3px;
-    }
-  }
-
-  /* Support for reduced motion preferences */
-  @media (prefers-reduced-motion: reduce) {
-    .tab-button {
-      transition: none !important;
-    }
-  }
-</style> 
+</div> 

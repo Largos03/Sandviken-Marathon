@@ -3,7 +3,6 @@ import { Writable, Readable } from 'svelte/store';
 // Define types
 export type Language = 'en' | 'sv';
 export type TranslationKey = string;
-export type TranslationRecord = Record<string, string>;
 export type TranslationObject = Record<string, string>;
 
 // Language store

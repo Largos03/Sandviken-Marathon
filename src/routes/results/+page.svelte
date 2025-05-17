@@ -1,7 +1,7 @@
 <script lang="ts">
-    import { fade } from 'svelte/transition';
+    import { fade, fly } from 'svelte/transition';
     import { onMount } from 'svelte';
-    import { language, translations } from '$lib/stores/i18n.js';
+    import { language, tStore } from '$lib/stores/i18n.js';
     import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
     import { 
         faSort, 
@@ -10,8 +10,15 @@
         faSpinner, 
         faDownload, 
         faSearch,
-        faCalendarAlt
+        faTrophy,
+        faRunning,
+        faStopwatch,
+        faMedal,
+        faGlobe
     } from '@fortawesome/free-solid-svg-icons';
+    
+    // UI Components
+    import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '$lib/components/ui/card';
     
     // Define the result type
     type Result = {
@@ -20,44 +27,39 @@
         country: string;
         time: string;
     };
-    
-    // Direct translation function with proper typing
-    $: t = (key: string): string => {
-        const trans = translations as Record<string, Record<string, string>>;
-        if (!trans[$language] || !trans[$language][key]) {
-            return key;
-        }
-        return trans[$language][key];
-    };
 
-    let selectedYear = '2024';
+    // Import page data
+    export let data;
+    
+    // Use the derived translation store
+    $: t = $tStore;
+
     let visible = false;
-    let loading = true;
+    let loading = false;
     let error = '';
     let searchQuery = '';
     let sortField = 'position';
     let sortDirection: 'asc' | 'desc' = 'asc';
     
-    const years = ['2024', '2023', '2022'];
-    let results: Result[] = [];
+    // Use server data for results (default to latest year)
+    $: results = data.results || [];
+    $: resultDownload = data.resultDownload;
     
-    // Sample results with the requested names
-    const sampleResults = [
-        { position: 1, name: 'Emil G', country: 'Sweden', time: '02:15:23' },
-        { position: 2, name: 'Olle Z', country: 'Sweden', time: '02:18:45' },
-        { position: 3, name: 'Anton B', country: 'Sweden', time: '02:22:10' }
-    ];
-    
-    $: filteredResults = results?.filter(result => 
-        result.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        result.country.toLowerCase().includes(searchQuery.toLowerCase())
-    ) ?? [];
+    $: filteredResults = results
+        .filter(result => 
+            result.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            result.country.toLowerCase().includes(searchQuery.toLowerCase())
+        );
     
     $: sortedResults = [...filteredResults].sort((a, b) => {
         const aValue = a[sortField as keyof typeof a];
         const bValue = b[sortField as keyof typeof b];
         
-        if (sortField === 'position' || sortField === 'time') {
+        if (sortField === 'position') {
+            return sortDirection === 'asc' 
+                ? Number(aValue) - Number(bValue)
+                : Number(bValue) - Number(aValue);
+        } else if (sortField === 'time') {
             return sortDirection === 'asc' 
                 ? String(aValue).localeCompare(String(bValue))
                 : String(bValue).localeCompare(String(aValue));
@@ -77,190 +79,234 @@
         }
     };
     
-    const fetchResults = async () => {
-        loading = true;
-        error = '';
-        try {
-            // For demo purposes, we'll just use the sample results
-            results = sampleResults;
-        } catch (e) {
-            error = t('errorLoadingResults');
-        } finally {
-            loading = false;
-        }
-    };
-    
     onMount(() => {
         visible = true;
-        // Use sample results instead of data.results
-        results = sampleResults;
-        loading = false;
     });
+
+    // Calculate medal colors for positions
+    const getMedalColor = (position: number) => {
+        if (position === 1) return 'bg-yellow-400';
+        if (position === 2) return 'bg-gray-300';
+        if (position === 3) return 'bg-amber-600';
+        return 'bg-gray-100';
+    };
+
+    // Format time for better display
+    const formatTime = (time: string) => {
+        return time;
+    };
 </script>
 
-<div class="results-page" in:fade>
-    <div class="container mx-auto px-4 py-8 md:py-16">
-        <h1 class="text-3xl md:text-4xl font-bold mb-4 md:mb-8 flex items-center gap-2">
-            <FontAwesomeIcon icon={faCalendarAlt} class="text-gray-800" />
-            {t('resultsTitle')}
-        </h1>
-        
-        <div class="flex flex-col md:flex-row gap-4 mb-4 md:mb-8">
-            <div class="w-full md:w-1/3">
-                <label for="year" class="block mb-2 text-base md:text-lg font-medium">{t('selectYear')}:</label>
-                <select 
-                    id="year" 
-                    bind:value={selectedYear}
-                    on:change={fetchResults}
-                    class="w-full px-3 md:px-4 py-2 border rounded-md bg-white shadow-sm focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
-                >
-                    {#each years as year}
-                        <option value={year}>{year}</option>
-                    {/each}
-                </select>
-            </div>
-            
-            <div class="w-full md:w-2/3">
-                <label for="search" class="block mb-2 text-base md:text-lg font-medium">{t('search')}:</label>
-                <div class="relative">
-                    <input 
-                        type="text" 
-                        id="search"
-                        bind:value={searchQuery}
-                        placeholder={t('searchPlaceholder')}
-                        class="w-full pl-10 pr-4 py-2 border rounded-md bg-white shadow-sm focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
-                    />
-                    <FontAwesomeIcon 
-                        icon={faSearch} 
-                        class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-                    />
-                </div>
-            </div>
-        </div>
-        
-        {#if error}
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" role="alert">
-                {error}
-            </div>
-        {/if}
-        
-        {#if loading}
-            <div class="flex justify-center items-center py-12">
-                <FontAwesomeIcon icon={faSpinner} class="text-gray-800 text-3xl animate-spin" />
-            </div>
-        {:else}
-            <div class="overflow-x-auto rounded-lg shadow-md" class:visible>
-                <table class="min-w-full bg-white border text-sm md:text-base">
-                    <thead class="bg-gray-100">
-                        <tr>
-                            {#each ['position', 'name', 'country', 'time'] as field}
-                                <th 
-                                    class="px-3 md:px-6 py-2 md:py-4 text-left font-semibold cursor-pointer hover:bg-gray-200"
-                                    on:click={() => handleSort(field)}
-                                >
-                                    <div class="flex items-center gap-2">
-                                        {t(field)}
-                                        <span class="text-gray-400">
-                                            {#if sortField === field}
-                                                <FontAwesomeIcon 
-                                                    icon={sortDirection === 'asc' ? faSortUp : faSortDown}
-                                                />
-                                            {:else}
-                                                <FontAwesomeIcon icon={faSort} />
-                                            {/if}
-                                        </span>
-                                    </div>
-                                </th>
-                            {/each}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {#each sortedResults as result}
-                            <tr class="border-t hover:bg-gray-50 transition-colors">
-                                <td class="px-3 md:px-6 py-2 md:py-4">{result.position}</td>
-                                <td class="px-3 md:px-6 py-2 md:py-4 font-medium">{result.name}</td>
-                                <td class="px-3 md:px-6 py-2 md:py-4">{t(result.country.toLowerCase())}</td>
-                                <td class="px-3 md:px-6 py-2 md:py-4 font-mono">{result.time}</td>
-                            </tr>
-                        {/each}
-                        {#if sortedResults.length === 0}
-                            <tr>
-                                <td colspan="4" class="px-3 md:px-6 py-8 text-center text-gray-500">
-                                    {searchQuery ? t('noSearchResults') : t('noResults')}
-                                </td>
-                            </tr>
-                        {/if}
-                    </tbody>
-                </table>
-            </div>
-        {/if}
-        
-        <div class="mt-6 md:mt-8" class:visible>
-            <h2 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 flex items-center gap-2">
-                <FontAwesomeIcon icon={faDownload} class="text-gray-800" />
-                {t('previousYears')}
-            </h2>
-            <p class="text-base md:text-lg mb-3 md:mb-4">
-                {t('resultsDownload')}
-            </p>
-            <div class="flex flex-col md:flex-row gap-2 md:gap-4">
-                <button 
-                    class="inline-flex items-center justify-center gap-2 px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-900 transition-colors shadow-sm hover:shadow-md"
-                >
-                    <FontAwesomeIcon icon={faDownload} />
-                    {selectedYear} {t('resultsPdf')}
-                </button>
-            </div>
+<svelte:head>
+    <title>{t('resultsTitle')} | Sandviken Marathon</title>
+    <meta name="description" content={t('resultsDescription')} />
+</svelte:head>
+
+<div class="min-h-screen bg-gray-50" in:fade>
+    <div class="bg-black text-white py-10 md:py-16 relative overflow-hidden">
+        <div class="container mx-auto px-4 py-8 md:py-12 relative z-10">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight">{t('resultsTitle')}</h1>
+            <div class="w-32 h-1 bg-red-500/70 mb-8 transform -skew-x-12"></div>
+            <p class="text-xl md:text-2xl max-w-3xl leading-relaxed font-light">{t('resultsIntro')}</p>
         </div>
     </div>
-</div>
-
-<style>
-    .results-page {
-        background-color: #f5f5f5;
-        min-height: 100vh;
-    }
-
-    h1, h2 {
-        color: #333;
-    }
     
-    p {
-        color: #555;
-        line-height: 1.6;
-    }
-
-    .overflow-x-auto {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-
-    .overflow-x-auto.visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    
-    @media (max-width: 640px) {
-        table {
-            font-size: 0.875rem;
-        }
-        
-        th, td {
-            white-space: nowrap;
-        }
-    }
-    
-    :global(.animate-spin) {
-        animation: spin 1s linear infinite;
-    }
-    
-    @keyframes spin {
-        from {
-            transform: rotate(0deg);
-        }
-        to {
-            transform: rotate(360deg);
-        }
-    }
-</style> 
+    <main class="relative -mt-8 z-10">
+        <div class="container mx-auto px-4 py-8 md:py-16">
+            <!-- Race stats cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div class="bg-white rounded-xl shadow-sm p-6 transition-transform hover:-translate-y-1 duration-300 hover:shadow-md border-l-2 border-red-500/20">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center flex-shrink-0 shadow">
+                            <FontAwesomeIcon icon={faRunning} class="text-red-100" />
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 font-medium">{t('totalRunners')}</p>
+                            <h3 class="text-2xl font-bold text-gray-900">{results.length}</h3>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-sm p-6 transition-transform hover:-translate-y-1 duration-300 hover:shadow-md border-l-2 border-red-500/20">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center flex-shrink-0 shadow">
+                            <FontAwesomeIcon icon={faMedal} class="text-red-100" />
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 font-medium">{t('winner')}</p>
+                            <h3 class="text-xl font-bold text-gray-900">
+                                {results.length > 0 ? results[0].name : '—'}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-sm p-6 transition-transform hover:-translate-y-1 duration-300 hover:shadow-md border-l-2 border-red-500/20">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center flex-shrink-0 shadow">
+                            <FontAwesomeIcon icon={faStopwatch} class="text-red-100" />
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 font-medium">{t('bestTime')}</p>
+                            <h3 class="text-2xl font-bold text-gray-900">
+                                {results.length > 0 ? results[0].time : '—'}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-sm p-6 transition-transform hover:-translate-y-1 duration-300 hover:shadow-md border-l-2 border-red-500/20">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center flex-shrink-0 shadow">
+                            <FontAwesomeIcon icon={faGlobe} class="text-red-100" />
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 font-medium">{t('countries')}</p>
+                            <h3 class="text-2xl font-bold text-gray-900">
+                                {[...new Set(results.map(r => r.country))].length}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main results section -->
+            <div class="bg-white rounded-2xl shadow-sm p-8 mb-8 border border-red-500/10">
+                <h2 class="text-2xl font-semibold mb-6 text-gray-900 flex items-center gap-2">
+                    <FontAwesomeIcon icon={faTrophy} class="text-red-500" />
+                    {t('raceResults')}
+                </h2>
+                
+                <!-- Search -->
+                <div class="mb-8">
+                    <div class="relative max-w-2xl">
+                        <FontAwesomeIcon 
+                            icon={faSearch} 
+                            class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                        />
+                        <input 
+                            type="text" 
+                            bind:value={searchQuery}
+                            placeholder={t('Search by Name or Country')}
+                            class="w-full pl-10 pr-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500/50 transition-shadow"
+                        />
+                    </div>
+                </div>
+                
+                <!-- Error message -->
+                {#if error}
+                    <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6" role="alert">
+                        {error}
+                    </div>
+                {/if}
+                
+                <!-- Loading state -->
+                {#if loading}
+                    <div class="flex justify-center items-center py-16">
+                        <FontAwesomeIcon icon={faSpinner} class="text-red-500/70 text-3xl animate-spin" />
+                    </div>
+                {:else}
+                    <!-- Results table -->
+                    <div class="border rounded-xl overflow-hidden mb-4 border-red-500/10">
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        {#each ['position', 'name', 'country', 'time'] as field}
+                                            <th 
+                                                scope="col"
+                                                class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-red-50/50 transition-colors"
+                                                on:click={() => handleSort(field)}
+                                            >
+                                                <div class="flex items-center gap-2">
+                                                    {t(field)}
+                                                    <span class={sortField === field ? "text-red-500/70" : "text-gray-400"}>
+                                                        {#if sortField === field}
+                                                            <FontAwesomeIcon 
+                                                                icon={sortDirection === 'asc' ? faSortUp : faSortDown}
+                                                            />
+                                                        {:else}
+                                                            <FontAwesomeIcon icon={faSort} />
+                                                        {/if}
+                                                    </span>
+                                                </div>
+                                            </th>
+                                        {/each}
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    {#each sortedResults as result, i}
+                                        <tr class="hover:bg-gray-50 transition-colors">
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="flex items-center">
+                                                    <div class={`flex-shrink-0 h-8 w-8 rounded-full ${getMedalColor(result.position)} flex items-center justify-center text-white font-bold shadow-sm`}>
+                                                        {#if result.position <= 3}
+                                                            <FontAwesomeIcon icon={faMedal} />
+                                                        {:else}
+                                                            {result.position}
+                                                        {/if}
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm font-medium text-gray-900">{result.name}</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm text-gray-700">{t(result.country.toLowerCase())}</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm font-mono font-medium">{formatTime(result.time)}</div>
+                                            </td>
+                                        </tr>
+                                    {/each}
+                                    {#if sortedResults.length === 0}
+                                        <tr>
+                                            <td colspan="4" class="px-6 py-10 text-center text-gray-500">
+                                                <div class="flex flex-col items-center gap-4">
+                                                    <FontAwesomeIcon icon={faSearch} class="text-3xl opacity-30 text-red-300" />
+                                                    <div>
+                                                        {searchQuery ? t('noSearchResults') : t('noResults')}
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {/if}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    {#if sortedResults.length > 0}
+                        <div class="text-center text-sm text-gray-500 mb-8">
+                            {t('showing')} <span class="font-medium">{sortedResults.length}</span> {t('of')} <span class="font-medium">{results.length}</span> {t('runners')}
+                        </div>
+                    {/if}
+                {/if}
+                
+                {#if resultDownload}
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-4 mt-8 border-t border-red-500/10 pt-8">
+                        <div>
+                            <h3 class="font-medium text-gray-900 flex items-center gap-2">
+                                <FontAwesomeIcon icon={faDownload} class="text-red-500/70" />
+                                {t('downloadResults')}
+                            </h3>
+                            <p class="text-sm text-gray-600 mt-1">
+                                {t('resultsDownload')}
+                            </p>
+                        </div>
+                        <div class="sm:ml-auto">
+                            <a 
+                                href={resultDownload} 
+                                class="inline-flex items-center justify-center gap-2 px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800 transition-colors border border-red-500/20 hover:border-red-500/40"
+                                download
+                            >
+                                <FontAwesomeIcon icon={faDownload} />
+                                {t('resultsPdf')}
+                            </a>
+                        </div>
+                    </div>
+                {/if}
+            </div>
+        </div>
+    </main>
+</div> 

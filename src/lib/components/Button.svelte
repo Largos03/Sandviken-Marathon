@@ -1,6 +1,6 @@
 <script lang="ts">
   // Props
-  export let variant: 'primary' | 'secondary' | 'light' = 'primary';
+  export let variant: 'primary' | 'secondary' | 'light' | 'red' = 'primary';
   export let href: string | undefined = undefined;
   export let type: 'button' | 'submit' | 'reset' = 'button';
   export let disabled: boolean = false;
@@ -12,6 +12,7 @@
     primary: 'bg-black text-white border-black hover:bg-gray-800 hover:border-gray-800',
     secondary: 'bg-transparent text-white border-white hover:bg-white hover:text-black',
     light: 'bg-white text-black border-white hover:bg-transparent hover:text-white',
+    red: 'bg-red-600 text-white border-red-600 hover:bg-red-700 hover:border-red-700',
   }[variant];
   
   $: sizeClasses = {

@@ -2,74 +2,9 @@
 /* This file contains reusable styles that can be applied throughout the Sandviken Marathon website */
 /* These utility classes help maintain consistency and reduce repetition in the stylesheets */
 
-/* ========== ANIMATION UTILITIES ========== */
 /* 
- * NOTE: This is the canonical location for animation utilities.
- * These same animations are defined in app.css and Navbar.css, but should be
- * consolidated here to avoid duplication.
+ * NOTE: Animation utilities are now defined in app.css to avoid duplication
  */
-
-/* Base animation settings for smooth transitions */
-.animate-in {
-  animation-duration: 150ms;     /* How long the animation lasts */
-  animation-timing-function: cubic-bezier(0.1, 0.99, 0.1, 1); /* Custom speed curve for natural movement */
-  animation-fill-mode: both;     /* Ensures element retains the animation's final state */
-}
-
-/* Simple fade-in animation */
-.fade-in {
-  animation-name: fadeIn;        /* Uses the fadeIn keyframe animation defined below */
-  animation-duration: 0.3s;      /* Animation lasts 0.3 seconds */
-}
-
-/* Animation that slides in from the top */
-.slide-in-from-top {
-  animation-name: slideInFromTop; /* Uses the slideInFromTop keyframe animation defined below */
-  animation-duration: 0.3s;      /* Animation lasts 0.3 seconds */
-}
-
-/* Animation that slides in from the bottom */
-.slide-in-from-bottom {
-  animation-name: slideInFromBottom; /* Uses the slideInFromBottom keyframe animation defined below */
-  animation-duration: 0.3s;      /* Animation lasts 0.3 seconds */
-}
-
-/* ========== ANIMATION DEFINITIONS ========== */
-/* Defines exactly how each animation works */
-
-/* Fade-in effect: from transparent to fully visible */
-@keyframes fadeIn {
-  from {
-    opacity: 0;                  /* Starts completely transparent */
-  }
-  to {
-    opacity: 1;                  /* Ends fully visible */
-  }
-}
-
-/* Slide-in from top effect: moves from above its final position while fading in */
-@keyframes slideInFromTop {
-  from {
-    transform: translateY(-0.5rem); /* Starts 0.5rem (8px) above final position */
-    opacity: 0;                  /* Starts completely transparent */
-  }
-  to {
-    transform: translateY(0);    /* Ends at proper position */
-    opacity: 1;                  /* Ends fully visible */
-  }
-}
-
-/* Slide-in from bottom effect: moves from below its final position while fading in */
-@keyframes slideInFromBottom {
-  from {
-    transform: translateY(0.5rem); /* Starts 0.5rem (8px) below final position */
-    opacity: 0;                  /* Starts completely transparent */
-  }
-  to {
-    transform: translateY(0);    /* Ends at proper position */
-    opacity: 1;                  /* Ends fully visible */
-  }
-}
 
 /* ========== SECTION UTILITIES ========== */
 /* Styling for major page sections */
@@ -100,6 +35,12 @@
   height: 3px;                   /* Height/thickness of the divider */
   background-color: var(--secondary-color, #333); /* Dark gray color */
   margin: 0 auto 1rem;           /* Centered horizontally with space below */
+}
+
+/* ========== VISUAL EFFECTS ========== */
+/* Glow effect for elements */
+.shadow-glow {
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6); /* White glow effect */
 }
 
 /* ========== CARDS AND GRIDS ========== */
@@ -148,4 +89,4 @@
   }
 }
 
-/* Note: Form element styles were removed as they're already defined in FormControls.css */ 
+/* Note: Form element styles now use Tailwind utility classes directly */ 

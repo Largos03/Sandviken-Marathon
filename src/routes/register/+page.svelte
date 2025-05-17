@@ -1,18 +1,12 @@
 <script lang="ts">
     import { fade } from 'svelte/transition';
-    import { language, translations } from '$lib/stores/i18n.js';
+    import { language, tStore } from '$lib/stores/i18n.js';
     
     // Accept data from page.server.js
     export const data = {};
     
-    // Direct translation function with proper typing
-    $: t = (key: string): string => {
-      const trans = translations as Record<string, Record<string, string>>;
-      if (!trans[$language] || !trans[$language][key]) {
-        return key;
-      }
-      return trans[$language][key];
-    };
+    // Use the derived translation store
+    $: t = $tStore;
 </script>
 
 <div class="register-page" in:fade>

@@ -4,7 +4,6 @@
     import { faTimes } from '@fortawesome/free-solid-svg-icons';
     import { tStore } from '$lib/stores/i18n.js';
     import { onMount } from 'svelte';
-    import '$lib/styles/CookieConsent.css';
 
     let showCookieNotice = false;
 
@@ -26,10 +25,19 @@
 </script>
 
 {#if showCookieNotice}
-    <div class="cookie-notice" transition:fade>
-        <div class="notice-content">
-            <p>{t('cookieNoticeText')}</p>
-            <button class="dismiss-button" on:click={dismissNotice}>
+    <div 
+        class="fixed bottom-8 right-8 z-50 max-w-sm bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden"
+        transition:fade={{ duration: 200 }}
+        role="alert"
+        aria-live="polite"
+    >
+        <div class="p-4 flex items-center gap-4">
+            <p class="text-sm text-gray-600">{t('cookieNoticeText')}</p>
+            <button 
+                class="text-gray-400 hover:text-gray-600 p-2 flex-shrink-0" 
+                on:click={dismissNotice}
+                aria-label="Dismiss cookie notice"
+            >
                 <FontAwesomeIcon icon={faTimes} />
             </button>
         </div>

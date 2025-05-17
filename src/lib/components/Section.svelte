@@ -1,6 +1,5 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import '$lib/styles/Section.css';
   
   // Props
   export let id: string | undefined = undefined;
@@ -60,17 +59,18 @@
 
 <section
   {id}
-  class="{bgClass} {paddingClass} section-fade relative"
-  class:visible
+  class="{bgClass} {paddingClass} relative opacity-0 translate-y-5 transition-all duration-800 ease-in-out"
+  class:opacity-100={visible}
+  class:translate-y-0={visible}
   bind:this={sectionElement}
   {...$$restProps}
 >
   <div class="container mx-auto px-4 max-w-6xl">
     {#if title}
-      <div class="section-header mb-12">
+      <div class="text-center max-w-[700px] mx-auto mb-12">
         <h2 class="text-3xl md:text-4xl font-bold mb-3">{title}</h2>
         {#if withDivider}
-          <div class="section-divider"></div>
+          <div class="w-[50px] h-[3px] bg-current opacity-60 mx-auto mb-4"></div>
         {/if}
         {#if subtitle}
           <p class="text-lg opacity-80 max-w-2xl mx-auto">{subtitle}</p>

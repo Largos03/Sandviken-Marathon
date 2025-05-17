@@ -1,7 +1,7 @@
 <script lang="ts">
   import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
   import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-  import '$lib/styles/Icon.css';
+  import { cn } from '$lib/utils'; // Assuming cn utility exists for class merging
 
   // Props
   export let icon: IconDefinition;
@@ -19,15 +19,15 @@
 </script>
 
 <span 
-  class={`icon-wrapper ${$$props.class || ''}`}
+  class={cn('inline-flex items-center justify-center', $$props.class)}
   style={style}
 >
   <FontAwesomeIcon 
     {icon} 
     size={faSize} 
-    spin={spin} 
-    pulse={pulse} 
-    fw={fixedWidth} 
+    {spin} 
+    {pulse} 
+    fixedWidth={fixedWidth} 
     {...$$restProps} 
   />
 </span> 

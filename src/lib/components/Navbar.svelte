@@ -20,7 +20,6 @@
 	import { language, tStore } from '$lib/stores/i18n';
 
 	// Define types for better TypeScript support
-	// type HoverItemType = number | null; // Unused
 
 	// States
 	let mobileMenuOpen = false;

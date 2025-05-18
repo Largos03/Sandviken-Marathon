@@ -5,8 +5,6 @@
 
 /* Global styles for the application */
 
-/* Remove ::-webkit-scrollbar styles */
-
 /* Set a default background color for the body */
 body {
 	@apply bg-gray-100;

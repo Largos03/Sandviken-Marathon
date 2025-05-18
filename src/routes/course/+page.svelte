@@ -19,9 +19,28 @@
 		faShieldAlt,
 		faUsers
 	} from '@fortawesome/free-solid-svg-icons';
+	import { ImageModal } from '$lib';
 
 	// Use the derived translation store
 	$: t = $tStore;
+
+	// State for the map modal
+	let isMapModalOpen = false;
+
+	function openMapModal() {
+		isMapModalOpen = true;
+	}
+
+	function handleMapTriggerKeydown(event: KeyboardEvent) {
+		if (event.key === 'Enter' || event.key === ' ') {
+			event.preventDefault();
+			openMapModal();
+		}
+	}
+
+	const courseHighlights = [
+		// ... existing code ...
+	];
 </script>
 
 <svelte:head>
@@ -149,9 +168,16 @@
 			<div class="mb-10 grid grid-cols-1 gap-6 md:grid-cols-3">
 				<!-- Map Card -->
 				<div class="overflow-hidden rounded-xl bg-white shadow-md">
-					<div class="relative">
+					<div 
+						class="relative cursor-pointer group" 
+						on:click={openMapModal} 
+						role="button" 
+						tabindex="0" 
+						aria-label={t('courseMapInteractive') || 'View course map'}
+						on:keydown={handleMapTriggerKeydown}
+					>
 						<div
-							class="absolute inset-0 z-10 flex items-center justify-center bg-black/60 opacity-0 transition-opacity hover:opacity-100"
+							class="absolute inset-0 z-10 flex items-center justify-center bg-black/60 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
 						>
 							<p class="px-6 text-center text-white">
 								{t('courseMapInteractive')}
@@ -425,4 +451,11 @@
 			<div class="h-16"></div>
 		</div>
 	</main>
+
+	<ImageModal
+		bind:open={isMapModalOpen}
+		imageSrc="/sandviken-map.jpg"
+		altText={t('courseMapAlt') + ' - Full view'}
+		on:close={() => isMapModalOpen = false}
+	/>
 </div>

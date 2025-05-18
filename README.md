@@ -74,7 +74,7 @@ The website supports English and Swedish. All text content is managed through th
 <!-- For more complex components -->
 <script>
   import { tStore } from '$lib/stores/i18n';
-  
+
   // Use the translation store
   $: t = $tStore;
 </script>

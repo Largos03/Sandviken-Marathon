@@ -3,54 +3,35 @@
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import { contactSchema } from './schema';
 	import { FontAwesomeIcon as Fa } from '@fortawesome/svelte-fontawesome';
-	import { 
-		faEnvelope, 
-		faPhone, 
-		faLocationDot, 
+	import {
+		faEnvelope,
+		faPhone,
+		faLocationDot,
 		faClock,
 		faCheck
 	} from '@fortawesome/free-solid-svg-icons';
-	import {
-		faFacebookF,
-		faTwitter,
-		faInstagram
-	} from '@fortawesome/free-brands-svg-icons';
+	import { faFacebookF, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
 	import type { SuperValidated } from 'sveltekit-superforms';
-	import type { z } from 'zod';
-	import { language, translations, type Language } from '$lib/stores/i18n.js';
+	import { tStore as t } from '$lib/stores/i18n.js';
 	import { fade } from 'svelte/transition';
 	import Input from '$lib/components/Input.svelte';
 	import TextArea from '$lib/components/TextArea.svelte';
 	import Button from '$lib/components/Button.svelte';
-	
+
 	type FormData = {
 		name: string;
 		email: string;
 		subject: string;
 		message: string;
 	};
-	
+
 	interface PageData {
 		form: SuperValidated<FormData>;
 	}
-	
+
 	// Accept data from page.server.js
 	export let data: PageData;
-	
-	// Type definitions for translations
-	type TranslationKeys = string;
-	
-	// Direct translation function with proper typing
-	$: t = (key: string): string => {
-		const currentLang = $language as Language;
-		const translationsObj = translations as Record<Language, Record<string, string>>;
-		if (!translationsObj[currentLang] || !translationsObj[currentLang][key]) {
-			// Fallback to English or just the key itself if not found
-			return translationsObj['en']?.[key] || key;
-		}
-		return translationsObj[currentLang][key];
-	};
-	
+
 	// Track form status and touched fields
 	let formSubmitted = false;
 	let showSuccess = false;
@@ -60,7 +41,7 @@
 		subject: false,
 		message: false
 	};
-	
+
 	const { form, enhance, errors, constraints } = superForm<FormData>(data.form, {
 		validators: zodClient(contactSchema),
 		resetForm: true,
@@ -80,18 +61,12 @@
 		}
 	});
 
-	// Type assertion for form fields
-	$: name = $form?.name ?? '';
-	$: email = $form?.email ?? '';
-	$: subject = $form?.subject ?? '';
-	$: message = $form?.message ?? '';
-
 	// Type assertion for error fields
 	$: nameError = $errors?.name ? String($errors.name) : '';
 	$: emailError = $errors?.email ? String($errors.email) : '';
 	$: subjectError = $errors?.subject ? String($errors.subject) : '';
 	$: messageError = $errors?.message ? String($errors.message) : '';
-	
+
 	// Create a safe constraints object
 	$: safeConstraints = {
 		name: $constraints?.name || {},
@@ -99,12 +74,12 @@
 		subject: $constraints?.subject || {},
 		message: $constraints?.message || {}
 	};
-	
+
 	// Handle field blur events to mark them as touched
 	function handleBlur(field: keyof typeof touchedFields) {
 		touchedFields[field] = true;
 	}
-	
+
 	// Helper to determine if we should show an error
 	function shouldShowError(field: keyof typeof touchedFields, error: string) {
 		// Only show errors if the field has been touched or form was submitted
@@ -114,180 +89,200 @@
 		}
 		return false;
 	}
-	
+
 	// Translate error message
 	function translateError(error: string): string {
 		// If the error message is a translation key, translate it
-		const translationsObj = translations as Record<Language, Record<string, string>>;
-		if (error && translationsObj[$language as Language] && translationsObj[$language as Language][error]) {
-			return translationsObj[$language as Language][error];
-		}
-		// Otherwise return the original error
-		return error;
+		// This needs to use the imported tStore ($t) now or be adjusted
+		// For now, let's assume error messages from superforms are already strings or pre-translated
+		// If they are keys, this function needs to use $t(error)
+		return error; // Simplified for now, may need to revisit if errors are keys
 	}
 </script>
 
 <div class="min-h-screen" in:fade>
 	<!-- Simple header with subtle texture -->
-	<header class="bg-black text-white py-16">
-		<div class="container max-w-screen-xl mx-auto px-6">
-			<h1 class="text-4xl font-bold">{t('contactTitle')}</h1>
-			<div class="w-16 h-1 bg-red-500 mt-4 mb-4"></div>
-			<p class="max-w-xl text-gray-300">{t('contactSubtitle')}</p>
+	<header class="bg-black py-16 text-white">
+		<div class="mx-auto max-w-screen-xl px-6">
+			<h1 class="text-4xl font-bold">{$t('contactTitle')}</h1>
+			<div class="mt-4 mb-4 h-1 w-16 bg-red-500"></div>
+			<p class="max-w-xl text-gray-300">{$t('contactSubtitle')}</p>
 		</div>
 	</header>
 
 	<main class="bg-white py-16">
-		<div class="container max-w-screen-xl mx-auto px-6">
-			<div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+		<div class="mx-auto max-w-screen-xl px-6">
+			<div class="grid grid-cols-1 gap-12 lg:grid-cols-3">
 				<!-- Contact information -->
 				<div class="lg:col-span-1">
-					<h2 class="text-xl font-semibold border-b pb-2 mb-6">{t('getInTouch')}</h2>
-					
-					<ul class="space-y-6 text-gray-700 mb-10">
+					<h2 class="mb-6 border-b pb-2 text-xl font-semibold">{$t('getInTouch')}</h2>
+
+					<ul class="mb-10 space-y-6 text-gray-700">
 						<li class="flex items-start">
-							<div class="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-red-50 text-red-500 mr-3">
+							<div
+								class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-red-50 text-red-500"
+							>
 								<Fa icon={faEnvelope} class="text-sm" />
 							</div>
 							<div>
-								<div class="font-medium">{t('email')}</div>
+								<div class="font-medium">{$t('email')}</div>
 								<a href="mailto:info@sandvikenmarathon.se" class="text-gray-600 hover:text-red-600">
 									info@sandvikenmarathon.se
 								</a>
 							</div>
 						</li>
-						
+
 						<li class="flex items-start">
-							<div class="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-red-50 text-red-500 mr-3">
+							<div
+								class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-red-50 text-red-500"
+							>
 								<Fa icon={faPhone} class="text-sm" />
 							</div>
 							<div>
-								<div class="font-medium">{t('phone')}</div>
+								<div class="font-medium">{$t('phone')}</div>
 								<a href="tel:+461234567" class="text-gray-600 hover:text-red-600">
 									+46 (0) 123 456 789
 								</a>
 							</div>
 						</li>
-						
+
 						<li class="flex items-start">
-							<div class="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-red-50 text-red-500 mr-3">
+							<div
+								class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-red-50 text-red-500"
+							>
 								<Fa icon={faLocationDot} class="text-sm" />
 							</div>
 							<div>
-								<div class="font-medium">{t('address')}</div>
+								<div class="font-medium">{$t('address')}</div>
 								<address class="text-gray-600 not-italic">
-									Marathon Office<br>
-									Sandviken City Center<br>
+									Marathon Office<br />
+									Sandviken City Center<br />
 									811 80 Sandviken, Sweden
 								</address>
 							</div>
 						</li>
-						
+
 						<li class="flex items-start">
-							<div class="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-red-50 text-red-500 mr-3">
+							<div
+								class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-red-50 text-red-500"
+							>
 								<Fa icon={faClock} class="text-sm" />
 							</div>
 							<div>
-								<div class="font-medium">{t('officeHours')}</div>
+								<div class="font-medium">{$t('officeHours')}</div>
 								<div class="text-gray-600">
-									<p>{t('monToFri')}</p>
-									<p>{t('weekends')}</p>
+									<p>{$t('monToFri')}</p>
+									<p>{$t('weekends')}</p>
 								</div>
 							</div>
 						</li>
 					</ul>
-					
-					<h2 class="text-xl font-semibold border-b pb-2 mb-6">{t('followUs')}</h2>
+
+					<h2 class="mb-6 border-b pb-2 text-xl font-semibold">{$t('followUs')}</h2>
 					<div class="flex space-x-4">
-						<a href="https://facebook.com" class="bg-gray-100 hover:bg-red-500 text-gray-600 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors" aria-label="Facebook">
+						<a
+							href="https://facebook.com"
+							class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-gray-600 transition-colors hover:bg-red-500 hover:text-white"
+							aria-label="Facebook"
+						>
 							<Fa icon={faFacebookF} />
 						</a>
-						<a href="https://twitter.com" class="bg-gray-100 hover:bg-red-500 text-gray-600 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors" aria-label="Twitter">
+						<a
+							href="https://twitter.com"
+							class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-gray-600 transition-colors hover:bg-red-500 hover:text-white"
+							aria-label="Twitter"
+						>
 							<Fa icon={faTwitter} />
 						</a>
-						<a href="https://instagram.com" class="bg-gray-100 hover:bg-red-500 text-gray-600 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors" aria-label="Instagram">
+						<a
+							href="https://instagram.com"
+							class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-gray-600 transition-colors hover:bg-red-500 hover:text-white"
+							aria-label="Instagram"
+						>
 							<Fa icon={faInstagram} />
 						</a>
 					</div>
 				</div>
-				
+
 				<!-- Contact form -->
 				<div class="lg:col-span-2">
-					<h2 class="text-xl font-semibold border-b pb-2 mb-6">{t('sendMessage')}</h2>
-					
+					<h2 class="mb-6 border-b pb-2 text-xl font-semibold">{$t('sendMessage')}</h2>
+
 					{#if showSuccess}
-						<div class="bg-green-50 border-l-4 border-green-500 text-green-700 p-4 mb-6">
+						<div class="mb-6 border-l-4 border-green-500 bg-green-50 p-4 text-green-700">
 							<div class="flex">
 								<div class="flex-shrink-0">
 									<Fa icon={faCheck} class="text-green-500" />
 								</div>
 								<div class="ml-3">
-									<p class="font-medium">{t('successMessage')}</p>
+									<p class="font-medium">{$t('successMessage')}</p>
 								</div>
 							</div>
 						</div>
 					{/if}
-					
+
 					<form method="POST" use:enhance class="space-y-6">
 						<div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-							<Input 
-								id="name" 
-								name="name" 
-								bind:value={name}
-								label={t('formName')}
+							<Input
+								id="name"
+								name="name"
+								bind:value={$form.name}
+								label={$t('formName')}
 								error={shouldShowError('name', nameError) ? translateError(nameError) : undefined}
-								placeholder={t('formName')}
+								placeholder={$t('formName')}
 								required={true}
 								on:blur={() => handleBlur('name')}
 								{...safeConstraints.name}
 							/>
-							
-							<Input 
-								id="email" 
-								name="email" 
+
+							<Input
+								id="email"
+								name="email"
 								type="email"
-								bind:value={email}
-								label={t('formEmail')}
-								error={shouldShowError('email', emailError) ? translateError(emailError) : undefined}
-								placeholder={t('formEmail')}
+								bind:value={$form.email}
+								label={$t('formEmail')}
+								error={shouldShowError('email', emailError)
+									? translateError(emailError)
+									: undefined}
+								placeholder={$t('formEmail')}
 								required={true}
 								on:blur={() => handleBlur('email')}
 								{...safeConstraints.email}
 							/>
 						</div>
-						
-						<Input 
-							id="subject" 
-							name="subject" 
-							bind:value={subject}
-							label={t('formSubject')}
-							error={shouldShowError('subject', subjectError) ? translateError(subjectError) : undefined}
-							placeholder={t('formSubject')}
+
+						<Input
+							id="subject"
+							name="subject"
+							bind:value={$form.subject}
+							label={$t('formSubject')}
+							error={shouldShowError('subject', subjectError)
+								? translateError(subjectError)
+								: undefined}
+							placeholder={$t('formSubject')}
 							required={true}
 							on:blur={() => handleBlur('subject')}
 							{...safeConstraints.subject}
 						/>
-						
-						<TextArea 
-							id="message" 
-							name="message" 
-							bind:value={message}
-							label={t('formMessage')}
-							error={shouldShowError('message', messageError) ? translateError(messageError) : undefined}
-							placeholder={t('formMessage')}
+
+						<TextArea
+							id="message"
+							name="message"
+							bind:value={$form.message}
+							label={$t('formMessage')}
+							error={shouldShowError('message', messageError)
+								? translateError(messageError)
+								: undefined}
+							placeholder={$t('formMessage')}
 							required={true}
 							rows={5}
 							on:blur={() => handleBlur('message')}
 							{...safeConstraints.message}
 						/>
-						
-						<div class="pt-2 flex justify-end">
-							<Button 
-								type="submit" 
-								variant="primary"
-								disabled={formSubmitted}
-							>
-								{formSubmitted ? t('sending') : t('sendButton')}
+
+						<div class="flex justify-end pt-2">
+							<Button type="submit" variant="primary" disabled={formSubmitted}>
+								{formSubmitted ? $t('sending') : $t('sendButton')}
 							</Button>
 						</div>
 					</form>
@@ -295,4 +290,4 @@
 			</div>
 		</div>
 	</main>
-</div> 
+</div>

@@ -17,39 +17,36 @@ There are several ways to use translations in your components:
 
 ```svelte
 <script>
-  import { language, translations } from '$lib/stores/i18n.js';
-  
-  // This creates a reactive translation function
-  $: t = (key) => translations[$language]?.[key] || key;
+	import { language, translations } from '$lib/stores/i18n.js';
+
+	// This creates a reactive translation function
+	$: t = (key) => translations[$language]?.[key] || key;
 </script>
 
-<h1>{t('pageTitle')}</h1>
-<p>{t('pageDescription')}</p>
+<h1>{t('pageTitle')}</h1><p>{t('pageDescription')}</p>
 ```
 
 ### Method 2: Using the T component (recommended for simple text)
 
 ```svelte
 <script>
-  import { T } from '$lib';
+	import { T } from '$lib';
 </script>
 
-<h1><T key="pageTitle" /></h1>
-<p><T key="pageDescription" /></p>
+<h1><T key="pageTitle" /></h1><p><T key="pageDescription" /></p>
 ```
 
 ### Method 3: Using the context (useful in deeply nested components)
 
 ```svelte
 <script>
-  import { getContext } from 'svelte';
-  
-  // Get the translation function from context
-  const { t } = getContext('translation');
+	import { getContext } from 'svelte';
+
+	// Get the translation function from context
+	const { t } = getContext('translation');
 </script>
 
-<h1>{t('pageTitle')}</h1>
-<p>{t('pageDescription')}</p>
+<h1>{t('pageTitle')}</h1><p>{t('pageDescription')}</p>
 ```
 
 ## Adding New Translations
@@ -63,14 +60,14 @@ For example:
 
 ```js
 export const translations = {
-  en: {
-    // ... existing translations
-    myNewKey: 'My English text',
-  },
-  sv: {
-    // ... existing translations
-    myNewKey: 'Min svenska text',
-  }
+	en: {
+		// ... existing translations
+		myNewKey: 'My English text'
+	},
+	sv: {
+		// ... existing translations
+		myNewKey: 'Min svenska text'
+	}
 };
 ```
 
@@ -91,11 +88,11 @@ For dynamic content, you can use template literals:
 
 ```svelte
 <script>
-  import { language, translations } from '$lib/stores/i18n.js';
-  
-  $: t = (key) => translations[$language]?.[key] || key;
-  
-  let username = "John";
+	import { language, translations } from '$lib/stores/i18n.js';
+
+	$: t = (key) => translations[$language]?.[key] || key;
+
+	let username = 'John';
 </script>
 
 <p>{t('welcomeUser').replace('{username}', username)}</p>
@@ -105,11 +102,11 @@ And in the translations file:
 
 ```js
 export const translations = {
-  en: {
-    welcomeUser: 'Welcome, {username}!',
-  },
-  sv: {
-    welcomeUser: 'Välkommen, {username}!',
-  }
+	en: {
+		welcomeUser: 'Welcome, {username}!'
+	},
+	sv: {
+		welcomeUser: 'Välkommen, {username}!'
+	}
 };
-``` 
+```

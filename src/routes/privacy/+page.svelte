@@ -2,24 +2,23 @@
 	import { fade, fly } from 'svelte/transition';
 	import { onMount } from 'svelte';
 	import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
-	import { 
-		faShield, 
-		faUserLock, 
-		faCookieBite, 
+	import {
+		faShield,
+		faUserLock,
+		faCookieBite,
 		faServer,
-		faLock, 
+		faLock,
 		faDatabase,
 		faChevronRight,
 		faClipboardCheck,
-		faEnvelope,
-		faMapMarkerAlt
+		faEnvelope
 	} from '@fortawesome/free-solid-svg-icons';
-	import { language, tStore } from '$lib/stores/i18n.js';
+	import { tStore } from '$lib/stores/i18n';
 	import { SidebarNav, ContactSection, TabsNav } from '$lib';
 
 	// Accept data from page.server.js
 	export const data: { lang?: string } = {};
-	
+
 	// Use the derived translation store
 	$: t = $tStore;
 
@@ -63,19 +62,19 @@
 		} catch (error) {
 			console.error('Error loading cookie preferences:', error);
 		}
-		
+
 		// Check for hash in URL to set active tab
 		const hash = window.location.hash.substring(1);
-		if (hash && tabs.some(tab => tab.id === hash)) {
+		if (hash && tabs.some((tab) => tab.id === hash)) {
 			activeTab = hash;
 		}
 	});
-	
+
 	function setActiveTab(tabId: string) {
 		activeTab = tabId;
 		window.location.hash = tabId;
 	}
-	
+
 	function handleCookiePreference(type: keyof CookiePreferences) {
 		if (type === 'essential') return;
 		cookiePreferences[type] = !cookiePreferences[type];
@@ -96,52 +95,80 @@
 
 <div in:fade={{ duration: 300 }}>
 	<!-- Hero Section -->
-	<div class="relative bg-black text-white py-10 md:py-14" role="banner">
+	<div class="relative bg-black py-10 text-white md:py-14" role="banner">
 		<!-- Subtle grid pattern overlay -->
 		<div class="absolute inset-0 opacity-20">
-			<div class="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.15)_1px,transparent_0)] bg-[size:16px_16px]"></div>
-			<div class="absolute inset-0 bg-[linear-gradient(to_right,transparent,rgba(255,255,255,0.05),transparent)]"></div>
+			<div
+				class="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.15)_1px,transparent_0)] bg-[size:16px_16px]"
+			></div>
+			<div
+				class="absolute inset-0 bg-[linear-gradient(to_right,transparent,rgba(255,255,255,0.05),transparent)]"
+			></div>
 		</div>
-		
+
 		<!-- Content -->
-		<div class="container mx-auto text-center px-4 relative z-10">
-			<h1 class="text-3xl md:text-4xl font-bold mb-3 inline-block relative" in:fly={{ y: -20, duration: 800, delay: 300 }}>
+		<div class="relative z-10 mx-auto px-6 text-center max-w-[1100px]">
+			<h1
+				class="relative mb-3 inline-block text-3xl font-bold md:text-4xl"
+				in:fly={{ y: -20, duration: 800, delay: 300 }}
+			>
 				{t('privacyPolicy')}
-				<span class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-red-500/80 rounded-full shadow-glow"></span>
+				<span
+					class="shadow-[0_0_8px_rgba(255,255,255,0.6)] absolute -bottom-2 left-1/2 h-1 w-12 -translate-x-1/2 transform rounded-full bg-red-500/80"
+				></span>
 			</h1>
-			<p class="text-base md:text-lg max-w-xl mx-auto mb-5 opacity-90 font-light" in:fly={{ y: 20, duration: 800, delay: 400 }}>
+			<p
+				class="mx-auto mb-5 max-w-xl text-base font-light opacity-90 md:text-lg"
+				in:fly={{ y: 20, duration: 800, delay: 400 }}
+			>
 				{t('privacyIntro')}
 			</p>
-			<div class="inline-flex items-center bg-white/10 backdrop-blur-sm px-4 py-1.5 rounded-full text-xs font-medium border border-white/20 shadow-sm" in:fly={{ y: 20, duration: 800, delay: 500 }}>
-				<svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+			<div
+				class="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-medium shadow-sm backdrop-blur-sm"
+				in:fly={{ y: 20, duration: 800, delay: 500 }}
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="mr-1.5 h-3 w-3"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+					/>
 				</svg>
 				<span>{t('privacyLastUpdated')} {t('privacyDate')}</span>
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- Main Content -->
-	<div class="container mx-auto -mt-8 px-4 relative z-20 mb-20">
-		<div class="bg-white rounded-xl shadow-xl overflow-hidden border border-gray-100">
+	<div class="relative z-20 mx-auto -mt-8 mb-20 px-6 max-w-[1100px]">
+		<div class="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-xl">
 			<!-- Tabs Navigation -->
 			<div class="flex flex-col md:flex-row">
 				<!-- Sidebar Navigation -->
 				<SidebarNav
-					tabs={tabs}
-					activeTab={activeTab}
+					{tabs}
+					{activeTab}
 					title={t('privacyPolicySections')}
 					onTabChange={setActiveTab}
 					ariaLabel={t('privacyMainNavigation')}
 				/>
-				
+
 				<!-- Tab Content -->
-				<div class="flex-grow p-6 overflow-y-auto h-[600px] md:h-[700px]">
+				<div class="h-[600px] flex-grow overflow-y-auto p-6 md:h-[700px]">
 					<!-- Overview Tab -->
 					{#if activeTab === 'overview'}
 						<div>
-							<div class="flex items-center mb-5">
-								<div class="w-12 h-12 bg-black text-white rounded-lg flex items-center justify-center mr-4 shadow-md border-b-4 border-red-500">
+							<div class="mb-5 flex items-center">
+								<div
+									class="mr-4 flex h-12 w-12 items-center justify-center rounded-lg border-b-4 border-red-500 bg-black text-white shadow-md"
+								>
 									<FontAwesomeIcon icon={faShield} size="lg" class="text-red-100" />
 								</div>
 								<div>
@@ -149,28 +176,34 @@
 									<p class="text-gray-500">{t('privacyIntroSubtitle')}</p>
 								</div>
 							</div>
-							
+
 							<p class="mb-5 text-gray-700">{t('privacyIntroText')}</p>
-							
-							<div class="bg-black text-white p-5 rounded-lg mb-6 relative overflow-hidden shadow-md border-l-4 border-red-500">
-								<div class="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.1)_1px,transparent_0)] bg-[size:20px_20px]"></div>
+
+							<div
+								class="relative mb-6 overflow-hidden rounded-lg border-l-4 border-red-500 bg-black p-5 text-white shadow-md"
+							>
+								<div
+									class="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.1)_1px,transparent_0)] bg-[size:20px_20px] opacity-30"
+								></div>
 								<p class="relative z-10 font-medium">{t('privacyHighlight')}</p>
 							</div>
-							
-							<TabsNav 
-								tabs={tabs.slice(1)} 
-								onTabChange={setActiveTab} 
+
+							<TabsNav
+								tabs={tabs.slice(1)}
+								onTabChange={setActiveTab}
 								headingText={t('privacyDocumentSections')}
 								ariaLabel={t('privacyNavigation')}
 							/>
 						</div>
 					{/if}
-					
+
 					<!-- Data Collection Tab -->
 					{#if activeTab === 'collection'}
 						<div>
-							<div class="flex items-center mb-5">
-								<div class="w-12 h-12 bg-black text-white rounded-lg flex items-center justify-center mr-4 shadow-md border-b-4 border-red-500">
+							<div class="mb-5 flex items-center">
+								<div
+									class="mr-4 flex h-12 w-12 items-center justify-center rounded-lg border-b-4 border-red-500 bg-black text-white shadow-md"
+								>
 									<FontAwesomeIcon icon={faUserLock} size="lg" class="text-red-100" />
 								</div>
 								<div>
@@ -178,13 +211,17 @@
 									<p class="text-gray-500">{t('infoCollectSubtitle')}</p>
 								</div>
 							</div>
-							
-							<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-								{#each ['personal', 'contact', 'technical', 'usage'] as item, i}
-									<div class="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden hover:border-l-3 hover:border-red-400/30">
+
+							<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+								{#each ['personal', 'contact', 'technical', 'usage'] as item (item)}
+									<div
+										class="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-shadow duration-200 hover:border-l-3 hover:border-red-400/30 hover:shadow-md"
+									>
 										<div class="flex items-center border-b border-gray-100 p-4">
-											<div class="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-sm font-bold mr-3 shadow-sm">
-												{i + 1}
+											<div
+												class="mr-3 flex h-8 w-8 items-center justify-center rounded-full bg-black text-sm font-bold text-white shadow-sm"
+											>
+												<!-- Number removed -->
 											</div>
 											<h3 class="font-semibold">{t(`${item}InfoTitle`)}</h3>
 										</div>
@@ -196,12 +233,14 @@
 							</div>
 						</div>
 					{/if}
-					
+
 					<!-- Data Usage Tab -->
 					{#if activeTab === 'usage'}
 						<div class="mb-6">
-							<div class="flex items-center mb-6">
-								<div class="w-12 h-12 bg-black text-white rounded-lg flex items-center justify-center mr-4 border-b-4 border-red-500">
+							<div class="mb-6 flex items-center">
+								<div
+									class="mr-4 flex h-12 w-12 items-center justify-center rounded-lg border-b-4 border-red-500 bg-black text-white"
+								>
 									<FontAwesomeIcon icon={faServer} size="lg" class="text-red-100" />
 								</div>
 								<div>
@@ -209,28 +248,34 @@
 									<p class="text-gray-500">{t('infoUseText')}</p>
 								</div>
 							</div>
-							
+
 							<div class="space-y-4">
-								{#each ['eventReg', 'relationship', 'communication', 'websiteImprovement', 'security'] as item, i}
-									<div class="flex items-start bg-white border border-gray-200 rounded-lg p-4 hover:shadow-sm transition-shadow duration-200 hover:border-l-3 hover:border-red-400/30">
-										<div class="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-sm font-bold mr-4 mt-0.5">
-											{i + 1}
+								{#each ['eventReg', 'relationship', 'communication', 'websiteImprovement', 'security'] as item (item)}
+									<div
+										class="flex items-start rounded-lg border border-gray-200 bg-white p-4 transition-shadow duration-200 hover:border-l-3 hover:border-red-400/30 hover:shadow-sm"
+									>
+										<div
+											class="mt-0.5 mr-4 flex h-8 w-8 items-center justify-center rounded-full bg-black text-sm font-bold text-white"
+										>
+											<!-- Number removed -->
 										</div>
 										<div>
 											<h3 class="font-medium text-gray-900">{t(`${item}Title`)}</h3>
-											<p class="text-gray-600 mt-1">{t(`${item}Text`)}</p>
+											<p class="mt-1 text-gray-600">{t(`${item}Text`)}</p>
 										</div>
 									</div>
 								{/each}
 							</div>
 						</div>
 					{/if}
-					
+
 					<!-- Cookies Tab -->
 					{#if activeTab === 'cookies'}
 						<div class="mb-6">
-							<div class="flex items-center mb-6">
-								<div class="w-12 h-12 bg-black text-white rounded-lg flex items-center justify-center mr-4 border-b-4 border-red-500">
+							<div class="mb-6 flex items-center">
+								<div
+									class="mr-4 flex h-12 w-12 items-center justify-center rounded-lg border-b-4 border-red-500 bg-black text-white"
+								>
 									<FontAwesomeIcon icon={faCookieBite} size="lg" class="text-red-100" />
 								</div>
 								<div>
@@ -238,34 +283,43 @@
 									<p class="text-gray-500">{t('cookiesSectionText')}</p>
 								</div>
 							</div>
-							
-							<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-								{#each Object.entries(cookiePreferences) as [type, enabled]}
-									<div class="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden hover:border-l-3 hover:border-red-400/30">
+
+							<div class="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+								{#each Object.entries(cookiePreferences) as [type, enabled] (type)}
+									<div
+										class="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-shadow duration-200 hover:border-l-3 hover:border-red-400/30 hover:shadow-md"
+									>
 										<div class="flex items-center justify-between border-b border-gray-100 p-4">
 											<div class="flex items-center">
-												<div class="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-sm font-bold mr-3">
-													<span class="w-2 h-2 rounded-full bg-red-200"></span>
+												<div
+													class="mr-3 flex h-8 w-8 items-center justify-center rounded-full bg-black text-sm font-bold text-white"
+												>
+													<span class="h-2 w-2 rounded-full bg-red-200"></span>
 												</div>
 												<h3 class="font-semibold">{t(`${type}Cookies`)}</h3>
 											</div>
 										</div>
 										<div class="p-4">
-											<p class="text-gray-600 mb-4">{t(`${type}${type === 'essential' ? 'CookiesText' : 'Text'}`)}</p>
+											<p class="mb-4 text-gray-600">
+												{t(`${type}${type === 'essential' ? 'CookiesText' : 'Text'}`)}
+											</p>
 											<div class="flex items-center justify-between">
-												<label class="relative inline-flex items-center cursor-pointer">
-													<input 
-														type="checkbox" 
-														class="sr-only peer" 
-														checked={enabled} 
+												<label class="relative inline-flex cursor-pointer items-center">
+													<input
+														type="checkbox"
+														class="peer sr-only"
+														checked={enabled}
 														disabled={type === 'essential'}
-														on:change={() => handleCookiePreference(type as keyof CookiePreferences)}
-													>
-													<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-red-300 rounded-full peer 
-																peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] 
-																after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 
-																after:border after:rounded-full after:h-5 after:w-5 after:transition-all 
-																peer-checked:bg-black {type === 'essential' ? 'opacity-60' : ''}"></div>
+														on:change={() =>
+															handleCookiePreference(type as keyof CookiePreferences)}
+													/>
+													<div
+														class="peer h-6 w-11 rounded-full bg-gray-200 peer-checked:bg-black peer-focus:ring-2 peer-focus:ring-red-300
+																peer-focus:outline-none after:absolute after:top-[2px]
+																after:left-[2px] after:h-5 after:w-5 after:rounded-full after:border
+																after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:after:translate-x-full
+																peer-checked:after:border-white {type === 'essential' ? 'opacity-60' : ''}"
+													></div>
 													<span class="ml-3 text-sm font-medium text-gray-700">
 														{enabled ? t('enabled') : t('disabled')}
 													</span>
@@ -275,18 +329,20 @@
 									</div>
 								{/each}
 							</div>
-							
+
 							<p class="text-sm text-gray-500 italic">
 								{t('cookiePreferencesSaved')}
 							</p>
 						</div>
 					{/if}
-					
+
 					<!-- Retention Tab -->
 					{#if activeTab === 'retention'}
 						<div class="mb-6">
-							<div class="flex items-center mb-6">
-								<div class="w-12 h-12 bg-black text-white rounded-lg flex items-center justify-center mr-4 border-b-4 border-red-500">
+							<div class="mb-6 flex items-center">
+								<div
+									class="mr-4 flex h-12 w-12 items-center justify-center rounded-lg border-b-4 border-red-500 bg-black text-white"
+								>
 									<FontAwesomeIcon icon={faDatabase} size="lg" class="text-red-100" />
 								</div>
 								<div>
@@ -294,13 +350,18 @@
 									<p class="text-gray-500">{t('dataRetentionPolicyText')}</p>
 								</div>
 							</div>
-							
-							<div class="bg-white border border-gray-200 rounded-lg p-6 mb-6 hover:border-l-3 hover:border-red-400/30">
-								<h3 class="text-xl font-semibold mb-4">{t('retentionPeriodsTitle')}</h3>
+
+							<div
+								class="mb-6 rounded-lg border border-gray-200 bg-white p-6 hover:border-l-3 hover:border-red-400/30"
+							>
+								<h3 class="mb-4 text-xl font-semibold">{t('retentionPeriodsTitle')}</h3>
 								<ul class="space-y-4">
-									{#each ['accountInfo', 'eventRegRetention', 'marketingPrefs', 'paymentInfoSecurity'] as item}
+									{#each ['accountInfo', 'eventRegRetention', 'marketingPrefs', 'paymentInfoSecurity'] as item (item)}
 										<li class="flex items-start">
-											<FontAwesomeIcon icon={faChevronRight} class="text-red-500 mt-1 mr-3 flex-shrink-0" />
+											<FontAwesomeIcon
+												icon={faChevronRight}
+												class="mt-1 mr-3 flex-shrink-0 text-red-500"
+											/>
 											<div>
 												<p class="font-medium">{t(`${item}Title`)}</p>
 												<p class="text-gray-600">{t(`${item}Text`)}</p>
@@ -309,19 +370,25 @@
 									{/each}
 								</ul>
 							</div>
-							
-							<div class="bg-black text-white p-6 rounded-lg relative overflow-hidden border-l-4 border-red-500">
-								<div class="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.1)_1px,transparent_0)] bg-[size:20px_20px]"></div>
+
+							<div
+								class="relative overflow-hidden rounded-lg border-l-4 border-red-500 bg-black p-6 text-white"
+							>
+								<div
+									class="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.1)_1px,transparent_0)] bg-[size:20px_20px] opacity-30"
+								></div>
 								<p class="relative z-10">{t('dataMinimizationPriority')}</p>
 							</div>
 						</div>
 					{/if}
-					
+
 					<!-- Your Rights Tab -->
 					{#if activeTab === 'rights'}
 						<div class="mb-6">
-							<div class="flex items-center mb-6">
-								<div class="w-12 h-12 bg-black text-white rounded-lg flex items-center justify-center mr-4 border-b-4 border-red-500">
+							<div class="mb-6 flex items-center">
+								<div
+									class="mr-4 flex h-12 w-12 items-center justify-center rounded-lg border-b-4 border-red-500 bg-black text-white"
+								>
 									<FontAwesomeIcon icon={faClipboardCheck} size="lg" class="text-red-100" />
 								</div>
 								<div>
@@ -329,27 +396,31 @@
 									<p class="text-gray-500">{t('yourRightsText')}</p>
 								</div>
 							</div>
-							
-							<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-								{#each ['access', 'correction', 'deletion', 'restriction'] as right}
-									<div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow duration-200 hover:border-l-3 hover:border-red-400/30">
-										<h3 class="text-lg font-semibold mb-2">{t(`${right}Title`)}</h3>
-										<p class="text-gray-600">{t(`${right}Text`)}</p>
+
+							<div class="mb-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
+								{#each ['access', 'rectification', 'erasure', 'restriction', 'portability', 'objection'] as item (item)}
+									<div
+										class="rounded-lg border border-gray-200 bg-white p-6 transition-shadow duration-200 hover:border-l-3 hover:border-red-400/30 hover:shadow-md"
+									>
+										<h3 class="mb-2 text-lg font-semibold">{t(`${item}Title`)}</h3>
+										<p class="text-gray-600">{t(`${item}Text`)}</p>
 									</div>
 								{/each}
 							</div>
-							
+
 							<p class="text-sm text-gray-500 italic">
 								{t('rightsNoteText')}
 							</p>
 						</div>
 					{/if}
-					
+
 					<!-- Security Tab -->
 					{#if activeTab === 'security'}
 						<div class="mb-6">
-							<div class="flex items-center mb-6">
-								<div class="w-12 h-12 bg-black text-white rounded-lg flex items-center justify-center mr-4 border-b-4 border-red-500">
+							<div class="mb-6 flex items-center">
+								<div
+									class="mr-4 flex h-12 w-12 items-center justify-center rounded-lg border-b-4 border-red-500 bg-black text-white"
+								>
 									<FontAwesomeIcon icon={faLock} size="lg" class="text-red-100" />
 								</div>
 								<div>
@@ -357,23 +428,31 @@
 									<p class="text-gray-500">{t('dataSecurityText')}</p>
 								</div>
 							</div>
-							
-							<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-								{#each ['secureStorage', 'accessControl', 'regularUpdates', 'dataMinimization'] as feature}
-									<div class="flex items-start bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-all duration-200 hover:border-l-3 hover:border-red-400/30">
-										<div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center text-2xl mr-4">
-											{#if feature === 'secureStorage'}🔒{:else if feature === 'accessControl'}🛡️{:else if feature === 'regularUpdates'}🔄{:else}📊{/if}
-										</div>
+
+							<div class="space-y-3">
+								{#each ['encryption', 'accessControls', 'regularAudits'] as item (item)}
+									<div class="flex items-start">
+										<FontAwesomeIcon
+											icon={item === 'encryption'
+												? faShield
+												: item === 'accessControls'
+													? faUserLock
+													: faServer}
+											size="lg"
+											class="mr-4 text-red-100"
+										/>
 										<div>
-											<h3 class="font-semibold mb-2">{t(`${feature}Title`)}</h3>
-											<p class="text-gray-600">{t(`${feature}Text`)}</p>
+											<h3 class="font-medium text-gray-900">{t(`${item}Title`)}</h3>
+											<p class="mt-1 text-gray-600">{t(`${item}Text`)}</p>
 										</div>
 									</div>
 								{/each}
 							</div>
+
+							<p class="mb-6 text-gray-700">{t('securityText')}</p>
 						</div>
 					{/if}
-					
+
 					<!-- Contact Tab -->
 					{#if activeTab === 'contact'}
 						<ContactSection
@@ -390,4 +469,4 @@
 			</div>
 		</div>
 	</div>
-</div> 
+</div>

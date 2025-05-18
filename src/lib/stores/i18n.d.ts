@@ -10,7 +10,7 @@ export const language: Writable<Language>;
 
 // Translations dictionary
 export const translations: {
-  [K in Language]: TranslationObject;
+	[K in Language]: TranslationObject;
 };
 
 // Translation function
@@ -20,4 +20,4 @@ export function t(key: TranslationKey, lang?: Language): string;
 export const tStore: Readable<(key: TranslationKey) => string>;
 
 // Browser language detection
-export function detectBrowserLanguage(): Language; 
+export function detectBrowserLanguage(): Language;

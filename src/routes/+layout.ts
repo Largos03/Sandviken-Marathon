@@ -1,5 +1,5 @@
 import { browser } from '$app/environment';
-import { language, detectBrowserLanguage } from '$lib/stores/i18n.js';
+import { language, detectBrowserLanguage, type Language } from '$lib/stores/i18n.js';
 
 export const ssr = false; // Disable server-side rendering
 
@@ -19,7 +19,7 @@ export function load() {
 		}
 
 		// Set the language in the store
-		language.set(currentLanguage);
+		language.set(currentLanguage as Language);
 	}
 
 	return {

@@ -13,6 +13,6 @@ export { default as TabsNav } from './components/TabsNav.svelte';
 export { default as ImageModal } from './components/ImageModal.svelte';
 
 // Export translation utilities
-export { language, translations, t, tStore } from './stores/i18n.js';
+export { language, t, tStore, detectBrowserLanguage } from './stores/i18n';
 
 // Export other utilities as needed

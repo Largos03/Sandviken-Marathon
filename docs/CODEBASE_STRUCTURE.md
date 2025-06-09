@@ -14,7 +14,6 @@ This document provides an overview of the codebase structure and design decision
     - `/types`: TypeScript type definitions
     - `/utils`: Utility functions
     - `/docs`: Documentation files
-    - `/ui`: UI component library (more generic than components)
   - `/routes`: SvelteKit routes (pages)
 
 ## Key Components
@@ -39,12 +38,17 @@ This document provides an overview of the codebase structure and design decision
   - `T.svelte`: Translation component
   - `Icon.svelte`: Icon wrapper for FontAwesome
 
-For detailed component documentation, see `COMPONENTS.md`.
+For detailed component documentation, see `docs/COMPONENTS.md`.
 
 ### Translation System
 
-- `src/lib/stores/i18n.ts`: Central translation system using Svelte stores
-- `src/lib/components/T.svelte`: Reusable translation component
+- `src/lib/stores/i18n.ts`: Main translation system controller that combines translations from feature files
+- Feature-specific translation files in the `src/lib/stores` directory:
+  - `common.ts`: Common translations used across multiple pages
+  - `about.ts`, `contact.ts`, etc.: Feature-specific translations
+- Translation access via:
+  - `tStore`: Reactive store for use in templates
+  - `t()`: Function for use in JavaScript
 - Currently supports English (en) and Swedish (sv)
 
 ### Styling System
@@ -69,9 +73,9 @@ For detailed component documentation, see `COMPONENTS.md`.
 
 ### Translations
 
-1. Use the `T` component for simple translations: `<T key="example" />`
-2. For complex components, use the tStore: `$: t = $tStore;`
-3. Keep all translations in the i18n.ts file
+1. Use the `tStore` for reactive translations: `{$tStore('example')}`
+2. For non-reactive cases, use the t function: `t('example')`
+3. Keep translations organized in feature-specific files within the `src/lib/stores` directory
 
 ### Styling
 
@@ -93,11 +97,12 @@ For detailed component documentation, see `COMPONENTS.md`.
    - Standardized form inputs
    - Added animation and viewport detection utilities
 
-2. **Consolidated Translation System**:
+2. **Modular Translation System**:
 
-   - Removed duplicate translation functions across components
-   - Improved type safety for translation keys
-   - Created standardized approach using the tStore
+   - Organized translations by feature into separate files
+   - Improved maintenance by grouping related translations
+   - Maintained type safety with centralized types
+   - Simplified adding new translations by feature
 
 3. **Reduced CSS Duplication**:
 

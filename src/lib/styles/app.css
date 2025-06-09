@@ -7,11 +7,16 @@
 
 /* Set a default background color for the body */
 body {
-	@apply bg-gray-100;
-	@apply text-gray-800;
-	font-family: 'Inter', sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+  background-color: #f3f4f6; /* Tailwind bg-gray-100 */
+  color: #1f2937; /* Tailwind text-gray-800 */
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Back to top button styles */
+.back-to-top-btn {
+  box-shadow: 0 4px 24px 0 rgb(0 0 0 / 0.10), 0 1.5px 4px 0 rgb(0 0 0 / 0.10);
 }
 
 /* Add any other global styles below */

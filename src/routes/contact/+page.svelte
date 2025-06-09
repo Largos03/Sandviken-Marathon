@@ -12,7 +12,7 @@
 	} from '@fortawesome/free-solid-svg-icons';
 	import { faFacebookF, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
 	import type { SuperValidated } from 'sveltekit-superforms';
-	import { tStore as t } from '$lib/stores/i18n.js';
+	import { tStore as t } from '$lib/stores/i18n';
 	import { fade } from 'svelte/transition';
 	import Input from '$lib/components/Input.svelte';
 	import TextArea from '$lib/components/TextArea.svelte';

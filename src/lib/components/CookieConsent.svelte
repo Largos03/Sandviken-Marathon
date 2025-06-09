@@ -2,7 +2,7 @@
 	import { fade } from 'svelte/transition';
 	import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
 	import { faTimes } from '@fortawesome/free-solid-svg-icons';
-	import { tStore } from '$lib/stores/i18n.js';
+	import { tStore } from '$lib/stores/i18n';
 	import { onMount } from 'svelte';
 
 	let showCookieNotice = false;

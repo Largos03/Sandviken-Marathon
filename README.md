@@ -61,40 +61,29 @@ pnpm run dev
 
 ### Language Support
 
-The website supports English and Swedish. All text content is managed through the translation system:
+The website supports English and Swedish. All text content is managed through a modular translation system:
 
 ```svelte
 <script>
-  import { T } from '$lib';
+  import { tStore } from '$lib/stores/i18n';
 </script>
 
-<!-- Simple usage -->
-<T key="welcomeMessage" />
+<!-- Using the reactive translation store -->
+<p>{$tStore('welcomeMessage')}</p>
 
-<!-- For more complex components -->
+<!-- Or with the t function -->
 <script>
-  import { tStore } from '$lib/stores/i18n';
-
-  // Use the translation store
-  $: t = $tStore;
+  import { t } from '$lib/stores/i18n';
 </script>
 
 <p>{t('welcomeMessage')}</p>
 ```
 
-New translations should be added to the `src/lib/stores/i18n.ts` file.
+Translations are organized by feature in separate files in the `src/lib/stores` directory. See `src/lib/docs/TRANSLATION.md` for detailed documentation on the translation system.
 
 ### Styling
 
 We use a combination of Tailwind CSS and custom CSS. Common utility classes are defined in `src/lib/styles/utilities.css`.
-
-### Code Cleanup
-
-For identifying potential unused code or duplications, run:
-
-```bash
-node src/lib/scripts/cleanup.js
-```
 
 ## Building for Production
 
@@ -110,6 +99,6 @@ The site is deployed automatically when changes are pushed to the main branch.
 
 ## Documentation
 
-- `src/lib/docs/CODEBASE_STRUCTURE.md` - Overall codebase structure
-- `src/lib/docs/COMPONENTS.md` - Component documentation
-- `src/lib/docs/TRANSLATION.md` - Translation system guide
+- `docs/CODEBASE_STRUCTURE.md` - Overall codebase structure
+- `docs/COMPONENTS.md` - Component documentation
+- `docs/TRANSLATION.md` - Translation system guide

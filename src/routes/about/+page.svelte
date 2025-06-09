@@ -46,7 +46,7 @@
 </script>
 
 <svelte:head>
-	<title>{t('aboutTitle')} | Sandviken Marathon</title>
+	<title>{t('aboutPageTitle')}</title>
 	<meta name="description" content={t('aboutIntro')} />
 	<link rel="canonical" href="https://sandvikenmarathon.com/about" />
 </svelte:head>
@@ -129,17 +129,14 @@
 						</div>
 						<div>
 							<h2 class="text-2xl font-bold">{t('aboutMission')}</h2>
-							<p class="text-gray-500">Our core purpose and values</p>
+							<p class="text-gray-500">{t('aboutMissionSubtitle')}</p>
 						</div>
 					</div>
 
 					<div class="grid gap-6 md:grid-cols-5">
 						<div class="md:col-span-3">
 							<p class="mb-4 text-gray-700">
-								Welcome to the Sandviken Marathon, a premier running event that brings together
-								athletes, enthusiasts, and the community in a celebration of endurance,
-								determination, and achievement. Our mission is to promote health, fitness, and
-								community spirit through the power of running.
+								{t('aboutMissionText2')}
 							</p>
 
 							<!-- Highlight Box -->
@@ -149,8 +146,7 @@
 								<div class="bg-opacity-20 absolute inset-0 bg-red-500 opacity-10"></div>
 								<div class="relative z-10">
 									<p class="font-medium">
-										Join us as we build a community of runners who inspire and challenge each other
-										to reach new heights.
+										{t('aboutMissionHighlight')}
 									</p>
 								</div>
 							</div>
@@ -179,7 +175,7 @@
 						</div>
 						<div>
 							<h2 class="text-2xl font-bold">{t('aboutHistoryTitle')}</h2>
-							<p class="text-gray-500">Our journey from the beginning</p>
+							<p class="text-gray-500">{t('aboutHistorySubtitle')}</p>
 						</div>
 					</div>
 
@@ -187,9 +183,7 @@
 						<div>
 							<p class="mb-4 text-gray-700">{t('aboutHistoryDesc')}</p>
 							<p class="text-gray-700">
-								Since our inception, the Sandviken Marathon has grown from a small local event to a
-								nationally recognized race. We've welcomed thousands of runners, created countless
-								memories, and supported numerous charitable causes.
+								{t('aboutHistoryGrowth')}
 							</p>
 						</div>
 
@@ -202,9 +196,9 @@
 									1
 								</div>
 								<div>
-									<h3 class="mb-1 font-semibold">First Event</h3>
+									<h3 class="mb-1 font-semibold">{t('aboutHistoryFirstEvent')}</h3>
 									<p class="text-gray-600">
-										Our inaugural marathon brought together 500 runners from across the region.
+										{t('aboutHistoryFirstEventDesc')}
 									</p>
 								</div>
 							</div>
@@ -217,9 +211,9 @@
 									2
 								</div>
 								<div>
-									<h3 class="mb-1 font-semibold">Growing Community</h3>
+									<h3 class="mb-1 font-semibold">{t('aboutHistoryGrowingCommunity')}</h3>
 									<p class="text-gray-600">
-										We expanded our race categories and welcomed more participants each year.
+										{t('aboutHistoryGrowingCommunityDesc')}
 									</p>
 								</div>
 							</div>
@@ -232,9 +226,9 @@
 									3
 								</div>
 								<div>
-									<h3 class="mb-1 font-semibold">National Recognition</h3>
+									<h3 class="mb-1 font-semibold">{t('aboutHistoryNationalRecognition')}</h3>
 									<p class="text-gray-600">
-										Sandviken Marathon is now a key event in the Swedish running calendar.
+										{t('aboutHistoryNationalRecognitionDesc')}
 									</p>
 								</div>
 							</div>
@@ -252,7 +246,7 @@
 						</div>
 						<div>
 							<h2 class="text-2xl font-bold">{t('aboutValuesTitle')}</h2>
-							<p class="text-gray-500">What makes our marathon special</p>
+							<p class="text-gray-500">{t('aboutValuesSubtitle')}</p>
 						</div>
 					</div>
 
@@ -266,9 +260,9 @@
 							>
 								<FontAwesomeIcon icon={faUsers} />
 							</div>
-							<h3 class="mb-2 text-xl font-semibold">Community</h3>
+							<h3 class="mb-2 text-xl font-semibold">{t('aboutValuesCommunity')}</h3>
 							<p class="text-gray-600">
-								Building connections and fostering a supportive environment for all participants.
+								{t('aboutValuesCommunityDesc')}
 							</p>
 						</div>
 
@@ -281,9 +275,9 @@
 							>
 								<FontAwesomeIcon icon={faMedal} />
 							</div>
-							<h3 class="mb-2 text-xl font-semibold">Excellence</h3>
+							<h3 class="mb-2 text-xl font-semibold">{t('aboutValuesExcellence')}</h3>
 							<p class="text-gray-600">
-								Striving for the highest standards in event organization and participant experience.
+								{t('aboutValuesExcellenceDesc')}
 							</p>
 						</div>
 
@@ -296,9 +290,9 @@
 							>
 								<FontAwesomeIcon icon={faHeart} />
 							</div>
-							<h3 class="mb-2 text-xl font-semibold">Inclusivity</h3>
+							<h3 class="mb-2 text-xl font-semibold">{t('aboutValuesInclusivity')}</h3>
 							<p class="text-gray-600">
-								Welcoming runners of all abilities and backgrounds to join our community.
+								{t('aboutValuesInclusivityDesc')}
 							</p>
 						</div>
 					</div>
@@ -314,7 +308,7 @@
 						</div>
 						<div>
 							<h2 class="text-2xl font-bold">{t('eventDetailsTitle')}</h2>
-							<p class="text-gray-500">Everything you need to know about our event</p>
+							<p class="text-gray-500">{t('eventDetailsSubtitle')}</p>
 						</div>
 					</div>
 
@@ -327,17 +321,16 @@
 								>
 									<FontAwesomeIcon icon={faCalendarAlt} />
 								</div>
-								<h3 class="font-semibold">Date & Time</h3>
+								<h3 class="font-semibold">{t('eventDateTime')}</h3>
 							</div>
 							<p class="text-gray-600">
-								Join us on the first Saturday of June for a day of running, celebration, and
-								community spirit.
+								{t('eventDateTimeDesc')}
 							</p>
 							<div class="mt-4 flex items-center text-sm text-gray-500">
-								<span class="mr-2 font-semibold text-red-900">Start time:</span> 8:00 AM
+								<span class="mr-2 font-semibold text-red-900">{t('eventStartTime')}</span> {t('eventStartTimeValue')}
 							</div>
 							<div class="mt-1 flex items-center text-sm text-gray-500">
-								<span class="mr-2 font-semibold text-red-900">Registration opens:</span> 6:30 AM
+								<span class="mr-2 font-semibold text-red-900">{t('eventRegistrationOpens')}</span> {t('eventRegistrationOpensValue')}
 							</div>
 						</div>
 
@@ -349,17 +342,16 @@
 								>
 									<FontAwesomeIcon icon={faMapMarkerAlt} />
 								</div>
-								<h3 class="font-semibold">Location</h3>
+								<h3 class="font-semibold">{t('eventLocation')}</h3>
 							</div>
 							<p class="text-gray-600">
-								The race takes place in the beautiful city of Sandviken, featuring scenic routes
-								through parks and along the waterfront.
+								{t('eventLocationDesc')}
 							</p>
 							<div class="mt-4 flex items-center text-sm text-gray-500">
-								<span class="mr-2 font-semibold text-red-900">Start/Finish:</span> Sandviken City Park
+								<span class="mr-2 font-semibold text-red-900">{t('eventStartFinish')}</span> {t('eventStartFinishValue')}
 							</div>
 							<div class="mt-1 flex items-center text-sm text-gray-500">
-								<span class="mr-2 font-semibold text-red-900">Parking:</span> Available at City Center
+								<span class="mr-2 font-semibold text-red-900">{t('eventParking')}</span> {t('eventParkingValue')}
 							</div>
 						</div>
 					</div>
@@ -387,7 +379,7 @@
 						</div>
 						<div>
 							<h2 class="text-2xl font-bold">{t('aboutCommunityTitle')}</h2>
-							<p class="text-gray-500">More than just a race</p>
+							<p class="text-gray-500">{t('aboutCommunitySubtitle')}</p>
 						</div>
 					</div>
 
@@ -395,9 +387,7 @@
 						<div class="md:col-span-3">
 							<p class="mb-4 text-gray-700">{t('aboutCommunityDesc')}</p>
 							<p class="text-gray-700">
-								The Sandviken Marathon is more than just a race—it's a celebration of our community.
-								We bring together runners, volunteers, spectators, and local businesses to create an
-								unforgettable experience.
+								{t('aboutCommunityText')}
 							</p>
 
 							<div class="mt-6 space-y-3">
@@ -453,7 +443,7 @@
 						</div>
 						<div>
 							<h2 class="text-2xl font-bold">{t('aboutFutureTitle')}</h2>
-							<p class="text-gray-500">Building our tomorrow</p>
+							<p class="text-gray-500">{t('aboutFutureSubtitle')}</p>
 						</div>
 					</div>
 
@@ -461,10 +451,7 @@
 						<div>
 							<p class="mb-4 text-gray-700">{t('aboutFutureDesc')}</p>
 							<p class="text-gray-700">
-								As we look to the future, our vision is to continue growing the Sandviken Marathon
-								while maintaining its community spirit and commitment to excellence. We aim to
-								introduce new race categories, enhance the participant experience, and expand our
-								charitable impact.
+								{t('aboutFutureText')}
 							</p>
 						</div>
 
@@ -477,16 +464,16 @@
 									<FontAwesomeIcon icon={faTrophy} size="2x" class="text-red-300/80" />
 								</div>
 								<div>
-									<h3 class="mb-2 text-xl font-semibold">Join Our Legacy</h3>
+									<h3 class="mb-2 text-xl font-semibold">{t('joinLegacy')}</h3>
 									<p class="font-medium">
-										Be part of our growing story. Register for our next event today!
+										{t('joinLegacyDesc')}
 									</p>
 									<a
 										href="/register"
 										class="mt-4 inline-block rounded-md border-b-2 border-red-500 bg-white px-6 py-2.5 font-medium text-gray-900 transition-all duration-300 hover:-translate-y-1 hover:bg-gray-100 hover:shadow-lg"
 									>
 										<span class="flex items-center"
-											>Register Now <FontAwesomeIcon
+											>{t('registerNow')} <FontAwesomeIcon
 												icon={faChevronRight}
 												class="ml-2 h-3 w-3 text-red-500"
 											/></span

@@ -2,8 +2,9 @@
 	import '$lib/styles/app.css';
 	import { Navbar, CookieConsent } from '$lib';
 	import { FontAwesomeIcon as Fa } from '@fortawesome/svelte-fontawesome';
+	import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 	import { faFacebookF, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
-	import { language, tStore } from '$lib/stores/i18n.js';
+	import { language, tStore } from '$lib/stores/i18n';
 	import { onMount } from 'svelte';
 
 	// Accept data from layout.js
@@ -86,12 +87,13 @@
 	</footer>
 
 	<div class="fixed bottom-5 right-5 z-50 {showBackToTop ? 'opacity-100' : 'opacity-0 pointer-events-none'} transition-opacity duration-300">
-		<div class="mx-auto flex flex-col items-center px-6 max-w-[1100px]">
-			<button
-				on:click={scrollToTop}
-			>
-				Back to Top
-			</button>
-		</div>
+		<button
+			class="back-to-top-btn group flex h-12 w-12 items-center justify-center rounded-full bg-black/90 text-white shadow-lg ring-2 ring-black/10 hover:bg-red-600 hover:scale-110 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-red-400"
+			on:click={scrollToTop}
+			aria-label={t('backToTop')}
+			tabindex={showBackToTop ? 0 : -1}
+		>
+			<Fa icon={faArrowUp} class="h-6 w-6 transition-transform duration-300 group-hover:-translate-y-1" />
+		</button>
 	</div>
 </div>

@@ -1,7 +1,5 @@
 import { browser } from '$app/environment';
-import { language, detectBrowserLanguage, type Language } from '$lib/stores/i18n.js';
-
-export const ssr = false; // Disable server-side rendering
+import { language, detectBrowserLanguage, type Language } from '$lib/stores/i18n';
 
 // Handle initial language loading
 export function load() {

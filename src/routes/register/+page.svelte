@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import { tStore } from '$lib/stores/i18n.js';
+	import { tStore } from '$lib/stores/i18n';
 
 	// Accept data from page.server.js
 	export const data = {};

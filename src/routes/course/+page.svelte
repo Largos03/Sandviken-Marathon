@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { tStore } from '$lib/stores/i18n.js';
+	import { tStore } from '$lib/stores/i18n';
 	import { fade } from 'svelte/transition';
 	import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
 	import {

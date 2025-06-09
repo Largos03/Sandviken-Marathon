@@ -15,9 +15,12 @@
 		faMapMarkedAlt,
 		faUsers
 	} from '@fortawesome/free-solid-svg-icons';
-	import { tStore } from '$lib/stores/i18n.js';
-	import { Card, CardContent } from '$lib/components/ui/card';
+	import { tStore } from '$lib/stores/i18n';
+	import { Card } from '$lib';
 	import Button from '$lib/components/Button.svelte';
+	import Container from '$lib/components/Container.svelte';
+	import SectionHeading from '$lib/components/SectionHeading.svelte';
+	import ResponsiveGrid from '$lib/components/ResponsiveGrid.svelte';
 
 	// Accept data from page.server.js
 	export const data: { lang?: string } = { lang: 'en' };
@@ -78,10 +81,10 @@
 </script>
 
 <svelte:head>
-	<title>Sandviken Marathon 2026 | Official Event</title>
+	<title>Sandviken Marathon 2026 | {t('officialEvent')}</title>
 	<meta
 		name="description"
-		content="Join the inaugural Sandviken Marathon in 2026. A premier running event with a scenic route through the heart of Sweden."
+		content={t('metaDescription')}
 	/>
 	<link rel="canonical" href="https://sandvikenmarathon.com/" />
 </svelte:head>
@@ -304,7 +307,7 @@
 					<!-- Content remains the same but with simplified card transitions -->
 					<div class="mb-10 grid grid-cols-1 gap-6 md:grid-cols-3">
 						<Card class="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-md">
-							<CardContent class="p-6">
+							<div class="p-6">
 								<div
 									class="mb-5 flex h-14 w-14 items-center justify-center rounded-lg bg-black text-white shadow-md"
 								>
@@ -319,11 +322,11 @@
 									<span>{t('viewCategories')}</span>
 									<FontAwesomeIcon icon={faChevronRight} class="ml-2 text-sm" />
 								</a>
-							</CardContent>
+							</div>
 						</Card>
 
 						<Card class="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-md">
-							<CardContent class="p-6">
+							<div class="p-6">
 								<div
 									class="mb-5 flex h-14 w-14 items-center justify-center rounded-lg bg-black text-white shadow-md"
 								>
@@ -338,11 +341,11 @@
 									<span>{t('exploreRoute')}</span>
 									<FontAwesomeIcon icon={faChevronRight} class="ml-2 text-sm" />
 								</a>
-							</CardContent>
+							</div>
 						</Card>
 
 						<Card class="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-md">
-							<CardContent class="p-6">
+							<div class="p-6">
 								<div
 									class="mb-5 flex h-14 w-14 items-center justify-center rounded-lg bg-black text-white shadow-md"
 								>
@@ -357,7 +360,7 @@
 									<span>{t('learnMore')}</span>
 									<FontAwesomeIcon icon={faChevronRight} class="ml-2 text-sm" />
 								</a>
-							</CardContent>
+							</div>
 						</Card>
 					</div>
 

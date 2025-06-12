@@ -19,8 +19,6 @@
 	// Import language store
 	import { language, tStore } from '$lib/stores/i18n';
 
-	// Define types for better TypeScript support
-
 	// States
 	let mobileMenuOpen = false;
 	let lastScrollY = 0;
@@ -58,13 +56,6 @@
 		// Get the navbar element
 		const navbar = document.getElementById('navbar') as HTMLElement | null;
 		if (!navbar) return;
-
-		// Apply padding to main content
-		const mainContent = document.querySelector('main') as HTMLElement | null;
-		if (mainContent) {
-			const navbarHeight = navbar.offsetHeight;
-			mainContent.style.paddingTop = `${navbarHeight}px`;
-		}
 
 		// Handle menu button visibility
 		function updateMenuButtonVisibility() {
@@ -109,12 +100,6 @@
 			if (window.innerWidth >= 768 && mobileMenuOpen) {
 				closeMobileMenu();
 			}
-
-			// Update navbar height on resize
-			if (navbar && mainContent) {
-				const navbarHeight = navbar.offsetHeight;
-				mainContent.style.paddingTop = `${navbarHeight}px`;
-			}
 		}
 
 		// Add event listeners
@@ -136,9 +121,9 @@
 <!-- Main navbar container -->
 <div
 	id="navbar"
-	class="fixed top-0 left-0 z-50 w-full transition-transform duration-300 ease-in-out"
+	class="sticky top-0 z-50 w-full transition-transform duration-300 ease-in-out"
 >
-	<div class="absolute inset-0 z-0 bg-white/70"></div>
+	<div class="absolute inset-0 z-0 bg-white/70 backdrop-blur-sm"></div>
 	<div class="relative z-10 mx-auto flex h-12 w-full max-w-7xl items-center justify-between px-3">
 		<!-- Left section -->
 		<div class="flex items-center">

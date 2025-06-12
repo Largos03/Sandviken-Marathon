@@ -16,6 +16,9 @@
 		faMedal,
 		faGlobe
 	} from '@fortawesome/free-solid-svg-icons';
+	import Container from '$lib/components/Container.svelte';
+	import SectionHeading from '$lib/components/SectionHeading.svelte';
+	import ResponsiveGrid from '$lib/components/ResponsiveGrid.svelte';
 
 	// Define the result type
 	type Result = {
@@ -104,17 +107,17 @@
 
 <div class="min-h-screen bg-gray-50" in:fade>
 	<div class="relative overflow-hidden bg-black py-10 text-white md:py-16">
-		<div class="relative z-10 mx-auto px-6 py-8 md:py-12 max-w-[1100px]">
-			<h1 class="mb-6 text-4xl font-bold tracking-tight md:text-6xl">{t('resultsTitle')}</h1>
+		<Container className="relative z-10 py-8 md:py-12">
+			<SectionHeading level={1} className="text-white mb-6">{t('resultsTitle')}</SectionHeading>
 			<div class="mb-8 h-1 w-32 -skew-x-12 transform bg-red-500/70"></div>
 			<p class="max-w-3xl text-xl leading-relaxed font-light md:text-2xl">{t('resultsIntro')}</p>
-		</div>
+		</Container>
 	</div>
 
-	<main class="relative z-10 -mt-8">
-		<div class="mx-auto px-6 py-8 md:py-16 max-w-[1100px]">
+	<main class="relative bg-gray-50 py-16 md:py-24">
+		<Container>
 			<!-- Race stats cards -->
-			<div class="mb-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+			<ResponsiveGrid cols="1 md:2 lg:4" gap="6" className="mb-12">
 				<div
 					class="rounded-xl border-l-2 border-red-500/20 bg-white p-6 shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-md"
 				>
@@ -184,7 +187,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</ResponsiveGrid>
 
 			<!-- Main results section -->
 			<div class="mb-8 rounded-2xl border border-red-500/10 bg-white p-8 shadow-sm">
@@ -335,6 +338,6 @@
 					</div>
 				{/if}
 			</div>
-		</div>
+		</Container>
 	</main>
 </div>

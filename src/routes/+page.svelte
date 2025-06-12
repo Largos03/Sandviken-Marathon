@@ -56,14 +56,17 @@
 	}
 
 	onMount(() => {
-		visible = true;
-
-		// Initialize countdown timer
+		// Set up countdown timer
 		updateCountdown();
 		countdownInterval = setInterval(updateCountdown, 1000);
 
-		// Clean up interval on component unmount
+		// Visibility control for animations
+		setTimeout(() => {
+			visible = true;
+		}, 100);
+
 		return () => {
+			// Clean up countdown timer
 			if (countdownInterval) clearInterval(countdownInterval);
 		};
 	});
@@ -228,7 +231,7 @@
 			</div>
 
 			<!-- Call to Action -->
-			<div>
+			<div class="mb-8">
 				<a
 					href="/register"
 					class="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-red-600 to-red-500 px-10 py-4 text-lg font-bold text-white shadow-lg focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-black"
@@ -241,50 +244,40 @@
 			</div>
 		{/if}
 	</div>
-
-	<!-- Scroll indicator removed to reduce complexity -->
 </div>
 
-<!-- Main Content - Simplified -->
-<div id="main-content" class="relative z-20 mx-auto -mt-20 px-6 pb-16 max-w-[1100px]">
-	<!-- Main content card with simplified styling -->
-	<div class="relative overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-2xl">
-		<!-- Simplified Navigation -->
-		<div class="bg-gray-900 py-12 md:py-16">
-			<div class="mx-auto px-6 max-w-[1100px]">
-				<div class="flex w-auto flex-wrap justify-center rounded-xl bg-gray-100 p-1 md:w-auto">
-					{#each sections as section (section.id)}
-						<button
-							class="relative mx-0.5 flex items-center rounded-lg px-4 py-2.5 text-sm font-medium
-							transition-all duration-300 md:px-6 md:py-3 md:text-base
-							{activeSection === section.id
-								? 'bg-white text-gray-900 shadow-lg'
-								: 'text-gray-700 hover:bg-white/50 hover:shadow-sm'}"
-							on:click={() => setActiveSection(section.id)}
-							aria-selected={activeSection === section.id}
-							role="tab"
-						>
-							<!-- Simplified active state -->
-							{#if activeSection === section.id}
-								<div class="absolute inset-x-0 bottom-0 h-0.5 bg-red-500"></div>
-							{/if}
-
-							<div class="relative z-10 flex items-center">
-								<div
-									class="mr-3 flex h-8 w-8 items-center justify-center rounded-full shadow-sm
-							{activeSection === section.id ? 'bg-red-500 text-white' : 'bg-white text-gray-600'}"
-								>
-									<FontAwesomeIcon icon={section.icon} class="h-3.5 w-3.5 md:h-4 md:w-4" />
+<!-- Main Content -->
+<section class="bg-gray-50 py-16 md:py-24">
+	<Container id="main-content">
+		<div class="relative overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-2xl">
+			<!-- Navigation -->
+			<div class="bg-gray-900 py-8 md:py-12">
+				<Container>
+					<div class="flex w-auto flex-wrap justify-center rounded-xl bg-gray-100 p-1">
+						{#each sections as section (section.id)}
+							<button
+								class="relative mx-0.5 flex items-center rounded-lg px-4 py-2.5 text-sm font-medium transition-all duration-300 md:px-6 md:py-3 md:text-base {activeSection === section.id ? 'bg-white text-gray-900 shadow-lg' : 'text-gray-700 hover:bg-white/50 hover:shadow-sm'}"
+								on:click={() => setActiveSection(section.id)}
+								aria-selected={activeSection === section.id}
+								role="tab"
+							>
+								{#if activeSection === section.id}
+									<div class="absolute inset-x-0 bottom-0 h-0.5 bg-red-500"></div>
+								{/if}
+								<div class="relative z-10 flex items-center">
+									<div class="mr-3 flex h-8 w-8 items-center justify-center rounded-full shadow-sm {activeSection === section.id ? 'bg-red-500 text-white' : 'bg-white text-gray-600'}">
+										<FontAwesomeIcon icon={section.icon} class="h-3.5 w-3.5 md:h-4 md:w-4" />
+									</div>
+									<span class="font-medium">{section.label}</span>
 								</div>
-								<span class="font-medium">{section.label}</span>
-							</div>
-						</button>
-					{/each}
-				</div>
+							</button>
+						{/each}
+					</div>
+				</Container>
 			</div>
-		</div>
 
-		<div class="min-h-[60vh] bg-white p-8 md:p-10">
+			<!-- Content -->
+			<div class="min-h-[60vh] bg-white p-6 md:p-10">
 			<!-- Overview Section Content - Simplified Design -->
 			{#if activeSection === 'overview'}
 				<div in:fade={{ duration: 300 }}>
@@ -850,4 +843,5 @@
 			{/if}
 		</div>
 	</div>
-</div>
+	</Container>
+</section>

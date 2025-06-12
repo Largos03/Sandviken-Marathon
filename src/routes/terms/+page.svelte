@@ -13,6 +13,9 @@
 	} from '@fortawesome/free-solid-svg-icons';
 	import { tStore } from '$lib/stores/i18n';
 	import { SidebarNav, ContactSection, TabsNav } from '$lib';
+	import Container from '$lib/components/Container.svelte';
+	import SectionHeading from '$lib/components/SectionHeading.svelte';
+	import ResponsiveGrid from '$lib/components/ResponsiveGrid.svelte';
 
 	// Accept data from page.server.js
 	export const data: { lang?: string } = {};

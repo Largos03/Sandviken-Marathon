@@ -16,6 +16,9 @@
 		faInfoCircle,
 		faRunning
 	} from '@fortawesome/free-solid-svg-icons';
+	import Container from '$lib/components/Container.svelte';
+	import SectionHeading from '$lib/components/SectionHeading.svelte';
+	import ResponsiveGrid from '$lib/components/ResponsiveGrid.svelte';
 
 	// Active tab state
 	let activeTab = 'mission';
@@ -63,7 +66,7 @@
 		</div>
 
 		<!-- Content -->
-		<div class="relative z-10 mx-auto px-6 text-center max-w-[1100px]">
+		<Container className="relative z-10 text-center">
 			<h1
 				class="relative mb-3 inline-block text-3xl font-bold md:text-5xl"
 				in:fly={{ y: -20, duration: 800, delay: 300 }}
@@ -75,14 +78,12 @@
 			</h1>
 
 			<!-- Subtitle for the About Us page -->
-			<div class="relative z-10 mx-auto px-6 text-center max-w-[1100px]">
-				<p
-					class="mx-auto mb-8 max-w-2xl text-lg text-gray-300 md:text-xl"
-					in:fly={{ y: 20, duration: 800, delay: 400 }}
-				>
-					{t('aboutIntro')}
-				</p>
-			</div>
+			<p
+				class="mx-auto mb-8 max-w-2xl text-lg text-gray-300 md:text-xl"
+				in:fly={{ y: 20, duration: 800, delay: 400 }}
+			>
+				{t('aboutIntro')}
+			</p>
 
 			<!-- Tabs Navigation -->
 			<div
@@ -108,16 +109,17 @@
 					</button>
 				{/each}
 			</div>
-		</div>
+		</Container>
 	</div>
 
 	<!-- Main Content Area -->
-	<div class="relative z-20 mx-auto -mt-6 mb-20 px-6 max-w-[1100px]">
-		<div class="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-xl">
-			<div
-				class="min-h-[60vh] bg-gradient-to-b from-white to-gray-50 p-6 md:p-8"
-				transition:fade={{ duration: 300 }}
-			>
+	<section class="bg-gray-50 py-16 md:py-24">
+		<Container>
+			<div class="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-xl">
+				<div
+					class="min-h-[60vh] bg-gradient-to-b from-white to-gray-50 p-6 md:p-8"
+					transition:fade={{ duration: 300 }}
+				>
 				<!-- Tab Content -->
 				{#if activeTab === 'mission'}
 					<!-- Tab Header -->
@@ -486,5 +488,6 @@
 				{/if}
 			</div>
 		</div>
-	</div>
+		</Container>
+	</section>
 </div>

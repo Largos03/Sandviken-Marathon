@@ -20,6 +20,9 @@
 		faUsers
 	} from '@fortawesome/free-solid-svg-icons';
 	import { ImageModal } from '$lib';
+	import Container from '$lib/components/Container.svelte';
+	import SectionHeading from '$lib/components/SectionHeading.svelte';
+	import ResponsiveGrid from '$lib/components/ResponsiveGrid.svelte';
 
 	// Use the derived translation store
 	$: t = $tStore;
@@ -60,15 +63,15 @@
 			</div>
 		</div>
 
-		<div class="relative z-10 mx-auto px-6 py-8 md:py-12 max-w-[1100px]">
-			<h1 class="mb-6 text-4xl font-bold tracking-tight md:text-6xl">{t('coursePageTitle')}</h1>
+		<Container className="relative z-10 py-8 md:py-12">
+			<SectionHeading level={1} className="text-white mb-6">{t('coursePageTitle')}</SectionHeading>
 			<div class="mb-8 h-1 w-32 -skew-x-12 transform bg-red-500/70"></div>
 			<p class="max-w-3xl text-xl leading-relaxed font-light md:text-2xl">{t('coursePageIntro')}</p>
-		</div>
+		</Container>
 	</div>
 
-	<main class="relative z-10 -mt-8">
-		<div class="mx-auto mb-16 px-6 py-8 md:py-16 max-w-[1100px]">
+	<main class="relative bg-gray-50 py-16 md:py-24">
+		<Container className="mb-16">
 			<!-- Stats Cards Row -->
 			<div class="mb-10 grid grid-cols-2 gap-4 md:grid-cols-4">
 				<div
@@ -449,7 +452,7 @@
 
 			<!-- Spacer element to add bottom margin -->
 			<div class="h-16"></div>
-		</div>
+		</Container>
 	</main>
 
 	<ImageModal

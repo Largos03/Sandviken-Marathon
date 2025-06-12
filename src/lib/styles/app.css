@@ -19,4 +19,27 @@ body {
   box-shadow: 0 4px 24px 0 rgb(0 0 0 / 0.10), 0 1.5px 4px 0 rgb(0 0 0 / 0.10);
 }
 
+/* Custom classes */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* New utility for pages to properly position below the navbar */
+  .page-content {
+    padding-top: 3rem; /* Equivalent to pt-12 in Tailwind */
+  }
+}
+
+/* Global styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 /* Add any other global styles below */

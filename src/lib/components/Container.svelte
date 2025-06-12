@@ -6,8 +6,9 @@
  * Usage: <Container> ... </Container>
  */
 export let className: string = '';
+export let id: string = '';
 </script>
 
-<div class={`mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8 ${className}`}>
+<div {id} class={`mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8 ${className}`}>
   <slot />
 </div>

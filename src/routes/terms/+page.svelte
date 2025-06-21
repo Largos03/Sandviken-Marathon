@@ -10,8 +10,7 @@
 		faShieldHalved,
 		faEnvelope
 	} from '@fortawesome/free-solid-svg-icons';
-	import { tStore } from '$lib/stores/i18n';
-	import { SidebarNav, ContactSection, TabsNav, TabHandler, HeroSection } from '$lib';
+	import { tStore } from '$lib/stores/i18n';	import { SidebarNav, ContactSection, TabsNav, TabHandler, HeroSection, ContentCard, InfoCard } from '$lib';
 	import Container from '$lib/components/Container.svelte';
 	import SectionHeading from '$lib/components/SectionHeading.svelte';
 	import ResponsiveGrid from '$lib/components/ResponsiveGrid.svelte';

@@ -3,8 +3,7 @@
 	import { onMount } from 'svelte';
 
 	// Import FontAwesome for icons
-	import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
-	import {
+	import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';	import {
 		faBars,
 		faTimes,
 		faGlobe,
@@ -13,7 +12,8 @@
 		faMapMarkerAlt,
 		faClipboard,
 		faMedal,
-		faPhone
+		faPhone,
+		faChevronRight
 	} from '@fortawesome/free-solid-svg-icons';
 
 	// Import language store
@@ -114,31 +114,75 @@
 	});
 </script>
 
+<style>
+	@keyframes slideIn {
+		from {
+			opacity: 0;
+			transform: translateX(30px);
+		}
+		to {
+			opacity: 1;
+			transform: translateX(0);
+		}
+	}
+	.animate-slideIn {
+		animation: slideIn 0.3s ease-out forwards;
+		opacity: 0;
+	}
+
+	/* Custom scrollbar for mobile menu */
+	.mobile-menu-content {
+		scrollbar-width: thin;
+		scrollbar-color: rgba(239, 68, 68, 0.3) transparent;
+	}
+
+	.mobile-menu-content::-webkit-scrollbar {
+		width: 4px;
+	}
+
+	.mobile-menu-content::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	.mobile-menu-content::-webkit-scrollbar-thumb {
+		background: rgba(239, 68, 68, 0.3);
+		border-radius: 2px;
+	}
+
+	.mobile-menu-content::-webkit-scrollbar-thumb:hover {
+		background: rgba(239, 68, 68, 0.5);
+	}
+</style>
+
 <!-- Main navbar container -->
 <div
 	id="navbar"
 	class="sticky top-0 z-50 w-full transition-transform duration-300 ease-in-out"
 >
-	<div class="absolute inset-0 z-0 bg-white/70 backdrop-blur-sm"></div>
-	<div class="relative z-10 mx-auto flex h-12 w-full max-w-7xl items-center justify-between px-3">
+	<div class="absolute inset-0 z-0 bg-white/90 backdrop-blur-lg border-b border-gray-200/50"></div>
+	<div class="relative z-10 mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4">
 		<!-- Left section -->
-		<div class="flex items-center">
-			<!-- Mobile menu button -->			<button
-				class="relative flex h-8 w-8 items-center justify-center text-gray-700 no-underline transition-colors duration-300 hover:text-red-600 focus:outline-none md:hidden"
+		<div class="flex items-center">			<!-- Mobile menu button -->
+			<button
+				class="relative flex h-9 w-9 items-center justify-center rounded-lg bg-gray-800 text-white transition-all duration-200 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 md:hidden {mobileMenuOpen ? 'bg-gray-900' : ''}"
 				on:click={toggleMobileMenu}
 				aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
 				aria-expanded={mobileMenuOpen}
 				bind:this={menuButton}
 			>
-				<FontAwesomeIcon icon={faBars} size="sm" />
+				<div class="relative w-4 h-4">
+					<span class="absolute top-0.5 left-0 w-4 h-0.5 bg-current transform transition-all duration-200 {mobileMenuOpen ? 'rotate-45 translate-y-1.5' : ''}"></span>
+					<span class="absolute top-2 left-0 w-4 h-0.5 bg-current transition-opacity duration-200 {mobileMenuOpen ? 'opacity-0' : 'opacity-100'}"></span>
+					<span class="absolute top-3.5 left-0 w-4 h-0.5 bg-current transform transition-all duration-200 {mobileMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}"></span>
+				</div>
 			</button>
 
 			<!-- Logo -->
-			<a href="/" class="ml-2 flex items-center md:ml-0">
+			<a href="/" class="ml-3 flex items-center md:ml-0">
 				<img
 					src="/Logo.png"
 					alt="Sandviken Marathon Logo"
-					class="h-8 w-auto drop-shadow-sm filter transition-transform duration-200 hover:scale-105"
+					class="h-10 w-auto drop-shadow-sm filter transition-transform duration-200 hover:scale-105"
 				/>
 			</a>
 		</div>
@@ -157,20 +201,19 @@
 				</a>
 			{/each}
 		</nav>
-
 		<!-- Language toggle -->
 		<div class="flex items-center">
 			<button
 				on:click={toggleLanguage}
-				class="relative flex cursor-pointer items-center gap-1.5 rounded-full border border-gray-200/50 bg-gray-100/60 px-2 py-1 text-xs font-medium text-gray-700 no-underline transition-colors duration-300 hover:bg-gray-200/80 hover:text-red-600"
+				class="relative flex cursor-pointer items-center gap-2 rounded-lg border border-gray-200 bg-white/80 px-3 py-2 text-sm font-medium text-gray-700 no-underline transition-all duration-300 hover:bg-gray-50 hover:border-gray-300 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
 				aria-label="Switch Language"
 			>
 				<span
-					class="text-opacity-80 inline-flex h-3.5 w-3.5 items-center justify-center text-red-500"
+					class="inline-flex h-4 w-4 items-center justify-center text-red-500"
 				>
 					<FontAwesomeIcon icon={faGlobe} size="sm" />
 				</span>
-				<span class="hidden sm:inline"
+				<span class="hidden sm:inline font-medium"
 					>{$language === 'en' ? t('switchToSwedish') : t('switchToEnglish')}</span
 				>
 			</button>
@@ -179,45 +222,76 @@
 </div>
 
 <!-- Mobile menu overlay -->
-<button
-	class="fixed inset-0 z-[99] m-0 cursor-pointer border-none bg-black/30 p-0 transition-opacity duration-300 outline-none md:hidden {mobileMenuOpen
+<div
+	class="fixed inset-0 z-[99] bg-black/40 transition-opacity duration-300 md:hidden {mobileMenuOpen
 		? 'visible opacity-100'
 		: 'invisible opacity-0'}"
 	on:click={closeMobileMenu}
 	on:keydown={(e) => e.key === 'Escape' && closeMobileMenu()}
 	aria-label="Close menu"
 	tabindex={mobileMenuOpen ? 0 : -1}
-></button>
+	role="button"
+></div>
 
 <!-- Mobile menu panel -->
 <nav
-	class="fixed top-0 left-0 z-[100] h-full w-3/4 max-w-[280px] overflow-y-auto overscroll-contain bg-white/95 shadow-[2px_0_8px_rgba(0,0,0,0.1)] transition-transform duration-300 md:hidden {mobileMenuOpen
+	class="fixed top-0 right-0 z-[100] h-full w-72 max-w-[80vw] overflow-hidden bg-white shadow-xl transition-transform duration-400 ease-out md:hidden {mobileMenuOpen
 		? 'translate-x-0'
-		: '-translate-x-full'}"
+		: 'translate-x-full'}"
 	aria-label="Mobile navigation"
 >
-	<div class="flex items-center justify-between border-b border-gray-100/70 p-3">
-		<h3 class="text-base font-semibold text-gray-700">{t('navigation')}</h3>
-		<button
-			class="absolute top-2 right-2 z-[2] flex h-8 w-8 cursor-pointer items-center justify-center rounded-full transition-colors duration-200 hover:bg-black/5"
-			on:click={closeMobileMenu}
-			aria-label="Close menu"
-		>
-			<FontAwesomeIcon icon={faTimes} size="sm" />
-		</button>
-	</div>
-	<div class="panel-content">
-		{#each navItems as item}
-			<a
-				href={item.href}
-				class="flex items-center border-b border-gray-100/50 p-3 text-sm text-gray-700 no-underline transition-colors duration-200 hover:bg-gray-50/80"
+	<!-- Header -->
+	<div class="relative bg-gray-800 p-5 text-white">
+		<div class="absolute top-3 right-3">
+			<button
+				class="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-white transition-colors duration-200 hover:bg-white/20"
 				on:click={closeMobileMenu}
+				aria-label="Close menu"
 			>
-				<span class="mr-3 flex h-4 w-4 flex-shrink-0 items-center justify-center text-red-600 opacity-85">
-					<FontAwesomeIcon icon={item.icon} size="sm" />
-				</span>
-				<span>{t(item.key)}</span>
-			</a>
-		{/each}
+				<FontAwesomeIcon icon={faTimes} size="sm" />
+			</button>
+		</div>
+		
+		<div class="pr-12">
+			<p class="text-white text-sm">Navigate to any section</p>
+		</div>
+	</div>	<!-- Navigation Items -->
+	<div class="flex flex-col h-full">
+		<div class="flex-1 overflow-y-auto py-2 mobile-menu-content">
+			{#each navItems as item, index}
+				<a
+					href={item.href}
+					class="group flex items-center mx-3 my-1 p-3 rounded-lg text-gray-700 no-underline transition-all duration-200 hover:bg-gray-50 hover:text-red-600 {mobileMenuOpen ? 'animate-slideIn' : ''}"
+					on:click={closeMobileMenu}
+					style="animation-delay: {mobileMenuOpen ? index * 80 + 150 : 0}ms"
+				>
+					<div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-gray-100 text-red-600 transition-all duration-200 group-hover:bg-red-600 group-hover:text-white mr-3">
+						<FontAwesomeIcon icon={item.icon} size="sm" />
+					</div>					<div class="flex flex-col flex-1">
+						<span class="font-medium text-base">{t(item.key)}</span>
+					</div>
+					<div class="opacity-0 transform translate-x-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0">
+						<FontAwesomeIcon icon={faChevronRight} class="w-3 h-3 text-gray-400 group-hover:text-red-500" />
+					</div>
+				</a>
+			{/each}
+		</div>
+		<!-- Footer Section -->
+		<div class="border-t border-gray-100 p-4">
+			<div class="flex items-center justify-between">
+				<div class="text-sm text-gray-600">
+					<div class="font-medium">April 1, 2026</div>
+					<div class="text-xs text-gray-500">Sandviken, Sweden</div>
+				</div>
+				<button
+					on:click={toggleLanguage}
+					class="flex items-center gap-2 rounded-lg bg-gray-100 px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors duration-200 hover:bg-gray-200 hover:text-red-600"
+					aria-label="Switch Language"
+				>
+					<FontAwesomeIcon icon={faGlobe} class="w-3 h-3 text-red-500" />
+					<span>{$language === 'en' ? 'SV' : 'EN'}</span>
+				</button>
+			</div>
+		</div>
 	</div>
 </nav>

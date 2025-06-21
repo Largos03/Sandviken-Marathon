@@ -20,6 +20,15 @@ export { default as IconCard } from './components/IconCard.svelte';
 export { default as CountdownTimer } from './components/CountdownTimer.svelte';
 export { default as StatsCard } from './components/StatsCard.svelte';
 
+// Export new optimization components
+export { default as ContactItem } from './components/ContactItem.svelte';
+export { default as NumberedStep } from './components/NumberedStep.svelte';
+export { default as SocialLink } from './components/SocialLink.svelte';
+export { default as ContentCard } from './components/ContentCard.svelte';
+export { default as FeatureHighlight } from './components/FeatureHighlight.svelte';
+export { default as InfoItem } from './components/InfoItem.svelte';
+export { default as InfoCard } from './components/InfoCard.svelte';
+
 // Export translation utilities
 export { language, t, tStore, detectBrowserLanguage } from './stores/i18n';
 

@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { tStore } from '$lib/stores/i18n';
 	import { fade, fly } from 'svelte/transition';
-	import { onMount } from 'svelte';
-	import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
+	import { onMount } from 'svelte';	import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
 	import {
 		faTrophy,
 		faUsers,
@@ -16,6 +15,7 @@
 		faInfoCircle,
 		faRunning
 	} from '@fortawesome/free-solid-svg-icons';
+	import { NumberedStep } from '$lib';
 	import Container from '$lib/components/Container.svelte';
 	import SectionHeading from '$lib/components/SectionHeading.svelte';
 	import ResponsiveGrid from '$lib/components/ResponsiveGrid.svelte';
@@ -190,53 +190,10 @@
 							<p class="text-gray-700">
 								{t('aboutHistoryGrowth')}
 							</p>
-						</div>
-
-						<div class="flex flex-col space-y-4">
-							<!-- Timeline Item -->
-							<div class="flex items-start">
-								<div
-									class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gray-800 text-sm font-bold text-white ring-2 ring-red-400/30"
-								>
-									1
-								</div>
-								<div>
-									<h3 class="mb-1 font-semibold">{t('aboutHistoryFirstEvent')}</h3>
-									<p class="text-gray-600">
-										{t('aboutHistoryFirstEventDesc')}
-									</p>
-								</div>
-							</div>
-
-							<!-- Timeline Item -->
-							<div class="flex items-start">
-								<div
-									class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gray-800 text-sm font-bold text-white ring-2 ring-red-400/30"
-								>
-									2
-								</div>
-								<div>
-									<h3 class="mb-1 font-semibold">{t('aboutHistoryGrowingCommunity')}</h3>
-									<p class="text-gray-600">
-										{t('aboutHistoryGrowingCommunityDesc')}
-									</p>
-								</div>
-							</div>
-
-							<!-- Timeline Item -->
-							<div class="flex items-start">
-								<div
-									class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gray-800 text-sm font-bold text-white ring-2 ring-red-400/30"
-								>
-									3
-								</div>
-								<div>
-									<h3 class="mb-1 font-semibold">{t('aboutHistoryNationalRecognition')}</h3>
-									<p class="text-gray-600">
-										{t('aboutHistoryNationalRecognitionDesc')}
-									</p>
-								</div>
-							</div>
+						</div>						<div class="flex flex-col space-y-4">
+							<NumberedStep number={1} title={t('aboutHistoryFirstEvent')} description={t('aboutHistoryFirstEventDesc')} variant="black" />
+							<NumberedStep number={2} title={t('aboutHistoryGrowingCommunity')} description={t('aboutHistoryGrowingCommunityDesc')} variant="black" />
+							<NumberedStep number={3} title={t('aboutHistoryNationalRecognition')} description={t('aboutHistoryNationalRecognitionDesc')} variant="black" />
 						</div>
 					</div>
 				{/if}

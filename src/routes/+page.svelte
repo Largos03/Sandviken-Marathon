@@ -14,8 +14,7 @@
 		faMapMarkedAlt,
 		faUsers
 	} from '@fortawesome/free-solid-svg-icons';
-	import { tStore } from '$lib/stores/i18n';
-	import { Card } from '$lib';
+	import { tStore } from '$lib/stores/i18n';	import { Card, NumberedStep } from '$lib';
 	import Button from '$lib/components/Button.svelte';
 	import Container from '$lib/components/Container.svelte';
 	import SectionHeading from '$lib/components/SectionHeading.svelte';
@@ -184,10 +183,6 @@
 							<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 							{@html t('bePartOfHistory')}
 						</h2>
-						<div class="mb-6 h-1.5 w-20 rounded-full bg-red-500"></div>
-						<p class="max-w-3xl text-xl text-gray-600">
-							{t('inauguralDescription')}
-						</p>
 					</div>					<!-- Content remains the same but with optimized card components -->
 					<div class="mb-10 grid grid-cols-1 gap-6 md:grid-cols-3">
 						<IconCard
@@ -339,61 +334,15 @@
 									<div class="prose prose-lg prose-gray mb-8 max-w-none">
 										<p class="lead mb-6 text-gray-700">
 											{t('iaafCertified')}
-										</p>
-
-										<!-- Route Highlights -->
+										</p>										<!-- Route Highlights -->
 										<div class="mb-6 rounded-xl border-l-4 border-red-500 bg-gray-50 p-6">
 											<h3 class="mb-4 text-xl font-bold">{t('routeHighlights')}</h3>
 
 											<div class="space-y-4">
-												<!-- Highlight items -->
-												<div class="flex items-start">
-													<div
-														class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-black text-white"
-													>
-														1
-													</div>
-													<div>
-														<h4 class="font-semibold text-gray-800">{t('lakesideStart')}</h4>
-														<p class="text-sm text-gray-600">{t('lakesideStartText')}</p>
-													</div>
-												</div>
-
-												<div class="flex items-start">
-													<div
-														class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-black text-white"
-													>
-														2
-													</div>
-													<div>
-														<h4 class="font-semibold text-gray-800">{t('forestTrail')}</h4>
-														<p class="text-sm text-gray-600">{t('forestTrailText')}</p>
-													</div>
-												</div>
-
-												<div class="flex items-start">
-													<div
-														class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-black text-white"
-													>
-														3
-													</div>
-													<div>
-														<h4 class="font-semibold text-gray-800">{t('historicDistrict')}</h4>
-														<p class="text-sm text-gray-600">{t('historicDistrictText')}</p>
-													</div>
-												</div>
-
-												<div class="flex items-start">
-													<div
-														class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-black text-white"
-													>
-														4
-													</div>
-													<div>
-														<h4 class="font-semibold text-gray-800">{t('victoryBoulevard')}</h4>
-														<p class="text-sm text-gray-600">{t('victoryBoulevardText')}</p>
-													</div>
-												</div>
+												<NumberedStep number={1} title={t('lakesideStart')} description={t('lakesideStartText')} />
+												<NumberedStep number={2} title={t('forestTrail')} description={t('forestTrailText')} />
+												<NumberedStep number={3} title={t('historicDistrict')} description={t('historicDistrictText')} />
+												<NumberedStep number={4} title={t('victoryBoulevard')} description={t('victoryBoulevardText')} />
 											</div>
 										</div>
 

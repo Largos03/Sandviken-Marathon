@@ -1,6 +1,5 @@
-<script lang="ts">
-	import '$lib/styles/app.css';
-	import { Navbar, CookieConsent } from '$lib';
+<script lang="ts">	import '$lib/styles/app.css';
+	import { Navbar, CookieConsent, SocialLink } from '$lib';
 	import { FontAwesomeIcon as Fa } from '@fortawesome/svelte-fontawesome';
 	import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 	import { faFacebookF, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
@@ -57,29 +56,10 @@
 	<CookieConsent />
 
 	<footer class="mt-auto bg-black py-4 text-white md:py-5">
-		<div class="mx-auto flex flex-col items-center px-6 max-w-[1100px]">
-			<div class="mb-3 flex items-center justify-center">
-				<a
-					href="https://facebook.com"
-					class="mx-2 flex h-7 w-7 items-center justify-center rounded-full bg-white/10 transition-all duration-200 hover:-translate-y-0.5 hover:bg-white/20"
-					aria-label="Facebook"
-				>
-					<Fa icon={faFacebookF} />
-				</a>
-				<a
-					href="https://twitter.com"
-					class="mx-2 flex h-7 w-7 items-center justify-center rounded-full bg-white/10 transition-all duration-200 hover:-translate-y-0.5 hover:bg-white/20"
-					aria-label="Twitter"
-				>
-					<Fa icon={faTwitter} />
-				</a>
-				<a
-					href="https://instagram.com"
-					class="mx-2 flex h-7 w-7 items-center justify-center rounded-full bg-white/10 transition-all duration-200 hover:-translate-y-0.5 hover:bg-white/20"
-					aria-label="Instagram"
-				>
-					<Fa icon={faInstagram} />
-				</a>
+		<div class="mx-auto flex flex-col items-center px-6 max-w-[1100px]">			<div class="mb-3 flex items-center justify-center">
+				<SocialLink icon={faFacebookF} href="https://facebook.com" label="Facebook" variant="footer" />
+				<SocialLink icon={faTwitter} href="https://twitter.com" label="Twitter" variant="footer" />
+				<SocialLink icon={faInstagram} href="https://instagram.com" label="Instagram" variant="footer" />
 			</div>
 			<div class="mb-3 flex items-center justify-center text-xs text-white md:text-sm">
 				<a href="/contact" class="mx-2 hover:underline">{t('contact')}</a>

@@ -19,7 +19,7 @@
 		faShieldAlt,
 		faUsers
 	} from '@fortawesome/free-solid-svg-icons';
-	import { ImageModal } from '$lib';
+	import { ImageModal, FeatureHighlight } from '$lib';
 	import Container from '$lib/components/Container.svelte';
 	import SectionHeading from '$lib/components/SectionHeading.svelte';
 	import ResponsiveGrid from '$lib/components/ResponsiveGrid.svelte';
@@ -27,17 +27,29 @@
 	// Use the derived translation store
 	$: t = $tStore;
 
-	// State for the map modal
+	// State for the map modals
 	let isMapModalOpen = false;
+	let isStadsparkenModalOpen = false;
 
 	function openMapModal() {
 		isMapModalOpen = true;
+	}
+
+	function openStadsparkenModal() {
+		isStadsparkenModalOpen = true;
 	}
 
 	function handleMapTriggerKeydown(event: KeyboardEvent) {
 		if (event.key === 'Enter' || event.key === ' ') {
 			event.preventDefault();
 			openMapModal();
+		}
+	}
+
+	function handleStadsparkenTriggerKeydown(event: KeyboardEvent) {
+		if (event.key === 'Enter' || event.key === ' ') {
+			event.preventDefault();
+			openStadsparkenModal();
 		}
 	}
 
@@ -182,8 +194,8 @@
 						<div
 							class="absolute inset-0 z-10 flex items-center justify-center bg-black/60 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
 						>
-							<p class="px-6 text-center text-white">
-								{t('courseMapInteractive')}
+							<p class="px-6 text-center text-white font-medium">
+								Click to view interactive course map
 							</p>
 						</div>
 						<img
@@ -221,57 +233,10 @@
 						</h3>
 
 						<div class="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
-							<div
-								class="group rounded-lg border-l-3 border-red-400/30 bg-gray-50 transition-colors hover:bg-gray-100"
-							>
-								<div class="flex items-center p-3">
-									<div
-										class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-md bg-gray-800 text-white"
-									>
-										<FontAwesomeIcon icon={faWater} class="text-red-100" />
-									</div>
-									<span class="ml-3 font-medium text-gray-900">{t('scenicWaterfront')}</span>
-								</div>
-							</div>
-
-							<div
-								class="group rounded-lg border-l-3 border-red-400/30 bg-gray-50 transition-colors hover:bg-gray-100"
-							>
-								<div class="flex items-center p-3">
-									<div
-										class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-md bg-gray-800 text-white"
-									>
-										<FontAwesomeIcon icon={faMapMarkedAlt} class="text-red-100" />
-									</div>
-									<span class="ml-3 font-medium text-gray-900">{t('historicNeighborhoods')}</span>
-								</div>
-							</div>
-
-							<div
-								class="group rounded-lg border-l-3 border-red-400/30 bg-gray-50 transition-colors hover:bg-gray-100"
-							>
-								<div class="flex items-center p-3">
-									<div
-										class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-md bg-gray-800 text-white"
-									>
-										<FontAwesomeIcon icon={faTree} class="text-red-100" />
-									</div>
-									<span class="ml-3 font-medium text-gray-900">{t('forestViews')}</span>
-								</div>
-							</div>
-
-							<div
-								class="group rounded-lg border-l-3 border-red-400/30 bg-gray-50 transition-colors hover:bg-gray-100"
-							>
-								<div class="flex items-center p-3">
-									<div
-										class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-md bg-gray-800 text-white"
-									>
-										<FontAwesomeIcon icon={faRoad} class="text-red-100" />
-									</div>
-									<span class="ml-3 font-medium text-gray-900">{t('scenicRoads')}</span>
-								</div>
-							</div>
+							<FeatureHighlight icon={faWater} title={t('scenicWaterfront')} />
+							<FeatureHighlight icon={faMapMarkedAlt} title={t('historicNeighborhoods')} />
+							<FeatureHighlight icon={faTree} title={t('forestViews')} />
+							<FeatureHighlight icon={faRoad} title={t('scenicRoads')} />
 						</div>
 					</div>
 
@@ -357,11 +322,27 @@
 					</div>
 
 					<div class="p-6 md:w-2/3">
-						<img
-							src="/stadsparken.png"
-							alt={t('stadsparkenMapAlt')}
-							class="mb-2 h-auto w-full rounded-lg object-cover shadow-md"
-						/>
+						<div 
+							class="relative cursor-pointer group mb-2" 
+							on:click={openStadsparkenModal} 
+							role="button" 
+							tabindex="0" 
+							aria-label="View Stadsparken area map - Click to zoom"
+							on:keydown={handleStadsparkenTriggerKeydown}
+						>
+							<div
+								class="absolute inset-0 z-10 flex items-center justify-center bg-black/60 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100 rounded-lg"
+							>
+								<p class="px-6 text-center text-white font-medium">
+									Click to view full-size map
+								</p>
+							</div>
+							<img
+								src="/stadsparken.png"
+								alt={t('stadsparkenMapAlt')}
+								class="h-auto w-full rounded-lg object-cover shadow-md transition-transform group-hover:scale-[1.02]"
+							/>
+						</div>
 						<p class="mb-6 text-center text-sm text-gray-600 italic">{t('stadsparkenMapAlt')}</p>
 						<div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
 							<div
@@ -460,5 +441,12 @@
 		imageSrc="/sandviken-map.jpg"
 		altText={t('courseMapAlt') + ' - Full view'}
 		on:close={() => isMapModalOpen = false}
+	/>
+
+	<ImageModal
+		bind:open={isStadsparkenModalOpen}
+		imageSrc="/stadsparken.png"
+		altText={t('stadsparkenMapAlt') + ' - Full view'}
+		on:close={() => isStadsparkenModalOpen = false}
 	/>
 </div>

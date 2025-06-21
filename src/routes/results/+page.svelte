@@ -16,6 +16,7 @@
 		faMedal,
 		faGlobe
 	} from '@fortawesome/free-solid-svg-icons';
+	import { StatsCard } from '$lib';
 	import Container from '$lib/components/Container.svelte';
 	import SectionHeading from '$lib/components/SectionHeading.svelte';
 	import ResponsiveGrid from '$lib/components/ResponsiveGrid.svelte';
@@ -118,82 +119,36 @@
 		<Container>
 			<!-- Race stats cards -->
 			<ResponsiveGrid cols="1 md:2 lg:4" gap="6" className="mb-12">
-				<div
-					class="rounded-xl border-l-2 border-red-500/20 bg-white p-6 shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-md"
-				>
-					<div class="flex items-start gap-4">
-						<div
-							class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-black text-white shadow"
-						>
-							<FontAwesomeIcon icon={faRunning} class="text-red-100" />
-						</div>
-						<div>
-							<p class="text-sm font-medium text-gray-500">{t('totalRunners')}</p>
-							<h3 class="text-2xl font-bold text-gray-900">{results.length}</h3>
-						</div>
-					</div>
-				</div>
+				<StatsCard 
+					icon={faRunning} 
+					value={results.length.toString()} 
+					label={t('totalRunners')} 
+				/>
 
-				<div
-					class="rounded-xl border-l-2 border-red-500/20 bg-white p-6 shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-md"
-				>
-					<div class="flex items-start gap-4">
-						<div
-							class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-black text-white shadow"
-						>
-							<FontAwesomeIcon icon={faMedal} class="text-red-100" />
-						</div>
-						<div>
-							<p class="text-sm font-medium text-gray-500">{t('winner')}</p>
-							<h3 class="text-xl font-bold text-gray-900">
-								{results.length > 0 ? results[0].name : '—'}
-							</h3>
-						</div>
-					</div>
-				</div>
+				<StatsCard 
+					icon={faMedal} 
+					value={results.length > 0 ? results[0].name : '—'} 
+					label={t('winner')} 
+				/>
 
-				<div
-					class="rounded-xl border-l-2 border-red-500/20 bg-white p-6 shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-md"
-				>
-					<div class="flex items-start gap-4">
-						<div
-							class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-black text-white shadow"
-						>
-							<FontAwesomeIcon icon={faStopwatch} class="text-red-100" />
-						</div>
-						<div>
-							<p class="text-sm font-medium text-gray-500">{t('bestTime')}</p>
-							<h3 class="text-2xl font-bold text-gray-900">
-								{results.length > 0 ? results[0].time : '—'}
-							</h3>
-						</div>
-					</div>
-				</div>
+				<StatsCard 
+					icon={faStopwatch} 
+					value={results.length > 0 ? results[0].time : '—'} 
+					label={t('bestTime')} 
+				/>
 
-				<div
-					class="rounded-xl border-l-2 border-red-500/20 bg-white p-6 shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-md"
-				>
-					<div class="flex items-start gap-4">
-						<div
-							class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-black text-white shadow"
-						>
-							<FontAwesomeIcon icon={faGlobe} class="text-red-100" />
-						</div>
-						<div>
-							<p class="text-sm font-medium text-gray-500">{t('countries')}</p>
-							<h3 class="text-2xl font-bold text-gray-900">
-								{[...new Set(results.map((r) => r.country))].length}
-							</h3>
-						</div>
-					</div>
-				</div>
+				<StatsCard 
+					icon={faGlobe} 
+					value={[...new Set(results.map((r) => r.country))].length.toString()} 
+					label={t('countries')} 
+				/>
 			</ResponsiveGrid>
 
 			<!-- Main results section -->
 			<div class="mb-8 rounded-2xl border border-red-500/10 bg-white p-8 shadow-sm">
 				<h2 class="mb-6 flex items-center gap-2 text-2xl font-semibold text-gray-900">
 					<FontAwesomeIcon icon={faTrophy} class="text-red-500" />
-					{t('raceResults')}
+					{t('resultsTitle')}
 				</h2>
 
 				<!-- Search -->
@@ -206,7 +161,7 @@
 						<input
 							type="text"
 							bind:value={searchQuery}
-							placeholder={t('Search by Name or Country')}
+							placeholder={t('Search_by_Name_or_Country')}
 							class="w-full rounded-lg border py-3 pr-4 pl-10 transition-shadow focus:ring-2 focus:ring-red-500/50 focus:outline-none"
 						/>
 					</div>
@@ -322,7 +277,6 @@
 								{t('downloadResults')}
 							</h3>
 							<p class="mt-1 text-sm text-gray-600">
-								{t('resultsDownload')}
 							</p>
 						</div>
 						<div class="sm:ml-auto">
@@ -332,7 +286,6 @@
 								download
 							>
 								<FontAwesomeIcon icon={faDownload} />
-								{t('resultsPdf')}
 							</a>
 						</div>
 					</div>

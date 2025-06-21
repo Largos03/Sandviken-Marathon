@@ -14,6 +14,7 @@
 	import type { SuperValidated } from 'sveltekit-superforms';
 	import { tStore as t } from '$lib/stores/i18n';
 	import { fade } from 'svelte/transition';
+	import { ContactItem, SocialLink } from '$lib';
 	import Input from '$lib/components/Input.svelte';
 	import TextArea from '$lib/components/TextArea.svelte';
 	import Button from '$lib/components/Button.svelte';
@@ -118,89 +119,33 @@
 					<h2 class="mb-6 border-b pb-2 text-xl font-semibold">{$t('getInTouch')}</h2>
 
 					<ul class="mb-10 space-y-6 text-gray-700">
-						<li class="flex items-start">
-							<div
-								class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-red-50 text-red-500"
-							>
-								<Fa icon={faEnvelope} class="text-sm" />
-							</div>
-							<div>
-								<div class="font-medium">{$t('email')}</div>
-								<a href="mailto:info@sandvikenmarathon.se" class="text-gray-600 hover:text-red-600">
-									info@sandvikenmarathon.se
-								</a>
-							</div>
-						</li>
+						<ContactItem icon={faEnvelope} title={$t('email')} href="mailto:info@sandvikenmarathon.se">
+							info@sandvikenmarathon.se
+						</ContactItem>
 
-						<li class="flex items-start">
-							<div
-								class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-red-50 text-red-500"
-							>
-								<Fa icon={faPhone} class="text-sm" />
-							</div>
-							<div>
-								<div class="font-medium">{$t('phone')}</div>
-								<a href="tel:+461234567" class="text-gray-600 hover:text-red-600">
-									+46 (0) 123 456 789
-								</a>
-							</div>
-						</li>
+						<ContactItem icon={faPhone} title={$t('phone')} href="tel:+461234567">
+							+46 (0) 123 456 789
+						</ContactItem>
 
-						<li class="flex items-start">
-							<div
-								class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-red-50 text-red-500"
-							>
-								<Fa icon={faLocationDot} class="text-sm" />
-							</div>
-							<div>
-								<div class="font-medium">{$t('address')}</div>
-								<address class="text-gray-600 not-italic">
-									Marathon Office<br />
-									Sandviken City Center<br />
-									811 80 Sandviken, Sweden
-								</address>
-							</div>
-						</li>
+						<ContactItem icon={faLocationDot} title={$t('address')}>
+							<address class="not-italic">
+								Marathon Office<br />
+								Sandviken City Center<br />
+								811 80 Sandviken, Sweden
+							</address>
+						</ContactItem>
 
-						<li class="flex items-start">
-							<div
-								class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-red-50 text-red-500"
-							>
-								<Fa icon={faClock} class="text-sm" />
-							</div>
-							<div>
-								<div class="font-medium">{$t('officeHours')}</div>
-								<div class="text-gray-600">
-									<p>{$t('monToFri')}</p>
-									<p>{$t('weekends')}</p>
-								</div>
-							</div>
-						</li>
+						<ContactItem icon={faClock} title={$t('officeHours')}>
+							<p>{$t('monToFri')}</p>
+							<p>{$t('weekends')}</p>
+						</ContactItem>
 					</ul>
 
 					<h2 class="mb-6 border-b pb-2 text-xl font-semibold">{$t('followUs')}</h2>
 					<div class="flex space-x-4">
-						<a
-							href="https://facebook.com"
-							class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-gray-600 transition-colors hover:bg-red-500 hover:text-white"
-							aria-label="Facebook"
-						>
-							<Fa icon={faFacebookF} />
-						</a>
-						<a
-							href="https://twitter.com"
-							class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-gray-600 transition-colors hover:bg-red-500 hover:text-white"
-							aria-label="Twitter"
-						>
-							<Fa icon={faTwitter} />
-						</a>
-						<a
-							href="https://instagram.com"
-							class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-gray-600 transition-colors hover:bg-red-500 hover:text-white"
-							aria-label="Instagram"
-						>
-							<Fa icon={faInstagram} />
-						</a>
+						<SocialLink icon={faFacebookF} href="https://facebook.com" label="Facebook" variant="contact" />
+						<SocialLink icon={faTwitter} href="https://twitter.com" label="Twitter" variant="contact" />
+						<SocialLink icon={faInstagram} href="https://instagram.com" label="Instagram" variant="contact" />
 					</div>
 				</div>
 

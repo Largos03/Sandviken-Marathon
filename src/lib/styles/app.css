@@ -1,45 +1,35 @@
-/* Main Application Stylesheet - This file contains global styles for the entire Sandviken Marathon website */
+/* Main Application Stylesheet - Optimized global styles for Sandviken Marathon */
 
-/* Import external stylesheets: Tailwind CSS (a utility-first CSS framework) */
+/* Import Tailwind CSS */
 @import 'tailwindcss';
 
-/* Global styles for the application */
-
-/* Set a default background color for the body */
-body {
-  background-color: #f3f4f6; /* Tailwind bg-gray-100 */
-  color: #1f2937; /* Tailwind text-gray-800 */
-  font-family: 'Inter', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Back to top button styles */
-.back-to-top-btn {
-  box-shadow: 0 4px 24px 0 rgb(0 0 0 / 0.10), 0 1.5px 4px 0 rgb(0 0 0 / 0.10);
-}
-
-/* Custom classes */
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-  
-  /* New utility for pages to properly position below the navbar */
-  .page-content {
-    padding-top: 3rem; /* Equivalent to pt-12 in Tailwind */
-  }
-}
-
-/* Global styles */
+/* Global styles - optimized and consolidated */
 html {
   scroll-behavior: smooth;
 }
 
 body {
+  background-color: #f3f4f6; /* Tailwind bg-gray-100 */
+  color: #1f2937; /* Tailwind text-gray-800 */
   font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Utility classes */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .page-content {
+    padding-top: 3rem;
+  }
+  
+  /* Optimized back-to-top button shadow */
+  .back-to-top-btn {
+    box-shadow: 0 4px 24px 0 rgb(0 0 0 / 0.10), 0 1.5px 4px 0 rgb(0 0 0 / 0.10);
+  }
 }
 
 /* Add any other global styles below */

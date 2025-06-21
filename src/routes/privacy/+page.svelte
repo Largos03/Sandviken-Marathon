@@ -1,20 +1,19 @@
 <script lang="ts">
-	import { fade, fly } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
 	import { onMount } from 'svelte';
-	import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
-	import {
+	import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';	import {
 		faShield,
 		faUserLock,
 		faCookieBite,
 		faServer,
 		faLock,
 		faDatabase,
-		faChevronRight,
 		faClipboardCheck,
-		faEnvelope
+		faEnvelope,
+		faChevronRight
 	} from '@fortawesome/free-solid-svg-icons';
 	import { tStore } from '$lib/stores/i18n';
-	import { SidebarNav, ContactSection, TabsNav } from '$lib';
+	import { SidebarNav, ContactSection, TabsNav, TabHandler, HeroSection } from '$lib';
 	import Container from '$lib/components/Container.svelte';
 	import SectionHeading from '$lib/components/SectionHeading.svelte';
 	import ResponsiveGrid from '$lib/components/ResponsiveGrid.svelte';
@@ -28,16 +27,16 @@
 	// Active tab state
 	let activeTab = 'overview';
 
-	// Tabs structure
-	const tabs = [
-		{ id: 'overview', label: 'Overview', icon: faShield },
-		{ id: 'collection', label: 'Data Collection', icon: faUserLock },
-		{ id: 'usage', label: 'Data Usage', icon: faServer },
-		{ id: 'cookies', label: 'Cookies', icon: faCookieBite },
-		{ id: 'retention', label: 'Retention', icon: faDatabase },
-		{ id: 'rights', label: 'Your Rights', icon: faClipboardCheck },
-		{ id: 'security', label: 'Security', icon: faLock },
-		{ id: 'contact', label: 'Contact Us', icon: faEnvelope }
+	// Tabs structure with translations
+	$: tabs = [
+		{ id: 'overview', label: t('tabOverview'), icon: faShield },
+		{ id: 'collection', label: t('tabDataCollection'), icon: faUserLock },
+		{ id: 'usage', label: t('tabDataUsage'), icon: faServer },
+		{ id: 'cookies', label: t('tabCookies'), icon: faCookieBite },
+		{ id: 'retention', label: t('tabRetention'), icon: faDatabase },
+		{ id: 'rights', label: t('tabYourRights'), icon: faClipboardCheck },
+		{ id: 'security', label: t('tabSecurity'), icon: faLock },
+		{ id: 'contact', label: t('tabContactUs'), icon: faEnvelope }
 	];
 
 	// Cookie preferences
@@ -53,30 +52,17 @@
 		functional: true,
 		analytics: true,
 		marketing: true
-	};
-
-	onMount(() => {
+	};	onMount(() => {
 		// Load saved preferences if they exist
 		try {
 			const savedPreferences = localStorage.getItem('cookiePreferences');
 			if (savedPreferences) {
 				cookiePreferences = JSON.parse(savedPreferences);
 			}
-		} catch (error) {
-			console.error('Error loading cookie preferences:', error);
-		}
-
-		// Check for hash in URL to set active tab
-		const hash = window.location.hash.substring(1);
-		if (hash && tabs.some((tab) => tab.id === hash)) {
-			activeTab = hash;
+		} catch {
+			// Silent fail - use defaults
 		}
 	});
-
-	function setActiveTab(tabId: string) {
-		activeTab = tabId;
-		window.location.hash = tabId;
-	}
 
 	function handleCookiePreference(type: keyof CookiePreferences) {
 		if (type === 'essential') return;
@@ -96,60 +82,15 @@
 	<link rel="canonical" href="https://sandvikenmarathon.com/privacy" />
 </svelte:head>
 
-<div in:fade={{ duration: 300 }}>
-	<!-- Hero Section -->
-	<div class="relative bg-black py-10 text-white md:py-14" role="banner">
-		<!-- Subtle grid pattern overlay -->
-		<div class="absolute inset-0 opacity-20">
-			<div
-				class="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.15)_1px,transparent_0)] bg-[size:16px_16px]"
-			></div>
-			<div
-				class="absolute inset-0 bg-[linear-gradient(to_right,transparent,rgba(255,255,255,0.05),transparent)]"
-			></div>
-		</div>
+<div in:fade={{ duration: 300 }}>	<TabHandler {tabs} bind:activeTab let:activeTab let:setActiveTab>
+		<!-- Hero Section -->
+		<HeroSection 
+			title={t('privacyPolicy')} 
+			description={t('privacyIntro')} 
+			lastUpdated="{t('privacyLastUpdated')} {t('privacyDate')}"
+		/>
 
-		<!-- Content -->
-		<div class="relative z-10 mx-auto px-6 text-center max-w-[1100px]">
-			<h1
-				class="relative mb-3 inline-block text-3xl font-bold md:text-4xl"
-				in:fly={{ y: -20, duration: 800, delay: 300 }}
-			>
-				{t('privacyPolicy')}
-				<span
-					class="shadow-[0_0_8px_rgba(255,255,255,0.6)] absolute -bottom-2 left-1/2 h-1 w-12 -translate-x-1/2 transform rounded-full bg-red-500/80"
-				></span>
-			</h1>
-			<p
-				class="mx-auto mb-5 max-w-xl text-base font-light opacity-90 md:text-lg"
-				in:fly={{ y: 20, duration: 800, delay: 400 }}
-			>
-				{t('privacyIntro')}
-			</p>
-			<div
-				class="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-medium shadow-sm backdrop-blur-sm"
-				in:fly={{ y: 20, duration: 800, delay: 500 }}
-			>
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					class="mr-1.5 h-3 w-3"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke="currentColor"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-					/>
-				</svg>
-				<span>{t('privacyLastUpdated')} {t('privacyDate')}</span>
-			</div>
-		</div>
-	</div>
-
-	<!-- Main Content -->
+		<!-- Main Content -->
 	<div class="relative z-20 mx-auto -mt-8 mb-20 px-6 max-w-[1100px]">
 		<div class="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-xl">
 			<!-- Tabs Navigation -->
@@ -465,11 +406,10 @@
 							addressLabel={t('address')}
 							buttonText={t('contactUs')}
 							emailAddress="privacy@sandvikenmarathon.com"
-							ariaLabelledby="privacy-contact-section"
-						/>
+							ariaLabelledby="privacy-contact-section"						/>
 					{/if}
 				</div>
 			</div>
 		</div>
-	</div>
+	</TabHandler>
 </div>

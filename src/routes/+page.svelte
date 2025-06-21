@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
-	import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
-	import {
+	import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';	import {
 		faCalendarAlt,
 		faMapMarkerAlt,
 		faMedal,
@@ -21,6 +20,8 @@
 	import Container from '$lib/components/Container.svelte';
 	import SectionHeading from '$lib/components/SectionHeading.svelte';
 	import ResponsiveGrid from '$lib/components/ResponsiveGrid.svelte';
+	import CountdownTimer from '$lib/components/CountdownTimer.svelte';
+	import IconCard from '$lib/components/IconCard.svelte';
 
 	// Accept data from page.server.js
 	export const data: { lang?: string } = { lang: 'en' };
@@ -28,47 +29,15 @@
 	let visible = false;
 	let activeSection = 'overview';
 
-	// Countdown timer variables
-	const marathonDate = new Date('April 1, 2026 08:00:00').getTime();
-	let days = 0;
-	let hours = 0;
-	let minutes = 0;
-	let seconds = 0;
-	let countdownInterval: ReturnType<typeof setInterval> | null = null;
-
-	function updateCountdown() {
-		const now = new Date().getTime();
-		const timeRemaining = marathonDate - now;
-
-		if (timeRemaining > 0) {
-			days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-			hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-			minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-			seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-		} else {
-			days = hours = minutes = seconds = 0;
-			if (countdownInterval) clearInterval(countdownInterval);
-		}
-	}
-
 	function setActiveSection(section: string) {
 		activeSection = section;
 	}
 
 	onMount(() => {
-		// Set up countdown timer
-		updateCountdown();
-		countdownInterval = setInterval(updateCountdown, 1000);
-
 		// Visibility control for animations
 		setTimeout(() => {
 			visible = true;
 		}, 100);
-
-		return () => {
-			// Clean up countdown timer
-			if (countdownInterval) clearInterval(countdownInterval);
-		};
 	});
 
 	// Use the derived store for translations
@@ -161,87 +130,11 @@
 			<!-- Intro text -->
 			<p class="mb-10 max-w-2xl text-xl leading-relaxed font-light text-white/95 md:text-2xl">
 				{t('introText')}
-			</p>
-
-			<!-- Countdown Timer -->
-			<div class="mb-12 w-full max-w-lg">
-				<!-- Label -->
-				<div class="mb-4 text-center">
-					<div
-						class="inline-block rounded-xl border border-white/10 bg-gradient-to-r from-red-600/80 to-red-500/80 px-4 py-1 text-xs font-bold tracking-widest text-white uppercase shadow-lg"
-					>
-						<FontAwesomeIcon icon={faClock} class="mr-2" />
-						{t('raceStartingIn')}
-					</div>
-				</div>
-
-				<!-- Timer -->
-				<div
-					class="rounded-2xl border border-white/10 bg-black/30 p-3 shadow-2xl backdrop-blur-md md:p-4"
-				>
-					<div
-						class="grid grid-cols-2 gap-3 divide-gray-700/30 md:grid-cols-4 md:gap-0 md:divide-x"
-					>
-						<!-- Days -->
-						<div class="px-2 py-3 md:px-4">
-							<div class="flex flex-col items-center">
-								<span class="text-3xl font-bold text-white/95 md:text-5xl"
-									>{days.toString().padStart(2, '0')}</span
-								>
-								<span class="mt-1 text-xs tracking-wider text-white/70 uppercase">{t('days')}</span>
-							</div>
-						</div>
-
-						<!-- Hours -->
-						<div class="px-2 py-3 md:px-4">
-							<div class="flex flex-col items-center">
-								<span class="text-3xl font-bold text-white/95 md:text-5xl"
-									>{hours.toString().padStart(2, '0')}</span
-								>
-								<span class="mt-1 text-xs tracking-wider text-white/70 uppercase">{t('hours')}</span
-								>
-							</div>
-						</div>
-
-						<!-- Minutes -->
-						<div class="px-2 py-3 md:px-4">
-							<div class="flex flex-col items-center">
-								<span class="text-3xl font-bold text-white/95 md:text-5xl"
-									>{minutes.toString().padStart(2, '0')}</span
-								>
-								<span class="mt-1 text-xs tracking-wider text-white/70 uppercase"
-									>{t('minutes')}</span
-								>
-							</div>
-						</div>
-
-						<!-- Seconds -->
-						<div class="px-2 py-3 md:px-4">
-							<div class="flex flex-col items-center">
-								<span class="animate-pulse text-3xl font-bold text-white/95 md:text-5xl"
-									>{seconds.toString().padStart(2, '0')}</span
-								>
-								<span class="mt-1 text-xs tracking-wider text-white/70 uppercase"
-									>{t('seconds')}</span
-								>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Call to Action -->
-			<div class="mb-8">
-				<a
-					href="/register"
-					class="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-red-600 to-red-500 px-10 py-4 text-lg font-bold text-white shadow-lg focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-black"
-				>
-					<span class="flex items-center">
-						{t('registerNow')}
-						<FontAwesomeIcon icon={faArrowRight} class="ml-2" />
-					</span>
-				</a>
-			</div>
+			</p>			<!-- Countdown Timer -->
+			<CountdownTimer 
+				targetDate="April 1, 2026 08:00:00" 
+				label={t('raceStartingIn')} 
+			/>
 		{/if}
 	</div>
 </div>
@@ -295,66 +188,31 @@
 						<p class="max-w-3xl text-xl text-gray-600">
 							{t('inauguralDescription')}
 						</p>
-					</div>
-
-					<!-- Content remains the same but with simplified card transitions -->
+					</div>					<!-- Content remains the same but with optimized card components -->
 					<div class="mb-10 grid grid-cols-1 gap-6 md:grid-cols-3">
-						<Card class="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-md">
-							<div class="p-6">
-								<div
-									class="mb-5 flex h-14 w-14 items-center justify-center rounded-lg bg-black text-white shadow-md"
-								>
-									<FontAwesomeIcon icon={faRunning} size="lg" />
-								</div>
-								<h3 class="mb-3 text-xl font-bold">{t('raceCategories')}</h3>
-								<p class="mb-6 text-gray-600">{t('raceDescription')}</p>
-								<a
-									href="/register"
-									class="mt-auto inline-flex items-center font-semibold text-black hover:underline"
-								>
-									<span>{t('viewCategories')}</span>
-									<FontAwesomeIcon icon={faChevronRight} class="ml-2 text-sm" />
-								</a>
-							</div>
-						</Card>
+						<IconCard
+							icon={faRunning}
+							title={t('raceCategories')}
+							description={t('raceDescription')}
+							href="/register"
+							buttonText={t('viewCategories')}
+						/>
 
-						<Card class="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-md">
-							<div class="p-6">
-								<div
-									class="mb-5 flex h-14 w-14 items-center justify-center rounded-lg bg-black text-white shadow-md"
-								>
-									<FontAwesomeIcon icon={faMapMarkerAlt} size="lg" />
-								</div>
-								<h3 class="mb-3 text-xl font-bold">{t('scenicRoute')}</h3>
-								<p class="mb-6 text-gray-600">{t('routeDescription')}</p>
-								<a
-									href="/course"
-									class="mt-auto inline-flex items-center font-semibold text-black hover:underline"
-								>
-									<span>{t('exploreRoute')}</span>
-									<FontAwesomeIcon icon={faChevronRight} class="ml-2 text-sm" />
-								</a>
-							</div>
-						</Card>
+						<IconCard
+							icon={faMapMarkerAlt}
+							title={t('scenicRoute')}
+							description={t('routeDescription')}
+							href="/course"
+							buttonText={t('exploreRoute')}
+						/>
 
-						<Card class="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-md">
-							<div class="p-6">
-								<div
-									class="mb-5 flex h-14 w-14 items-center justify-center rounded-lg bg-black text-white shadow-md"
-								>
-									<FontAwesomeIcon icon={faMedal} size="lg" />
-								</div>
-								<h3 class="mb-3 text-xl font-bold">{t('prizesAwards')}</h3>
-								<p class="mb-6 text-gray-600">{t('prizesDescription')}</p>
-								<a
-									href="/about"
-									class="mt-auto inline-flex items-center font-semibold text-black hover:underline"
-								>
-									<span>{t('learnMore')}</span>
-									<FontAwesomeIcon icon={faChevronRight} class="ml-2 text-sm" />
-								</a>
-							</div>
-						</Card>
+						<IconCard
+							icon={faMedal}
+							title={t('prizesAwards')}
+							description={t('prizesDescription')}
+							href="/about"
+							buttonText={t('learnMore')}
+						/>
 					</div>
 
 					<!-- Race Day Schedule - Simplified Design -->

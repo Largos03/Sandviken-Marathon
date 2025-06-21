@@ -24,6 +24,16 @@
 	let lastScrollY = 0;
 	let menuButton: HTMLButtonElement;
 
+	// Navigation items configuration
+	const navItems = [
+		{ href: '/', icon: faHome, key: 'home' },
+		{ href: '/about', icon: faInfoCircle, key: 'about' },
+		{ href: '/course', icon: faMapMarkerAlt, key: 'course' },
+		{ href: '/register', icon: faClipboard, key: 'register' },
+		{ href: '/results', icon: faMedal, key: 'results' },
+		{ href: '/contact', icon: faPhone, key: 'contact' }
+	];
+
 	// Mobile menu handling
 	function toggleMobileMenu(): void {
 		mobileMenuOpen = !mobileMenuOpen;
@@ -51,20 +61,10 @@
 
 	// Use the derived store for translations
 	$: t = $tStore;
-
 	onMount(() => {
 		// Get the navbar element
 		const navbar = document.getElementById('navbar') as HTMLElement | null;
 		if (!navbar) return;
-
-		// Handle menu button visibility
-		function updateMenuButtonVisibility() {
-			if (!menuButton) return;
-			menuButton.style.display = window.innerWidth < 768 ? 'flex' : 'none';
-		}
-
-		// Initial check
-		updateMenuButtonVisibility();
 
 		// Load language preference from localStorage
 		if (typeof localStorage !== 'undefined') {
@@ -74,36 +74,32 @@
 			}
 		}
 
-		// Scroll and resize event handlers
-		function handleScroll(): void {
-			const scrollY = window.scrollY;
-
-			if (scrollY > 100) {
-				// Toggle navbar visibility based on scroll direction
-				if (navbar) {
-					navbar.style.transform = scrollY > lastScrollY ? 'translateY(-100%)' : 'translateY(0)';
-				}
-			} else {
-				// Reset at top of page
-				if (navbar) {
-					navbar.style.transform = 'translateY(0)';
-				}
+		// Optimized scroll handler with throttling
+		let ticking = false;
+		const handleScroll = () => {
+			if (!ticking) {
+				requestAnimationFrame(() => {
+					const scrollY = window.scrollY;
+					if (scrollY > 100) {
+						navbar.style.transform = scrollY > lastScrollY ? 'translateY(-100%)' : 'translateY(0)';
+					} else {
+						navbar.style.transform = 'translateY(0)';
+					}
+					lastScrollY = scrollY;
+					ticking = false;
+				});
+				ticking = true;
 			}
+		};
 
-			lastScrollY = scrollY;
-		}
-
-		function handleResize(): void {
-			updateMenuButtonVisibility();
-
-			// Close mobile menu on desktop view
+		const handleResize = () => {
 			if (window.innerWidth >= 768 && mobileMenuOpen) {
 				closeMobileMenu();
 			}
-		}
-
-		// Add event listeners
-		window.addEventListener('scroll', handleScroll);
+		};
+		
+		// Event listeners with passive scrolling for better performance
+		window.addEventListener('scroll', handleScroll, { passive: true });
 		window.addEventListener('resize', handleResize);
 
 		// Clean up on unmount
@@ -127,13 +123,11 @@
 	<div class="relative z-10 mx-auto flex h-12 w-full max-w-7xl items-center justify-between px-3">
 		<!-- Left section -->
 		<div class="flex items-center">
-			<!-- Mobile menu button -->
-			<button
+			<!-- Mobile menu button -->			<button
 				class="relative flex h-8 w-8 items-center justify-center text-gray-700 no-underline transition-colors duration-300 hover:text-red-600 focus:outline-none md:hidden"
 				on:click={toggleMobileMenu}
 				aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
 				aria-expanded={mobileMenuOpen}
-				style="display: none;"
 				bind:this={menuButton}
 			>
 				<FontAwesomeIcon icon={faBars} size="sm" />
@@ -148,100 +142,20 @@
 				/>
 			</a>
 		</div>
-
 		<!-- Desktop navigation -->
-		<nav
-			class="hidden items-center justify-center gap-2 overflow-hidden text-center font-semibold text-ellipsis whitespace-nowrap md:flex"
-		>
-			<a
-				href="/"
-				class="group relative flex items-center justify-center px-3 py-1 text-sm font-medium text-gray-700 no-underline transition-colors duration-300 hover:text-red-600"
-			>
-				<span
-					class="text-opacity-80 mr-1.5 inline-flex h-3.5 w-3.5 items-center justify-center text-red-500"
+		<nav class="hidden items-center justify-center gap-2 overflow-hidden text-center font-semibold text-ellipsis whitespace-nowrap md:flex">
+			{#each navItems as item}
+				<a
+					href={item.href}
+					class="group relative flex items-center justify-center px-3 py-1 text-sm font-medium text-gray-700 no-underline transition-colors duration-300 hover:text-red-600"
 				>
-					<FontAwesomeIcon icon={faHome} size="sm" />
-				</span>
-				<span>{t('home')}</span>
-				<span
-					class="absolute bottom-[-1px] left-0 h-0.5 w-full origin-left scale-x-0 transform rounded bg-red-600 transition-transform duration-300 group-hover:scale-x-100"
-				></span>
-			</a>
-
-			<a
-				href="/about"
-				class="group relative flex items-center justify-center px-3 py-1 text-sm font-medium text-gray-700 no-underline transition-colors duration-300 hover:text-red-600"
-			>
-				<span
-					class="text-opacity-80 mr-1.5 inline-flex h-3.5 w-3.5 items-center justify-center text-red-500"
-				>
-					<FontAwesomeIcon icon={faInfoCircle} size="sm" />
-				</span>
-				<span>{t('about')}</span>
-				<span
-					class="absolute bottom-[-1px] left-0 h-0.5 w-full origin-left scale-x-0 transform rounded bg-red-600 transition-transform duration-300 group-hover:scale-x-100"
-				></span>
-			</a>
-
-			<a
-				href="/course"
-				class="group relative flex items-center justify-center px-3 py-1 text-sm font-medium text-gray-700 no-underline transition-colors duration-300 hover:text-red-600"
-			>
-				<span
-					class="text-opacity-80 mr-1.5 inline-flex h-3.5 w-3.5 items-center justify-center text-red-500"
-				>
-					<FontAwesomeIcon icon={faMapMarkerAlt} size="sm" />
-				</span>
-				<span>{t('course')}</span>
-				<span
-					class="absolute bottom-[-1px] left-0 h-0.5 w-full origin-left scale-x-0 transform rounded bg-red-600 transition-transform duration-300 group-hover:scale-x-100"
-				></span>
-			</a>
-
-			<a
-				href="/register"
-				class="group relative flex items-center justify-center px-3 py-1 text-sm font-medium text-gray-700 no-underline transition-colors duration-300 hover:text-red-600"
-			>
-				<span
-					class="text-opacity-80 mr-1.5 inline-flex h-3.5 w-3.5 items-center justify-center text-red-500"
-				>
-					<FontAwesomeIcon icon={faClipboard} size="sm" />
-				</span>
-				<span>{t('register')}</span>
-				<span
-					class="absolute bottom-[-1px] left-0 h-0.5 w-full origin-left scale-x-0 transform rounded bg-red-600 transition-transform duration-300 group-hover:scale-x-100"
-				></span>
-			</a>
-
-			<a
-				href="/results"
-				class="group relative flex items-center justify-center px-3 py-1 text-sm font-medium text-gray-700 no-underline transition-colors duration-300 hover:text-red-600"
-			>
-				<span
-					class="text-opacity-80 mr-1.5 inline-flex h-3.5 w-3.5 items-center justify-center text-red-500"
-				>
-					<FontAwesomeIcon icon={faMedal} size="sm" />
-				</span>
-				<span>{t('results')}</span>
-				<span
-					class="absolute bottom-[-1px] left-0 h-0.5 w-full origin-left scale-x-0 transform rounded bg-red-600 transition-transform duration-300 group-hover:scale-x-100"
-				></span>
-			</a>
-
-			<a
-				href="/contact"
-				class="group relative flex items-center justify-center px-3 py-1 text-sm font-medium text-gray-700 no-underline transition-colors duration-300 hover:text-red-600"
-			>
-				<span
-					class="text-opacity-80 mr-1.5 inline-flex h-3.5 w-3.5 items-center justify-center text-red-500"
-				>
-					<FontAwesomeIcon icon={faPhone} size="sm" />
-				</span>
-				<span>{t('contact')}</span>
-				<span
-					class="absolute bottom-[-1px] left-0 h-0.5 w-full origin-left scale-x-0 transform rounded bg-red-600 transition-transform duration-300 group-hover:scale-x-100"
-				></span>
-			</a>
+					<span class="text-opacity-80 mr-1.5 inline-flex h-3.5 w-3.5 items-center justify-center text-red-500">
+						<FontAwesomeIcon icon={item.icon} size="sm" />
+					</span>
+					<span>{t(item.key)}</span>
+					<span class="absolute bottom-[-1px] left-0 h-0.5 w-full origin-left scale-x-0 transform rounded bg-red-600 transition-transform duration-300 group-hover:scale-x-100"></span>
+				</a>
+			{/each}
 		</nav>
 
 		<!-- Language toggle -->
@@ -292,84 +206,18 @@
 			<FontAwesomeIcon icon={faTimes} size="sm" />
 		</button>
 	</div>
-
 	<div class="panel-content">
-		<a
-			href="/"
-			class="flex items-center border-b border-gray-100/50 p-3 text-sm text-gray-700 no-underline transition-colors duration-200 hover:bg-gray-50/80"
-			on:click={closeMobileMenu}
-		>
-			<span
-				class="mr-3 flex h-4 w-4 flex-shrink-0 items-center justify-center text-red-600 opacity-85"
+		{#each navItems as item}
+			<a
+				href={item.href}
+				class="flex items-center border-b border-gray-100/50 p-3 text-sm text-gray-700 no-underline transition-colors duration-200 hover:bg-gray-50/80"
+				on:click={closeMobileMenu}
 			>
-				<FontAwesomeIcon icon={faHome} size="sm" />
-			</span>
-			<span>{t('home')}</span>
-		</a>
-
-		<a
-			href="/about"
-			class="flex items-center border-b border-gray-100/50 p-3 text-sm text-gray-700 no-underline transition-colors duration-200 hover:bg-gray-50/80"
-			on:click={closeMobileMenu}
-		>
-			<span
-				class="mr-3 flex h-4 w-4 flex-shrink-0 items-center justify-center text-red-600 opacity-85"
-			>
-				<FontAwesomeIcon icon={faInfoCircle} size="sm" />
-			</span>
-			<span>{t('about')}</span>
-		</a>
-
-		<a
-			href="/course"
-			class="flex items-center border-b border-gray-100/50 p-3 text-sm text-gray-700 no-underline transition-colors duration-200 hover:bg-gray-50/80"
-			on:click={closeMobileMenu}
-		>
-			<span
-				class="mr-3 flex h-4 w-4 flex-shrink-0 items-center justify-center text-red-600 opacity-85"
-			>
-				<FontAwesomeIcon icon={faMapMarkerAlt} size="sm" />
-			</span>
-			<span>{t('course')}</span>
-		</a>
-
-		<a
-			href="/register"
-			class="flex items-center border-b border-gray-100/50 p-3 text-sm text-gray-700 no-underline transition-colors duration-200 hover:bg-gray-50/80"
-			on:click={closeMobileMenu}
-		>
-			<span
-				class="mr-3 flex h-4 w-4 flex-shrink-0 items-center justify-center text-red-600 opacity-85"
-			>
-				<FontAwesomeIcon icon={faClipboard} size="sm" />
-			</span>
-			<span>{t('register')}</span>
-		</a>
-
-		<a
-			href="/results"
-			class="flex items-center border-b border-gray-100/50 p-3 text-sm text-gray-700 no-underline transition-colors duration-200 hover:bg-gray-50/80"
-			on:click={closeMobileMenu}
-		>
-			<span
-				class="mr-3 flex h-4 w-4 flex-shrink-0 items-center justify-center text-red-600 opacity-85"
-			>
-				<FontAwesomeIcon icon={faMedal} size="sm" />
-			</span>
-			<span>{t('results')}</span>
-		</a>
-
-		<a
-			href="/contact"
-			class="flex items-center border-b border-gray-100/50 p-3 text-sm text-gray-700 no-underline transition-colors duration-200 hover:bg-gray-50/80"
-			on:click={closeMobileMenu}
-		>
-			<span
-				class="mr-3 flex h-4 w-4 flex-shrink-0 items-center justify-center text-red-600 opacity-85"
-			>
-				<FontAwesomeIcon icon={faPhone} size="sm" />
-			</span>
-			<span>{t('contact')}</span>
-		</a>
+				<span class="mr-3 flex h-4 w-4 flex-shrink-0 items-center justify-center text-red-600 opacity-85">
+					<FontAwesomeIcon icon={item.icon} size="sm" />
+				</span>
+				<span>{t(item.key)}</span>
+			</a>
+		{/each}
 	</div>
 </nav>

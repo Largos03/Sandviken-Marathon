@@ -34,7 +34,12 @@ export const commonTranslations = {
     switchToEnglish: 'English',
     
     // Cookie consent
-    cookieNoticeText: 'This website uses cookies to improve your experience. <a href="/privacy" class="underline">Learn more</a>'
+    cookieNoticeText: 'This website uses cookies to improve your experience. <a href="/privacy" class="underline">Learn more</a>',
+    
+    // Contact related
+    email: 'Email',
+    address: 'Address',
+    termsContactBtn: 'Contact Legal Team',
   },
   sv: {
     // Navbar
@@ -70,6 +75,11 @@ export const commonTranslations = {
     switchToEnglish: 'Engelska',
     
     // Cookie consent
-    cookieNoticeText: 'Denna webbplats använder cookies för att förbättra din upplevelse. <a href="/privacy" class="underline">Läs mer</a>'
+    cookieNoticeText: 'Den här webbplatsen använder cookies för att förbättra din upplevelse. <a href="/privacy" class="underline">Läs mer</a>',
+    
+    // Contact related
+    email: 'E-post',
+    address: 'Adress',
+    termsContactBtn: 'Kontakta juridiskt team'
   }
-}; 
+};

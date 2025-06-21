@@ -11,8 +11,17 @@ export { default as ContactSection } from './components/ContactSection.svelte';
 export { default as SidebarNav } from './components/SidebarNav.svelte';
 export { default as TabsNav } from './components/TabsNav.svelte';
 export { default as ImageModal } from './components/ImageModal.svelte';
+export { default as TabHandler } from './components/TabHandler.svelte';
+export { default as HeroSection } from './components/HeroSection.svelte';
+
+// Export optimized components
+export { default as IconButton } from './components/IconButton.svelte';
+export { default as IconCard } from './components/IconCard.svelte';
+export { default as CountdownTimer } from './components/CountdownTimer.svelte';
+export { default as StatsCard } from './components/StatsCard.svelte';
 
 // Export translation utilities
 export { language, t, tStore, detectBrowserLanguage } from './stores/i18n';
 
-// Export other utilities as needed
+// Export utility functions
+export { cn } from './utils';

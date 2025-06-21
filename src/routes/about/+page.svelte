@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { t } from '$lib/stores/i18n';
+	import { tStore } from '$lib/stores/i18n';
 	import { fade, fly } from 'svelte/transition';
 	import { onMount } from 'svelte';
 	import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
@@ -20,11 +20,14 @@
 	import SectionHeading from '$lib/components/SectionHeading.svelte';
 	import ResponsiveGrid from '$lib/components/ResponsiveGrid.svelte';
 
+	// Use derived translation store for reactivity
+	$: t = $tStore;
+
 	// Active tab state
 	let activeTab = 'mission';
 
-	// Tabs structure
-	const tabs = [
+	// Tabs structure - now reactive to translation changes
+	$: tabs = [
 		{ id: 'mission', label: t('aboutMission'), icon: faHeart },
 		{ id: 'history', label: t('aboutHistoryTitle'), icon: faHistory },
 		{ id: 'values', label: t('aboutValuesTitle'), icon: faLightbulb },

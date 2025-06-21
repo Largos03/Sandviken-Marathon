@@ -23,17 +23,23 @@
 
 	// Use the derived translation store
 	$: t = $tStore;
-
 	onMount(() => {
 		// Update the html lang attribute when language changes
 		document.documentElement.lang = $language;
 
-		// Logic for Back to Top button
+		// Optimized scroll handler with throttling
+		let ticking = false;
 		const handleScroll = () => {
-			showBackToTop = window.scrollY > 200;
+			if (!ticking) {
+				requestAnimationFrame(() => {
+					showBackToTop = window.scrollY > 200;
+					ticking = false;
+				});
+				ticking = true;
+			}
 		};
 
-		window.addEventListener('scroll', handleScroll);
+		window.addEventListener('scroll', handleScroll, { passive: true });
 
 		return () => {
 			window.removeEventListener('scroll', handleScroll);

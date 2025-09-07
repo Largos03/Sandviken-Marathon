@@ -6,9 +6,6 @@ import { Resend } from 'resend';
 import { env } from '$env/dynamic/private';
 import type { PageServerLoad, Actions } from './$types';
 
-// Initialize Resend with the API key from environment
-const resend = new Resend(env.RESEND_API_KEY);
-
 export const load: PageServerLoad = async () => {
 	const form = await superValidate(zod(contactSchema));
 	return { form };
@@ -33,6 +30,9 @@ export const actions: Actions = {
 				error: 'Email service is not properly configured. Please contact the administrator.'
 			});
 		}
+
+		// Initialize Resend with the API key from environment
+		const resend = new Resend(env.RESEND_API_KEY);
 
 		try {
 			console.log('Attempting to send email with data:', form.data);

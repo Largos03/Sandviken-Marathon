@@ -10,9 +10,4 @@ declare global {
 	}
 }
 
-// Private environment variables (server-side only)
-declare module '$env/static/private' {
-	export const RESEND_API_KEY: string;
-}
-
 export {};

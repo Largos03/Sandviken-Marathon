@@ -3,11 +3,11 @@ import { superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { contactSchema } from './schema';
 import { Resend } from 'resend';
-import { RESEND_API_KEY } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import type { PageServerLoad, Actions } from './$types';
 
-// Initialize Resend with the API key
-const resend = new Resend(RESEND_API_KEY);
+// Initialize Resend with the API key from environment
+const resend = new Resend(env.RESEND_API_KEY);
 
 export const load: PageServerLoad = async () => {
 	const form = await superValidate(zod(contactSchema));
@@ -26,7 +26,7 @@ export const actions: Actions = {
 		}
 
 		// Check if Resend API key is available
-		if (!RESEND_API_KEY) {
+		if (!env.RESEND_API_KEY) {
 			console.error('RESEND_API_KEY is not configured');
 			return fail(500, {
 				form,
@@ -39,7 +39,7 @@ export const actions: Actions = {
 			
 			// Send email using Resend
 			const emailResult = await resend.emails.send({
-				from: 'Sandviken Marathon <onboarding@resend.dev>', // Use Resend's default domain for testing
+				from: 'Sandviken Marathon <noreply@sandviken-marathon.com>', // Your custom domain
 				to: ['traningsgruppensandviken@outlook.com'],
 				subject: `Contact Form: ${form.data.subject}`,
 				html: `
@@ -50,6 +50,7 @@ export const actions: Actions = {
 					<p><strong>Message:</strong></p>
 					<p>${form.data.message.replace(/\n/g, '<br>')}</p>
 				`,
+				replyTo: form.data.email, // Allow replies to go to the form submitter
 			});
 
 			console.log('✅ Email sent successfully:', emailResult);

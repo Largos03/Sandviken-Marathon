@@ -7,7 +7,8 @@
 		faEnvelope,
 		faPhone,
 		faClock,
-		faCheck
+		faCheck,
+		faExclamationTriangle
 	} from '@fortawesome/free-solid-svg-icons';
 	import { faFacebookF, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
 	import type { SuperValidated } from 'sveltekit-superforms';
@@ -27,12 +28,15 @@
 
 	interface PageData {
 		form: SuperValidated<FormData>;
+		error?: string;
 	}
 
 	export let data: PageData;
 
 	let formSubmitted = false;
 	let showSuccess = false;
+	let showError = false;
+	let errorMessage = '';
 	let touchedFields = {
 		name: false,
 		email: false,
@@ -46,22 +50,44 @@
 		onSubmit: () => {
 			formSubmitted = true;
 			showSuccess = false;
+			showError = false;
+			console.log('Form submission started');
 		},
-		onResult: () => {
-			showSuccess = true;
+		onResult: (event) => {
+			console.log('Form result received:', event.result);
+			
+			if (event.result.type === 'success') {
+				showSuccess = true;
+				showError = false;
+				formSubmitted = false;
+				console.log('Form submitted successfully');
+			} else if (event.result.type === 'failure') {
+				showError = true;
+				showSuccess = false;
+				formSubmitted = false;
+				errorMessage = event.result.data?.error || 'An error occurred';
+				console.error('Form submission failed:', event.result.data);
+			}
 			touchedFields = {
 				name: false,
 				email: false,
 				subject: false,
 				message: false
 			};
+		},
+		onError: (error) => {
+			console.error('Form error:', error);
+			showError = true;
+			showSuccess = false;
+			formSubmitted = false;
+			errorMessage = 'An unexpected error occurred. Please try again.';
 		}
 	});
 
-	$: nameError = $errors?.name ? String($errors.name) : '';
-	$: emailError = $errors?.email ? String($errors.email) : '';
-	$: subjectError = $errors?.subject ? String($errors.subject) : '';
-	$: messageError = $errors?.message ? String($errors.message) : '';
+	$: nameError = $errors?.name ? $t(String($errors.name)) : '';
+	$: emailError = $errors?.email ? $t(String($errors.email)) : '';
+	$: subjectError = $errors?.subject ? $t(String($errors.subject)) : '';
+	$: messageError = $errors?.message ? $t(String($errors.message)) : '';
 
 	$: safeConstraints = {
 		name: $constraints?.name || {},
@@ -124,8 +150,22 @@
 				<div class="lg:col-span-2">
 					<h2 class="mb-6 border-b pb-2 text-xl font-semibold">{$t('sendMessage')}</h2>
 
+					{#if showError}
+						<div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-6">
+							<div class="flex">
+								<div class="flex-shrink-0">
+									<Fa icon={faExclamationTriangle} class="text-red-500" />
+								</div>
+								<div class="ml-3">
+									<p class="font-medium">Error sending message</p>
+									<p class="text-sm">{errorMessage}</p>
+								</div>
+							</div>
+						</div>
+					{/if}
+
 					{#if showSuccess}
-						<div class="bg-success mb-6">
+						<div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded mb-6">
 							<div class="flex">
 								<div class="flex-shrink-0">
 									<Fa icon={faCheck} class="text-green-500" />

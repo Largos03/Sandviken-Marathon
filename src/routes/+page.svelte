@@ -1,654 +1,147 @@
+<!-- Homepage component for the Sandviken Half-marathon website -->
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
-	import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';	import {
-		faCalendarAlt,
-		faMapMarkerAlt,
-		faMedal,
-		faRunning,
-		faChevronRight,
-		faClock,
-		faInfoCircle,
-		faArrowRight,
-		faStar,
-		faMapMarkedAlt,
-		faUsers
-	} from '@fortawesome/free-solid-svg-icons';
-	import { tStore } from '$lib/stores/i18n';	import { Card, NumberedStep } from '$lib';
+	import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
+	import { faCalendarAlt, faStar } from '@fortawesome/free-solid-svg-icons';
+	import { tStore } from '$lib/stores/i18n';
 	import Button from '$lib/components/Button.svelte';
 	import Container from '$lib/components/Container.svelte';
-	import SectionHeading from '$lib/components/SectionHeading.svelte';
-	import ResponsiveGrid from '$lib/components/ResponsiveGrid.svelte';
 	import CountdownTimer from '$lib/components/CountdownTimer.svelte';
-	import IconCard from '$lib/components/IconCard.svelte';
+	import QuickOverview from '$lib/components/QuickOverview.svelte';
+	import SchedulePreview from '$lib/components/SchedulePreview.svelte';
+	import RegistrationCTA from '$lib/components/RegistrationCTA.svelte';
 
-	// Accept data from page.server.js
+	// Page data for language
 	export const data: { lang?: string } = { lang: 'en' };
 
+	// State for animation visibility
 	let visible = false;
-	let activeSection = 'overview';
-
-	function setActiveSection(section: string) {
-		activeSection = section;
-	}
 
 	onMount(() => {
-		// Visibility control for animations
 		setTimeout(() => {
 			visible = true;
 		}, 100);
 	});
 
-	// Use the derived store for translations
+	// Translation store
 	$: t = $tStore;
-
-	// Navigation sections - reactive to translation changes
-	$: sections = [
-		{ id: 'overview', label: t('overviewTab'), icon: faUsers },
-		{ id: 'course', label: t('courseTab'), icon: faMapMarkedAlt },
-		{ id: 'details', label: t('detailsTab'), icon: faCalendarAlt },
-		{ id: 'register', label: t('registerTab'), icon: faMedal }
-	];
 </script>
 
 <svelte:head>
-	<title>Sandviken Marathon 2026 | {t('officialEvent')}</title>
+	<!-- SEO-optimized page title and meta description for search engines -->
+	<!-- Why dynamic: Title includes translated event name for better i18n SEO -->
+	<title>Sandviken Half-marathon 2026 | {t('officialEvent')}</title>
 	<meta
 		name="description"
 		content={t('metaDescription')}
 	/>
-	<link rel="canonical" href="https://sandvikenmarathon.com/" />
+	<!-- Canonical URL to prevent duplicate content issues and consolidate SEO value -->
+	<link rel="canonical" href="https://sandvikenhalfmarathon.com/" />
 </svelte:head>
 
-<!-- Hero Section -->
+<!-- Hero Section - Primary visual impact area to capture visitor attention -->
+<!-- Intent: Create immediate excitement and establish the event's premium nature -->
+<!-- Why full-screen: Maximizes visual impact on modern devices for better engagement -->
 <div class="relative h-screen overflow-hidden bg-black text-white" in:fade={{ duration: 300 }}>
-	<!-- Simplified background -->
+	<!-- Multi-layer gradient overlays ensure text readability across varying video content -->
+	<!-- Why multiple layers: Provides depth and ensures contrast regardless of video brightness -->
 	<div class="absolute inset-0 z-10 bg-gradient-to-b from-black/80 via-black/70 to-black/85"></div>
+	<!-- Background video showcasing running to immerse visitors in the event atmosphere -->
+	<!-- Why autoplay muted: Complies with browser policies while maintaining visual engagement -->
+	<!-- playsinline prevents fullscreen on mobile devices -->
 	<video autoplay muted loop playsinline class="absolute inset-0 z-0 h-full w-full object-cover">
 		<source src="/running.mp4" type="video/mp4" />
 		Your browser does not support the video tag.
 	</video>
 
-	<!-- Hero content -->
 	<div class="relative z-20 flex h-full flex-col items-center justify-center px-4 text-center">
 		{#if visible}
-			<!-- Event badge -->
+			<!-- Event badge - Highlights the official nature of the inaugural event -->
+			<!-- Why stars: Creates visual hierarchy and emphasizes exclusivity -->
 			<div class="mb-8">
-				<div
-					class="flex items-center rounded-full bg-white px-6 py-2 text-sm font-bold tracking-wider text-black uppercase shadow-lg"
-				>
+				<div class="flex items-center rounded-full bg-white px-6 py-2 text-sm font-bold tracking-wider text-black uppercase shadow-lg">
 					<FontAwesomeIcon icon={faStar} class="mr-1 text-red-600" size="xs" />
 					<span>{t('officialEvent')}</span>
 					<FontAwesomeIcon icon={faStar} class="ml-1 text-red-600" size="xs" />
 				</div>
 			</div>
 
-			<!-- Title -->
+			<!-- Main title with decorative elements - Emphasizes event name and year -->
+			<!-- Why split layout: Allows responsive typography and decorative accents -->
 			<h1 class="mb-4 text-5xl leading-tight font-black tracking-tight uppercase md:text-7xl">
 				<div class="flex flex-col items-center">
 					<span class="relative mb-2 inline-block tracking-wide text-white">
 						SANDVIKEN
-						<div
-							class="absolute -right-2 bottom-1.5 -left-2 h-0.5 bg-gradient-to-r from-transparent via-red-500 to-transparent"
-						></div>
+						<!-- Underline accent for visual emphasis and brand consistency -->
+						<div class="absolute -right-2 bottom-1.5 -left-2 h-0.5 bg-gradient-to-r from-transparent via-red-500 to-transparent"></div>
 					</span>
-					<span
-						class="relative inline-flex items-center bg-gradient-to-r from-white via-gray-300 to-white bg-clip-text tracking-wide text-transparent"
-					>
-						MARATHON
-						<div
-							class="absolute -top-1 -right-10 rotate-12 transform rounded border-2 border-red-500 bg-white px-2 py-0.5 text-sm font-bold text-black shadow-xl sm:-right-12 md:-right-16"
-						>
+					<span class="relative inline-flex items-center bg-gradient-to-r from-white via-gray-300 to-white bg-clip-text tracking-wide text-transparent">
+						HALF-MARATHON
+						<!-- Year badge positioned absolutely for dynamic layout adaptation -->
+						<!-- Why rotated: Creates visual interest and draws attention to the year -->
+						<div class="absolute -top-1 -right-10 rotate-12 transform rounded border-2 border-red-500 bg-white px-2 py-0.5 text-sm font-bold text-black shadow-xl sm:-right-12 md:-right-16">
 							2026
 						</div>
 					</span>
 				</div>
 			</h1>
 
-			<!-- Distance indicator -->
-			<div class="mb-8 flex items-center justify-center gap-3">
-				<div class="h-px w-16 bg-gradient-to-r from-transparent via-red-500 to-transparent"></div>
-				<div
-					class="rounded-full bg-red-600 px-3 py-1 text-xs font-bold tracking-widest text-white uppercase shadow-lg"
-				>
-					<span>42.195 km</span>
-				</div>
-				<div class="h-px w-16 bg-gradient-to-r from-transparent via-red-500 to-transparent"></div>
-			</div>
-
-			<!-- Date -->
+			<!-- Event date display - Clearly communicates when the event occurs -->
+			<!-- Why backdrop blur: Modern aesthetic that maintains readability over video -->
 			<div class="mb-8">
-				<div
-					class="flex items-center rounded-xl border border-white/30 bg-black/30 px-6 py-3 font-bold text-white shadow-lg backdrop-blur-md"
-				>
+				<div class="flex items-center rounded-xl border border-white/30 bg-black/30 px-6 py-3 font-bold text-white shadow-lg backdrop-blur-md">
 					<FontAwesomeIcon icon={faCalendarAlt} class="mr-3 text-red-400" />
-					<span>{t('eventDate')}</span>
+					<span>{t('homeEventDate')}</span>
 				</div>
 			</div>
 
-			<!-- Intro text -->
+			<!-- Introductory text - Provides context and builds anticipation -->
+			<!-- Why max-width: Prevents text from becoming too wide on large screens -->
 			<p class="mb-10 max-w-2xl text-xl leading-relaxed font-light text-white/95 md:text-2xl">
 				{t('introText')}
-			</p>			<!-- Countdown Timer -->
+			</p>
+
+			<!-- Countdown timer - Builds urgency and excitement for the event -->
+			<!-- Why specific date: Official race start time; consider dynamic sourcing for future events -->
 			<CountdownTimer 
-				targetDate="April 1, 2026 08:00:00" 
-				label={t('raceStartingIn')} 
+				targetDate="August 22, 2026 11:00:00" 
+				label={t('homeRaceStartingIn')} 
 			/>
 		{/if}
 	</div>
 </div>
 
-<!-- Main Content -->
+<!-- Main Content Section - Detailed event information and conversion elements -->
+<!-- Intent: Provide comprehensive event details while maintaining visual hierarchy -->
+<!-- Why gray background: Provides visual separation from dark hero, improving content readability -->
 <section class="bg-gray-50 py-16 md:py-24">
-	<Container id="main-content">
-		<div class="relative overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-2xl">
-			<!-- Navigation -->
-			<div class="bg-gray-900 py-8 md:py-12">
-				<Container>
-					<div class="flex w-auto flex-wrap justify-center rounded-xl bg-gray-100 p-1">
-						{#each sections as section (section.id)}
-							<button
-								class="relative mx-0.5 flex items-center rounded-lg px-4 py-2.5 text-sm font-medium transition-all duration-300 md:px-6 md:py-3 md:text-base {activeSection === section.id ? 'bg-white text-gray-900 shadow-lg' : 'text-gray-700 hover:bg-white/50 hover:shadow-sm'}"
-								on:click={() => setActiveSection(section.id)}
-								aria-selected={activeSection === section.id}
-								role="tab"
-							>
-								{#if activeSection === section.id}
-									<div class="absolute inset-x-0 bottom-0 h-0.5 bg-red-500"></div>
-								{/if}
-								<div class="relative z-10 flex items-center">
-									<div class="mr-3 flex h-8 w-8 items-center justify-center rounded-full shadow-sm {activeSection === section.id ? 'bg-red-500 text-white' : 'bg-white text-gray-600'}">
-										<FontAwesomeIcon icon={section.icon} class="h-3.5 w-3.5 md:h-4 md:w-4" />
-									</div>
-									<span class="font-medium">{section.label}</span>
-								</div>
-							</button>
-						{/each}
-					</div>
-				</Container>
+	<Container>
+		<!-- Quick Overview Section - Key event highlights and statistics -->
+		<!-- Why first: Immediately addresses visitor questions about event scope and credibility -->
+		<div class="mb-16">
+			<div class="mb-10 text-center">
+				<!-- Inaugural event badge - Emphasizes historical significance -->
+				<!-- Why gradient: Creates premium feel consistent with brand colors -->
+				<div class="mb-4 inline-block rounded-lg bg-gradient-to-r from-gray-900 to-black px-4 py-2.5 text-white shadow-lg">
+					<span class="text-lg font-bold">{t('inauguralEventTitle')}</span>
+				</div>
+				<h2 class="mb-6 text-4xl leading-tight font-bold md:text-5xl">
+					Be part of <span class="text-red-600">history</span>
+				</h2>
 			</div>
-
-			<!-- Content -->
-			<div class="min-h-[60vh] bg-white p-6 md:p-10">
-			<!-- Overview Section Content - Simplified Design -->
-			{#if activeSection === 'overview'}
-				<div in:fade={{ duration: 300 }}>
-					<div class="mb-10 flex flex-col items-start">
-						<div
-							class="mb-4 inline-block rounded-lg bg-gradient-to-r from-gray-900 to-black px-4 py-2.5 text-white shadow-lg"
-						>
-							<span class="text-lg font-bold">{t('inauguralEventTitle')}</span>
-						</div>
-						<h2 class="mb-3 text-4xl leading-tight font-bold md:text-5xl">
-							<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-							{@html t('bePartOfHistory')}
-						</h2>
-					</div>					<!-- Content remains the same but with optimized card components -->
-					<div class="mb-10 grid grid-cols-1 gap-6 md:grid-cols-3">
-						<IconCard
-							icon={faRunning}
-							title={t('raceCategories')}
-							description={t('raceDescription')}
-							href="/register"
-							buttonText={t('viewCategories')}
-						/>
-
-						<IconCard
-							icon={faMapMarkerAlt}
-							title={t('scenicRoute')}
-							description={t('routeDescription')}
-							href="/course"
-							buttonText={t('exploreRoute')}
-						/>
-
-						<IconCard
-							icon={faMedal}
-							title={t('prizesAwards')}
-							description={t('prizesDescription')}
-							href="/about"
-							buttonText={t('learnMore')}
-						/>
-					</div>
-
-					<!-- Race Day Schedule - Simplified Design -->
-					<div class="relative mt-10">
-						<div class="rounded-2xl bg-gray-50 p-8 shadow-sm">
-							<div class="mb-6 flex items-center">
-								<div
-									class="mr-4 flex h-12 w-12 items-center justify-center rounded-lg bg-black text-white shadow-md"
-								>
-									<FontAwesomeIcon icon={faClock} size="lg" />
-								</div>
-								<div>
-									<h3 class="text-2xl font-bold">{t('raceDaySchedule')}</h3>
-									<p class="text-gray-500">{t('raceDayDate')}</p>
-								</div>
-							</div>
-
-							<!-- Rest of the schedule content remains the same -->
-							<div class="relative">
-								<div class="absolute top-0 bottom-0 left-4 w-0.5 bg-red-500/20"></div>
-
-								<div class="space-y-6">
-									<div class="relative flex items-start">
-										<div
-											class="absolute left-4 mt-1.5 h-3 w-3 -translate-x-1/2 transform rounded-full bg-red-500"
-										></div>
-										<div class="pl-10">
-											<div class="text-lg font-bold text-gray-900">{t('raceVillageOpens')}</div>
-											<div class="text-gray-600">{t('raceVillageOpensText')}</div>
-										</div>
-									</div>
-
-									<div class="relative flex items-start">
-										<div
-											class="absolute left-4 mt-1.5 h-3 w-3 -translate-x-1/2 transform rounded-full bg-red-500"
-										></div>
-										<div class="pl-10">
-											<div class="text-lg font-bold text-gray-900">{t('warmupSession')}</div>
-											<div class="text-gray-600">{t('warmupSessionText')}</div>
-										</div>
-									</div>
-
-									<div class="relative flex items-start">
-										<div
-											class="absolute left-4 mt-1.5 h-4 w-4 -translate-x-1/2 transform rounded-full bg-red-600 shadow-sm"
-										></div>
-										<div class="pl-10">
-											<div class="text-lg font-bold text-gray-900">{t('marathonStart')}</div>
-											<div class="font-medium text-gray-600">{t('marathonStartText')}</div>
-										</div>
-									</div>
-
-									<div class="relative flex items-start">
-										<div
-											class="absolute left-4 mt-1.5 h-3 w-3 -translate-x-1/2 transform rounded-full bg-red-500"
-										></div>
-										<div class="pl-10">
-											<div class="text-lg font-bold text-gray-900">{t('halfMarathonStart')}</div>
-											<div class="text-gray-600">{t('halfMarathonStartText')}</div>
-										</div>
-									</div>
-
-									<div class="relative flex items-start">
-										<div
-											class="absolute left-4 mt-1.5 h-3 w-3 -translate-x-1/2 transform rounded-full bg-red-500"
-										></div>
-										<div class="pl-10">
-											<div class="text-lg font-bold text-gray-900">{t('tenKStart')}</div>
-											<div class="text-gray-600">{t('tenKStartText')}</div>
-										</div>
-									</div>
-
-									<div class="relative flex items-start">
-										<div
-											class="absolute left-4 mt-1.5 h-3 w-3 -translate-x-1/2 transform rounded-full bg-red-500"
-										></div>
-										<div class="pl-10">
-											<div class="text-lg font-bold text-gray-900">{t('awardsCeremony')}</div>
-											<div class="text-gray-600">{t('awardsCeremonyText')}</div>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div class="mt-8 text-center">
-								<a
-									href="/course"
-									class="inline-flex items-center justify-center rounded-lg bg-black px-5 py-2 text-white transition-colors hover:bg-gray-900"
-								>
-									<span>{t('eventDetailsLink')}</span>
-									<FontAwesomeIcon icon={faChevronRight} class="ml-2" />
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			{/if}
-
-			<!-- Course Tab -->
-			{#if activeSection === 'course'}
-				<div in:fade={{ duration: 300 }}>
-					<!-- Section Header -->
-					<div class="mb-10 flex flex-col items-start">
-						<div
-							class="mb-4 inline-block rounded-lg bg-gradient-to-r from-gray-900 to-black px-4 py-2.5 text-white shadow-lg"
-						>
-							<span class="text-lg font-bold">{t('scenicRouteTitle')}</span>
-						</div>
-						<h2 class="mb-3 text-4xl leading-tight font-bold md:text-5xl">
-							<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-							{@html t('breathtakingJourney')}
-						</h2>
-						<div class="mb-6 h-1.5 w-20 rounded-full bg-red-500"></div>
-						<p class="max-w-3xl text-xl text-gray-600">
-							{t('courseDescription2')}
-						</p>
-					</div>
-
-					<!-- Course Map Section -->
-					<div class="mb-16">
-						<div class="overflow-hidden rounded-xl bg-white shadow-xl">
-							<div class="md:flex">
-								<div class="p-6 md:w-1/2 md:p-8">
-									<div class="prose prose-lg prose-gray mb-8 max-w-none">
-										<p class="lead mb-6 text-gray-700">
-											{t('iaafCertified')}
-										</p>										<!-- Route Highlights -->
-										<div class="mb-6 rounded-xl border-l-4 border-red-500 bg-gray-50 p-6">
-											<h3 class="mb-4 text-xl font-bold">{t('routeHighlights')}</h3>
-
-											<div class="space-y-4">
-												<NumberedStep number={1} title={t('lakesideStart')} description={t('lakesideStartText')} />
-												<NumberedStep number={2} title={t('forestTrail')} description={t('forestTrailText')} />
-												<NumberedStep number={3} title={t('historicDistrict')} description={t('historicDistrictText')} />
-												<NumberedStep number={4} title={t('victoryBoulevard')} description={t('victoryBoulevardText')} />
-											</div>
-										</div>
-
-										<!-- CTA -->
-										<div class="flex justify-center md:justify-start">
-											<a
-												href="/course"
-												class="inline-flex items-center justify-center rounded-lg bg-black px-5 py-2 text-white"
-											>
-												<span>{t('exploreDetailedMap')}</span>
-												<FontAwesomeIcon icon={faChevronRight} class="ml-2" />
-											</a>
-										</div>
-									</div>
-								</div>
-
-								<!-- Map image -->
-								<div class="relative bg-gray-800 md:w-1/2">
-									<div class="aspect-w-1 aspect-h-1 md:aspect-auto md:h-full">
-										<img
-											src="/sandviken-map.jpg"
-											alt="Map of Sandviken Marathon Course"
-											class="h-full w-full object-cover"
-										/>
-
-										<div class="absolute bottom-6 left-6 z-10">
-											<div
-												class="max-w-xs rounded-xl border border-white/10 bg-black/70 p-5 backdrop-blur-sm"
-											>
-												<div class="mb-3 flex items-end">
-													<div class="text-4xl font-bold text-white">42.2</div>
-													<div class="mb-1 ml-2 text-sm tracking-wider text-white/80 uppercase">
-														KM
-													</div>
-												</div>
-												<div class="text-sm text-white/80">{t('iaafCertifiedLabel')}</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Course Features -->
-					<div class="mt-8 grid grid-cols-2 gap-5 md:grid-cols-4">
-						<!-- Time Limit -->
-						<div class="rounded-xl border-t-4 border-red-500 bg-white p-5 shadow-md">
-							<div
-								class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-black text-white"
-							>
-								<FontAwesomeIcon icon={faClock} size="lg" />
-							</div>
-							<h3 class="mb-2 text-lg font-bold">{t('timeLimit')}</h3>
-							<p class="text-gray-600">{t('timeLimitText')}</p>
-						</div>
-
-						<!-- Aid Stations -->
-						<div class="rounded-xl border-t-4 border-red-500 bg-white p-5 shadow-md">
-							<div
-								class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-black text-white"
-							>
-								<FontAwesomeIcon icon={faMapMarkerAlt} size="lg" />
-							</div>
-							<h3 class="mb-2 text-lg font-bold">{t('aidStationsFeature')}</h3>
-							<p class="text-gray-600">{t('aidStationsFeatureText')}</p>
-						</div>
-
-						<!-- Pace Groups -->
-						<div class="rounded-xl border-t-4 border-red-500 bg-white p-5 shadow-md">
-							<div
-								class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-black text-white"
-							>
-								<FontAwesomeIcon icon={faRunning} size="lg" />
-							</div>
-							<h3 class="mb-2 text-lg font-bold">{t('paceGroups')}</h3>
-							<p class="text-gray-600">{t('paceGroupsText')}</p>
-						</div>
-
-						<!-- Finisher Medal -->
-						<div class="rounded-xl border-t-4 border-red-500 bg-white p-5 shadow-md">
-							<div
-								class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-black text-white"
-							>
-								<FontAwesomeIcon icon={faMedal} size="lg" />
-							</div>
-							<h3 class="mb-2 text-lg font-bold">{t('finisherMedal')}</h3>
-							<p class="text-gray-600">{t('finisherMedalText')}</p>
-						</div>
-					</div>
-				</div>
-			{/if}
-
-			<!-- Event Details Tab -->
-			{#if activeSection === 'details'}
-				<div in:fade={{ duration: 300 }}>
-					<!-- Section Header -->
-					<div class="mb-6 flex flex-col items-start md:flex-row md:items-center">
-						<div
-							class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-black text-white shadow-md md:mr-4 md:mb-0"
-						>
-							<FontAwesomeIcon icon={faCalendarAlt} size="lg" />
-						</div>
-						<div>
-							<h2 class="text-2xl font-bold">{t('eventDetailsSectionTitle')}</h2>
-							<p class="text-gray-500">{t('eventDetailsSubtitle')}</p>
-						</div>
-					</div>
-
-					<!-- Details Cards -->
-					<div class="mx-auto max-w-4xl space-y-8">
-						<!-- Event Schedule -->
-						<div class="rounded-xl bg-gray-50 p-6">
-							<h3 class="mb-4 flex items-center text-xl font-bold">
-								<FontAwesomeIcon icon={faCalendarAlt} class="mr-3 text-red-500" />
-								{t('eventSchedule')}
-							</h3>
-							<div class="space-y-4">
-								<div class="rounded-lg bg-white p-4 shadow-sm">
-									<div class="font-bold">{t('preRaceDay')}</div>
-									<div class="text-gray-600">{t('preRaceDayText')}</div>
-								</div>
-								<div class="rounded-lg bg-white p-4 shadow-sm">
-									<div class="font-bold">{t('raceDayFull')}</div>
-									<div class="text-gray-600">{t('raceDayFullText')}</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- Location Details -->
-						<div class="rounded-xl bg-gray-50 p-6">
-							<h3 class="mb-4 flex items-center text-xl font-bold">
-								<FontAwesomeIcon icon={faMapMarkerAlt} class="mr-3 text-red-500" />
-								{t('locationDetails')}
-							</h3>
-							<div class="space-y-4">
-								<div class="rounded-lg bg-white p-4 shadow-sm">
-									<div class="font-bold">{t('startFinishArea')}</div>
-									<div class="text-gray-600">{t('startFinishAreaText')}</div>
-								</div>
-								<div class="rounded-lg bg-white p-4 shadow-sm">
-									<div class="font-bold">{t('raceExpo')}</div>
-									<div class="text-gray-600">{t('raceExpoText')}</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- Race Categories -->
-						<div class="rounded-xl bg-gray-50 p-6">
-							<h3 class="mb-4 flex items-center text-xl font-bold">
-								<FontAwesomeIcon icon={faMedal} class="mr-3 text-red-500" />
-								{t('raceCategoriesDetails')}
-							</h3>
-							<div class="grid grid-cols-1 gap-4 md:grid-cols-3">
-								<div class="rounded-lg bg-white p-4 shadow-sm">
-									<div class="mb-2 text-center font-bold">{t('marathonLabel')}</div>
-									<div class="text-center text-gray-600">42.195 km</div>
-								</div>
-								<div class="rounded-lg bg-white p-4 shadow-sm">
-									<div class="mb-2 text-center font-bold">{t('halfMarathonLabel')}</div>
-									<div class="text-center text-gray-600">21.098 km</div>
-								</div>
-								<div class="rounded-lg bg-white p-4 shadow-sm">
-									<div class="mb-2 text-center font-bold">{t('tenKRunLabel')}</div>
-									<div class="text-center text-gray-600">10 km</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- Important Information -->
-						<div class="rounded-xl bg-gradient-to-r from-gray-900 to-black p-6 text-white">
-							<h3 class="mb-4 text-xl font-bold">{t('importantInfo')}</h3>
-							<ul class="space-y-2">
-								<li class="flex items-start">
-									<FontAwesomeIcon
-										icon={faInfoCircle}
-										class="mt-1 mr-2 flex-shrink-0 text-red-400"
-									/>
-									<span>{t('packetPickupInfo')}</span>
-								</li>
-								<li class="flex items-start">
-									<FontAwesomeIcon
-										icon={faInfoCircle}
-										class="mt-1 mr-2 flex-shrink-0 text-red-400"
-									/>
-									<span>{t('idRequired')}</span>
-								</li>
-								<li class="flex items-start">
-									<FontAwesomeIcon
-										icon={faInfoCircle}
-										class="mt-1 mr-2 flex-shrink-0 text-red-400"
-									/>
-									<span>{t('noRaceDayRegistration')}</span>
-								</li>
-								<li class="flex items-start">
-									<FontAwesomeIcon
-										icon={faInfoCircle}
-										class="mt-1 mr-2 flex-shrink-0 text-red-400"
-									/>
-									<span>{t('timingChips')}</span>
-								</li>
-							</ul>
-						</div>
-					</div>
-
-					<!-- CTA -->
-					<div class="mt-8 text-center">
-						<Button href="/register" variant="primary" size="large">{t('registerNow')}</Button>
-					</div>
-				</div>
-			{/if}
-
-			<!-- Registration Tab -->
-			{#if activeSection === 'register'}
-				<div in:fade={{ duration: 300 }}>
-					<!-- Section Header -->
-					<div class="mb-6 flex flex-col items-start md:flex-row md:items-center">
-						<div
-							class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-black text-white shadow-md md:mr-4 md:mb-0"
-						>
-							<FontAwesomeIcon icon={faMedal} size="lg" />
-						</div>
-						<div>
-							<h2 class="text-2xl font-bold">{t('inauguralEvent')}</h2>
-							<p class="text-gray-500">{t('bePartOf')}</p>
-						</div>
-					</div>
-
-					<!-- Registration Info Card -->
-					<div class="mx-auto mb-10 max-w-3xl rounded-xl bg-gray-50 p-8 shadow-md">
-						<div class="mb-4 inline-block rounded-md bg-black px-4 py-1 font-semibold text-white">
-							2026
-						</div>
-						<h3 class="mb-4 text-2xl font-bold">{t('historicOpportunity')}</h3>
-						<p class="mb-8 text-gray-700">{t('joinUs')}</p>
-
-						<!-- Features -->
-						<div class="mb-8 grid grid-cols-1 gap-6 md:grid-cols-2">
-							<div
-								class="rounded-lg bg-white p-6 text-center shadow-sm transition-shadow duration-300 hover:shadow-md"
-							>
-								<h4 class="mb-3 text-xl font-semibold">{t('premiumExperience')}</h4>
-								<p class="text-gray-600">{t('experienceDescription')}</p>
-							</div>
-							<div
-								class="rounded-lg bg-white p-6 text-center shadow-sm transition-shadow duration-300 hover:shadow-md"
-							>
-								<h4 class="mb-3 text-xl font-semibold">{t('foundingStatus')}</h4>
-								<p class="text-gray-600">{t('foundingDescription')}</p>
-							</div>
-						</div>
-
-						<!-- CTA -->
-						<div class="text-center">
-							<Button href="/register" variant="primary" size="large">{t('secureSpot')}</Button>
-						</div>
-					</div>
-
-					<!-- Promo Banner -->
-					<div
-						class="relative mt-8 overflow-hidden rounded-xl bg-gradient-to-r from-gray-900 to-black p-6 text-white"
-					>
-						<div class="absolute top-0 right-0 opacity-20">
-							<FontAwesomeIcon
-								icon={faRunning}
-								size="6x"
-								class="-rotate-12 transform text-red-500"
-							/>
-						</div>
-
-						<div class="relative z-10 flex flex-col items-center justify-between md:flex-row">
-							<div>
-								<div
-									class="mb-3 inline-block rounded-full bg-red-600 px-3 py-1 text-xs font-bold tracking-wider text-white uppercase"
-								>
-									{t('limitedSpots')}
-								</div>
-								<h3 class="mb-2 text-2xl font-bold">{t('secureYourSpot')}</h3>
-								<p class="mb-4 max-w-lg opacity-90 md:mb-0">
-									{t('earlyBirdPromo')}
-								</p>
-							</div>
-							<a
-								href="/register"
-								class="inline-flex transform items-center justify-center rounded-lg bg-gradient-to-r from-red-500 to-red-600 px-6 py-3 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-red-600 hover:to-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-black"
-							>
-								<span>{t('registerNow')}</span>
-								<FontAwesomeIcon icon={faArrowRight} class="ml-2" />
-							</a>
-						</div>
-
-						<!-- Info badges -->
-						<div class="mt-6 flex flex-wrap items-center justify-center gap-4">
-							<div class="flex items-center rounded-lg bg-white/10 px-3 py-1.5 backdrop-blur-sm">
-								<FontAwesomeIcon icon={faCalendarAlt} class="mr-2 text-red-400" size="sm" />
-								<span class="text-sm">{t('registrationOpens')}</span>
-							</div>
-							<div class="flex items-center rounded-lg bg-white/10 px-3 py-1.5 backdrop-blur-sm">
-								<FontAwesomeIcon icon={faUsers} class="mr-2 text-red-400" size="sm" />
-								<span class="text-sm">{t('limitedParticipants')}</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			{/if}
+			<!-- QuickOverview component displays key metrics to build trust and excitement -->
+			<QuickOverview />
 		</div>
-	</div>
+
+		<!-- Schedule Preview Section - Race day timeline and key events -->
+		<!-- Why included: Helps visitors understand event flow and plan their participation -->
+		<div class="mb-16">
+			<SchedulePreview />
+		</div>
+
+		<!-- Registration Call-to-Action - Primary conversion element -->
+		<!-- Intent: Drive registrations by providing clear next steps after information consumption -->
+		<RegistrationCTA />
 	</Container>
 </section>

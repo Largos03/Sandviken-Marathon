@@ -2,10 +2,8 @@
 	import { fade } from 'svelte/transition';
 	import { tStore } from '$lib/stores/i18n';
 
-	// Accept data from page.server.js
 	export const data = {};
 
-	// Use the derived translation store
 	$: t = $tStore;
 </script>
 

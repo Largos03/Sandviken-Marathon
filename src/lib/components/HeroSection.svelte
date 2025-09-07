@@ -1,7 +1,8 @@
-<!-- Reusable Hero Section Component -->
+<!-- Reusable Hero Section Component with animated title and description -->
 <script lang="ts">
 	import { fly } from 'svelte/transition';
 
+	// Component props
 	export let title: string;
 	export let description: string;
 	export let lastUpdated: string = '';

@@ -1,5 +1,6 @@
+<!-- Reusable Input component with validation and accessibility -->
 <script lang="ts">
-	// Props
+	// Component props
 	export let id: string;
 	export let name: string;
 	export let label: string | undefined = undefined;
@@ -24,10 +25,10 @@
 	export let pattern: string | undefined = undefined;
 	export let readonly: boolean = false;
 
-	// Bind to actual input element
+	// Reference to the input element
 	let inputElement: HTMLInputElement;
 
-	// Forward focus
+	// Method to focus the input
 	export const focus = () => {
 		if (inputElement) {
 			inputElement.focus();

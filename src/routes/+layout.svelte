@@ -58,7 +58,6 @@
 	<footer class="mt-auto bg-black py-4 text-white md:py-5">
 		<div class="mx-auto flex flex-col items-center px-6 max-w-[1100px]">			<div class="mb-3 flex items-center justify-center">
 				<SocialLink icon={faFacebookF} href="https://facebook.com" label="Facebook" variant="footer" />
-				<SocialLink icon={faTwitter} href="https://twitter.com" label="Twitter" variant="footer" />
 				<SocialLink icon={faInstagram} href="https://instagram.com" label="Instagram" variant="footer" />
 			</div>
 			<div class="mb-3 flex items-center justify-center text-xs text-white md:text-sm">

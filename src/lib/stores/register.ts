@@ -2,15 +2,15 @@
 export const registerTranslations = {
   en: {
     // Register page
-    registerTitle: 'Register for Sandviken Marathon',
+    registerTitle: 'Register for Sandviken Half-marathon',
     comingSoon: 'Registration Coming Soon',
-    registrationInfo: 'Registration for the Sandviken Marathon 2026 will open in January 2025. Please check back later for more information.',
+    registrationInfo: 'Registration for the Sandviken Half-marathon 2026 will take place on another page. The event is scheduled for August 23, 2026. Please check back later for more information.',
     // Registration related content
     registerNow: 'Register Now',
     inauguralEvent: 'Inaugural Event',
-    bePartOf: 'Be part of history in the first-ever Sandviken Marathon',
+    bePartOf: 'Be part of history in the first-ever Sandviken Half-marathon',
     historicOpportunity: 'Be Part of Something Historic',
-    joinUs: "Join us for the inaugural Sandviken Marathon and become one of our founding participants. This is your chance to make history in Sandviken's first major marathon event.",
+    joinUs: "Join us for the inaugural Sandviken Half-marathon and become one of our founding participants. This is your chance to make history in Sandviken's first major half-marathon event.",
     premiumExperience: 'Premium Experience',
     experienceDescription: 'Professional timing, live tracking and full route support',
     foundingStatus: 'Founding Participant Status',
@@ -19,20 +19,20 @@ export const registerTranslations = {
     limitedSpots: 'Early Bird Registration',
     secureYourSpot: 'Secure Your Spot Today',
     earlyBirdPromo: "Early bird registration opens soon with exclusive benefits for founding participants. Don't miss your chance to be part of history.",
-    registrationOpens: 'Registration Opens: January 2025',
+    registrationOpens: 'Event Date: August 23, 2026',
     limitedParticipants: 'Limited to 5,000 Participants'
   },
   sv: {
     // Register page
-    registerTitle: 'Anmäl dig till Sandviken Marathon',
+    registerTitle: 'Anmäl dig till Sandviken Halvmarathon',
     comingSoon: 'Anmälan Kommer Snart',
-    registrationInfo: 'Anmälan till Sandviken Marathon 2026 öppnar i januari 2025. Vänligen återkom senare för mer information.',
+    registrationInfo: 'Anmälan till Sandviken Halvmarathon 2026 kommer att ske på en annan sida. Evenemanget är planerat till den 23 augusti 2026. Vänligen återkom senare för mer information.',
     // Registration related content
     registerNow: 'Anmäl Nu',
     inauguralEvent: 'Inaugureringsevenemang',
-    bePartOf: 'Var med och skapa historia i det första Sandviken Marathon',
+    bePartOf: 'Var med och skapa historia i det första Sandviken Halvmarathon',
     historicOpportunity: 'Var Med i Något Historiskt',
-    joinUs: 'Gå med oss för det första Sandviken Marathon och bli en av våra grundande deltagare. Detta är din chans att göra historia i Sandvikens första stora maraton.',
+    joinUs: 'Gå med oss för det första Sandviken Halvmarathon och bli en av våra grundande deltagare. Detta är din chans att göra historia i Sandvikens första stora halvmaraton.',
     premiumExperience: 'Premiumupplevelse',
     experienceDescription: 'Professionell tidtagning, live-tracking och fullständigt ruttstöd',
     foundingStatus: 'Grundande Deltagarstatus',
@@ -41,7 +41,7 @@ export const registerTranslations = {
     limitedSpots: 'Early Bird-anmälan',
     secureYourSpot: 'Säkra din plats idag',
     earlyBirdPromo: 'Early bird-registrering öppnar snart med exklusiva förmåner för grundande deltagare. Missa inte din chans att bli en del av historien.',
-    registrationOpens: 'Registrering öppnar: Januari 2025',
+    registrationOpens: 'Evenemangsdatum: 23 augusti 2026',
     limitedParticipants: 'Begränsat till 5 000 deltagare'
   }
 };

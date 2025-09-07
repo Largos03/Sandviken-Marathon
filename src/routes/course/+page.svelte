@@ -24,10 +24,8 @@
 	import SectionHeading from '$lib/components/SectionHeading.svelte';
 	import ResponsiveGrid from '$lib/components/ResponsiveGrid.svelte';
 
-	// Use the derived translation store
 	$: t = $tStore;
 
-	// State for the map modals
 	let isMapModalOpen = false;
 	let isStadsparkenModalOpen = false;
 
@@ -53,19 +51,17 @@
 		}
 	}
 
-	const courseHighlights = [
-		// ... existing code ...
-	];
+	const courseHighlights = [];
 </script>
 
 <svelte:head>
-	<title>{t('coursePageTitle')} | Sandviken Marathon</title>
+	<title>{t('coursePageTitle')} | Sandviken Half-marathon</title>
 	<meta name="description" content={t('courseDescription')} />
 </svelte:head>
 
 <div class="min-h-screen bg-gray-50" in:fade>
 	<!-- Hero Section with Background -->
-	<div class="relative overflow-hidden bg-black py-10 text-white md:py-16">
+	<div class="bg-hero-dark">
 		<!-- Decorative diagonal lines -->
 		<div class="absolute inset-0 opacity-10">
 			<div class="absolute -inset-10 rotate-45 transform">
@@ -76,9 +72,11 @@
 		</div>
 
 		<Container className="relative z-10 py-8 md:py-12">
-			<SectionHeading level={1} className="text-white mb-6">{t('coursePageTitle')}</SectionHeading>
+			<SectionHeading level={1} className="text-white mb-6">{t('courseHeading')}</SectionHeading>
 			<div class="mb-8 h-1 w-32 -skew-x-12 transform bg-red-500/70"></div>
-			<p class="max-w-3xl text-xl leading-relaxed font-light md:text-2xl">{t('coursePageIntro')}</p>
+			<p class="max-w-3xl text-xl leading-relaxed font-light md:text-2xl">
+				{t('courseWelcomeText')}
+			</p>
 		</Container>
 	</div>
 
@@ -91,10 +89,8 @@
 				>
 					<div class="h-1.5 w-full bg-red-500/70"></div>
 					<div class="p-6">
-						<div class="flex items-start gap-4">
-							<div
-								class="flex h-12 w-12 flex-shrink-0 transform items-center justify-center rounded-lg border-b-2 border-red-500/70 bg-gray-800 text-white transition-transform group-hover:-rotate-6"
-							>
+						<div class="layout-content-gap">
+							<div class="icon-container-interactive">
 								<FontAwesomeIcon icon={faRoute} class="text-red-100" />
 							</div>
 							<div>
@@ -103,7 +99,7 @@
 								>
 									{t('courseLength')}
 								</p>
-								<h3 class="text-lg font-bold text-gray-900 sm:text-xl">42.195 km</h3>
+								<h3 class="text-lg font-bold text-gray-900 sm:text-xl">21.60 km</h3>
 							</div>
 						</div>
 					</div>
@@ -114,10 +110,8 @@
 				>
 					<div class="h-1.5 w-full bg-red-500/70"></div>
 					<div class="p-6">
-						<div class="flex items-start gap-4">
-							<div
-								class="flex h-12 w-12 flex-shrink-0 transform items-center justify-center rounded-lg border-b-2 border-red-500/70 bg-gray-800 text-white transition-transform group-hover:-rotate-6"
-							>
+						<div class="layout-content-gap">
+							<div class="icon-container-interactive">
 								<FontAwesomeIcon icon={faMountain} class="text-red-100" />
 							</div>
 							<div>
@@ -126,7 +120,7 @@
 								>
 									{t('elevationGain')}
 								</p>
-								<h3 class="text-lg font-bold text-gray-900 sm:text-xl">350m</h3>
+								<h3 class="text-lg font-bold text-gray-900 sm:text-xl">165m</h3>
 							</div>
 						</div>
 					</div>
@@ -137,10 +131,8 @@
 				>
 					<div class="h-1.5 w-full bg-red-500/70"></div>
 					<div class="p-6">
-						<div class="flex items-start gap-4">
-							<div
-								class="flex h-12 w-12 flex-shrink-0 transform items-center justify-center rounded-lg border-b-2 border-red-500/70 bg-gray-800 text-white transition-transform group-hover:-rotate-6"
-							>
+						<div class="layout-content-gap">
+							<div class="icon-container-interactive">
 								<FontAwesomeIcon icon={faTint} class="text-red-100" />
 							</div>
 							<div>
@@ -160,10 +152,8 @@
 				>
 					<div class="h-1.5 w-full bg-red-500/70"></div>
 					<div class="p-6">
-						<div class="flex items-start gap-4">
-							<div
-								class="flex h-12 w-12 flex-shrink-0 transform items-center justify-center rounded-lg border-b-2 border-red-500/70 bg-gray-800 text-white transition-transform group-hover:-rotate-6"
-							>
+						<div class="layout-content-gap">
+							<div class="icon-container-interactive">
 								<FontAwesomeIcon icon={faFlagCheckered} class="text-red-100" />
 							</div>
 							<div>
@@ -213,7 +203,7 @@
 
 						<div class="flex items-center gap-2 border-t border-gray-100 py-3 text-black">
 							<FontAwesomeIcon icon={faMountain} class="text-red-500/70" />
-							<span class="text-sm font-medium">{t('elevationProfile')}: 350m</span>
+							<span class="text-sm font-medium">{t('elevationProfile')}: 165m</span>
 						</div>
 					</div>
 				</div>
@@ -225,7 +215,9 @@
 							<FontAwesomeIcon icon={faRoute} class="text-red-500/70" />
 							{t('courseDetailsTitle')}
 						</h2>
-						<p class="mb-6 leading-relaxed text-gray-700">{t('courseDescription')}</p>
+						<p class="mb-6 leading-relaxed text-gray-700">
+							{t('courseDescription')}
+						</p>
 
 						<h3 class="mb-3 inline-flex items-center font-semibold text-gray-900">
 							{t('courseHighlights')}
@@ -251,26 +243,10 @@
 							<div>
 								<h4 class="mb-2 font-medium text-gray-900">{t('waterStations')}</h4>
 								<div class="flex flex-wrap gap-2">
-									<span
-										class="rounded-full border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-gray-800 shadow-sm"
-										>5km</span
-									>
-									<span
-										class="rounded-full border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-gray-800 shadow-sm"
-										>12km</span
-									>
-									<span
-										class="rounded-full border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-gray-800 shadow-sm"
-										>21km</span
-									>
-									<span
-										class="rounded-full border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-gray-800 shadow-sm"
-										>30km</span
-									>
-									<span
-										class="rounded-full border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-gray-800 shadow-sm"
-										>37km</span
-									>
+									<span class="btn-tag">5km</span>
+									<span class="btn-tag">10km</span>
+									<span class="btn-tag">15km</span>
+									<span class="btn-tag">21km</span>
 								</div>
 								<p class="mt-2 text-sm text-gray-600">{t('waterStationDetails')}</p>
 							</div>
@@ -280,15 +256,15 @@
 								<div class="flex flex-wrap gap-2">
 									<span
 										class="rounded-full border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-gray-800 shadow-sm"
-										>12km</span
+										>10km</span
+									>
+									<span
+										class="rounded-full border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-gray-800 shadow-sm"
+										>15km</span
 									>
 									<span
 										class="rounded-full border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-gray-800 shadow-sm"
 										>21km</span
-									>
-									<span
-										class="rounded-full border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-gray-800 shadow-sm"
-										>37km</span
 									>
 								</div>
 								<p class="mt-2 text-sm text-gray-600">{t('medicalStationDetails')}</p>
@@ -310,10 +286,7 @@
 							</h2>
 							<p class="mb-6 text-gray-300">{t('raceDayDetails')}</p>
 
-							<a
-								href="/register"
-								class="inline-flex items-center justify-center gap-2 rounded-md border-b-2 border-red-500 bg-white px-6 py-3 font-medium text-gray-900 transition-colors hover:bg-gray-100"
-							>
+							<a href="/register" class="btn-secondary">
 								<FontAwesomeIcon icon={faRunning} class="text-red-500" />
 								<span>{t('registerNow')}</span>
 								<FontAwesomeIcon icon={faChevronRight} class="h-3 w-3" />
@@ -359,12 +332,8 @@
 								</div>
 							</div>
 
-							<div
-								class="flex items-start gap-4 rounded-lg border-l-3 border-red-400/30 bg-gray-50 p-4 transition-colors hover:bg-gray-100"
-							>
-								<div
-									class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md bg-gray-800 text-white"
-								>
+							<div class="info-section-interactive">
+								<div class="icon-container-md">
 									<FontAwesomeIcon icon={faMapPin} class="text-red-100" />
 								</div>
 								<div>
@@ -373,12 +342,8 @@
 								</div>
 							</div>
 
-							<div
-								class="flex items-start gap-4 rounded-lg border-l-3 border-red-400/30 bg-gray-50 p-4 transition-colors hover:bg-gray-100"
-							>
-								<div
-									class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md bg-gray-800 text-white"
-								>
+							<div class="info-section-interactive">
+								<div class="icon-container-md">
 									<FontAwesomeIcon icon={faTint} class="text-red-100" />
 								</div>
 								<div>
@@ -387,12 +352,8 @@
 								</div>
 							</div>
 
-							<div
-								class="flex items-start gap-4 rounded-lg border-l-3 border-red-400/30 bg-gray-50 p-4 transition-colors hover:bg-gray-100"
-							>
-								<div
-									class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md bg-gray-800 text-white"
-								>
+							<div class="info-section-interactive">
+								<div class="icon-container-md">
 									<FontAwesomeIcon icon={faInfoCircle} class="text-red-100" />
 								</div>
 								<div>

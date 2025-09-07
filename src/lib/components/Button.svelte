@@ -1,7 +1,8 @@
+<!-- Reusable Button component with multiple variants and sizes -->
 <script lang="ts">
 	import { cn } from '$lib/utils';
 	
-	// Props
+	// Component props
 	export let variant: 'primary' | 'secondary' | 'light' | 'red' | 'outline' = 'primary';
 	export let href: string | undefined = undefined;
 	export let type: 'button' | 'submit' | 'reset' = 'button';
@@ -9,7 +10,7 @@
 	export let fullWidth: boolean = false;
 	export let size: 'small' | 'medium' | 'large' = 'medium';
 
-	// Optimized computed classes using cn utility
+	// Computed classes for variants and sizes
 	const variantClasses = {
 		primary: 'bg-black text-white border-black hover:bg-gray-800 hover:border-gray-800',
 		secondary: 'bg-transparent text-white border-white hover:bg-white hover:text-black',

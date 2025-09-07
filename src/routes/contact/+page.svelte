@@ -6,7 +6,6 @@
 	import {
 		faEnvelope,
 		faPhone,
-		faLocationDot,
 		faClock,
 		faCheck
 	} from '@fortawesome/free-solid-svg-icons';
@@ -30,10 +29,8 @@
 		form: SuperValidated<FormData>;
 	}
 
-	// Accept data from page.server.js
 	export let data: PageData;
 
-	// Track form status and touched fields
 	let formSubmitted = false;
 	let showSuccess = false;
 	let touchedFields = {
@@ -52,7 +49,6 @@
 		},
 		onResult: () => {
 			showSuccess = true;
-			// Reset touched state when form is successfully submitted
 			touchedFields = {
 				name: false,
 				email: false,
@@ -62,13 +58,11 @@
 		}
 	});
 
-	// Type assertion for error fields
 	$: nameError = $errors?.name ? String($errors.name) : '';
 	$: emailError = $errors?.email ? String($errors.email) : '';
 	$: subjectError = $errors?.subject ? String($errors.subject) : '';
 	$: messageError = $errors?.message ? String($errors.message) : '';
 
-	// Create a safe constraints object
 	$: safeConstraints = {
 		name: $constraints?.name || {},
 		email: $constraints?.email || {},
@@ -81,29 +75,17 @@
 		touchedFields[field] = true;
 	}
 
-	// Helper to determine if we should show an error
 	function shouldShowError(field: keyof typeof touchedFields, error: string) {
-		// Only show errors if the field has been touched or form was submitted
 		if ((formSubmitted || touchedFields[field]) && error) {
-			// Translate the error message
 			return true;
 		}
 		return false;
-	}
-
-	// Translate error message
-	function translateError(error: string): string {
-		// If the error message is a translation key, translate it
-		// This needs to use the imported tStore ($t) now or be adjusted
-		// For now, let's assume error messages from superforms are already strings or pre-translated
-		// If they are keys, this function needs to use $t(error)
-		return error; // Simplified for now, may need to revisit if errors are keys
 	}
 </script>
 
 <div class="min-h-screen" in:fade>
 	<!-- Simple header with subtle texture -->
-	<header class="bg-black py-16 text-white">
+	<header class="bg-hero-dark">
 		<div class="mx-auto max-w-screen-xl px-6">
 			<h1 class="text-4xl font-bold">{$t('contactTitle')}</h1>
 			<div class="mt-4 mb-4 h-1 w-16 bg-red-500"></div>
@@ -119,32 +101,21 @@
 					<h2 class="mb-6 border-b pb-2 text-xl font-semibold">{$t('getInTouch')}</h2>
 
 					<ul class="mb-10 space-y-6 text-gray-700">
-						<ContactItem icon={faEnvelope} title={$t('email')} href="mailto:info@sandvikenmarathon.se">
-							info@sandvikenmarathon.se
+						<ContactItem icon={faEnvelope} title={$t('email')} href="mailto:traningsgruppensandviken@outlook.com">
+							traningsgruppensandviken@outlook.com
 						</ContactItem>
 
-						<ContactItem icon={faPhone} title={$t('phone')} href="tel:+461234567">
-							+46 (0) 123 456 789
+						<ContactItem icon={faPhone} title={$t('phone')} href="tel:+46(0) 705 713 800 , +46(0) 732 027 032">
+							+46 (0) 705 713 800 , +46(0) 732 027 032
 						</ContactItem>
 
-						<ContactItem icon={faLocationDot} title={$t('address')}>
-							<address class="not-italic">
-								Marathon Office<br />
-								Sandviken City Center<br />
-								811 80 Sandviken, Sweden
-							</address>
-						</ContactItem>
-
-						<ContactItem icon={faClock} title={$t('officeHours')}>
-							<p>{$t('monToFri')}</p>
-							<p>{$t('weekends')}</p>
+						<ContactItem icon={faClock} title={$t('telephoneHours')}>
 						</ContactItem>
 					</ul>
 
 					<h2 class="mb-6 border-b pb-2 text-xl font-semibold">{$t('followUs')}</h2>
 					<div class="flex space-x-4">
 						<SocialLink icon={faFacebookF} href="https://facebook.com" label="Facebook" variant="contact" />
-						<SocialLink icon={faTwitter} href="https://twitter.com" label="Twitter" variant="contact" />
 						<SocialLink icon={faInstagram} href="https://instagram.com" label="Instagram" variant="contact" />
 					</div>
 				</div>
@@ -154,7 +125,7 @@
 					<h2 class="mb-6 border-b pb-2 text-xl font-semibold">{$t('sendMessage')}</h2>
 
 					{#if showSuccess}
-						<div class="mb-6 border-l-4 border-green-500 bg-green-50 p-4 text-green-700">
+						<div class="bg-success mb-6">
 							<div class="flex">
 								<div class="flex-shrink-0">
 									<Fa icon={faCheck} class="text-green-500" />
@@ -173,7 +144,7 @@
 								name="name"
 								bind:value={$form.name}
 								label={$t('formName')}
-								error={shouldShowError('name', nameError) ? translateError(nameError) : undefined}
+								error={shouldShowError('name', nameError) ? nameError : undefined}
 								placeholder={$t('formName')}
 								required={true}
 								on:blur={() => handleBlur('name')}
@@ -186,9 +157,7 @@
 								type="email"
 								bind:value={$form.email}
 								label={$t('formEmail')}
-								error={shouldShowError('email', emailError)
-									? translateError(emailError)
-									: undefined}
+								error={shouldShowError('email', emailError) ? emailError : undefined}
 								placeholder={$t('formEmail')}
 								required={true}
 								on:blur={() => handleBlur('email')}
@@ -201,9 +170,7 @@
 							name="subject"
 							bind:value={$form.subject}
 							label={$t('formSubject')}
-							error={shouldShowError('subject', subjectError)
-								? translateError(subjectError)
-								: undefined}
+							error={shouldShowError('subject', subjectError) ? subjectError : undefined}
 							placeholder={$t('formSubject')}
 							required={true}
 							on:blur={() => handleBlur('subject')}
@@ -215,9 +182,7 @@
 							name="message"
 							bind:value={$form.message}
 							label={$t('formMessage')}
-							error={shouldShowError('message', messageError)
-								? translateError(messageError)
-								: undefined}
+							error={shouldShowError('message', messageError) ? messageError : undefined}
 							placeholder={$t('formMessage')}
 							required={true}
 							rows={5}

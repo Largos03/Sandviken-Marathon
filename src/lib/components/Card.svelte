@@ -1,10 +1,13 @@
+<!-- Reusable Card component with optional link, title, and styling variants -->
 <script lang="ts">
+	// Component props
 	export let href: string | undefined = undefined;
 	export let title: string | undefined = undefined;
 	export let elevated: boolean = false;
 	export let interactive: boolean = false;
 	export let padding: 'none' | 'small' | 'medium' | 'large' = 'medium';
 
+	// Computed classes for padding
 	$: paddingClass = {
 		none: 'p-0',
 		small: 'p-3',
@@ -12,6 +15,7 @@
 		large: 'p-8'
 	}[padding];
 
+	// Computed base classes for styling
 	$: baseClasses = `
     bg-white rounded-lg overflow-hidden
     ${elevated ? 'shadow-md' : 'border border-gray-100'}

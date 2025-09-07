@@ -1,6 +1,5 @@
-// place files you want to import through the `$lib` alias in this folder.
-
-// Export components
+// Main library exports for the Sandviken Half-marathon website
+// Includes all reusable components, stores, and utility functions
 export { default as Navbar } from './components/Navbar.svelte';
 export { default as CookieConsent } from './components/CookieConsent.svelte';
 export { default as Button } from './components/Button.svelte';
@@ -13,14 +12,9 @@ export { default as TabsNav } from './components/TabsNav.svelte';
 export { default as ImageModal } from './components/ImageModal.svelte';
 export { default as TabHandler } from './components/TabHandler.svelte';
 export { default as HeroSection } from './components/HeroSection.svelte';
-
-// Export optimized components
-export { default as IconButton } from './components/IconButton.svelte';
 export { default as IconCard } from './components/IconCard.svelte';
 export { default as CountdownTimer } from './components/CountdownTimer.svelte';
 export { default as StatsCard } from './components/StatsCard.svelte';
-
-// Export new optimization components
 export { default as ContactItem } from './components/ContactItem.svelte';
 export { default as NumberedStep } from './components/NumberedStep.svelte';
 export { default as SocialLink } from './components/SocialLink.svelte';
@@ -29,8 +23,5 @@ export { default as FeatureHighlight } from './components/FeatureHighlight.svelt
 export { default as InfoItem } from './components/InfoItem.svelte';
 export { default as InfoCard } from './components/InfoCard.svelte';
 
-// Export translation utilities
 export { language, t, tStore, detectBrowserLanguage } from './stores/i18n';
-
-// Export utility functions
 export { cn } from './utils';

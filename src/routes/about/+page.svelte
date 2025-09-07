@@ -17,16 +17,11 @@
 	} from '@fortawesome/free-solid-svg-icons';
 	import { NumberedStep } from '$lib';
 	import Container from '$lib/components/Container.svelte';
-	import SectionHeading from '$lib/components/SectionHeading.svelte';
-	import ResponsiveGrid from '$lib/components/ResponsiveGrid.svelte';
 
-	// Use derived translation store for reactivity
 	$: t = $tStore;
 
-	// Active tab state
 	let activeTab = 'mission';
 
-	// Tabs structure - now reactive to translation changes
 	$: tabs = [
 		{ id: 'mission', label: t('aboutMission'), icon: faHeart },
 		{ id: 'history', label: t('aboutHistoryTitle'), icon: faHistory },
@@ -38,12 +33,10 @@
 
 	function setActiveTab(tabId: string): void {
 		activeTab = tabId;
-		// Update URL hash without scrolling
 		history.replaceState(null, '', `#${tabId}`);
 	}
 
 	onMount(() => {
-		// Check for hash in URL to set active tab
 		const hash = window.location.hash.substring(1);
 		if (hash && tabs.some((tab) => tab.id === hash)) {
 			activeTab = hash;
@@ -54,7 +47,7 @@
 <svelte:head>
 	<title>{t('aboutPageTitle')}</title>
 	<meta name="description" content={t('aboutIntro')} />
-	<link rel="canonical" href="https://sandvikenmarathon.com/about" />
+	<link rel="canonical" href="https://sandvikenhalfmarathon.com/about" />
 </svelte:head>
 
 <div in:fade={{ duration: 300 }}>
@@ -118,7 +111,7 @@
 	<!-- Main Content Area -->
 	<section class="bg-gray-50 py-16 md:py-24">
 		<Container>
-			<div class="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-xl">
+			<div class="card-main">
 				<div
 					class="min-h-[60vh] bg-gradient-to-b from-white to-gray-50 p-6 md:p-8"
 					transition:fade={{ duration: 300 }}
@@ -126,10 +119,8 @@
 				<!-- Tab Content -->
 				{#if activeTab === 'mission'}
 					<!-- Tab Header -->
-					<div class="mb-6 flex flex-col items-start md:flex-row md:items-center">
-						<div
-							class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg border-b-4 border-red-500 bg-gray-800 text-white shadow-md md:mr-4 md:mb-0"
-						>
+					<div class="layout-header">
+						<div class="icon-container-lg layout-icon-spacing">
 							<FontAwesomeIcon icon={faHeart} size="lg" class="text-red-100" />
 						</div>
 						<div>
@@ -172,10 +163,8 @@
 
 				{#if activeTab === 'history'}
 					<!-- Tab Header -->
-					<div class="mb-6 flex flex-col items-start md:flex-row md:items-center">
-						<div
-							class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg border-b-4 border-red-500 bg-gray-800 text-white shadow-md md:mr-4 md:mb-0"
-						>
+					<div class="layout-header">
+						<div class="icon-container-lg layout-icon-spacing">
 							<FontAwesomeIcon icon={faHistory} size="lg" class="text-red-100" />
 						</div>
 						<div>
@@ -201,9 +190,7 @@
 				{#if activeTab === 'values'}
 					<!-- Tab Header -->
 					<div class="mb-6 flex flex-col items-start md:flex-row md:items-center">
-						<div
-							class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg border-b-4 border-red-500 bg-gray-800 text-white shadow-md md:mr-4 md:mb-0"
-						>
+						<div class="icon-container-lg layout-icon-spacing">
 							<FontAwesomeIcon icon={faLightbulb} size="lg" class="text-red-100" />
 						</div>
 						<div>
@@ -214,12 +201,8 @@
 
 					<div class="grid gap-6 md:grid-cols-3">
 						<!-- Value Card -->
-						<div
-							class="cursor-pointer rounded-xl border-b-4 border-red-500/40 bg-gray-50 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-red-500 hover:shadow-lg"
-						>
-							<div
-								class="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-gray-900 text-white"
-							>
+						<div class="card-feature">
+							<div class="icon-container-md mb-4 bg-gray-900">
 								<FontAwesomeIcon icon={faUsers} />
 							</div>
 							<h3 class="mb-2 text-xl font-semibold">{t('aboutValuesCommunity')}</h3>
@@ -229,12 +212,8 @@
 						</div>
 
 						<!-- Value Card -->
-						<div
-							class="cursor-pointer rounded-xl border-b-4 border-red-500/40 bg-gray-50 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-red-500 hover:shadow-lg"
-						>
-							<div
-								class="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-gray-900 text-white"
-							>
+						<div class="card-feature">
+							<div class="icon-container-md mb-4 bg-gray-900">
 								<FontAwesomeIcon icon={faMedal} />
 							</div>
 							<h3 class="mb-2 text-xl font-semibold">{t('aboutValuesExcellence')}</h3>
@@ -244,12 +223,8 @@
 						</div>
 
 						<!-- Value Card -->
-						<div
-							class="cursor-pointer rounded-xl border-b-4 border-red-500/40 bg-gray-50 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-red-500 hover:shadow-lg"
-						>
-							<div
-								class="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-gray-900 text-white"
-							>
+						<div class="card-feature">
+							<div class="icon-container-md mb-4 bg-gray-900">
 								<FontAwesomeIcon icon={faHeart} />
 							</div>
 							<h3 class="mb-2 text-xl font-semibold">{t('aboutValuesInclusivity')}</h3>
@@ -262,10 +237,8 @@
 
 				{#if activeTab === 'details'}
 					<!-- Tab Header -->
-					<div class="mb-6 flex flex-col items-start md:flex-row md:items-center">
-						<div
-							class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg border-b-4 border-red-500 bg-gray-800 text-white shadow-md md:mr-4 md:mb-0"
-						>
+					<div class="layout-header">
+						<div class="icon-container-lg layout-icon-spacing">
 							<FontAwesomeIcon icon={faInfoCircle} size="lg" class="text-red-100" />
 						</div>
 						<div>
@@ -274,58 +247,36 @@
 						</div>
 					</div>
 
-					<div class="grid gap-6 md:grid-cols-2">
-						<!-- Detail Card -->
-						<div class="rounded-xl border-l-3 border-red-400/30 bg-gray-50 p-5">
+					<div class="grid gap-6 md:grid-cols-1">
+						<!-- Stadsparken Details -->
+						<div class="info-section">
 							<div class="mb-3 flex items-center">
-								<div
-									class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-gray-800 text-white"
-								>
-									<FontAwesomeIcon icon={faCalendarAlt} />
-								</div>
-								<h3 class="font-semibold">{t('eventDateTime')}</h3>
-							</div>
-							<p class="text-gray-600">
-								{t('eventDateTimeDesc')}
-							</p>
-							<div class="mt-4 flex items-center text-sm text-gray-500">
-								<span class="mr-2 font-semibold text-red-900">{t('eventStartTime')}</span> {t('eventStartTimeValue')}
-							</div>
-							<div class="mt-1 flex items-center text-sm text-gray-500">
-								<span class="mr-2 font-semibold text-red-900">{t('eventRegistrationOpens')}</span> {t('eventRegistrationOpensValue')}
-							</div>
-						</div>
-
-						<!-- Detail Card -->
-						<div class="rounded-xl border-l-3 border-red-400/30 bg-gray-50 p-5">
-							<div class="mb-3 flex items-center">
-								<div
-									class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-gray-800 text-white"
-								>
+								<div class="icon-container-md mr-3">
 									<FontAwesomeIcon icon={faMapMarkerAlt} />
 								</div>
-								<h3 class="font-semibold">{t('eventLocation')}</h3>
+								<h3 class="font-semibold">{t('stadsparkenTitle')}</h3>
 							</div>
-							<p class="text-gray-600">
-								{t('eventLocationDesc')}
+							<p class="text-gray-600 mb-4">
+								{t('stadsparkenIntro')}
 							</p>
-							<div class="mt-4 flex items-center text-sm text-gray-500">
-								<span class="mr-2 font-semibold text-red-900">{t('eventStartFinish')}</span> {t('eventStartFinishValue')}
-							</div>
-							<div class="mt-1 flex items-center text-sm text-gray-500">
-								<span class="mr-2 font-semibold text-red-900">{t('eventParking')}</span> {t('eventParkingValue')}
-							</div>
+							<ul class="text-gray-600 space-y-2">
+								<li><strong>{t('bessemerHall')}:</strong> {t('bessemerHallDesc')}</li>
+								<li><strong>{t('lekpark')}:</strong> {t('lekparkDesc')}</li>
+								<li><strong>{t('dromfabriken')}:</strong> {t('dromfabrikenDesc')}</li>
+								<li><strong>{t('scene')}:</strong> {t('sceneDesc')}</li>
+								<li><strong>{t('basketplan')}:</strong> {t('basketplanDesc')}</li>
+								<li><strong>{t('parking')}:</strong> {t('parkingDesc')}</li>
+								<li><strong>{t('finisherArea')}:</strong> {t('finisherAreaDesc')}</li>
+							</ul>
 						</div>
 					</div>
 
 					<div class="mt-6">
 						<!-- Highlight Box -->
-						<div
-							class="relative mt-2 overflow-hidden rounded-lg border-l-4 border-red-500 bg-gradient-to-br from-gray-900 to-gray-800 p-5 text-white shadow-md"
-						>
+						<div class="card-info">
 							<div class="bg-opacity-20 absolute inset-0 bg-red-500 opacity-10"></div>
 							<div class="relative z-10">
-								<p>{t('eventDetailsDesc')}</p>
+								<p>{t('riskSummary')}</p>
 							</div>
 						</div>
 					</div>
@@ -333,10 +284,8 @@
 
 				{#if activeTab === 'community'}
 					<!-- Tab Header -->
-					<div class="mb-6 flex flex-col items-start md:flex-row md:items-center">
-						<div
-							class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg border-b-4 border-red-500 bg-gray-800 text-white shadow-md md:mr-4 md:mb-0"
-						>
+					<div class="layout-header">
+						<div class="icon-container-lg layout-icon-spacing">
 							<FontAwesomeIcon icon={faUsers} size="lg" class="text-red-100" />
 						</div>
 						<div>
@@ -397,10 +346,8 @@
 
 				{#if activeTab === 'future'}
 					<!-- Tab Header -->
-					<div class="mb-6 flex flex-col items-start md:flex-row md:items-center">
-						<div
-							class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg border-b-4 border-red-500 bg-gray-800 text-white shadow-md md:mr-4 md:mb-0"
-						>
+					<div class="layout-header">
+						<div class="icon-container-lg layout-icon-spacing">
 							<FontAwesomeIcon icon={faTrophy} size="lg" class="text-red-100" />
 						</div>
 						<div>
@@ -417,9 +364,7 @@
 							</p>
 						</div>
 
-						<div
-							class="relative flex h-full flex-col justify-center overflow-hidden rounded-lg border-l-4 border-red-500 bg-gray-900 p-6 text-white shadow-md"
-						>
+						<div class="card-info relative flex h-full flex-col justify-center">
 							<div class="bg-opacity-20 absolute inset-0 bg-red-500 opacity-10"></div>
 							<div class="relative z-10 flex items-center">
 								<div class="mr-4">
@@ -430,10 +375,7 @@
 									<p class="font-medium">
 										{t('joinLegacyDesc')}
 									</p>
-									<a
-										href="/register"
-										class="mt-4 inline-block rounded-md border-b-2 border-red-500 bg-white px-6 py-2.5 font-medium text-gray-900 transition-all duration-300 hover:-translate-y-1 hover:bg-gray-100 hover:shadow-lg"
-									>
+									<a href="/register" class="btn-secondary mt-4">
 										<span class="flex items-center"
 											>{t('registerNow')} <FontAwesomeIcon
 												icon={faChevronRight}

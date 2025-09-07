@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import { onMount } from 'svelte';
 	import { tStore } from '$lib/stores/i18n';
 	import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
 	import {
@@ -30,19 +29,16 @@
 		time: string;
 	};
 
-	// Import page data
 	export let data: { results: Result[]; resultDownload: string | null; availableYears: string[] };
 
-	// Use the derived translation store
 	$: t = $tStore;
 
 	let loading = false;
 	let error = '';
 	let searchQuery = '';
-	let sortField: keyof Result | 'position' = 'position'; // Ensure sortField is a key of Result
+	let sortField: keyof Result | 'position' = 'position';
 	let sortDirection: 'asc' | 'desc' = 'asc';
 
-	// Use server data for results (default to latest year)
 	$: results = data.results || [];
 	$: resultDownload = data.resultDownload;
 
@@ -61,20 +57,17 @@
 				? Number(aValue) - Number(bValue)
 				: Number(bValue) - Number(aValue);
 		} else if (sortField === 'time') {
-			// Ensure aValue and bValue are strings for localeCompare if they are not already
 			const timeA = String(aValue);
 			const timeB = String(bValue);
 			return sortDirection === 'asc' ? timeA.localeCompare(timeB) : timeB.localeCompare(timeA);
 		}
 
-		// Default sort for other string fields (name, country, category)
 		const valA = String(aValue);
 		const valB = String(bValue);
 		return sortDirection === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
 	});
 
 	const handleSort = (field: keyof Result) => {
-		// Typed field
 		if (sortField === field) {
 			sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
 		} else {
@@ -83,11 +76,6 @@
 		}
 	};
 
-	onMount(() => {
-		// No longer using 'visible'
-	});
-
-	// Calculate medal colors for positions
 	const getMedalColor = (position: number) => {
 		if (position === 1) return 'bg-yellow-400';
 		if (position === 2) return 'bg-gray-300';
@@ -95,19 +83,18 @@
 		return 'bg-gray-100';
 	};
 
-	// Format time for better display
 	const formatTime = (time: string) => {
 		return time;
 	};
 </script>
 
 <svelte:head>
-	<title>{t('resultsTitle')} | Sandviken Marathon</title>
+	<title>{t('resultsTitle')} | Sandviken Half-marathon</title>
 	<meta name="description" content={t('resultsDescription')} />
 </svelte:head>
 
 <div class="min-h-screen bg-gray-50" in:fade>
-	<div class="relative overflow-hidden bg-black py-10 text-white md:py-16">
+	<div class="bg-hero-dark">
 		<Container className="relative z-10 py-8 md:py-12">
 			<SectionHeading level={1} className="text-white mb-6">{t('resultsTitle')}</SectionHeading>
 			<div class="mb-8 h-1 w-32 -skew-x-12 transform bg-red-500/70"></div>
@@ -169,10 +156,7 @@
 
 				<!-- Error message -->
 				{#if error}
-					<div
-						class="mb-6 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-red-700"
-						role="alert"
-					>
+					<div class="bg-error mb-6" role="alert">
 						{error}
 					</div>
 				{/if}
@@ -280,11 +264,7 @@
 							</p>
 						</div>
 						<div class="sm:ml-auto">
-							<a
-								href={resultDownload}
-								class="inline-flex items-center justify-center gap-2 rounded-md border border-red-500/20 bg-black px-4 py-2 text-white transition-colors hover:border-red-500/40 hover:bg-gray-800"
-								download
-							>
+							<a href={resultDownload} class="btn-primary" download>
 								<FontAwesomeIcon icon={faDownload} />
 							</a>
 						</div>

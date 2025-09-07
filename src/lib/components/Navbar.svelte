@@ -1,10 +1,10 @@
+<!-- Main Navigation Component with mobile menu and language toggle -->
 <script lang="ts">
 	// Using vanilla JavaScript in the onMount lifecycle
 	import { onMount } from 'svelte';
 
 	// Import FontAwesome for icons
 	import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';	import {
-		faBars,
 		faTimes,
 		faGlobe,
 		faHome,
@@ -19,7 +19,7 @@
 	// Import language store
 	import { language, tStore } from '$lib/stores/i18n';
 
-	// States
+	// Component state variables
 	let mobileMenuOpen = false;
 	let lastScrollY = 0;
 	let menuButton: HTMLButtonElement;
@@ -34,7 +34,7 @@
 		{ href: '/contact', icon: faPhone, key: 'contact' }
 	];
 
-	// Mobile menu handling
+	// Mobile menu handling functions
 	function toggleMobileMenu(): void {
 		mobileMenuOpen = !mobileMenuOpen;
 		if (typeof document !== 'undefined') {
@@ -51,7 +51,7 @@
 		}
 	}
 
-	// Language toggle
+	// Language toggle function
 	function toggleLanguage(): void {
 		$language = $language === 'en' ? 'sv' : 'en';
 		if (typeof localStorage !== 'undefined') {
@@ -181,7 +181,7 @@
 			<a href="/" class="ml-3 flex items-center md:ml-0">
 				<img
 					src="/Logo.png"
-					alt="Sandviken Marathon Logo"
+					alt="Sandviken Half-marathon Logo"
 					class="h-10 w-auto drop-shadow-sm filter transition-transform duration-200 hover:scale-105"
 				/>
 			</a>
@@ -280,7 +280,7 @@
 		<div class="border-t border-gray-100 p-4">
 			<div class="flex items-center justify-between">
 				<div class="text-sm text-gray-600">
-					<div class="font-medium">April 1, 2026</div>
+					<div class="font-medium">August 22, 2026</div>
 					<div class="text-xs text-gray-500">Sandviken, Sweden</div>
 				</div>
 				<button

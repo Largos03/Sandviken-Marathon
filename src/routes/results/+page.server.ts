@@ -1,6 +1,5 @@
 import type { PageServerLoad } from './$types';
 
-// Results data per year (could be loaded from a file or DB in the future)
 const resultsData: Record<string, Array<{ position: number; name: string; country: string; category: string; time: string }>> = {
 	'2026': [
 		{ position: 1, name: 'Emil Gustafsson', country: 'Sweden', category: 'menCategory', time: '2:43:12' },

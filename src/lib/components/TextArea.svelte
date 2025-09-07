@@ -1,5 +1,6 @@
+<!-- Reusable TextArea component with validation and accessibility -->
 <script lang="ts">
-	// Props
+	// Component props
 	export let id: string;
 	export let name: string;
 	export let label: string | undefined = undefined;
@@ -12,10 +13,10 @@
 	export let rows: number = 4;
 	export let maxlength: number | undefined = undefined;
 
-	// Bind to actual textarea element
+	// Reference to the textarea element
 	let textareaElement: HTMLTextAreaElement;
 
-	// Forward focus
+	// Method to focus the textarea
 	export const focus = () => {
 		if (textareaElement) {
 			textareaElement.focus();

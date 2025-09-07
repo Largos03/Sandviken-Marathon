@@ -1,7 +1,9 @@
+<!-- Sidebar Navigation component with tabs -->
 <script lang="ts">
 	import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
 	import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
+	// Component props
 	export let tabs: { id: string; label: string; icon: IconDefinition }[] = [];
 	export let activeTab: string;
 	export let title: string;

@@ -75,7 +75,7 @@
 								>
 									{t('courseLength')}
 								</p>
-								<h3 class="text-lg font-bold text-gray-900 sm:text-xl">21.60 km</h3>
+								<h3 class="text-lg font-bold text-gray-900 sm:text-xl">21.1 km</h3>
 							</div>
 						</div>
 					</div>
@@ -96,7 +96,7 @@
 								>
 									{t('elevationGain')}
 								</p>
-								<h3 class="text-lg font-bold text-gray-900 sm:text-xl">165m</h3>
+								<h3 class="text-lg font-bold text-gray-900 sm:text-xl">74m</h3>
 							</div>
 						</div>
 					</div>
@@ -117,7 +117,7 @@
 								>
 									{t('aidStations')}
 								</p>
-								<h3 class="text-lg font-bold text-gray-900 sm:text-xl">6</h3>
+								<h3 class="text-lg font-bold text-gray-900 sm:text-xl">5</h3>
 							</div>
 						</div>
 					</div>
@@ -189,9 +189,10 @@
 							<div>
 								<h4 class="mb-2 font-medium text-gray-900">{t('waterStations')}</h4>
 								<div class="flex flex-wrap gap-2">
-									<span class="btn-tag">5km</span>
-									<span class="btn-tag">10km</span>
-									<span class="btn-tag">15km</span>
+									<span class="btn-tag">4km</span>
+									<span class="btn-tag">9km</span>
+									<span class="btn-tag">14km</span>
+									<span class="btn-tag">19km</span>
 									<span class="btn-tag">21km</span>
 								</div>
 								<p class="mt-2 text-sm text-gray-600">{t('waterStationDetails')}</p>

@@ -15,11 +15,8 @@ export const aboutTranslations = {
     aboutMissionHighlight:
       'Join us as we build a community of runners who inspire and challenge each other to reach new heights.',
     aboutHistoryTitle: 'Our History',
-    aboutHistorySubtitle: 'Our journey from the beginning',
     aboutHistoryDesc:
       'The Sandviken Half-marathon was established in 2023 with a vision to bring the community together through the power of running.',
-    aboutHistoryGrowth:
-      'Since our inception, the Sandviken Half-marathon has grown from a small local event to a nationally recognized race. We\'ve welcomed thousands of runners, created countless memories, and supported numerous charitable causes.',
     aboutHistoryFirstEvent: 'First Event',
     aboutHistoryFirstEventDesc: 'Our inaugural half-marathon brought together 500 runners from across the region.',
     aboutHistoryGrowingCommunity: 'Growing Community',
@@ -99,14 +96,11 @@ export const aboutTranslations = {
       'Välkommen till Sandviken Halvmarathon, ett förstklassigt löpevenemang som samlar atleter, entusiaster och samhället i en firande av uthållighet, beslutsamhet och prestation. Vårt uppdrag är att främja hälsa, fitness och gemenskapsanda genom löpandets kraft.',
     aboutMissionHighlight:
       'Följ med oss när vi bygger en gemenskap av löpare som inspirerar och utmanar varandra att nå nya höjder.',
-    aboutHistoryTitle: 'Vår Historia',
-    aboutHistorySubtitle: 'Vår resa från början',
+    aboutHistoryTitle: 'Vår historia har just börjat skrivas.',
     aboutHistoryDesc:
-      'Sandviken Halvmarathon grundades 2023 med en vision att föra samman gemenskapen genom löpandets kraft.',
-    aboutHistoryGrowth:
-      'Sedan starten har Sandviken Halvmarathon växt från ett litet lokalt evenemang till ett nationellt erkänt lopp. Vi har välkomnat tusentals löpare, skapat otaliga minnen och stött många välgörande ändamål.',
+      'I augusti 2026 går startskottet för vårt allra första lopp och vi vill göra det tillsammans med er. Hjälp oss att forma ett vackert första kapitel för träning, motion och löpning.Låt oss skapa något meningsfullt, där alla är med sida vid sida, steg för steg.',
     aboutHistoryFirstEvent: 'Första Evenemanget',
-    aboutHistoryFirstEventDesc: 'Vårt första halvmaraton samlade 500 löpare från hela regionen.',
+    aboutHistoryFirstEventDesc: 'hoppas samla 200-300 löpare från hela landet.',
     aboutHistoryGrowingCommunity: 'Växande Gemenskap',
     aboutHistoryGrowingCommunityDesc: 'Vi utökade våra loppkategorier och välkomnade fler deltagare varje år.',
     aboutHistoryNationalRecognition: 'Nationellt Erkännande',

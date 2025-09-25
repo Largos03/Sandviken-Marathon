@@ -169,16 +169,12 @@
 						</div>
 						<div>
 							<h2 class="text-2xl font-bold">{t('aboutHistoryTitle')}</h2>
-							<p class="text-gray-500">{t('aboutHistorySubtitle')}</p>
 						</div>
 					</div>
 
 					<div class="grid gap-6 md:grid-cols-2">
 						<div>
 							<p class="mb-4 text-gray-700">{t('aboutHistoryDesc')}</p>
-							<p class="text-gray-700">
-								{t('aboutHistoryGrowth')}
-							</p>
 						</div>						<div class="flex flex-col space-y-4">
 							<NumberedStep number={1} title={t('aboutHistoryFirstEvent')} description={t('aboutHistoryFirstEventDesc')} variant="black" />
 							<NumberedStep number={2} title={t('aboutHistoryGrowingCommunity')} description={t('aboutHistoryGrowingCommunityDesc')} variant="black" />

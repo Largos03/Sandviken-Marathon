@@ -3,7 +3,7 @@ export const resultsTranslations = {
   en: {
     // Results page
     resultsTitle: 'Race Results',
-    resultsIntro: 'View the official results from the Sandviken Half-marathon.',
+    resultsIntro: 'The results for the half-marathon will be available here after the event.',
     resultsComingSoon: 'Results Coming Soon',
     resultsWillBeAvailable: 'The results for the Sandviken Half-marathon 2026 will be available here after the event.',
     checkBackLater: 'Please check back after August 22, 2026.',
@@ -40,7 +40,7 @@ export const resultsTranslations = {
     resultsTitle: 'Loppresultat',
     resultsIntro: 'Se de officiella resultaten från Sandviken Halvmarathon.',
     resultsComingSoon: 'Resultat Kommer Snart',
-    resultsWillBeAvailable: 'Resultaten för Sandviken Halvmarathon 2026 kommer att finnas tillgängliga här efter evenemanget.',
+    resultsWillBeAvailable: 'Resultaten för Sandviken Halvmarathon 2026 kommer att finnas här efter evenemanget.',
     checkBackLater: 'Vänligen återkom efter 22 augusti, 2026.',
     pastResults: 'Tidigare Resultat',
     noPastResults: 'Inga tidigare resultat är tillgängliga ännu.',

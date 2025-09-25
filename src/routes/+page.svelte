@@ -31,7 +31,7 @@
 <svelte:head>
 	<!-- SEO-optimized page title and meta description for search engines -->
 	<!-- Why dynamic: Title includes translated event name for better i18n SEO -->
-	<title>Sandviken Half-marathon 2026 | {t('officialEvent')}</title>
+	<title>{t('officialEvent')}</title>
 	<meta
 		name="description"
 		content={t('metaDescription')}
@@ -72,12 +72,12 @@
 			<h1 class="mb-4 text-5xl leading-tight font-black tracking-tight uppercase md:text-7xl">
 				<div class="flex flex-col items-center">
 					<span class="relative mb-2 inline-block tracking-wide text-white">
-						SANDVIKEN
+						{t('TITLE')}
 						<!-- Underline accent for visual emphasis and brand consistency -->
 						<div class="absolute -right-2 bottom-1.5 -left-2 h-0.5 bg-gradient-to-r from-transparent via-red-500 to-transparent"></div>
 					</span>
 					<span class="relative inline-flex items-center bg-gradient-to-r from-white via-gray-300 to-white bg-clip-text tracking-wide text-transparent">
-						HALF-MARATHON
+						{t('TITLE2')}
 					</span>
 				</div>
 			</h1>

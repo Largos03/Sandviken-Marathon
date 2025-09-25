@@ -141,8 +141,8 @@
 
 					<h2 class="mb-6 border-b pb-2 text-xl font-semibold">{$t('followUs')}</h2>
 					<div class="flex space-x-4">
-						<SocialLink icon={faFacebookF} href="https://facebook.com" label="Facebook" variant="contact" />
-						<SocialLink icon={faInstagram} href="https://instagram.com" label="Instagram" variant="contact" />
+						<SocialLink icon={faFacebookF} href="https://facebook.com/share/1BLyunYz3p/?mibextid=wwXlfr" label="Facebook" variant="contact" />
+						<SocialLink icon={faInstagram} href="https://instagram.com/sandviken21k" label="Instagram" variant="contact" />
 					</div>
 				</div>
 

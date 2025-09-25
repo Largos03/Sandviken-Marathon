@@ -2,6 +2,8 @@
 export const homeTranslations = {
   en: {
     // Meta
+    TITLE: 'Sandviken',
+    TITLE2: 'Half-marathon',
     metaDescription: "Join the inaugural Sandviken Half-marathon in 2026. A premier running event with a scenic route through the heart of Sweden.",
     
     // Hero section
@@ -14,7 +16,7 @@ export const homeTranslations = {
     premierEvent: 'The Premier Running Event in Sandviken',
     joinThousands: "Join runners globally, tracing a path through Sandviken's rich steel town history and alongside its serene Gästrikland lakes and forests",
     raceCategories: 'Race Categories',
-    raceDescription: 'Half Marathon (21.60km) through the beautiful landscapes of Sandviken',
+    raceDescription: 'Half Marathon (21.1km) through the beautiful landscapes of Sandviken',
     viewCategories: 'View Categories',
     scenicRoute: 'Scenic Route',
     routeDescription: "Run through Barrsätra, Sätra, Stensätra, Säljan, and Orta neighborhoods, along the shores of Lake Storsjön, and past significant local landmarks",
@@ -88,6 +90,8 @@ export const homeTranslations = {
   },
   sv: {
     // Meta
+    TITLE: 'Sandviken',
+    TITLE2: 'Halvmarathon',
     metaDescription: "Var med på Sandviken Halvmarathon 2026. Ett förstklassigt löpevenemang med en naturskönn bana genom hjärtat av Sverige.",
     
     // Hero section
@@ -103,7 +107,7 @@ export const homeTranslations = {
     raceDescription: 'Halvmaraton (21,60km) genom Sandvikens vackra landskap',
     viewCategories: 'Visa Kategorier',
     scenicRoute: 'Naturskön rutt',
-    routeDescription: 'Spring genom Barrsätra, Sätra, Stensätra, Säljan och Orta stadsdelar, längs Storsjöns stränder och förbi betydelsefulla lokala landmärken',
+    routeDescription: 'Spring genom Barrsätra, Sätra, Stensätra, Säljan och örta stadsdelar, längs Storsjöns stränder och förbi betydelsefulla lokala landmärken',
     exploreRoute: 'Utforska Rutten',
     prizesAwards: 'Priser & Utmärkelser',
     prizesDescription: 'Exklusiva medaljer för alla målgångare och specialpriser för topputförare',

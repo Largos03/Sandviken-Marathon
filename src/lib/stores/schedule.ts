@@ -3,7 +3,6 @@ export const scheduleTranslations = {
   en: {
     // Race Day Schedule
     raceDaySchedule: 'Race Day Schedule',
-    raceDayDate: 'April 1, 2026',
     raceVillageOpens: '6:00 AM',
     raceVillageOpensText: 'Race village opens with registration, packet pickup, and vendor booths',
     warmupSession: '7:30 AM',
@@ -23,7 +22,6 @@ export const scheduleTranslations = {
     eventSchedule: 'Event Schedule',
     preRaceDay: 'March 31, 2026',
     preRaceDayText: 'Pre-race expo and packet pickup (10:00 AM - 8:00 PM)',
-    raceDayFull: 'April 1, 2026',
     raceDayFullText: 'Race day with multiple start times (see race day schedule)',
     locationDetails: 'Location Details',
     startFinishArea: 'Start/Finish Area',
@@ -43,7 +41,6 @@ export const scheduleTranslations = {
   sv: {
     // Race Day Schedule
     raceDaySchedule: 'Tidsschema för loppdag',
-    raceDayDate: '1 april 2026',
     raceVillageOpens: '6:00',
     raceVillageOpensText: 'Tävlingsområdet öppnar med registrering, nummerlappsutdelning och utställare',
     warmupSession: '7:30',
@@ -63,7 +60,6 @@ export const scheduleTranslations = {
     eventSchedule: 'Evenemangsschema',
     preRaceDay: '31 mars 2026',
     preRaceDayText: 'Expo före tävling och nummerlappsutdelning (10:00 - 20:00)',
-    raceDayFull: '1 april 2026',
     raceDayFullText: 'Tävlingsdag med flera starttider (se schema för tävlingsdagen)',
     locationDetails: 'Platsdetaljer',
     startFinishArea: 'Start/Målområde',

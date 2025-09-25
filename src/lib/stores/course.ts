@@ -5,7 +5,7 @@ export const courseTranslations = {
     coursePageTitle: 'The Course',
     coursePageIntro: 'Experience a meticulously designed route that showcases the best of Sandviken',
     courseHeading: 'Sandviken Half-marathon - Course Description',
-    courseWelcomeText: 'Welcome to Sandviken Half-marathon, a race where every step is carried by nature\'s beauty, the city\'s pulse, and people\'s engagement. The start takes place near Sandvik Coromant, with the course looping through Sandviken and extending southwards toward the coast and countryside before returning. Here runners, audience, and volunteers gather in a joint movement festival - with music, joy, and anticipation in the air.',
+    courseWelcomeText: 'Welcome to Sandviken Half-marathon, a race where every step is carried by nature\'s beauty, the city\'s pulse, and people\'s engagement. The start takes place in stadsparken Sandviken, with the course looping through Sandviken and extending southwards toward the coast and countryside before returning. Here runners, audience, and volunteers gather in a joint movement festival - with music, joy, and anticipation in the air.',
     courseLength: 'Course Length',
     elevationGain: 'Elevation Gain',
     aidStations: 'Aid Stations',
@@ -16,7 +16,7 @@ export const courseTranslations = {
     courseMapInteractive: 'Click to view larger map',
     elevationProfile: 'Elevation Profile',
     courseDetailsTitle: 'Course Details',
-    courseDescription: 'The Sandviken Half Marathon course is 21.6 km long with a total climb and descent of 165 m. The elevation profile is mostly flat with some gentle rolling hills, making it a relatively fast and manageable course. It starts near Sandvik Coromant and loops through the town, extending southwards toward the coast and countryside before returning. The route passes through Barrsätra, Sätra, Stensätra, Säljan, and Orta neighborhoods, with parts running close to Lake Storsjön shoreline. The course combines both urban streets and more natural/forest areas, providing a scenic route that showcases Sandviken\'s unique blend of industrial heritage and natural beauty.',
+    courseDescription: 'The Sandviken Half Marathon course is 21.1 km long with a total climb and descent of 74 m. The elevation profile is mostly flat with some gentle rolling hills, making it a relatively fast and manageable course. It starts in stadsparken Sandviken and loops through the town, extending southwards toward the coast and countryside before returning. The route passes through Barrsätra, Sätra, Stensätra, Säljan, and Örta neighborhoods, with parts running close to Lake Storsjön shoreline. The course combines both urban streets and more natural/forest areas, providing a scenic route that showcases Sandviken\'s unique blend of industrial heritage and natural beauty.',
     courseHighlights: 'Course Highlights',
     scenicWaterfront: 'Scenic Waterfront',
     historicNeighborhoods: 'Historic Neighborhoods',
@@ -28,11 +28,11 @@ export const courseTranslations = {
     medicalStationDetails: 'Professional medical staff and first aid',
     raceDayInfo: 'Race Day Information',
     raceDayDetails: 'Everything you need to know for a successful race day experience',
-    stadsparkenMapAlt: 'Map of Sandvik Coromant area (Start area)',
+    stadsparkenMapAlt: 'Map of stadsparken Sandviken area (Start area)',
     startTime: 'Start Time',
     startTimeDetails: 'Half Marathon starts at 11:00 AM, Half Marathon at 11:15 AM, 10K at 11:30 AM',
     startLocation: 'Start Location',
-    startLocationDetails: 'Near Sandvik Coromant in Sandviken',
+    startLocationDetails: 'Near stadsparken Sandviken in Sandviken',
     supportAvailable: 'Support Available',
     supportDetails: 'Hydration, nutrition, and medical support throughout the course',
     moreInfo: 'More Information',
@@ -43,7 +43,7 @@ export const courseTranslations = {
     staffingPlanDesc: 'Our race is supported by over 200 trained volunteers and professional staff, including certified medical personnel, experienced race marshals, and dedicated aid station crews. Each kilometer of the course is monitored, and our command center maintains communication with all staff throughout the event.',
 
     // Detailed course description from file
-    courseDescriptionEn: 'The Sandviken Half Marathon course is 21.6 km long with a total climb and descent of 165 m. The elevation profile is mostly flat with some gentle rolling hills, making it a relatively fast and manageable course. It starts near Sandvik Coromant and loops through the town, extending southwards toward the coast and countryside before returning. The route passes through Barrsätra, Sätra, Stensätra, Säljan, and Orta neighborhoods, with parts running close to Lake Storsjön shoreline. The course combines both urban streets and more natural/forest areas, providing a scenic route that showcases Sandviken\'s unique blend of industrial heritage and natural beauty.',
+    courseDescriptionEn: 'The Sandviken Half Marathon course is 21.1 km long with a total climb and descent of 74 m. The elevation profile is mostly flat with some gentle rolling hills, making it a relatively fast and manageable course. It starts near stadsparken Sandviken and loops through the town, extending southwards toward the coast and countryside before returning. The route passes through Barrsätra, Sätra, Stensätra, Säljan, and Örta neighborhoods, with parts running close to Lake Storsjön shoreline. The course combines both urban streets and more natural/forest areas, providing a scenic route that showcases Sandviken\'s unique blend of industrial heritage and natural beauty.',
 
     // Map reveal translations
     mapRevealTitle: 'Map Reveal Countdown',
@@ -55,7 +55,7 @@ export const courseTranslations = {
     coursePageTitle: 'Banan',
     coursePageIntro: 'Upplev en noggrant utformad rutt som visar det bästa av Sandviken',
     courseHeading: 'Sandviken Halvmarathon - Banbeskrivning',
-    courseWelcomeText: 'Välkommen till Sandviken Halvmarathon, ett lopp där varje steg bärs av naturens skönhet, stadens puls och människors engagemang. Starten sker nära Sandvik Coromant, med banan som slingrar genom Sandviken och sträcker sig söderut mot kusten och landsbygden innan den återvänder. Här samlas löpare, publik och volontärer i en gemensam rörelsefest - med musik, glädje och förväntan i luften.',
+    courseWelcomeText: 'Välkommen till Sandviken Halvmarathon, ett lopp där varje steg bärs av naturens skönhet, stadens puls och människors engagemang. Starten sker i stadsparken Sandviken, med banan som slingrar genom Sandviken och sträcker sig söderut mot sjön och landsbygden innan den återvänder. Här samlas löpare, publik och volontärer i en gemensam rörelsefest - med musik, glädje och förväntan i luften.',
     courseLength: 'Banans Längd',
     elevationGain: 'Höjdskillnad',
     aidStations: 'Vätskestationer',
@@ -66,7 +66,7 @@ export const courseTranslations = {
     courseMapInteractive: 'Klicka för att visa större karta',
     elevationProfile: 'Höjdprofil',
     courseDetailsTitle: 'Bandetaljer',
-    courseDescription: 'Sandviken Halvmarathon-banan är 21,6 km lång med en total stigning och nedförsbacke på 165 m. Höjdprofilen är mestadels platt med några lätta kullar, vilket gör den relativt snabb och hanterbar. Den börjar nära Sandvik Coromant och slingrar genom staden, sträcker sig söderut mot kusten och landsbygden innan den återvänder. Rutten passerar genom Barrsätra, Sätra, Stensätra, Säljan och Orta stadsdelar, med delar som löper nära Storsjöns strandlinje. Banan kombinerar både urbana gator och mer naturliga/skogsområden, vilket ger en naturskön rutt som visar Sandvikens unika blandning av industriarv och naturlig skönhet.',
+    courseDescription: 'Sandviken Halvmarathon-banan är 21,1 km lång med en total stigning på 74 m. Höjdprofilen är mestadels platt med några lätta kullar, vilket gör den relativt snabb och hanterbar. Den börjar i stadsparken Sandviken och slingrar genom staden, sträcker sig söderut mot sjön och landsbygden innan den återvänder. Rutten passerar genom Barrsätra, Sätra, Stensätra, Säljan och Örta stadsdelar, med delar som löper nära Storsjöns strandlinje. Banan kombinerar både urbana gator och mer naturliga/skogsområden, vilket ger en naturskön rutt som visar Sandvikens unika blandning av industriarv och naturlig skönhet.',
     courseHighlights: 'Banans höjdpunkter',
     scenicWaterfront: 'Vacker Strandpromenad',
     historicNeighborhoods: 'Historiska Kvarter',
@@ -78,11 +78,11 @@ export const courseTranslations = {
     medicalStationDetails: 'Professionell sjukvårdspersonal och första hjälpen',
     raceDayInfo: 'Information om Loppdag',
     raceDayDetails: 'Allt du behöver veta för en framgångsrik loppupplevelse',
-    stadsparkenMapAlt: 'Karta över Sandvik Coromant-området (Startområde)',
+    stadsparkenMapAlt: 'Karta över stadsparken Sandviken (Startområde)',
     startTime: 'Starttid',
     startTimeDetails: 'Halvmaraton startar kl 11:00, Halvmaraton kl 11:15, 10K kl 11:30',
     startLocation: 'Startplats',
-    startLocationDetails: 'Nära Sandvik Coromant i Sandviken',
+    startLocationDetails: 'I stadsparken Sandviken i Sandviken',
     supportAvailable: 'Tillgängligt Stöd',
     supportDetails: 'Vätska, näring och medicinskt stöd längs hela banan',
     moreInfo: 'Mer Information',
@@ -93,7 +93,7 @@ export const courseTranslations = {
     staffingPlanDesc: 'Vårt lopp stöds av över 200 utbildade volontärer och professionell personal, inklusive certifierad sjukvårdspersonal, erfarna lopp-marskalkar och dedikerade vätskestation-team. Varje kilometer av banan övervakas, och vår kommandocentral upprätthåller kommunikation med all personal under hela evenemanget.',
 
     // Detailed course description from file
-    courseDescriptionSv: 'Sandviken Halvmarathon-banan är 21,6 km lång med en total stigning och nedförsbacke på 165 m. Höjdprofilen är mestadels platt med några lätta kullar, vilket gör den relativt snabb och hanterbar. Den börjar nära Sandvik Coromant och slingrar genom staden, sträcker sig söderut mot kusten och landsbygden innan den återvänder. Rutten passerar genom Barrsätra, Sätra, Stensätra, Säljan och Orta stadsdelar, med delar som löper nära Storsjöns strandlinje. Banan kombinerar både urbana gator och mer naturliga/skogsområden, vilket ger en naturskön rutt som visar Sandvikens unika blandning av industriarv och naturlig skönhet.',
+    courseDescriptionSv: 'Sandviken Halvmarathon-banan är 21,1 km lång med stadsparken Sandviken total stigning på 74 m. Höjdprofilen är mestadels platt med några lätta kullar, vilket gör den relativt snabb och hanterbar. Den börjar i stadsparken Sandviken och slingrar genom staden, sträcker sig söderut mot sjön och landsbygden innan den återvänder. Rutten passerar genom Barrsätra, Sätra, Stensätra, Säljan och Örta stadsdelar, med delar som löper nära Storsjöns strandlinje. Banan kombinerar både urbana gator och mer naturliga/skogsområden, vilket ger en naturskön rutt som visar Sandvikens unika blandning av industriarv och naturlig skönhet.',
 
     // Map reveal translations
     mapRevealTitle: 'Kartavslutning Nedräkning',

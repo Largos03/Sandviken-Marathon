@@ -43,7 +43,12 @@ export const courseTranslations = {
     staffingPlanDesc: 'Our race is supported by over 200 trained volunteers and professional staff, including certified medical personnel, experienced race marshals, and dedicated aid station crews. Each kilometer of the course is monitored, and our command center maintains communication with all staff throughout the event.',
 
     // Detailed course description from file
-    courseDescriptionEn: 'The Sandviken Half Marathon course is 21.6 km long with a total climb and descent of 165 m. The elevation profile is mostly flat with some gentle rolling hills, making it a relatively fast and manageable course. It starts near Sandvik Coromant and loops through the town, extending southwards toward the coast and countryside before returning. The route passes through Barrsätra, Sätra, Stensätra, Säljan, and Orta neighborhoods, with parts running close to Lake Storsjön shoreline. The course combines both urban streets and more natural/forest areas, providing a scenic route that showcases Sandviken\'s unique blend of industrial heritage and natural beauty.'
+    courseDescriptionEn: 'The Sandviken Half Marathon course is 21.6 km long with a total climb and descent of 165 m. The elevation profile is mostly flat with some gentle rolling hills, making it a relatively fast and manageable course. It starts near Sandvik Coromant and loops through the town, extending southwards toward the coast and countryside before returning. The route passes through Barrsätra, Sätra, Stensätra, Säljan, and Orta neighborhoods, with parts running close to Lake Storsjön shoreline. The course combines both urban streets and more natural/forest areas, providing a scenic route that showcases Sandviken\'s unique blend of industrial heritage and natural beauty.',
+
+    // Map reveal translations
+    mapRevealTitle: 'Map Reveal Countdown',
+    mapRevealMessage: 'The maps will be shown on 1/12-2025',
+    mapRevealLabel: 'Time until maps are revealed'
   },
   sv: {
     // Course page
@@ -88,6 +93,11 @@ export const courseTranslations = {
     staffingPlanDesc: 'Vårt lopp stöds av över 200 utbildade volontärer och professionell personal, inklusive certifierad sjukvårdspersonal, erfarna lopp-marskalkar och dedikerade vätskestation-team. Varje kilometer av banan övervakas, och vår kommandocentral upprätthåller kommunikation med all personal under hela evenemanget.',
 
     // Detailed course description from file
-    courseDescriptionSv: 'Sandviken Halvmarathon-banan är 21,6 km lång med en total stigning och nedförsbacke på 165 m. Höjdprofilen är mestadels platt med några lätta kullar, vilket gör den relativt snabb och hanterbar. Den börjar nära Sandvik Coromant och slingrar genom staden, sträcker sig söderut mot kusten och landsbygden innan den återvänder. Rutten passerar genom Barrsätra, Sätra, Stensätra, Säljan och Orta stadsdelar, med delar som löper nära Storsjöns strandlinje. Banan kombinerar både urbana gator och mer naturliga/skogsområden, vilket ger en naturskön rutt som visar Sandvikens unika blandning av industriarv och naturlig skönhet.'
+    courseDescriptionSv: 'Sandviken Halvmarathon-banan är 21,6 km lång med en total stigning och nedförsbacke på 165 m. Höjdprofilen är mestadels platt med några lätta kullar, vilket gör den relativt snabb och hanterbar. Den börjar nära Sandvik Coromant och slingrar genom staden, sträcker sig söderut mot kusten och landsbygden innan den återvänder. Rutten passerar genom Barrsätra, Sätra, Stensätra, Säljan och Orta stadsdelar, med delar som löper nära Storsjöns strandlinje. Banan kombinerar både urbana gator och mer naturliga/skogsområden, vilket ger en naturskön rutt som visar Sandvikens unika blandning av industriarv och naturlig skönhet.',
+
+    // Map reveal translations
+    mapRevealTitle: 'Kartavslutning Nedräkning',
+    mapRevealMessage: 'Kartorna kommer att visas den 1/12-2025',
+    mapRevealLabel: 'Tid tills kartorna avslöjas'
   }
 };

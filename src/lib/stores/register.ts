@@ -20,7 +20,12 @@ export const registerTranslations = {
     secureYourSpot: 'Secure Your Spot Today',
     earlyBirdPromo: "Early bird registration opens soon with exclusive benefits for founding participants. Don't miss your chance to be part of history.",
     registrationOpens: 'Event Date: August 23, 2026',
-    limitedParticipants: 'Limited to 5,000 Participants'
+    limitedParticipants: 'Limited to 5,000 Participants',
+
+    // Registration timer translations
+    registrationTimerTitle: 'Registration Opening Countdown',
+    registrationTimerMessage: 'Registration opens on 1/12-2025',
+    registrationTimerLabel: 'Time until registration opens'
   },
   sv: {
     // Register page
@@ -42,6 +47,11 @@ export const registerTranslations = {
     secureYourSpot: 'Säkra din plats idag',
     earlyBirdPromo: 'Early bird-registrering öppnar snart med exklusiva förmåner för grundande deltagare. Missa inte din chans att bli en del av historien.',
     registrationOpens: 'Evenemangsdatum: 23 augusti 2026',
-    limitedParticipants: 'Begränsat till 5 000 deltagare'
+    limitedParticipants: 'Begränsat till 5 000 deltagare',
+
+    // Registration timer translations
+    registrationTimerTitle: 'Nedräkning för anmälningsöppning',
+    registrationTimerMessage: 'Anmälan öppnar den 1/12-2025',
+    registrationTimerLabel: 'Tid tills anmälan öppnar'
   }
 };

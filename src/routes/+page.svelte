@@ -78,11 +78,6 @@
 					</span>
 					<span class="relative inline-flex items-center bg-gradient-to-r from-white via-gray-300 to-white bg-clip-text tracking-wide text-transparent">
 						HALF-MARATHON
-						<!-- Year badge positioned absolutely for dynamic layout adaptation -->
-						<!-- Why rotated: Creates visual interest and draws attention to the year -->
-						<div class="absolute -top-1 -right-10 rotate-12 transform rounded border-2 border-red-500 bg-white px-2 py-0.5 text-sm font-bold text-black shadow-xl sm:-right-12 md:-right-16">
-							2026
-						</div>
 					</span>
 				</div>
 			</h1>

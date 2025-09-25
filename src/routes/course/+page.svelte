@@ -19,37 +19,13 @@
 		faShieldAlt,
 		faUsers
 	} from '@fortawesome/free-solid-svg-icons';
-	import { ImageModal, FeatureHighlight } from '$lib';
+	import { FeatureHighlight } from '$lib';
 	import Container from '$lib/components/Container.svelte';
 	import SectionHeading from '$lib/components/SectionHeading.svelte';
 	import ResponsiveGrid from '$lib/components/ResponsiveGrid.svelte';
+	import MapRevealTimer from '$lib/components/MapRevealTimer.svelte';
 
 	$: t = $tStore;
-
-	let isMapModalOpen = false;
-	let isStadsparkenModalOpen = false;
-
-	function openMapModal() {
-		isMapModalOpen = true;
-	}
-
-	function openStadsparkenModal() {
-		isStadsparkenModalOpen = true;
-	}
-
-	function handleMapTriggerKeydown(event: KeyboardEvent) {
-		if (event.key === 'Enter' || event.key === ' ') {
-			event.preventDefault();
-			openMapModal();
-		}
-	}
-
-	function handleStadsparkenTriggerKeydown(event: KeyboardEvent) {
-		if (event.key === 'Enter' || event.key === ' ') {
-			event.preventDefault();
-			openStadsparkenModal();
-		}
-	}
 
 	const courseHighlights = [];
 </script>
@@ -171,40 +147,10 @@
 
 			<!-- Map and Course Details -->
 			<div class="mb-10 grid grid-cols-1 gap-6 md:grid-cols-3">
-				<!-- Map Card -->
+				<!-- Map Reveal Timer -->
 				<div class="overflow-hidden rounded-xl bg-white shadow-md">
-					<div 
-						class="relative cursor-pointer group" 
-						on:click={openMapModal} 
-						role="button" 
-						tabindex="0" 
-						aria-label={t('courseMapInteractive') || 'View course map'}
-						on:keydown={handleMapTriggerKeydown}
-					>
-						<div
-							class="absolute inset-0 z-10 flex items-center justify-center bg-black/60 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
-						>
-							<p class="px-6 text-center text-white font-medium">
-								Click to view interactive course map
-							</p>
-						</div>
-						<img
-							src="/sandviken-map.jpg"
-							alt={t('courseMapAlt')}
-							class="aspect-[4/3] w-full object-cover"
-						/>
-					</div>
-					<div class="p-5">
-						<h2 class="mb-2 flex items-center gap-2 text-xl font-bold text-gray-900">
-							<FontAwesomeIcon icon={faMapMarkedAlt} class="text-red-500/70" />
-							{t('courseMap')}
-						</h2>
-						<p class="mb-3 text-sm text-gray-600">{t('courseMapNote')}</p>
-
-						<div class="flex items-center gap-2 border-t border-gray-100 py-3 text-black">
-							<FontAwesomeIcon icon={faMountain} class="text-red-500/70" />
-							<span class="text-sm font-medium">{t('elevationProfile')}: 165m</span>
-						</div>
+					<div class="p-6">
+						<MapRevealTimer />
 					</div>
 				</div>
 
@@ -295,28 +241,6 @@
 					</div>
 
 					<div class="p-6 md:w-2/3">
-						<div 
-							class="relative cursor-pointer group mb-2" 
-							on:click={openStadsparkenModal} 
-							role="button" 
-							tabindex="0" 
-							aria-label="View Stadsparken area map - Click to zoom"
-							on:keydown={handleStadsparkenTriggerKeydown}
-						>
-							<div
-								class="absolute inset-0 z-10 flex items-center justify-center bg-black/60 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100 rounded-lg"
-							>
-								<p class="px-6 text-center text-white font-medium">
-									Click to view full-size map
-								</p>
-							</div>
-							<img
-								src="/stadsparken.png"
-								alt={t('stadsparkenMapAlt')}
-								class="h-auto w-full rounded-lg object-cover shadow-md transition-transform group-hover:scale-[1.02]"
-							/>
-						</div>
-						<p class="mb-6 text-center text-sm text-gray-600 italic">{t('stadsparkenMapAlt')}</p>
 						<div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
 							<div
 								class="flex items-start gap-4 rounded-lg border-l-3 border-red-400/30 bg-gray-50 p-4 transition-colors hover:bg-gray-100"
@@ -396,18 +320,4 @@
 			<div class="h-16"></div>
 		</Container>
 	</main>
-
-	<ImageModal
-		bind:open={isMapModalOpen}
-		imageSrc="/sandviken-map.jpg"
-		altText={t('courseMapAlt') + ' - Full view'}
-		on:close={() => isMapModalOpen = false}
-	/>
-
-	<ImageModal
-		bind:open={isStadsparkenModalOpen}
-		imageSrc="/stadsparken.png"
-		altText={t('stadsparkenMapAlt') + ' - Full view'}
-		on:close={() => isStadsparkenModalOpen = false}
-	/>
 </div>

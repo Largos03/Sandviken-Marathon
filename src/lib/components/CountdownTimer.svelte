@@ -51,8 +51,8 @@
 	];
 </script>
 
-<div class="w-full max-w-lg">
-	<div class="mb-4 text-center">
+<div class="w-full mx-auto max-w-lg">
+	<div class="mb-4 mx-auto text-center">
 		<div class="inline-block rounded-xl border border-white/10 bg-gradient-to-r from-red-600/80 to-red-500/80 px-4 py-1 text-xs font-bold tracking-widest text-white uppercase shadow-lg">
 			<FontAwesomeIcon icon={faClock} class="mr-2" />
 			{label}

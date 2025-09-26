@@ -22,16 +22,13 @@
 	import { FeatureHighlight } from '$lib';
 	import Container from '$lib/components/Container.svelte';
 	import SectionHeading from '$lib/components/SectionHeading.svelte';
-	import ResponsiveGrid from '$lib/components/ResponsiveGrid.svelte';
 	import MapRevealTimer from '$lib/components/MapRevealTimer.svelte';
 
 	$: t = $tStore;
-
-	const courseHighlights = [];
 </script>
 
 <svelte:head>
-	<title>{t('coursePageTitle')} | Sandviken Half-marathon</title>
+	<title>{t('coursePageTitle')}</title>
 	<meta name="description" content={t('courseDescription')} />
 </svelte:head>
 
@@ -59,7 +56,7 @@
 	<main class="relative bg-gray-50 py-16 md:py-24">
 		<Container className="mb-16">
 			<!-- Stats Cards Row -->
-			<div class="mb-10 grid grid-cols-2 gap-4 md:grid-cols-4">
+			<div class="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
 				<div
 					class="group overflow-hidden rounded-xl bg-white shadow-md transition-all duration-300 hover:shadow-lg"
 				>
@@ -75,7 +72,7 @@
 								>
 									{t('courseLength')}
 								</p>
-								<h3 class="text-lg font-bold text-gray-900 sm:text-xl">21.1 km</h3>
+								<h3 class="text-lg font-bold text-gray-900 sm:text-xl">{t('courseLengthValue')}</h3>
 							</div>
 						</div>
 					</div>
@@ -96,7 +93,9 @@
 								>
 									{t('elevationGain')}
 								</p>
-								<h3 class="text-lg font-bold text-gray-900 sm:text-xl">74m</h3>
+								<h3 class="text-lg font-bold text-gray-900 sm:text-xl">
+									{t('elevationGainValue')}
+								</h3>
 							</div>
 						</div>
 					</div>
@@ -117,7 +116,7 @@
 								>
 									{t('aidStations')}
 								</p>
-								<h3 class="text-lg font-bold text-gray-900 sm:text-xl">5</h3>
+								<h3 class="text-lg font-bold text-gray-900 sm:text-xl">{t('aidStationsValue')}</h3>
 							</div>
 						</div>
 					</div>

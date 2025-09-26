@@ -24,7 +24,7 @@ export const language: Writable<Language>;
 /**
  * Translation function
  * Get a translation by key with an optional language override
- * 
+ *
  * @param key The translation key to look up
  * @param lang Optional language override (defaults to current language)
  * @returns The translated string or the key if not found
@@ -34,7 +34,7 @@ export function t(key: TranslationKey, lang?: Language): string;
 /**
  * Derived translation store
  * Reactive store that provides translations based on the current language
- * 
+ *
  * Use: $tStore('key') to get a translation in templates
  */
 export const tStore: Readable<(key: TranslationKey) => string>;
@@ -42,7 +42,7 @@ export const tStore: Readable<(key: TranslationKey) => string>;
 /**
  * Detect the browser language and return a supported language code
  * Used to set initial language based on user's browser settings
- * 
+ *
  * @returns The detected language code (en or sv)
  */
 export function detectBrowserLanguage(): Language;

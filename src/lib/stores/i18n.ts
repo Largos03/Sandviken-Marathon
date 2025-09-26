@@ -19,34 +19,34 @@ export type TranslationObject = Record<TranslationKey, string>;
 
 // Combine translations from all files
 const combinedTranslations: Record<Language, TranslationObject> = {
-  en: {
-    ...commonTranslations.en,
-    ...aboutTranslations.en,
-    ...contactTranslations.en,
-    ...courseTranslations.en,
-    ...homeTranslations.en,
-    ...privacyTranslations.en,
-    ...registerTranslations.en,
-    ...resultsTranslations.en,
-    ...routeTranslations.en,
-    ...scheduleTranslations.en,
-    ...tabsTranslations.en,
-    ...termsTranslations.en
-  },
-  sv: {
-    ...commonTranslations.sv,
-    ...aboutTranslations.sv,
-    ...contactTranslations.sv,
-    ...courseTranslations.sv,
-    ...homeTranslations.sv,
-    ...privacyTranslations.sv,
-    ...registerTranslations.sv,
-    ...resultsTranslations.sv,
-    ...routeTranslations.sv,
-    ...scheduleTranslations.sv,
-    ...tabsTranslations.sv,
-    ...termsTranslations.sv
-  }
+	en: {
+		...commonTranslations.en,
+		...aboutTranslations.en,
+		...contactTranslations.en,
+		...courseTranslations.en,
+		...homeTranslations.en,
+		...privacyTranslations.en,
+		...registerTranslations.en,
+		...resultsTranslations.en,
+		...routeTranslations.en,
+		...scheduleTranslations.en,
+		...tabsTranslations.en,
+		...termsTranslations.en
+	},
+	sv: {
+		...commonTranslations.sv,
+		...aboutTranslations.sv,
+		...contactTranslations.sv,
+		...courseTranslations.sv,
+		...homeTranslations.sv,
+		...privacyTranslations.sv,
+		...registerTranslations.sv,
+		...resultsTranslations.sv,
+		...routeTranslations.sv,
+		...scheduleTranslations.sv,
+		...tabsTranslations.sv,
+		...termsTranslations.sv
+	}
 };
 
 // Default language

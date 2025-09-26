@@ -1,7 +1,7 @@
 <!-- Reusable Button component with multiple variants and sizes -->
 <script lang="ts">
 	import { cn } from '$lib/utils';
-	
+
 	// Component props
 	export let variant: 'primary' | 'secondary' | 'light' | 'red' | 'outline' = 'primary';
 	export let href: string | undefined = undefined;

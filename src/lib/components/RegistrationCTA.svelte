@@ -7,12 +7,16 @@
 	$: t = $tStore;
 </script>
 
-<div class="relative overflow-hidden rounded-xl bg-gradient-to-r from-gray-900 to-black p-8 text-white">
+<div
+	class="relative overflow-hidden rounded-xl bg-gradient-to-r from-gray-900 to-black p-8 text-white"
+>
 	<div class="relative z-10">
-		<div class="mb-4 inline-block rounded-full bg-red-600 px-3 py-1 text-xs font-bold tracking-wider text-white uppercase">
+		<div
+			class="mb-4 inline-block rounded-full bg-red-600 px-3 py-1 text-xs font-bold tracking-wider text-white uppercase"
+		>
 			{t('limitedSpots')}
 		</div>
-		<h3 class="mb-3 text-3xl font-bold">Be part of <span class="text-red-600">history</span></h3>
+		<h3 class="mb-3 text-3xl font-bold">{t('bePartOfHistory')}</h3>
 		<p class="mb-6 max-w-2xl text-lg opacity-90">
 			{t('inauguralEventDescription')}
 		</p>

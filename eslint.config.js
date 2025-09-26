@@ -15,22 +15,22 @@ const gitignorePath = fileURLToPath(new URL('./.gitignore', import.meta.url)); /
 export default ts.config(
 	// Include gitignore patterns to avoid linting generated/ignored files
 	includeIgnoreFile(gitignorePath),
-	
+
 	// Base recommended rules for JavaScript
 	js.configs.recommended,
-	
+
 	// TypeScript recommended rules for type safety
 	...ts.configs.recommended,
-	
+
 	// Svelte recommended rules for component best practices
 	...svelte.configs.recommended,
-	
+
 	// Prettier config to avoid style conflicts
 	prettier,
-	
+
 	// Additional Prettier compatibility for Svelte
 	...svelte.configs['flat/prettier'],
-	
+
 	{
 		// Global variables available in browser and Node.js environments
 		// Why: Prevents false positives for globals like window, document, process
@@ -41,13 +41,13 @@ export default ts.config(
 			}
 		}
 	},
-	
+
 	{
 		// Specific configuration for Svelte files
 		// Why separate: Svelte files need special parsing and TypeScript integration
 		files: ['**/*.svelte', '**/*.svelte.ts', '**/*.svelte.js'],
 		ignores: ['eslint.config.js', 'svelte.config.js'], // Don't lint config files
-		
+
 		languageOptions: {
 			parserOptions: {
 				projectService: true, // Enable TypeScript project service for better analysis

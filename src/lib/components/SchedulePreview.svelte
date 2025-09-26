@@ -21,21 +21,27 @@
 		<div class="absolute top-0 bottom-0 left-4 w-0.5 bg-red-500/20"></div>
 		<div class="space-y-6">
 			<div class="relative flex items-start">
-				<div class="absolute left-4 mt-1.5 h-3 w-3 -translate-x-1/2 transform rounded-full bg-red-500"></div>
+				<div
+					class="absolute left-4 mt-1.5 h-3 w-3 -translate-x-1/2 transform rounded-full bg-red-500"
+				></div>
 				<div class="pl-10">
 					<div class="text-lg font-bold text-gray-900">{t('raceVillageOpens')}</div>
 					<div class="text-gray-600">{t('raceVillageOpensText')}</div>
 				</div>
 			</div>
 			<div class="relative flex items-start">
-				<div class="absolute left-4 mt-1.5 h-3 w-3 -translate-x-1/2 transform rounded-full bg-red-500"></div>
+				<div
+					class="absolute left-4 mt-1.5 h-3 w-3 -translate-x-1/2 transform rounded-full bg-red-500"
+				></div>
 				<div class="pl-10">
 					<div class="text-lg font-bold text-gray-900">{t('halfMarathonStart')}</div>
 					<div class="text-gray-600">{t('halfMarathonStartText')}</div>
 				</div>
 			</div>
 			<div class="relative flex items-start">
-				<div class="absolute left-4 mt-1.5 h-3 w-3 -translate-x-1/2 transform rounded-full bg-red-500"></div>
+				<div
+					class="absolute left-4 mt-1.5 h-3 w-3 -translate-x-1/2 transform rounded-full bg-red-500"
+				></div>
 				<div class="pl-10">
 					<div class="text-lg font-bold text-gray-900">{t('awardsCeremony')}</div>
 					<div class="text-gray-600">{t('awardsCeremonyText')}</div>

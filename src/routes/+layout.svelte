@@ -1,8 +1,9 @@
-<script lang="ts">	import '$lib/styles/app.css';
+<script lang="ts">
+	import '$lib/styles/app.css';
 	import { Navbar, CookieConsent, SocialLink } from '$lib';
 	import { FontAwesomeIcon as Fa } from '@fortawesome/svelte-fontawesome';
 	import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
-	import { faFacebookF, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
+	import { faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
 	import { language, tStore } from '$lib/stores/i18n';
 	import { onMount } from 'svelte';
 
@@ -56,11 +57,22 @@
 	<CookieConsent />
 
 	<footer class="mt-auto bg-black py-4 text-white md:py-5">
-		<div class="mx-auto flex flex-col items-center px-6 max-w-[1100px]">			<div class="mb-3 flex items-center justify-center">
-				<SocialLink icon={faFacebookF} href="https://facebook.com/share/1BLyunYz3p/?mibextid=wwXlfr" label="Facebook" variant="footer" />
-				<SocialLink icon={faInstagram} href="https://instagram.com/sandviken21k" label="Instagram" variant="footer" />
+		<div class="mx-auto flex max-w-[1100px] flex-col items-center px-6">
+			<div class="mb-3 flex items-center justify-center">
+				<SocialLink
+					icon={faFacebookF}
+					href="https://facebook.com/share/1BLyunYz3p/?mibextid=wwXlfr"
+					label="Facebook"
+					variant="footer"
+				/>
+				<SocialLink
+					icon={faInstagram}
+					href="https://instagram.com/sandviken21k"
+					label="Instagram"
+					variant="footer"
+				/>
 			</div>
-			<div class="mb-3 flex items-center justify-center text-xs text-white md:text-sm">
+			<div class="mb-3 flex items-center justify-center text-sm md:text-base">
 				<a href="/contact" class="mx-2 hover:underline">{t('contact')}</a>
 				<span>|</span>
 				<a href="/privacy" class="mx-2 hover:underline">{t('privacyPolicy')}</a>
@@ -71,14 +83,21 @@
 		</div>
 	</footer>
 
-	<div class="fixed bottom-5 right-5 z-50 {showBackToTop ? 'opacity-100' : 'opacity-0 pointer-events-none'} transition-opacity duration-300">
+	<div
+		class="fixed right-5 bottom-5 z-50 {showBackToTop
+			? 'opacity-100'
+			: 'pointer-events-none opacity-0'} transition-opacity duration-300"
+	>
 		<button
-			class="back-to-top-btn group flex h-12 w-12 items-center justify-center rounded-full bg-black/90 text-white shadow-lg ring-2 ring-black/10 hover:bg-red-600 hover:scale-110 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-red-400"
+			class="back-to-top-btn group flex h-12 w-12 items-center justify-center rounded-full bg-black/90 text-white shadow-lg ring-2 ring-black/10 transition-all duration-300 hover:scale-110 hover:bg-red-600 focus:ring-4 focus:ring-red-400 focus:outline-none"
 			on:click={scrollToTop}
 			aria-label={t('backToTop')}
 			tabindex={showBackToTop ? 0 : -1}
 		>
-			<Fa icon={faArrowUp} class="h-6 w-6 transition-transform duration-300 group-hover:-translate-y-1" />
+			<Fa
+				icon={faArrowUp}
+				class="h-6 w-6 transition-transform duration-300 group-hover:-translate-y-1"
+			/>
 		</button>
 	</div>
 </div>

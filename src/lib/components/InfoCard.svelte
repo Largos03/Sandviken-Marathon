@@ -5,10 +5,14 @@
 	export let number: number | undefined = undefined;
 </script>
 
-<div class="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-shadow duration-200 hover:border-l-3 hover:border-red-400/30 hover:shadow-md">
+<div
+	class="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-shadow duration-200 hover:border-l-3 hover:border-red-400/30 hover:shadow-md"
+>
 	<div class="flex items-center border-b border-gray-100 p-4">
 		{#if number !== undefined}
-			<div class="mr-3 flex h-8 w-8 items-center justify-center rounded-full bg-black text-sm font-bold text-white">
+			<div
+				class="mr-3 flex h-8 w-8 items-center justify-center rounded-full bg-black text-sm font-bold text-white"
+			>
 				{number}
 			</div>
 		{/if}

@@ -13,7 +13,9 @@
 </script>
 
 <div class="flex items-start">
-	<div class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full {variantClasses} text-sm font-bold">
+	<div
+		class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full {variantClasses} text-sm font-bold"
+	>
 		{number}
 	</div>
 	<div>

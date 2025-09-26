@@ -16,7 +16,7 @@ const config = {
 		// Why adapter-auto: Automatically chooses the right adapter for the hosting platform
 		// Intent: Simplifies deployment without manual adapter switching
 		adapter: adapter(),
-		
+
 		// Path aliases for cleaner imports
 		// Why $lib: Standard SvelteKit alias for the lib directory
 		// Intent: Reduces relative path complexity in imports

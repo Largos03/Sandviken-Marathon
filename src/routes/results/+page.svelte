@@ -4,9 +4,6 @@
 	import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
 	import {
 		faSort,
-		faSortUp,
-		faSortDown,
-		faSpinner,
 		faDownload,
 		faSearch,
 		faTrophy,
@@ -33,8 +30,6 @@
 
 	$: t = $tStore;
 
-	let loading = false;
-	let error = '';
 	let searchQuery = '';
 	let sortField: keyof Result | 'position' = 'position';
 	let sortDirection: 'asc' | 'desc' = 'asc';
@@ -82,14 +77,10 @@
 		if (position === 3) return 'bg-amber-600';
 		return 'bg-gray-100';
 	};
-
-	const formatTime = (time: string) => {
-		return time;
-	};
 </script>
 
 <svelte:head>
-	<title>{t('resultsTitle')} | Sandviken Half-marathon</title>
+	<title>{t('resultsPageTitle')}</title>
 	<meta name="description" content={t('resultsDescription')} />
 </svelte:head>
 
@@ -106,28 +97,24 @@
 		<Container>
 			<!-- Race stats cards -->
 			<ResponsiveGrid cols="1 md:2 lg:4" gap="6" className="mb-12">
-				<StatsCard 
-					icon={faRunning} 
-					value={results.length.toString()} 
-					label={t('totalRunners')} 
+				<StatsCard icon={faRunning} value={results.length.toString()} label={t('totalRunners')} />
+
+				<StatsCard
+					icon={faMedal}
+					value={results.length > 0 ? results[0].name : '—'}
+					label={t('winner')}
 				/>
 
-				<StatsCard 
-					icon={faMedal} 
-					value={results.length > 0 ? results[0].name : '—'} 
-					label={t('winner')} 
+				<StatsCard
+					icon={faStopwatch}
+					value={results.length > 0 ? results[0].time : '—'}
+					label={t('bestTime')}
 				/>
 
-				<StatsCard 
-					icon={faStopwatch} 
-					value={results.length > 0 ? results[0].time : '—'} 
-					label={t('bestTime')} 
-				/>
-
-				<StatsCard 
-					icon={faGlobe} 
-					value={[...new Set(results.map((r) => r.country))].length.toString()} 
-					label={t('countries')} 
+				<StatsCard
+					icon={faGlobe}
+					value={[...new Set(results.map((r) => r.country))].length.toString()}
+					label={t('countries')}
 				/>
 			</ResponsiveGrid>
 
@@ -154,102 +141,71 @@
 					</div>
 				</div>
 
-				<!-- Error message -->
-				{#if error}
-					<div class="bg-error mb-6" role="alert">
-						{error}
-					</div>
-				{/if}
-
-				<!-- Loading state -->
-				{#if loading}
-					<div class="flex items-center justify-center py-16">
-						<FontAwesomeIcon icon={faSpinner} class="animate-spin text-3xl text-red-500/70" />
-					</div>
-				{:else}
-					<!-- Results table -->
-					<div class="mb-4 overflow-hidden rounded-xl border border-red-500/10">
-						<div class="overflow-x-auto">
-							<table class="min-w-full divide-y divide-gray-200">
-								<thead class="bg-gray-50">
-									<tr>
-										{#each ['position', 'name', 'country', 'time'] as field (field)}
-											<th
-												scope="col"
-												class="cursor-pointer px-6 py-4 text-left text-xs font-medium tracking-wider text-gray-500 uppercase transition-colors hover:bg-red-50/50"
-												on:click={() => handleSort(field as keyof Result)}
-											>
-												<div class="flex items-center gap-2">
-													{t(field)}
-													<span class={sortField === field ? 'text-red-500/70' : 'text-gray-400'}>
-														{#if sortField === field}
-															<FontAwesomeIcon
-																icon={sortDirection === 'asc' ? faSortUp : faSortDown}
-															/>
-														{:else}
-															<FontAwesomeIcon icon={faSort} />
-														{/if}
-													</span>
-												</div>
-											</th>
-										{/each}
-									</tr>
-								</thead>
-								<tbody class="divide-y divide-gray-200 bg-white">
-									{#each sortedResults as result (result.position)}
-										<tr class="transition-colors hover:bg-gray-50">
-											<td class="px-6 py-4 whitespace-nowrap">
-												<div class="flex items-center">
-													<div
-														class={`h-8 w-8 flex-shrink-0 rounded-full ${getMedalColor(result.position)} flex items-center justify-center font-bold text-white shadow-sm`}
-													>
-														{#if result.position <= 3}
-															<FontAwesomeIcon icon={faMedal} />
-														{:else}
-															{result.position}
-														{/if}
-													</div>
-												</div>
-											</td>
-											<td class="px-6 py-4 whitespace-nowrap">
-												<div class="text-sm font-medium text-gray-900">{result.name}</div>
-											</td>
-											<td class="px-6 py-4 whitespace-nowrap">
-												<div class="text-sm text-gray-700">{t(result.country.toLowerCase())}</div>
-											</td>
-											<td class="px-6 py-4 whitespace-nowrap">
-												<div class="font-mono text-sm font-medium">{formatTime(result.time)}</div>
-											</td>
-										</tr>
+				<!-- Results table -->
+				<div class="mb-4 overflow-hidden rounded-xl border border-red-500/10">
+					<div class="overflow-x-auto">
+						<table class="min-w-full divide-y divide-gray-200">
+							<thead class="bg-gray-50">
+								<tr>
+									{#each ['position', 'name', 'country', 'time'] as field (field)}
+										<th
+											scope="col"
+											class="cursor-pointer px-6 py-4 text-left text-xs font-medium tracking-wider text-gray-500 uppercase transition-colors hover:bg-red-50/50"
+											on:click={() => handleSort(field as keyof Result)}
+										>
+											<div class="flex items-center gap-2">
+												{t(field)}
+												<span class={sortField === field ? 'text-red-500/70' : 'text-gray-400'}>
+													<FontAwesomeIcon icon={faSort} />
+												</span>
+											</div>
+										</th>
 									{/each}
-									{#if sortedResults.length === 0}
-										<tr>
-											<td colspan="4" class="px-6 py-10 text-center text-gray-500">
-												<div class="flex flex-col items-center gap-4">
-													<FontAwesomeIcon
-														icon={faSearch}
-														class="text-3xl text-red-300 opacity-30"
-													/>
-													<div>
-														{searchQuery ? t('noSearchResults') : t('noResults')}
-													</div>
+								</tr>
+							</thead>
+							<tbody class="divide-y divide-gray-200 bg-white">
+								{#each sortedResults as result (result.position)}
+									<tr class="transition-colors hover:bg-gray-50">
+										<td class="px-6 py-4 whitespace-nowrap">
+											<div class="flex items-center">
+												<div
+													class={`h-8 w-8 flex-shrink-0 rounded-full ${getMedalColor(result.position)} flex items-center justify-center font-bold text-white shadow-sm`}
+												>
+													{#if result.position <= 3}
+														<FontAwesomeIcon icon={faMedal} />
+													{:else}
+														{result.position}
+													{/if}
 												</div>
-											</td>
-										</tr>
-									{/if}
-								</tbody>
-							</table>
-						</div>
+											</div>
+										</td>
+										<td class="px-6 py-4 whitespace-nowrap">
+											<div class="text-sm font-medium text-gray-900">{result.name}</div>
+										</td>
+										<td class="px-6 py-4 whitespace-nowrap">
+											<div class="text-sm text-gray-700">{t(result.country.toLowerCase())}</div>
+										</td>
+										<td class="px-6 py-4 whitespace-nowrap">
+											<div class="font-mono text-sm font-medium">{result.time}</div>
+										</td>
+									</tr>
+								{/each}
+								{#if sortedResults.length === 0}
+									<tr>
+										<td colspan="4" class="px-6 py-10 text-center text-gray-500">
+											<div class="flex flex-col items-center gap-4">
+												<FontAwesomeIcon icon={faSearch} class="text-3xl text-red-300 opacity-30" />
+												<div>
+													{searchQuery ? t('noSearchResults') : t('noResults')}
+												</div>
+											</div>
+										</td>
+									</tr>
+								{/if}
+							</tbody>
+						</table>
 					</div>
-
-					{#if sortedResults.length > 0}
-						<div class="mb-8 text-center text-sm text-gray-500">
-							{t('showing')} <span class="font-medium">{sortedResults.length}</span>
-							{t('of')} <span class="font-medium">{results.length}</span>
-							{t('runners')}
-						</div>
-					{/if}
-				{/if}
+				</div>
 
 				{#if resultDownload}
 					<div
@@ -261,6 +217,7 @@
 								{t('downloadResults')}
 							</h3>
 							<p class="mt-1 text-sm text-gray-600">
+								{t('downloadResultsDesc')}
 							</p>
 						</div>
 						<div class="sm:ml-auto">

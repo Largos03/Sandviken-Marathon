@@ -21,11 +21,15 @@
 	}[variant];
 </script>
 
-<div class="overflow-hidden rounded-xl {variantClasses} p-6 transition-all duration-300 hover:shadow-lg">
+<div
+	class="overflow-hidden rounded-xl {variantClasses} p-6 transition-all duration-300 hover:shadow-lg"
+>
 	{#if icon || title || subtitle}
 		<div class="mb-5 flex items-center">
 			{#if icon}
-				<div class="mr-4 flex h-12 w-12 items-center justify-center rounded-lg {iconBgClasses} shadow-md">
+				<div
+					class="mr-4 flex h-12 w-12 items-center justify-center rounded-lg {iconBgClasses} shadow-md"
+				>
 					<FontAwesomeIcon {icon} size="lg" class="text-red-100" />
 				</div>
 			{/if}

@@ -15,7 +15,9 @@
 </script>
 
 <li class="flex items-start">
-	<div class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full {containerClasses}">
+	<div
+		class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full {containerClasses}"
+	>
 		<FontAwesomeIcon {icon} class="text-sm" />
 	</div>
 	<div>

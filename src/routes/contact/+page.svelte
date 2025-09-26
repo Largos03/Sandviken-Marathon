@@ -10,9 +10,10 @@
 		faCheck,
 		faExclamationTriangle
 	} from '@fortawesome/free-solid-svg-icons';
-	import { faFacebookF, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
+	import { faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
 	import type { SuperValidated } from 'sveltekit-superforms';
 	import { tStore as t } from '$lib/stores/i18n';
+	import { EVENT_CONFIG } from '$lib/config';
 	import { fade } from 'svelte/transition';
 	import { ContactItem, SocialLink } from '$lib';
 	import Input from '$lib/components/Input.svelte';
@@ -55,7 +56,7 @@
 		},
 		onResult: (event) => {
 			console.log('Form result received:', event.result);
-			
+
 			if (event.result.type === 'success') {
 				showSuccess = true;
 				showError = false;
@@ -127,22 +128,41 @@
 					<h2 class="mb-6 border-b pb-2 text-xl font-semibold">{$t('getInTouch')}</h2>
 
 					<ul class="mb-10 space-y-6 text-gray-700">
-						<ContactItem icon={faEnvelope} title={$t('email')} href="mailto:traningsgruppensandviken@outlook.com">
-							traningsgruppensandviken@outlook.com
+						<ContactItem
+							icon={faEnvelope}
+							title={$t('email')}
+							href="mailto:{EVENT_CONFIG.organizerEmail}"
+						>
+							{EVENT_CONFIG.organizerEmail}
 						</ContactItem>
 
-						<ContactItem icon={faPhone} title={$t('phone')} href="tel:+46(0) 705 713 800 , +46(0) 732 027 032">
-							+46 (0) 705 713 800 , +46(0) 732 027 032
+						<ContactItem
+							icon={faPhone}
+							title={$t('phone')}
+							href="tel:{EVENT_CONFIG.organizerPhone}"
+						>
+							{EVENT_CONFIG.organizerPhone}
 						</ContactItem>
 
 						<ContactItem icon={faClock} title={$t('telephoneHours')}>
+							{$t('telephoneHoursContent')}
 						</ContactItem>
 					</ul>
 
 					<h2 class="mb-6 border-b pb-2 text-xl font-semibold">{$t('followUs')}</h2>
 					<div class="flex space-x-4">
-						<SocialLink icon={faFacebookF} href="https://facebook.com/share/1BLyunYz3p/?mibextid=wwXlfr" label="Facebook" variant="contact" />
-						<SocialLink icon={faInstagram} href="https://instagram.com/sandviken21k" label="Instagram" variant="contact" />
+						<SocialLink
+							icon={faFacebookF}
+							href="https://facebook.com/share/1BLyunYz3p/?mibextid=wwXlfr"
+							label="Facebook"
+							variant="contact"
+						/>
+						<SocialLink
+							icon={faInstagram}
+							href="https://instagram.com/sandviken21k"
+							label="Instagram"
+							variant="contact"
+						/>
 					</div>
 				</div>
 
@@ -151,13 +171,13 @@
 					<h2 class="mb-6 border-b pb-2 text-xl font-semibold">{$t('sendMessage')}</h2>
 
 					{#if showError}
-						<div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-6">
+						<div class="mb-6 rounded border border-red-200 bg-red-50 px-4 py-3 text-red-700">
 							<div class="flex">
 								<div class="flex-shrink-0">
 									<Fa icon={faExclamationTriangle} class="text-red-500" />
 								</div>
 								<div class="ml-3">
-									<p class="font-medium">Error sending message</p>
+									<p class="font-medium">{$t('errorSendingMessage')}</p>
 									<p class="text-sm">{errorMessage}</p>
 								</div>
 							</div>
@@ -165,7 +185,7 @@
 					{/if}
 
 					{#if showSuccess}
-						<div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded mb-6">
+						<div class="mb-6 rounded border border-green-200 bg-green-50 px-4 py-3 text-green-700">
 							<div class="flex">
 								<div class="flex-shrink-0">
 									<Fa icon={faCheck} class="text-green-500" />

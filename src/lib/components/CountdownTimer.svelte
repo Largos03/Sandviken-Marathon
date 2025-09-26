@@ -51,20 +51,27 @@
 	];
 </script>
 
-<div class="w-full mx-auto max-w-lg">
-	<div class="mb-4 mx-auto text-center">
-		<div class="inline-block rounded-xl border border-white/10 bg-gradient-to-r from-red-600/80 to-red-500/80 px-4 py-1 text-xs font-bold tracking-widest text-white uppercase shadow-lg">
+<div class="mx-auto w-full max-w-lg">
+	<div class="mx-auto mb-4 text-center">
+		<div
+			class="inline-block rounded-xl border border-white/10 bg-gradient-to-r from-red-600/80 to-red-500/80 px-4 py-1 text-xs font-bold tracking-widest text-white uppercase shadow-lg"
+		>
 			<FontAwesomeIcon icon={faClock} class="mr-2" />
 			{label}
 		</div>
 	</div>
 
-	<div class="rounded-2xl border border-white/10 bg-black/30 p-3 shadow-2xl backdrop-blur-md md:p-4">
+	<div
+		class="rounded-2xl border border-white/10 bg-black/30 p-3 shadow-2xl backdrop-blur-md md:p-4"
+	>
 		<div class="grid grid-cols-2 gap-3 divide-gray-700/30 md:grid-cols-4 md:gap-0 md:divide-x">
 			{#each timeUnits as unit, index}
 				<div class="px-2 py-3 md:px-4">
-					<div class="flex flex-col items-center">						<span 
-							class="text-3xl font-bold text-white/95 md:text-5xl {index === 3 ? 'animate-pulse' : ''}"
+					<div class="flex flex-col items-center">
+						<span
+							class="text-3xl font-bold text-white/95 md:text-5xl {index === 3
+								? 'animate-pulse'
+								: ''}"
 						>
 							{unit.value.toString().padStart(2, '0')}
 						</span>

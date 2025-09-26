@@ -26,6 +26,7 @@ src/
 ```
 
 **Component Library** (20 battle-tested components):
+
 - **UI Core**: Button, Card, Input, HeroSection, Navbar
 - **Layout**: Container, ResponsiveGrid, SidebarNav, TabsNav
 - **Content**: CountdownTimer, StatsCard, FeatureHighlight, SocialLink
@@ -51,7 +52,7 @@ No half-baked i18n here—feature-based translation files keep everything organi
 
 ## ⚡ Performance That Matters
 
-This site doesn't just look fast—it *is* fast:
+This site doesn't just look fast—it _is_ fast:
 
 - **700+ lines eliminated** through smart component reuse
 - **85% average reduction** in repetitive markup

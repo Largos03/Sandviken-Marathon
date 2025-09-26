@@ -2,6 +2,7 @@
 <script lang="ts">
 	import CountdownTimer from './CountdownTimer.svelte';
 	import { tStore } from '$lib/stores/i18n';
+	import { EVENT_CONFIG } from '$lib/config';
 
 	$: t = $tStore;
 </script>
@@ -14,7 +15,7 @@
 		{t('registrationTimerMessage') || 'Registration opens on 1/12-2025'}
 	</p>
 	<CountdownTimer
-		targetDate="2025-12-01T00:00:00.000Z"
+		targetDate={EVENT_CONFIG.registrationOpens}
 		label={t('registrationTimerLabel') || 'Time until registration opens'}
 	/>
 </div>

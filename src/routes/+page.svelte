@@ -5,15 +5,12 @@
 	import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
 	import { faCalendarAlt, faStar } from '@fortawesome/free-solid-svg-icons';
 	import { tStore } from '$lib/stores/i18n';
-	import Button from '$lib/components/Button.svelte';
+	import { EVENT_CONFIG } from '$lib/config';
 	import Container from '$lib/components/Container.svelte';
 	import CountdownTimer from '$lib/components/CountdownTimer.svelte';
 	import QuickOverview from '$lib/components/QuickOverview.svelte';
 	import SchedulePreview from '$lib/components/SchedulePreview.svelte';
 	import RegistrationCTA from '$lib/components/RegistrationCTA.svelte';
-
-	// Page data for language
-	export const data: { lang?: string } = { lang: 'en' };
 
 	// State for animation visibility
 	let visible = false;
@@ -29,15 +26,8 @@
 </script>
 
 <svelte:head>
-	<!-- SEO-optimized page title and meta description for search engines -->
-	<!-- Why dynamic: Title includes translated event name for better i18n SEO -->
 	<title>{t('officialEvent')}</title>
-	<meta
-		name="description"
-		content={t('metaDescription')}
-	/>
-	<!-- Canonical URL to prevent duplicate content issues and consolidate SEO value -->
-	<link rel="canonical" href="https://sandvikenhalfmarathon.com/" />
+	<meta name="description" content={t('metaDescription')} />
 </svelte:head>
 
 <!-- Hero Section - Primary visual impact area to capture visitor attention -->
@@ -60,7 +50,9 @@
 			<!-- Event badge - Highlights the official nature of the inaugural event -->
 			<!-- Why stars: Creates visual hierarchy and emphasizes exclusivity -->
 			<div class="mb-8">
-				<div class="flex items-center rounded-full bg-white px-6 py-2 text-sm font-bold tracking-wider text-black uppercase shadow-lg">
+				<div
+					class="flex items-center rounded-full bg-white px-6 py-2 text-sm font-bold tracking-wider text-black uppercase shadow-lg"
+				>
 					<FontAwesomeIcon icon={faStar} class="mr-1 text-red-600" size="xs" />
 					<span>{t('officialEvent')}</span>
 					<FontAwesomeIcon icon={faStar} class="ml-1 text-red-600" size="xs" />
@@ -74,9 +66,13 @@
 					<span class="relative mb-2 inline-block tracking-wide text-white">
 						{t('TITLE')}
 						<!-- Underline accent for visual emphasis and brand consistency -->
-						<div class="absolute -right-2 bottom-1.5 -left-2 h-0.5 bg-gradient-to-r from-transparent via-red-500 to-transparent"></div>
+						<div
+							class="absolute -right-2 bottom-1.5 -left-2 h-0.5 bg-gradient-to-r from-transparent via-red-500 to-transparent"
+						></div>
 					</span>
-					<span class="relative inline-flex items-center bg-gradient-to-r from-white via-gray-300 to-white bg-clip-text tracking-wide text-transparent">
+					<span
+						class="relative inline-flex items-center bg-gradient-to-r from-white via-gray-300 to-white bg-clip-text tracking-wide text-transparent"
+					>
 						{t('TITLE2')}
 					</span>
 				</div>
@@ -85,7 +81,9 @@
 			<!-- Event date display - Clearly communicates when the event occurs -->
 			<!-- Why backdrop blur: Modern aesthetic that maintains readability over video -->
 			<div class="mb-8">
-				<div class="flex items-center rounded-xl border border-white/30 bg-black/30 px-6 py-3 font-bold text-white shadow-lg backdrop-blur-md">
+				<div
+					class="flex items-center rounded-xl border border-white/30 bg-black/30 px-6 py-3 font-bold text-white shadow-lg backdrop-blur-md"
+				>
 					<FontAwesomeIcon icon={faCalendarAlt} class="mr-3 text-red-400" />
 					<span>{t('homeEventDate')}</span>
 				</div>
@@ -98,11 +96,8 @@
 			</p>
 
 			<!-- Countdown timer - Builds urgency and excitement for the event -->
-			<!-- Why specific date: Official race start time; consider dynamic sourcing for future events -->
-			<CountdownTimer 
-				targetDate="August 22, 2026 11:00:00" 
-				label={t('homeRaceStartingIn')} 
-			/>
+			<!-- Why specific date: Official race start time; now configurable for future events -->
+			<CountdownTimer targetDate={EVENT_CONFIG.raceDate} label={t('homeRaceStartingIn')} />
 		{/if}
 	</div>
 </div>
@@ -118,11 +113,13 @@
 			<div class="mb-10 text-center">
 				<!-- Inaugural event badge - Emphasizes historical significance -->
 				<!-- Why gradient: Creates premium feel consistent with brand colors -->
-				<div class="mb-4 inline-block rounded-lg bg-gradient-to-r from-gray-900 to-black px-4 py-2.5 text-white shadow-lg">
+				<div
+					class="mb-4 inline-block rounded-lg bg-gradient-to-r from-gray-900 to-black px-4 py-2.5 text-white shadow-lg"
+				>
 					<span class="text-lg font-bold">{t('inauguralEventTitle')}</span>
 				</div>
 				<h2 class="mb-6 text-4xl leading-tight font-bold md:text-5xl">
-					Be part of <span class="text-red-600">history</span>
+					{t('bePartOfHistoryText')}
 				</h2>
 			</div>
 			<!-- QuickOverview component displays key metrics to build trust and excitement -->

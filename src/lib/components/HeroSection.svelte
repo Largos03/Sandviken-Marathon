@@ -20,14 +20,14 @@
 	</div>
 
 	<!-- Content -->
-	<div class="relative z-10 mx-auto px-6 text-center max-w-[1100px]">
+	<div class="relative z-10 mx-auto max-w-[1100px] px-6 text-center">
 		<h1
 			class="relative mb-3 inline-block text-3xl font-bold md:text-4xl"
 			in:fly={{ y: -20, duration: 800, delay: 300 }}
 		>
 			{title}
 			<span
-				class="shadow-[0_0_8px_rgba(255,255,255,0.6)] absolute -bottom-2 left-1/2 h-1 w-12 -translate-x-1/2 transform rounded-full bg-red-500/80"
+				class="absolute -bottom-2 left-1/2 h-1 w-12 -translate-x-1/2 transform rounded-full bg-red-500/80 shadow-[0_0_8px_rgba(255,255,255,0.6)]"
 			></span>
 		</h1>
 		<p

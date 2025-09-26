@@ -6,6 +6,16 @@ import { Resend } from 'resend';
 import { env } from '$env/dynamic/private';
 import type { PageServerLoad, Actions } from './$types';
 
+// Helper function to escape HTML characters
+function escapeHtml(text: string): string {
+	return text
+		.replace(/&/g, '&amp;')
+		.replace(/</g, '&lt;')
+		.replace(/>/g, '&gt;')
+		.replace(/"/g, '&quot;')
+		.replace(/'/g, '&#39;');
+}
+
 export const load: PageServerLoad = async () => {
 	const form = await superValidate(zod(contactSchema));
 	return { form };
@@ -15,7 +25,11 @@ export const actions: Actions = {
 	default: async ({ request }) => {
 		const form = await superValidate(request, zod(contactSchema));
 
-		console.log('Form validation result:', { valid: form.valid, data: form.data, errors: form.errors });
+		console.log('Form validation result:', {
+			valid: form.valid,
+			data: form.data,
+			errors: form.errors
+		});
 
 		if (!form.valid) {
 			console.log('Form validation failed:', form.errors);
@@ -36,21 +50,21 @@ export const actions: Actions = {
 
 		try {
 			console.log('Attempting to send email with data:', form.data);
-			
+
 			// Send email using Resend
 			const emailResult = await resend.emails.send({
 				from: 'Sandviken Marathon <noreply@sandviken-marathon.com>', // Your custom domain
 				to: ['traningsgruppensandviken@outlook.com'],
-				subject: `Contact Form: ${form.data.subject}`,
+				subject: `Contact Form: ${escapeHtml(form.data.subject)}`,
 				html: `
 					<h2>New Contact Form Submission</h2>
-					<p><strong>Name:</strong> ${form.data.name}</p>
-					<p><strong>Email:</strong> ${form.data.email}</p>
-					<p><strong>Subject:</strong> ${form.data.subject}</p>
+					<p><strong>Name:</strong> ${escapeHtml(form.data.name)}</p>
+					<p><strong>Email:</strong> ${escapeHtml(form.data.email)}</p>
+					<p><strong>Subject:</strong> ${escapeHtml(form.data.subject)}</p>
 					<p><strong>Message:</strong></p>
-					<p>${form.data.message.replace(/\n/g, '<br>')}</p>
+					<p>${escapeHtml(form.data.message).replace(/\n/g, '<br>')}</p>
 				`,
-				replyTo: form.data.email, // Allow replies to go to the form submitter
+				replyTo: form.data.email // Allow replies to go to the form submitter
 			});
 
 			console.log('✅ Email sent successfully:', emailResult);
@@ -61,13 +75,13 @@ export const actions: Actions = {
 			};
 		} catch (error) {
 			console.error('❌ Email sending failed:', error);
-			
+
 			// Log more detailed error information
 			if (error instanceof Error) {
 				console.error('Error message:', error.message);
 				console.error('Error stack:', error.stack);
 			}
-			
+
 			return fail(500, {
 				form,
 				error: 'Failed to send email. Please try again later.'

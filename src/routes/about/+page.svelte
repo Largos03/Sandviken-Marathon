@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { tStore } from '$lib/stores/i18n';
 	import { fade, fly } from 'svelte/transition';
-	import { onMount } from 'svelte';	import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
+	import { onMount } from 'svelte';
+	import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
 	import {
 		faTrophy,
 		faUsers,
 		faMapMarkerAlt,
-		faCalendarAlt,
 		faHeart,
 		faMedal,
 		faHistory,
@@ -37,10 +37,26 @@
 	}
 
 	onMount(() => {
-		const hash = window.location.hash.substring(1);
-		if (hash && tabs.some((tab) => tab.id === hash)) {
-			activeTab = hash;
-		}
+		const updateActiveTabFromHash = () => {
+			const hash = window.location.hash.substring(1);
+			if (hash && tabs.some((tab) => tab.id === hash)) {
+				activeTab = hash;
+			}
+		};
+
+		// Set initial tab from hash
+		updateActiveTabFromHash();
+
+		// Listen for hash changes (browser back/forward navigation)
+		const handleHashChange = () => {
+			updateActiveTabFromHash();
+		};
+
+		window.addEventListener('hashchange', handleHashChange);
+
+		return () => {
+			window.removeEventListener('hashchange', handleHashChange);
+		};
 	});
 </script>
 
@@ -85,6 +101,8 @@
 			<div
 				class="mx-auto mt-8 mb-4 flex max-w-3xl flex-wrap justify-center gap-1 rounded-full bg-black/30 p-1 backdrop-blur-sm md:gap-2"
 				in:fly={{ y: 20, duration: 800, delay: 500 }}
+				role="tablist"
+				aria-label="About page sections"
 			>
 				{#each tabs as tab (tab.id)}
 					<button
@@ -95,6 +113,8 @@
 							: 'text-white/90 hover:bg-white/10'}"
 						on:click={() => setActiveTab(tab.id)}
 						aria-selected={activeTab === tab.id}
+						aria-controls="panel-{tab.id}"
+						id="tab-{tab.id}"
 						role="tab"
 					>
 						<FontAwesomeIcon
@@ -116,276 +136,323 @@
 					class="min-h-[60vh] bg-gradient-to-b from-white to-gray-50 p-6 md:p-8"
 					transition:fade={{ duration: 300 }}
 				>
-				<!-- Tab Content -->
-				{#if activeTab === 'mission'}
-					<!-- Tab Header -->
-					<div class="layout-header">
-						<div class="icon-container-lg layout-icon-spacing">
-							<FontAwesomeIcon icon={faHeart} size="lg" class="text-red-100" />
+					<!-- Tab Content -->
+					{#if activeTab === 'mission'}
+						<!-- Tab Header -->
+						<div
+							class="layout-header"
+							role="tabpanel"
+							aria-labelledby="tab-mission"
+							id="panel-mission"
+						>
+							<div class="icon-container-lg layout-icon-spacing">
+								<FontAwesomeIcon icon={faHeart} size="lg" class="text-red-100" />
+							</div>
+							<div>
+								<h2 class="text-2xl font-bold">{t('aboutMission')}</h2>
+								<p class="text-gray-500">{t('aboutMissionSubtitle')}</p>
+							</div>
 						</div>
-						<div>
-							<h2 class="text-2xl font-bold">{t('aboutMission')}</h2>
-							<p class="text-gray-500">{t('aboutMissionSubtitle')}</p>
+
+						<div class="grid gap-6 md:grid-cols-5">
+							<div class="md:col-span-3">
+								<p class="mb-4 text-gray-700">
+									{t('aboutMissionText2')}
+								</p>
+
+								<!-- Highlight Box -->
+								<div
+									class="relative mt-2 overflow-hidden rounded-lg border-l-4 border-red-500 bg-gradient-to-br from-gray-900 to-gray-800 p-5 text-white shadow-md"
+								>
+									<div class="bg-opacity-20 absolute inset-0 bg-red-500 opacity-10"></div>
+									<div class="relative z-10">
+										<p class="font-medium">
+											{t('aboutMissionHighlight')}
+										</p>
+									</div>
+								</div>
+							</div>
+
+							<div class="md:col-span-2">
+								<div
+									class="flex h-48 w-full items-center justify-center rounded-lg bg-gray-100 shadow-md md:h-full"
+								>
+									<FontAwesomeIcon
+										icon={faRunning}
+										class="text-4xl text-gray-400 opacity-70 md:text-6xl"
+									/>
+								</div>
+							</div>
 						</div>
-					</div>
+					{/if}
 
-					<div class="grid gap-6 md:grid-cols-5">
-						<div class="md:col-span-3">
-							<p class="mb-4 text-gray-700">
-								{t('aboutMissionText2')}
-							</p>
+					{#if activeTab === 'history'}
+						<!-- Tab Header -->
+						<div
+							class="layout-header"
+							role="tabpanel"
+							aria-labelledby="tab-history"
+							id="panel-history"
+						>
+							<div class="icon-container-lg layout-icon-spacing">
+								<FontAwesomeIcon icon={faHistory} size="lg" class="text-red-100" />
+							</div>
+							<div>
+								<h2 class="text-2xl font-bold">{t('aboutHistoryTitle')}</h2>
+							</div>
+						</div>
 
+						<div class="grid gap-6 md:grid-cols-2">
+							<div>
+								<p class="mb-4 text-gray-700">{t('aboutHistoryDesc')}</p>
+							</div>
+							<div class="flex flex-col space-y-4">
+								<NumberedStep
+									number={1}
+									title={t('aboutHistoryFirstEvent')}
+									description={t('aboutHistoryFirstEventDesc')}
+									variant="black"
+								/>
+								<NumberedStep
+									number={2}
+									title={t('aboutHistoryGrowingCommunity')}
+									description={t('aboutHistoryGrowingCommunityDesc')}
+									variant="black"
+								/>
+								<NumberedStep
+									number={3}
+									title={t('aboutHistoryNationalRecognition')}
+									description={t('aboutHistoryNationalRecognitionDesc')}
+									variant="black"
+								/>
+							</div>
+						</div>
+					{/if}
+
+					{#if activeTab === 'values'}
+						<!-- Tab Header -->
+						<div
+							class="mb-6 flex flex-col items-start md:flex-row md:items-center"
+							role="tabpanel"
+							aria-labelledby="tab-values"
+							id="panel-values"
+						>
+							<div class="icon-container-lg layout-icon-spacing">
+								<FontAwesomeIcon icon={faLightbulb} size="lg" class="text-red-100" />
+							</div>
+							<div>
+								<h2 class="text-2xl font-bold">{t('aboutValuesTitle')}</h2>
+								<p class="text-gray-500">{t('aboutValuesSubtitle')}</p>
+							</div>
+						</div>
+
+						<div class="grid gap-6 md:grid-cols-3">
+							<!-- Value Card -->
+							<div class="card-feature">
+								<div class="icon-container-md mb-4 bg-gray-900">
+									<FontAwesomeIcon icon={faUsers} />
+								</div>
+								<h3 class="mb-2 text-xl font-semibold">{t('aboutValuesCommunity')}</h3>
+								<p class="text-gray-600">
+									{t('aboutValuesCommunityDesc')}
+								</p>
+							</div>
+
+							<!-- Value Card -->
+							<div class="card-feature">
+								<div class="icon-container-md mb-4 bg-gray-900">
+									<FontAwesomeIcon icon={faMedal} />
+								</div>
+								<h3 class="mb-2 text-xl font-semibold">{t('aboutValuesExcellence')}</h3>
+								<p class="text-gray-600">
+									{t('aboutValuesExcellenceDesc')}
+								</p>
+							</div>
+
+							<!-- Value Card -->
+							<div class="card-feature">
+								<div class="icon-container-md mb-4 bg-gray-900">
+									<FontAwesomeIcon icon={faHeart} />
+								</div>
+								<h3 class="mb-2 text-xl font-semibold">{t('aboutValuesInclusivity')}</h3>
+								<p class="text-gray-600">
+									{t('aboutValuesInclusivityDesc')}
+								</p>
+							</div>
+						</div>
+					{/if}
+
+					{#if activeTab === 'details'}
+						<!-- Tab Header -->
+						<div
+							class="layout-header"
+							role="tabpanel"
+							aria-labelledby="tab-details"
+							id="panel-details"
+						>
+							<div class="icon-container-lg layout-icon-spacing">
+								<FontAwesomeIcon icon={faInfoCircle} size="lg" class="text-red-100" />
+							</div>
+							<div>
+								<h2 class="text-2xl font-bold">{t('eventDetailsTitle')}</h2>
+								<p class="text-gray-500">{t('eventDetailsSubtitle')}</p>
+							</div>
+						</div>
+
+						<div class="grid gap-6 md:grid-cols-1">
+							<!-- Stadsparken Details -->
+							<div class="info-section">
+								<div class="mb-3 flex items-center">
+									<div class="icon-container-md mr-3">
+										<FontAwesomeIcon icon={faMapMarkerAlt} />
+									</div>
+									<h3 class="font-semibold">{t('stadsparkenTitle')}</h3>
+								</div>
+								<p class="mb-4 text-gray-600">
+									{t('stadsparkenIntro')}
+								</p>
+								<ul class="space-y-2 text-gray-600">
+									<li><strong>{t('bessemerHall')}:</strong> {t('bessemerHallDesc')}</li>
+									<li><strong>{t('lekpark')}:</strong> {t('lekparkDesc')}</li>
+									<li><strong>{t('dromfabriken')}:</strong> {t('dromfabrikenDesc')}</li>
+									<li><strong>{t('scene')}:</strong> {t('sceneDesc')}</li>
+									<li><strong>{t('basketplan')}:</strong> {t('basketplanDesc')}</li>
+									<li><strong>{t('parking')}:</strong> {t('parkingDesc')}</li>
+									<li><strong>{t('finisherArea')}:</strong> {t('finisherAreaDesc')}</li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="mt-6">
 							<!-- Highlight Box -->
-							<div
-								class="relative mt-2 overflow-hidden rounded-lg border-l-4 border-red-500 bg-gradient-to-br from-gray-900 to-gray-800 p-5 text-white shadow-md"
-							>
+							<div class="card-info">
 								<div class="bg-opacity-20 absolute inset-0 bg-red-500 opacity-10"></div>
 								<div class="relative z-10">
-									<p class="font-medium">
-										{t('aboutMissionHighlight')}
-									</p>
+									<p>{t('riskSummary')}</p>
 								</div>
 							</div>
 						</div>
+					{/if}
 
-						<div class="md:col-span-2">
-							<div
-								class="flex h-48 w-full items-center justify-center rounded-lg bg-gray-100 shadow-md md:h-full"
-							>
-								<FontAwesomeIcon
-									icon={faRunning}
-									class="text-4xl text-gray-400 opacity-70 md:text-6xl"
-								/>
+					{#if activeTab === 'community'}
+						<!-- Tab Header -->
+						<div
+							class="layout-header"
+							role="tabpanel"
+							aria-labelledby="tab-community"
+							id="panel-community"
+						>
+							<div class="icon-container-lg layout-icon-spacing">
+								<FontAwesomeIcon icon={faUsers} size="lg" class="text-red-100" />
+							</div>
+							<div>
+								<h2 class="text-2xl font-bold">{t('aboutCommunityTitle')}</h2>
+								<p class="text-gray-500">{t('aboutCommunitySubtitle')}</p>
 							</div>
 						</div>
-					</div>
-				{/if}
 
-				{#if activeTab === 'history'}
-					<!-- Tab Header -->
-					<div class="layout-header">
-						<div class="icon-container-lg layout-icon-spacing">
-							<FontAwesomeIcon icon={faHistory} size="lg" class="text-red-100" />
-						</div>
-						<div>
-							<h2 class="text-2xl font-bold">{t('aboutHistoryTitle')}</h2>
-						</div>
-					</div>
+						<div class="grid gap-6 md:grid-cols-5">
+							<div class="md:col-span-3">
+								<p class="mb-4 text-gray-700">{t('aboutCommunityDesc')}</p>
+								<p class="text-gray-700">
+									{t('aboutCommunityText')}
+								</p>
 
-					<div class="grid gap-6 md:grid-cols-2">
-						<div>
-							<p class="mb-4 text-gray-700">{t('aboutHistoryDesc')}</p>
-						</div>						<div class="flex flex-col space-y-4">
-							<NumberedStep number={1} title={t('aboutHistoryFirstEvent')} description={t('aboutHistoryFirstEventDesc')} variant="black" />
-							<NumberedStep number={2} title={t('aboutHistoryGrowingCommunity')} description={t('aboutHistoryGrowingCommunityDesc')} variant="black" />
-							<NumberedStep number={3} title={t('aboutHistoryNationalRecognition')} description={t('aboutHistoryNationalRecognitionDesc')} variant="black" />
-						</div>
-					</div>
-				{/if}
+								<div class="mt-6 space-y-3">
+									<!-- Bullet Point -->
+									<div class="flex items-start">
+										<FontAwesomeIcon
+											icon={faChevronRight}
+											class="mt-1 mr-3 flex-shrink-0 text-red-500/70"
+										/>
+										<p class="text-gray-600">{t('communityEngagement')}</p>
+									</div>
 
-				{#if activeTab === 'values'}
-					<!-- Tab Header -->
-					<div class="mb-6 flex flex-col items-start md:flex-row md:items-center">
-						<div class="icon-container-lg layout-icon-spacing">
-							<FontAwesomeIcon icon={faLightbulb} size="lg" class="text-red-100" />
-						</div>
-						<div>
-							<h2 class="text-2xl font-bold">{t('aboutValuesTitle')}</h2>
-							<p class="text-gray-500">{t('aboutValuesSubtitle')}</p>
-						</div>
-					</div>
+									<!-- Bullet Point -->
+									<div class="flex items-start">
+										<FontAwesomeIcon
+											icon={faChevronRight}
+											class="mt-1 mr-3 flex-shrink-0 text-red-500/70"
+										/>
+										<p class="text-gray-600">{t('localBusinessSupport')}</p>
+									</div>
 
-					<div class="grid gap-6 md:grid-cols-3">
-						<!-- Value Card -->
-						<div class="card-feature">
-							<div class="icon-container-md mb-4 bg-gray-900">
-								<FontAwesomeIcon icon={faUsers} />
-							</div>
-							<h3 class="mb-2 text-xl font-semibold">{t('aboutValuesCommunity')}</h3>
-							<p class="text-gray-600">
-								{t('aboutValuesCommunityDesc')}
-							</p>
-						</div>
-
-						<!-- Value Card -->
-						<div class="card-feature">
-							<div class="icon-container-md mb-4 bg-gray-900">
-								<FontAwesomeIcon icon={faMedal} />
-							</div>
-							<h3 class="mb-2 text-xl font-semibold">{t('aboutValuesExcellence')}</h3>
-							<p class="text-gray-600">
-								{t('aboutValuesExcellenceDesc')}
-							</p>
-						</div>
-
-						<!-- Value Card -->
-						<div class="card-feature">
-							<div class="icon-container-md mb-4 bg-gray-900">
-								<FontAwesomeIcon icon={faHeart} />
-							</div>
-							<h3 class="mb-2 text-xl font-semibold">{t('aboutValuesInclusivity')}</h3>
-							<p class="text-gray-600">
-								{t('aboutValuesInclusivityDesc')}
-							</p>
-						</div>
-					</div>
-				{/if}
-
-				{#if activeTab === 'details'}
-					<!-- Tab Header -->
-					<div class="layout-header">
-						<div class="icon-container-lg layout-icon-spacing">
-							<FontAwesomeIcon icon={faInfoCircle} size="lg" class="text-red-100" />
-						</div>
-						<div>
-							<h2 class="text-2xl font-bold">{t('eventDetailsTitle')}</h2>
-							<p class="text-gray-500">{t('eventDetailsSubtitle')}</p>
-						</div>
-					</div>
-
-					<div class="grid gap-6 md:grid-cols-1">
-						<!-- Stadsparken Details -->
-						<div class="info-section">
-							<div class="mb-3 flex items-center">
-								<div class="icon-container-md mr-3">
-									<FontAwesomeIcon icon={faMapMarkerAlt} />
+									<!-- Bullet Point -->
+									<div class="flex items-start">
+										<FontAwesomeIcon
+											icon={faChevronRight}
+											class="mt-1 mr-3 flex-shrink-0 text-red-500/70"
+										/>
+										<p class="text-gray-600">{t('volunteerOpportunities')}</p>
+									</div>
 								</div>
-								<h3 class="font-semibold">{t('stadsparkenTitle')}</h3>
 							</div>
-							<p class="text-gray-600 mb-4">
-								{t('stadsparkenIntro')}
-							</p>
-							<ul class="text-gray-600 space-y-2">
-								<li><strong>{t('bessemerHall')}:</strong> {t('bessemerHallDesc')}</li>
-								<li><strong>{t('lekpark')}:</strong> {t('lekparkDesc')}</li>
-								<li><strong>{t('dromfabriken')}:</strong> {t('dromfabrikenDesc')}</li>
-								<li><strong>{t('scene')}:</strong> {t('sceneDesc')}</li>
-								<li><strong>{t('basketplan')}:</strong> {t('basketplanDesc')}</li>
-								<li><strong>{t('parking')}:</strong> {t('parkingDesc')}</li>
-								<li><strong>{t('finisherArea')}:</strong> {t('finisherAreaDesc')}</li>
-							</ul>
-						</div>
-					</div>
 
-					<div class="mt-6">
-						<!-- Highlight Box -->
-						<div class="card-info">
-							<div class="bg-opacity-20 absolute inset-0 bg-red-500 opacity-10"></div>
-							<div class="relative z-10">
-								<p>{t('riskSummary')}</p>
-							</div>
-						</div>
-					</div>
-				{/if}
-
-				{#if activeTab === 'community'}
-					<!-- Tab Header -->
-					<div class="layout-header">
-						<div class="icon-container-lg layout-icon-spacing">
-							<FontAwesomeIcon icon={faUsers} size="lg" class="text-red-100" />
-						</div>
-						<div>
-							<h2 class="text-2xl font-bold">{t('aboutCommunityTitle')}</h2>
-							<p class="text-gray-500">{t('aboutCommunitySubtitle')}</p>
-						</div>
-					</div>
-
-					<div class="grid gap-6 md:grid-cols-5">
-						<div class="md:col-span-3">
-							<p class="mb-4 text-gray-700">{t('aboutCommunityDesc')}</p>
-							<p class="text-gray-700">
-								{t('aboutCommunityText')}
-							</p>
-
-							<div class="mt-6 space-y-3">
-								<!-- Bullet Point -->
-								<div class="flex items-start">
+							<div class="md:col-span-2">
+								<div
+									class="flex h-48 w-full items-center justify-center rounded-lg bg-gray-100 shadow-md md:h-full"
+								>
 									<FontAwesomeIcon
-										icon={faChevronRight}
-										class="mt-1 mr-3 flex-shrink-0 text-red-500/70"
+										icon={faUsers}
+										class="text-4xl text-gray-400 opacity-70 md:text-6xl"
 									/>
-									<p class="text-gray-600">Community engagement throughout the year</p>
-								</div>
-
-								<!-- Bullet Point -->
-								<div class="flex items-start">
-									<FontAwesomeIcon
-										icon={faChevronRight}
-										class="mt-1 mr-3 flex-shrink-0 text-red-500/70"
-									/>
-									<p class="text-gray-600">Support for local businesses and organizations</p>
-								</div>
-
-								<!-- Bullet Point -->
-								<div class="flex items-start">
-									<FontAwesomeIcon
-										icon={faChevronRight}
-										class="mt-1 mr-3 flex-shrink-0 text-red-500/70"
-									/>
-									<p class="text-gray-600">Volunteer opportunities for all ages</p>
 								</div>
 							</div>
 						</div>
+					{/if}
 
-						<div class="md:col-span-2">
-							<div
-								class="flex h-48 w-full items-center justify-center rounded-lg bg-gray-100 shadow-md md:h-full"
-							>
-								<FontAwesomeIcon
-									icon={faUsers}
-									class="text-4xl text-gray-400 opacity-70 md:text-6xl"
-								/>
+					{#if activeTab === 'future'}
+						<!-- Tab Header -->
+						<div
+							class="layout-header"
+							role="tabpanel"
+							aria-labelledby="tab-future"
+							id="panel-future"
+						>
+							<div class="icon-container-lg layout-icon-spacing">
+								<FontAwesomeIcon icon={faTrophy} size="lg" class="text-red-100" />
+							</div>
+							<div>
+								<h2 class="text-2xl font-bold">{t('aboutFutureTitle')}</h2>
+								<p class="text-gray-500">{t('aboutFutureSubtitle')}</p>
 							</div>
 						</div>
-					</div>
-				{/if}
 
-				{#if activeTab === 'future'}
-					<!-- Tab Header -->
-					<div class="layout-header">
-						<div class="icon-container-lg layout-icon-spacing">
-							<FontAwesomeIcon icon={faTrophy} size="lg" class="text-red-100" />
-						</div>
-						<div>
-							<h2 class="text-2xl font-bold">{t('aboutFutureTitle')}</h2>
-							<p class="text-gray-500">{t('aboutFutureSubtitle')}</p>
-						</div>
-					</div>
+						<div class="grid gap-6 md:grid-cols-2">
+							<div>
+								<p class="mb-4 text-gray-700">{t('aboutFutureDesc')}</p>
+								<p class="text-gray-700">
+									{t('aboutFutureText')}
+								</p>
+							</div>
 
-					<div class="grid gap-6 md:grid-cols-2">
-						<div>
-							<p class="mb-4 text-gray-700">{t('aboutFutureDesc')}</p>
-							<p class="text-gray-700">
-								{t('aboutFutureText')}
-							</p>
-						</div>
-
-						<div class="card-info relative flex h-full flex-col justify-center">
-							<div class="bg-opacity-20 absolute inset-0 bg-red-500 opacity-10"></div>
-							<div class="relative z-10 flex items-center">
-								<div class="mr-4">
-									<FontAwesomeIcon icon={faTrophy} size="2x" class="text-red-300/80" />
-								</div>
-								<div>
-									<h3 class="mb-2 text-xl font-semibold">{t('joinLegacy')}</h3>
-									<p class="font-medium">
-										{t('joinLegacyDesc')}
-									</p>
-									<a href="/register" class="btn-secondary mt-4">
-										<span class="flex items-center"
-											>{t('registerNow')} <FontAwesomeIcon
-												icon={faChevronRight}
-												class="ml-2 h-3 w-3 text-red-500"
-											/></span
-										>
-									</a>
+							<div class="card-info relative flex h-full flex-col justify-center">
+								<div class="bg-opacity-20 absolute inset-0 bg-red-500 opacity-10"></div>
+								<div class="relative z-10 flex items-center">
+									<div class="mr-4">
+										<FontAwesomeIcon icon={faTrophy} size="2x" class="text-red-300/80" />
+									</div>
+									<div>
+										<h3 class="mb-2 text-xl font-semibold">{t('joinLegacy')}</h3>
+										<p class="font-medium">
+											{t('joinLegacyDesc')}
+										</p>
+										<a href="/register" class="btn-secondary mt-4">
+											<span class="flex items-center"
+												>{t('registerNow')}
+												<FontAwesomeIcon
+													icon={faChevronRight}
+													class="ml-2 h-3 w-3 text-red-500"
+												/></span
+											>
+										</a>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				{/if}
+					{/if}
+				</div>
 			</div>
-		</div>
 		</Container>
 	</section>
 </div>

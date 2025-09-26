@@ -37,7 +37,7 @@
 			<button
 				class="flex-shrink-0 p-2 text-gray-400 hover:text-gray-600"
 				on:click={dismissNotice}
-				aria-label="Dismiss cookie notice"
+				aria-label={t('dismissCookieNotice')}
 			>
 				<FontAwesomeIcon icon={faTimes} />
 			</button>

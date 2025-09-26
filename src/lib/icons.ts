@@ -4,12 +4,12 @@
 // Intent: Provide semantic icon choices that enhance user understanding of interface elements
 
 // Import solid icons for general UI elements - chosen for their clarity and recognition
-import { 
-	faHome, 
-	faInfoCircle, 
-	faMapMarkerAlt, 
-	faClipboard, 
-	faMedal, 
+import {
+	faHome,
+	faInfoCircle,
+	faMapMarkerAlt,
+	faClipboard,
+	faMedal,
 	faPhone,
 	faRunning,
 	faCalendarAlt,
@@ -22,11 +22,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 // Import brand icons for social media links - official brand representations
-import {
-	faFacebookF,
-	faTwitter, 
-	faInstagram
-} from '@fortawesome/free-brands-svg-icons';
+import { faFacebookF, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
 
 // Icons for main navigation menu - ensures consistent iconography across pages
 // Why specific icons: Home for landing, Info for about, Map for course, etc.

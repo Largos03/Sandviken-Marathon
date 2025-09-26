@@ -17,30 +17,31 @@
 	}[variant];
 </script>
 
-<div class="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-md transition-all duration-300 hover:shadow-lg">
+<div
+	class="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-md transition-all duration-300 hover:shadow-lg"
+>
 	<div class="p-6">
 		{#if icon}
-			<div class="mb-5 flex h-14 w-14 items-center justify-center rounded-lg {variantClasses} shadow-md">
+			<div
+				class="mb-5 flex h-14 w-14 items-center justify-center rounded-lg {variantClasses} shadow-md"
+			>
 				<FontAwesomeIcon {icon} size="lg" />
 			</div>
 		{/if}
 		<h3 class="mb-3 text-xl font-bold">{title}</h3>
 		<p class="mb-6 text-gray-600">{description}</p>
-		
+
 		<slot name="content" />
-		
+
 		{#if href && buttonText}
-			<a
-				{href}
-				class="mt-auto inline-flex items-center font-semibold text-black hover:underline"
-			>
+			<a {href} class="mt-auto inline-flex items-center font-semibold text-black hover:underline">
 				{buttonText}
 				<svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
 				</svg>
 			</a>
 		{/if}
-		
+
 		<slot name="actions" />
 	</div>
 </div>

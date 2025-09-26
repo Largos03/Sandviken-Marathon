@@ -15,7 +15,9 @@
 	}[variant];
 </script>
 
-<div class="group rounded-lg border-l-3 border-red-400/30 bg-gray-50 transition-colors hover:bg-gray-100">
+<div
+	class="group rounded-lg border-l-3 border-red-400/30 bg-gray-50 transition-colors hover:bg-gray-100"
+>
 	<div class="flex items-center p-3">
 		<div class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-md {variantClasses}">
 			<FontAwesomeIcon {icon} class="text-red-100" />

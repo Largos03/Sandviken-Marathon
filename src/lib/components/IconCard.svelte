@@ -20,10 +20,10 @@
 <div
 	class="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-md transition-all duration-300 hover:shadow-lg"
 >
-	<div class="p-6">
+	<div class="p-4 sm:p-5 md:p-6">
 		{#if icon}
 			<div
-				class="mb-5 flex h-14 w-14 items-center justify-center rounded-lg {variantClasses} shadow-md"
+				class="xs:h-14 xs:w-14 mb-5 flex h-12 w-12 items-center justify-center rounded-lg {variantClasses} shadow-md"
 			>
 				<FontAwesomeIcon {icon} size="lg" />
 			</div>

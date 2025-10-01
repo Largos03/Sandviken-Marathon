@@ -32,15 +32,26 @@
 
 <!-- Hero Section - Primary visual impact area to capture visitor attention -->
 <!-- Intent: Create immediate excitement and establish the event's premium nature -->
-<!-- Why full-screen: Maximizes visual impact on modern devices for better engagement -->
-<div class="relative h-screen overflow-hidden bg-black text-white" in:fade={{ duration: 300 }}>
+<!-- Why responsive height: Prevents excessive height on mobile landscape while maintaining full-screen on desktop -->
+<div
+	class="relative h-screen min-h-[60vh] overflow-hidden bg-black text-white md:h-screen md:min-h-screen"
+	in:fade={{ duration: 300 }}
+>
 	<!-- Multi-layer gradient overlays ensure text readability across varying video content -->
 	<!-- Why multiple layers: Provides depth and ensures contrast regardless of video brightness -->
 	<div class="absolute inset-0 z-10 bg-gradient-to-b from-black/80 via-black/70 to-black/85"></div>
 	<!-- Background video showcasing running to immerse visitors in the event atmosphere -->
 	<!-- Why autoplay muted: Complies with browser policies while maintaining visual engagement -->
 	<!-- playsinline prevents fullscreen on mobile devices -->
-	<video autoplay muted loop playsinline class="absolute inset-0 z-0 h-full w-full object-cover">
+	<video
+		autoplay
+		muted
+		loop
+		playsinline
+		preload="metadata"
+		poster="/Logo.png"
+		class="absolute inset-0 z-0 h-full w-full object-cover"
+	>
 		<source src="/running.mp4" type="video/mp4" />
 		Your browser does not support the video tag.
 	</video>
@@ -61,7 +72,9 @@
 
 			<!-- Main title with decorative elements - Emphasizes event name and year -->
 			<!-- Why split layout: Allows responsive typography and decorative accents -->
-			<h1 class="mb-4 text-5xl leading-tight font-black tracking-tight uppercase md:text-7xl">
+			<h1
+				class="xs:text-4xl mb-4 text-3xl leading-tight font-black tracking-tight uppercase sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl"
+			>
 				<div class="flex flex-col items-center">
 					<span class="relative mb-2 inline-block tracking-wide text-white">
 						{t('TITLE')}
@@ -118,7 +131,7 @@
 				>
 					<span class="text-lg font-bold">{t('inauguralEventTitle')}</span>
 				</div>
-				<h2 class="mb-6 text-4xl leading-tight font-bold md:text-5xl">
+				<h2 class="mb-6 text-3xl leading-tight font-bold sm:text-4xl md:text-5xl lg:text-6xl">
 					{t('bePartOfHistoryText')}
 				</h2>
 			</div>

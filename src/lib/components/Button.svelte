@@ -21,8 +21,8 @@
 
 	const sizeClasses = {
 		small: 'px-3 py-1.5 text-sm',
-		medium: 'px-5 py-3',
-		large: 'px-8 py-4 text-lg'
+		medium: 'px-4 py-2.5 text-sm sm:px-5 sm:py-3 sm:text-base',
+		large: 'px-6 py-3.5 text-base sm:px-8 sm:py-4 sm:text-lg'
 	};
 
 	$: classes = cn(

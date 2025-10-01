@@ -163,7 +163,7 @@
 		<nav
 			class="hidden items-center justify-center gap-2 overflow-hidden text-center font-semibold text-ellipsis whitespace-nowrap md:flex"
 		>
-			{#each navItems as item}
+			{#each navItems as item (item.href)}
 				<a
 					href={item.href}
 					class="group relative flex items-center justify-center px-3 py-1 text-sm font-medium text-gray-700 no-underline transition-colors duration-300 hover:text-red-600"
@@ -190,6 +190,7 @@
 				<span class="inline-flex h-4 w-4 items-center justify-center text-red-500">
 					<FontAwesomeIcon icon={faGlobe} size="sm" />
 				</span>
+				<span class="font-medium sm:hidden">{$language === 'en' ? 'SV' : 'EN'}</span>
 				<span class="hidden font-medium sm:inline"
 					>{$language === 'en' ? t('switchToSwedish') : t('switchToEnglish')}</span
 				>
@@ -236,7 +237,7 @@
 	<!-- Navigation Items -->
 	<div class="flex h-full flex-col">
 		<div class="mobile-menu-content flex-1 overflow-y-auto py-2">
-			{#each navItems as item, index}
+			{#each navItems as item, index (item.href)}
 				<a
 					href={item.href}
 					class="group mx-3 my-1 flex items-center rounded-lg p-3 text-gray-700 no-underline transition-all duration-200 hover:bg-gray-50 hover:text-red-600 {mobileMenuOpen

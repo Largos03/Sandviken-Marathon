@@ -6,7 +6,7 @@
 	$: t = $tStore;
 </script>
 
-<div class="rounded-2xl bg-gray-50 p-8 shadow-sm">
+<div class="rounded-2xl bg-gray-50 p-4 shadow-sm sm:p-6 md:p-8">
 	<div class="mb-6 flex items-center">
 		<div class="icon-container-lg mr-4 bg-black">
 			<FontAwesomeIcon icon={faClock} size="lg" />
@@ -43,8 +43,8 @@
 					class="absolute left-4 mt-1.5 h-3 w-3 -translate-x-1/2 transform rounded-full bg-red-500"
 				></div>
 				<div class="pl-10">
-					<div class="text-lg font-bold text-gray-900">{t('awardsCeremony')}</div>
-					<div class="text-gray-600">{t('awardsCeremonyText')}</div>
+					<div class="text-lg font-bold text-gray-900">{t('tenKStart')}</div>
+					<div class="text-gray-600">{t('tenKStartText')}</div>
 				</div>
 			</div>
 		</div>

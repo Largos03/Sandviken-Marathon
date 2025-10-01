@@ -8,7 +8,7 @@
 </script>
 
 <div
-	class="relative overflow-hidden rounded-xl bg-gradient-to-r from-gray-900 to-black p-8 text-white"
+	class="relative overflow-hidden rounded-xl bg-gradient-to-r from-gray-900 to-black p-6 text-white sm:p-8 md:p-10"
 >
 	<div class="relative z-10">
 		<div

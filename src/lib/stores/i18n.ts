@@ -3,7 +3,9 @@ import { commonTranslations } from './common';
 import { aboutTranslations } from './about';
 import { contactTranslations } from './contact';
 import { courseTranslations } from './course';
+import { funkisloppetTranslations } from './funkisloppet';
 import { homeTranslations } from './home';
+import { miniloppetTranslations } from './miniloppet';
 import { privacyTranslations } from './privacy';
 import { registerTranslations } from './register';
 import { resultsTranslations } from './results';
@@ -24,7 +26,9 @@ const combinedTranslations: Record<Language, TranslationObject> = {
 		...aboutTranslations.en,
 		...contactTranslations.en,
 		...courseTranslations.en,
+		...funkisloppetTranslations.en,
 		...homeTranslations.en,
+		...miniloppetTranslations.en,
 		...privacyTranslations.en,
 		...registerTranslations.en,
 		...resultsTranslations.en,
@@ -38,7 +42,9 @@ const combinedTranslations: Record<Language, TranslationObject> = {
 		...aboutTranslations.sv,
 		...contactTranslations.sv,
 		...courseTranslations.sv,
+		...funkisloppetTranslations.sv,
 		...homeTranslations.sv,
+		...miniloppetTranslations.sv,
 		...privacyTranslations.sv,
 		...registerTranslations.sv,
 		...resultsTranslations.sv,

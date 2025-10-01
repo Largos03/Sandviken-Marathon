@@ -9,6 +9,9 @@
 	export let id: string = '';
 </script>
 
-<div {id} class={`mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8 ${className}`}>
+<div
+	{id}
+	class={`mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 ${className}`}
+>
 	<slot />
 </div>

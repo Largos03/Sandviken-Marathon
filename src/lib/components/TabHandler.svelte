@@ -1,8 +1,9 @@
 <!-- Reusable Tab Handler Component -->
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
-	export let tabs: Array<{ id: string; label: string; icon?: any }> = [];
+	export let tabs: Array<{ id: string; label: string; icon?: IconDefinition }> = [];
 	export let activeTab: string = 'overview';
 
 	onMount(() => {

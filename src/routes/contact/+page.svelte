@@ -52,16 +52,12 @@
 			formSubmitted = true;
 			showSuccess = false;
 			showError = false;
-			console.log('Form submission started');
 		},
 		onResult: (event) => {
-			console.log('Form result received:', event.result);
-
 			if (event.result.type === 'success') {
 				showSuccess = true;
 				showError = false;
 				formSubmitted = false;
-				console.log('Form submitted successfully');
 			} else if (event.result.type === 'failure') {
 				showError = true;
 				showSuccess = false;

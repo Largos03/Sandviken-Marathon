@@ -25,14 +25,7 @@ export const actions: Actions = {
 	default: async ({ request }) => {
 		const form = await superValidate(request, zod(contactSchema));
 
-		console.log('Form validation result:', {
-			valid: form.valid,
-			data: form.data,
-			errors: form.errors
-		});
-
 		if (!form.valid) {
-			console.log('Form validation failed:', form.errors);
 			return fail(400, { form });
 		}
 
@@ -49,10 +42,8 @@ export const actions: Actions = {
 		const resend = new Resend(env.RESEND_API_KEY);
 
 		try {
-			console.log('Attempting to send email with data:', form.data);
-
 			// Send email using Resend
-			const emailResult = await resend.emails.send({
+			await resend.emails.send({
 				from: 'Sandviken Marathon <noreply@sandviken-marathon.com>', // Your custom domain
 				to: ['traningsgruppensandviken@outlook.com'],
 				subject: `Contact Form: ${escapeHtml(form.data.subject)}`,
@@ -66,8 +57,6 @@ export const actions: Actions = {
 				`,
 				replyTo: form.data.email // Allow replies to go to the form submitter
 			});
-
-			console.log('✅ Email sent successfully:', emailResult);
 
 			return {
 				form,

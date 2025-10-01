@@ -21,6 +21,10 @@ export const homeTranslations = {
 		raceCategories: 'Race Categories',
 		raceDescription: 'Half Marathon (21.1km) through the beautiful landscapes of Sandviken',
 		viewCategories: 'View Categories',
+		inauguralLegacy: 'Inaugural Legacy',
+		inauguralLegacyDescription:
+			"Be among the first to run Sandviken's historic course, blending industrial roots with natural beauty in unforgettable ways",
+		joinLegacy: 'Join the Legacy',
 		scenicRoute: 'Scenic Route',
 		routeDescription:
 			'Run through Barrsätra, Sätra, Stensätra, Säljan, and Orta neighborhoods, along the shores of Lake Storsjön, and past significant local landmarks',
@@ -28,6 +32,20 @@ export const homeTranslations = {
 		prizesAwards: 'Prizes & Awards',
 		prizesDescription: 'Exclusive medals for all finishers and special prizes for top performers',
 		learnMore: 'Learn More',
+
+		// Race cards
+		halfMarathonCard: 'Half Marathon',
+		halfMarathonCardDesc:
+			"21.1km through Sandviken's historic industrial heritage and natural beauty",
+		halfMarathonCardBtn: 'More info',
+		tenKCard: 'Para Run',
+		tenKCardDesc:
+			'A fun and relaxed 5km run perfect for families, beginners, and those looking to enjoy the atmosphere',
+		tenKCardBtn: 'More info',
+		teamRelayCard: 'Mini Race',
+		teamRelayCardDesc:
+			'A shorter 3km course designed for children and those wanting a manageable running experience',
+		teamRelayCardBtn: 'More info',
 
 		// Course section
 		theCourse: 'The Course',
@@ -128,6 +146,10 @@ export const homeTranslations = {
 		raceCategories: 'Loppkategorier',
 		raceDescription: 'Halvmaraton (21,1km) genom Sandvikens vackra landskap',
 		viewCategories: 'Visa Kategorier',
+		inauguralLegacy: 'Inaugural Legacy',
+		inauguralLegacyDescription:
+			'Var bland de första att springa Sandvikens historiska bana, som förenar industriella rötter med naturlig skönhet på oförglömliga sätt',
+		joinLegacy: 'Var med i arvet',
 		scenicRoute: 'Naturskön rutt',
 		routeDescription:
 			'Spring genom Barrsätra, Sätra, Stensätra, Säljan och Orta stadsdelar, längs Storsjöns stränder och förbi betydelsefulla lokala landmärken',
@@ -135,6 +157,19 @@ export const homeTranslations = {
 		prizesAwards: 'Priser & Utmärkelser',
 		prizesDescription: 'Exklusiva medaljer för alla målgångare och specialpriser för topputförare',
 		learnMore: 'Läs Mer',
+
+		// Race cards
+		halfMarathonCard: 'Halvmaraton',
+		halfMarathonCardDesc: '21,1km genom Sandvikens historiska industriarv och naturliga skönhet',
+		halfMarathonCardBtn: 'Mer info',
+		tenKCard: 'Funkisloppet',
+		tenKCardDesc:
+			'Ett kul och avslappnat 5km lopp perfekt för familjer, nybörjare och de som vill njuta av atmosfären',
+		tenKCardBtn: 'Mer info',
+		teamRelayCard: 'Mini-loppet',
+		teamRelayCardDesc:
+			'En kortare 3km bana utformad för barn och de som vill ha en hanterbar löpupplevelse',
+		teamRelayCardBtn: 'Mer info',
 
 		// Course section
 		theCourse: 'Banan',

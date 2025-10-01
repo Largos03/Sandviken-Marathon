@@ -62,10 +62,12 @@
 	</div>
 
 	<div
-		class="rounded-2xl border border-white/10 bg-black/30 p-3 shadow-2xl backdrop-blur-md md:p-4"
+		class="rounded-2xl border border-white/10 bg-black/30 p-3 shadow-2xl backdrop-blur-md sm:p-4 md:p-4"
 	>
-		<div class="grid grid-cols-2 gap-3 divide-gray-700/30 md:grid-cols-4 md:gap-0 md:divide-x">
-			{#each timeUnits as unit, index}
+		<div
+			class="xs:grid-cols-2 xs:gap-3 grid grid-cols-4 gap-2 divide-gray-700/30 sm:grid-cols-4 md:divide-x"
+		>
+			{#each timeUnits as unit, index (unit.label)}
 				<div class="px-2 py-3 md:px-4">
 					<div class="flex flex-col items-center">
 						<span

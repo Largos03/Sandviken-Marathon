@@ -88,7 +88,7 @@
 	<div class="bg-hero-dark">
 		<Container className="relative z-10 py-8 md:py-12">
 			<SectionHeading level={1} className="text-white mb-6">{t('resultsTitle')}</SectionHeading>
-			<div class="mb-8 h-1 w-32 -skew-x-12 transform bg-red-500/70"></div>
+			<div class="hero-accent-line mb-8"></div>
 			<p class="max-w-3xl text-xl leading-relaxed font-light md:text-2xl">{t('resultsIntro')}</p>
 		</Container>
 	</div>

@@ -9,26 +9,26 @@
 <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
 	<IconCard
 		icon={faRunning}
-		title={t('inauguralLegacy')}
-		description={t('inauguralLegacyDescription')}
+		title={t('home-inauguralLegacy')}
+		description={t('home-inauguralLegacyDescription')}
 		href="/register"
-		buttonText={t('joinLegacy')}
+		buttonText={t('home-joinLegacy')}
 	/>
 
 	<IconCard
 		icon={faMapMarkerAlt}
-		title={t('scenicRoute')}
-		description={t('routeDescription')}
+		title={t('home-scenicRoute')}
+		description={t('home-routeDescription')}
 		href="/course"
-		buttonText={t('exploreRoute')}
+		buttonText={t('home-exploreRoute')}
 	/>
 
 	<IconCard
 		icon={faMedal}
-		title={t('prizesAwards')}
-		description={t('prizesDescription')}
+		title={t('home-prizesAwards')}
+		description={t('home-prizesDescription')}
 		href="/about#details"
-		buttonText={t('learnMore')}
+		buttonText={t('home-learnMore')}
 	/>
 </div>
 
@@ -39,17 +39,17 @@
 	>
 		<!-- Hero image at top -->
 		<div class="h-60 overflow-hidden rounded-t-xl bg-gray-100">
-			<img src="/mapfiller.jpg" alt="Half Marathon Course Map" class="h-full w-full object-cover" />
+			<img src="/Halvmara.webp" alt="Half Marathon Course Map" class="h-full w-full object-cover" />
 		</div>
 		<!-- Content below -->
 		<div class="p-4 sm:p-5 md:p-6">
-			<h3 class="mb-3 text-xl font-bold">{t('halfMarathonCard')}</h3>
-			<p class="mb-6 text-gray-600">{t('halfMarathonCardDesc')}</p>
+			<h3 class="mb-3 text-xl font-bold">{t('home-halfMarathonCard')}</h3>
+			<p class="mb-6 text-gray-600">{t('home-halfMarathonCardDesc')}</p>
 			<a
 				href="/course"
 				class="mt-auto inline-flex items-center font-semibold text-black hover:underline"
 			>
-				{t('halfMarathonCardBtn')}
+				{t('home-halfMarathonCardBtn')}
 				<svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
 				</svg>
@@ -62,17 +62,17 @@
 	>
 		<!-- Hero image at top -->
 		<div class="h-60 overflow-hidden rounded-t-xl bg-gray-100">
-			<img src="/mapfiller.jpg" alt="Funkisloppet Course Map" class="h-full w-full object-cover" />
+			<img src="/Funkis.webp" alt="Funkisloppet Course Map" class="h-full w-full object-cover" />
 		</div>
 		<!-- Content below -->
 		<div class="p-4 sm:p-5 md:p-6">
-			<h3 class="mb-3 text-xl font-bold">{t('tenKCard')}</h3>
-			<p class="mb-6 text-gray-600">{t('tenKCardDesc')}</p>
+			<h3 class="mb-3 text-xl font-bold">{t('home-tenKCard')}</h3>
+			<p class="mb-6 text-gray-600">{t('home-tenKCardDesc')}</p>
 			<a
 				href="/Funkisloppet"
 				class="mt-auto inline-flex items-center font-semibold text-black hover:underline"
 			>
-				{t('tenKCardBtn')}
+				{t('home-tenKCardBtn')}
 				<svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
 				</svg>
@@ -85,17 +85,17 @@
 	>
 		<!-- Hero image at top -->
 		<div class="h-60 overflow-hidden rounded-t-xl bg-gray-100">
-			<img src="/mapfiller.jpg" alt="Mini-loppet Course Map" class="h-full w-full object-cover" />
+			<img src="/mini.webp" alt="Mini-loppet Course Map" class="h-full w-full object-cover" />
 		</div>
 		<!-- Content below -->
 		<div class="p-4 sm:p-5 md:p-6">
-			<h3 class="mb-3 text-xl font-bold">{t('teamRelayCard')}</h3>
-			<p class="mb-6 text-gray-600">{t('teamRelayCardDesc')}</p>
+			<h3 class="mb-3 text-xl font-bold">{t('home-teamRelayCard')}</h3>
+			<p class="mb-6 text-gray-600">{t('home-teamRelayCardDesc')}</p>
 			<a
 				href="/Mini-loppet"
 				class="mt-auto inline-flex items-center font-semibold text-black hover:underline"
 			>
-				{t('teamRelayCardBtn')}
+				{t('home-teamRelayCardBtn')}
 				<svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
 				</svg>

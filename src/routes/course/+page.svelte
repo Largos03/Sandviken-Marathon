@@ -46,7 +46,7 @@
 
 		<Container className="relative z-10 py-8 md:py-12">
 			<SectionHeading level={1} className="text-white mb-6">{t('courseHeading')}</SectionHeading>
-			<div class="mb-8 h-1 w-32 -skew-x-12 transform bg-red-500/70"></div>
+			<div class="hero-accent-line mb-8"></div>
 			<p class="max-w-3xl text-xl leading-relaxed font-light md:text-2xl">
 				{t('courseWelcomeText')}
 			</p>
@@ -58,9 +58,9 @@
 			<!-- Stats Cards Row -->
 			<div class="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
 				<div
-					class="group overflow-hidden rounded-xl bg-white shadow-md transition-all duration-300 hover:shadow-lg"
+					class="group card-white overflow-hidden rounded-xl transition-all duration-300 hover:shadow-lg"
 				>
-					<div class="h-1.5 w-full bg-red-500/70"></div>
+					<div class="accent-red h-1.5 w-full"></div>
 					<div class="p-6">
 						<div class="layout-content-gap">
 							<div class="icon-container-interactive">
@@ -79,9 +79,9 @@
 				</div>
 
 				<div
-					class="group overflow-hidden rounded-xl bg-white shadow-md transition-all duration-300 hover:shadow-lg"
+					class="group card-white overflow-hidden rounded-xl transition-all duration-300 hover:shadow-lg"
 				>
-					<div class="h-1.5 w-full bg-red-500/70"></div>
+					<div class="accent-red h-1.5 w-full"></div>
 					<div class="p-6">
 						<div class="layout-content-gap">
 							<div class="icon-container-interactive">
@@ -102,9 +102,9 @@
 				</div>
 
 				<div
-					class="group overflow-hidden rounded-xl bg-white shadow-md transition-all duration-300 hover:shadow-lg"
+					class="group card-white overflow-hidden rounded-xl transition-all duration-300 hover:shadow-lg"
 				>
-					<div class="h-1.5 w-full bg-red-500/70"></div>
+					<div class="accent-red h-1.5 w-full"></div>
 					<div class="p-6">
 						<div class="layout-content-gap">
 							<div class="icon-container-interactive">
@@ -123,9 +123,9 @@
 				</div>
 
 				<div
-					class="group overflow-hidden rounded-xl bg-white shadow-md transition-all duration-300 hover:shadow-lg"
+					class="group card-white overflow-hidden rounded-xl transition-all duration-300 hover:shadow-lg"
 				>
-					<div class="h-1.5 w-full bg-red-500/70"></div>
+					<div class="accent-red h-1.5 w-full"></div>
 					<div class="p-6">
 						<div class="layout-content-gap">
 							<div class="icon-container-interactive">
@@ -147,14 +147,14 @@
 			<!-- Map and Course Details -->
 			<div class="mb-10 grid grid-cols-1 gap-6 md:grid-cols-3">
 				<!-- Map Reveal Timer -->
-				<div class="overflow-hidden rounded-xl bg-white shadow-md">
+				<div class="card-white overflow-hidden rounded-xl">
 					<div class="p-6">
 						<MapRevealTimer />
 					</div>
 				</div>
 
 				<!-- Course Details -->
-				<div class="overflow-hidden rounded-xl bg-white shadow-md md:col-span-2">
+				<div class="card-white overflow-hidden rounded-xl md:col-span-2">
 					<div class="px-6 pt-6 pb-3">
 						<h2 class="mb-4 flex items-center gap-2 text-xl font-bold text-gray-900">
 							<FontAwesomeIcon icon={faRoute} class="text-red-500/70" />
@@ -200,18 +200,9 @@
 							<div>
 								<h4 class="mb-2 font-medium text-gray-900">{t('medicalStations')}</h4>
 								<div class="flex flex-wrap gap-2">
-									<span
-										class="rounded-full border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-gray-800 shadow-sm"
-										>10km</span
-									>
-									<span
-										class="rounded-full border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-gray-800 shadow-sm"
-										>15km</span
-									>
-									<span
-										class="rounded-full border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-gray-800 shadow-sm"
-										>21km</span
-									>
+									<span class="tag-medical">10km</span>
+									<span class="tag-medical">15km</span>
+									<span class="tag-medical">21km</span>
 								</div>
 								<p class="mt-2 text-sm text-gray-600">{t('medicalStationDetails')}</p>
 							</div>
@@ -221,7 +212,7 @@
 			</div>
 
 			<!-- Race Day Information -->
-			<div class="mb-10 overflow-hidden rounded-xl bg-white shadow-md">
+			<div class="card-white mb-10 overflow-hidden rounded-xl">
 				<div class="md:flex">
 					<div class="relative border-l-4 border-red-500 bg-gray-900 p-6 text-white md:w-1/3">
 						<div class="absolute inset-0 bg-red-500/20 opacity-10"></div>
@@ -242,9 +233,7 @@
 
 					<div class="p-6 md:w-2/3">
 						<div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-							<div
-								class="flex items-start gap-4 rounded-lg border-l-3 border-red-400/30 bg-gray-50 p-4 transition-colors hover:bg-gray-100"
-							>
+							<div class="info-hover flex items-start gap-4">
 								<div
 									class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md bg-gray-800 text-white"
 								>
@@ -291,7 +280,7 @@
 			</div>
 
 			<!-- Risk Management and Safety Section -->
-			<div class="mb-10 overflow-hidden rounded-xl bg-white shadow-md">
+			<div class="card-white mb-10 overflow-hidden rounded-xl">
 				<div class="p-6">
 					<h2 class="mb-4 flex items-center gap-2 text-2xl font-bold text-gray-900">
 						<FontAwesomeIcon icon={faShieldAlt} class="text-red-500/70" />
@@ -304,7 +293,7 @@
 			</div>
 
 			<!-- Event Staff and Support Section -->
-			<div class="overflow-hidden rounded-xl bg-white shadow-md">
+			<div class="card-white overflow-hidden rounded-xl">
 				<div class="p-6">
 					<h2 class="mb-4 flex items-center gap-2 text-2xl font-bold text-gray-900">
 						<FontAwesomeIcon icon={faUsers} class="text-red-500/70" />

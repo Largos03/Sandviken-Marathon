@@ -153,7 +153,7 @@
 			<!-- Logo -->
 			<a href="/" class="ml-3 flex items-center md:ml-0">
 				<img
-					src="/Logo.png"
+					src="/Logo.webp"
 					alt="Sandviken Half-marathon Logo"
 					class="h-10 w-auto drop-shadow-sm filter transition-transform duration-200 hover:scale-105"
 				/>

@@ -133,7 +133,7 @@
 		<Container>
 			<div class="card-main">
 				<div
-					class="min-h-[60vh] bg-gradient-to-b from-white to-gray-50 p-6 md:p-8"
+					class="bg-gradient-content min-h-[60vh] p-6 md:p-8"
 					transition:fade={{ duration: 300 }}
 				>
 					<!-- Tab Content -->
@@ -164,7 +164,7 @@
 								<div
 									class="relative mt-2 overflow-hidden rounded-lg border-l-4 border-red-500 bg-gradient-to-br from-gray-900 to-gray-800 p-5 text-white shadow-md"
 								>
-									<div class="bg-opacity-20 absolute inset-0 bg-red-500 opacity-10"></div>
+									<div class="bg-red-overlay absolute inset-0"></div>
 									<div class="relative z-10">
 										<p class="font-medium">
 											{t('aboutMissionHighlight')}
@@ -175,7 +175,7 @@
 
 							<div class="md:col-span-2">
 								<div
-									class="flex h-48 w-full items-center justify-center rounded-lg bg-gray-100 shadow-md md:h-full"
+									class="placeholder-icon flex h-48 w-full items-center justify-center rounded-lg md:h-full"
 								>
 									<FontAwesomeIcon
 										icon={faRunning}
@@ -326,7 +326,7 @@
 						<div class="mt-6">
 							<!-- Highlight Box -->
 							<div class="card-info">
-								<div class="bg-opacity-20 absolute inset-0 bg-red-500 opacity-10"></div>
+								<div class="bg-red-overlay absolute inset-0"></div>
 								<div class="relative z-10">
 									<p>{t('riskSummary')}</p>
 								</div>
@@ -390,7 +390,7 @@
 
 							<div class="md:col-span-2">
 								<div
-									class="flex h-48 w-full items-center justify-center rounded-lg bg-gray-100 shadow-md md:h-full"
+									class="placeholder-icon flex h-48 w-full items-center justify-center rounded-lg md:h-full"
 								>
 									<FontAwesomeIcon
 										icon={faUsers}
@@ -427,7 +427,7 @@
 							</div>
 
 							<div class="card-info relative flex h-full flex-col justify-center">
-								<div class="bg-opacity-20 absolute inset-0 bg-red-500 opacity-10"></div>
+								<div class="bg-red-overlay absolute inset-0"></div>
 								<div class="relative z-10 flex items-center">
 									<div class="mr-4">
 										<FontAwesomeIcon icon={faTrophy} size="2x" class="text-red-300/80" />

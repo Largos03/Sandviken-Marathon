@@ -16,9 +16,9 @@
 </script>
 
 <div
-	class="group overflow-hidden rounded-xl bg-white shadow-md transition-all duration-300 hover:shadow-lg"
+	class="group card-white overflow-hidden rounded-xl transition-all duration-300 hover:shadow-lg"
 >
-	<div class="h-1.5 w-full bg-red-500/70"></div>
+	<div class="accent-red h-1.5 w-full"></div>
 	<div class="p-6">
 		<div class="flex items-start gap-4">
 			<div

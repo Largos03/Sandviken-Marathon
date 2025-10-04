@@ -7,9 +7,7 @@
 	$: t = $tStore;
 </script>
 
-<div
-	class="relative overflow-hidden rounded-xl bg-gradient-to-r from-gray-900 to-black p-6 text-white sm:p-8 md:p-10"
->
+<div class="bg-gradient-dark relative overflow-hidden rounded-xl p-6 text-white sm:p-8 md:p-10">
 	<div class="relative z-10">
 		<div
 			class="mb-4 inline-block rounded-full bg-red-600 px-3 py-1 text-xs font-bold tracking-wider text-white uppercase"

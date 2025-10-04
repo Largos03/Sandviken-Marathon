@@ -9,7 +9,6 @@
 	import Container from '$lib/components/Container.svelte';
 	import CountdownTimer from '$lib/components/CountdownTimer.svelte';
 	import QuickOverview from '$lib/components/QuickOverview.svelte';
-	import SchedulePreview from '$lib/components/SchedulePreview.svelte';
 	import RegistrationCTA from '$lib/components/RegistrationCTA.svelte';
 
 	// State for animation visibility
@@ -26,8 +25,8 @@
 </script>
 
 <svelte:head>
-	<title>{t('officialEvent')}</title>
-	<meta name="description" content={t('metaDescription')} />
+	<title>{t('home-officialEvent')}</title>
+	<meta name="description" content={t('home-metaDescription')} />
 </svelte:head>
 
 <!-- Hero Section - Primary visual impact area to capture visitor attention -->
@@ -49,10 +48,10 @@
 		loop
 		playsinline
 		preload="metadata"
-		poster="/Logo.png"
+		poster="/Logo.webp"
 		class="absolute inset-0 z-0 h-full w-full object-cover"
 	>
-		<source src="/running.mp4" type="video/mp4" />
+		<source src="/running.webm" type="video/mp4" />
 		Your browser does not support the video tag.
 	</video>
 
@@ -65,28 +64,22 @@
 					class="flex items-center rounded-full bg-white px-6 py-2 text-sm font-bold tracking-wider text-black uppercase shadow-lg"
 				>
 					<FontAwesomeIcon icon={faStar} class="mr-1 text-red-600" size="xs" />
-					<span>{t('officialEvent')}</span>
+					<span>{t('home-officialEvent')}</span>
 					<FontAwesomeIcon icon={faStar} class="ml-1 text-red-600" size="xs" />
 				</div>
 			</div>
 
 			<!-- Main title with decorative elements - Emphasizes event name and year -->
 			<!-- Why split layout: Allows responsive typography and decorative accents -->
-			<h1
-				class="xs:text-4xl mb-4 text-3xl leading-tight font-black tracking-tight uppercase sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl"
-			>
+			<h1 class="mb-4 text-4xl leading-tight font-black tracking-tight uppercase md:text-7xl">
 				<div class="flex flex-col items-center">
 					<span class="relative mb-2 inline-block tracking-wide text-white">
-						{t('TITLE')}
+						{t('home-TITLE')}
 						<!-- Underline accent for visual emphasis and brand consistency -->
-						<div
-							class="absolute -right-2 bottom-1.5 -left-2 h-0.5 bg-gradient-to-r from-transparent via-red-500 to-transparent"
-						></div>
+						<div class="underline-accent absolute -right-2 bottom-1.5 -left-2 h-0.5"></div>
 					</span>
-					<span
-						class="relative inline-flex items-center bg-gradient-to-r from-white via-gray-300 to-white bg-clip-text tracking-wide text-transparent"
-					>
-						{t('TITLE2')}
+					<span class="text-gradient-white relative items-center tracking-wide">
+						{t('home-TITLE2')}
 					</span>
 				</div>
 			</h1>
@@ -95,22 +88,22 @@
 			<!-- Why backdrop blur: Modern aesthetic that maintains readability over video -->
 			<div class="mb-8">
 				<div
-					class="flex items-center rounded-xl border border-white/30 bg-black/30 px-6 py-3 font-bold text-white shadow-lg backdrop-blur-md"
+					class="backdrop-glass flex items-center rounded-xl border border-white/30 px-6 py-3 font-bold text-white shadow-lg"
 				>
 					<FontAwesomeIcon icon={faCalendarAlt} class="mr-3 text-red-400" />
-					<span>{t('homeEventDate')}</span>
+					<span>{t('home-eventDate')}</span>
 				</div>
 			</div>
 
 			<!-- Introductory text - Provides context and builds anticipation -->
 			<!-- Why max-width: Prevents text from becoming too wide on large screens -->
 			<p class="mb-10 max-w-2xl text-xl leading-relaxed font-light text-white/95 md:text-2xl">
-				{t('introText')}
+				{t('home-introText')}
 			</p>
 
 			<!-- Countdown timer - Builds urgency and excitement for the event -->
 			<!-- Why specific date: Official race start time; now configurable for future events -->
-			<CountdownTimer targetDate={EVENT_CONFIG.raceDate} label={t('homeRaceStartingIn')} />
+			<CountdownTimer targetDate={EVENT_CONFIG.raceDate} label={t('home-raceStartingIn')} />
 		{/if}
 	</div>
 </div>
@@ -126,23 +119,15 @@
 			<div class="mb-10 text-center">
 				<!-- Inaugural event badge - Emphasizes historical significance -->
 				<!-- Why gradient: Creates premium feel consistent with brand colors -->
-				<div
-					class="mb-4 inline-block rounded-lg bg-gradient-to-r from-gray-900 to-black px-4 py-2.5 text-white shadow-lg"
-				>
-					<span class="text-lg font-bold">{t('inauguralEventTitle')}</span>
+				<div class="bg-gradient-dark mb-4 inline-block rounded-lg px-4 py-2.5 text-white shadow-lg">
+					<span class="text-lg font-bold">{t('home-inauguralEventTitle')}</span>
 				</div>
 				<h2 class="mb-6 text-3xl leading-tight font-bold sm:text-4xl md:text-5xl lg:text-6xl">
-					{t('bePartOfHistoryText')}
+					{t('home-bePartOfHistoryText')}
 				</h2>
 			</div>
 			<!-- QuickOverview component displays key metrics to build trust and excitement -->
 			<QuickOverview />
-		</div>
-
-		<!-- Schedule Preview Section - Race day timeline and key events -->
-		<!-- Why included: Helps visitors understand event flow and plan their participation -->
-		<div class="mb-16">
-			<SchedulePreview />
 		</div>
 
 		<!-- Registration Call-to-Action - Primary conversion element -->

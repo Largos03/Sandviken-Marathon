@@ -10,4 +10,13 @@ declare global {
 	}
 }
 
+// Environment variable type definitions
+interface ImportMetaEnv {
+	readonly VITE_PUBLIC_API_URL?: string;
+}
+
+interface ImportMeta {
+	readonly env: ImportMetaEnv;
+}
+
 export {};

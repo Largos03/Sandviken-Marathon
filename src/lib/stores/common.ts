@@ -4,11 +4,14 @@ export const commonTranslations = {
 		// Navbar
 		home: 'Home',
 		about: 'About',
-		course: 'Course',
+		course: 'Courses',
 		register: 'Register',
 		results: 'Results',
 		contact: 'Contact',
 		navigation: 'Navigation',
+		courseHalfMarathon: 'Half Marathon',
+		courseParaRun: 'Para Run',
+		courseMiniRace: 'Mini Race',
 
 		// Footer
 		privacyPolicy: 'Privacy Policy',
@@ -84,11 +87,14 @@ export const commonTranslations = {
 		// Navbar
 		home: 'Hem',
 		about: 'Om',
-		course: 'Bana',
+		course: 'Banor',
 		register: 'Anmäl',
 		results: 'Resultat',
 		contact: 'Kontakt',
 		navigation: 'Navigation',
+		courseHalfMarathon: 'Halvmaraton',
+		courseParaRun: 'Funkisloppet',
+		courseMiniRace: 'Mini-loppet',
 
 		// Footer
 		privacyPolicy: 'Integritetspolicy',

@@ -13,58 +13,38 @@
 </script>
 
 <svelte:head>
-	<title>{t('TITLE')} - {t('TITLE2')}</title>
-	<meta name="description" content={t('metaDescription')} />
+	<title>{t('miniloppet-TITLE')} - {t('miniloppet-TITLE2')}</title>
+	<meta name="description" content={t('miniloppet-metaDescription')} />
 </svelte:head>
 
 <!-- Hero Section -->
-<HeroSection title={t('heroTitle')} description={t('heroDescription')} />
-
-<!-- Race Navigation -->
-<div class="border-b border-gray-200 bg-white/90 backdrop-blur-sm">
-	<div class="mx-auto max-w-6xl px-6 py-4">
-		<div class="flex items-center justify-center gap-4">
-			<span class="text-sm font-semibold text-gray-700">Mini-loppet (3km)</span>
-			<div class="text-sm text-gray-400">•</div>
-			<a
-				href="/Funkisloppet"
-				class="flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-4 py-2 text-red-700 transition-colors duration-200 hover:border-red-300 hover:bg-red-100 hover:text-red-800"
-			>
-				<span class="text-sm font-medium">Funkisloppet (5km)</span>
-				<svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"
-					></path>
-				</svg>
-			</a>
-		</div>
-	</div>
-</div>
+<HeroSection title={t('miniloppet-heroTitle')} description={t('miniloppet-heroDescription')} />
 
 <!-- Stats Section -->
 <Container className="py-12">
 	<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
 		<StatsCard
 			icon={commonIcons.mapMarked}
-			value={t('distanceValue')}
-			label={t('distance')}
+			value={t('miniloppet-distanceValue')}
+			label={t('miniloppet-distance')}
 			variant="red"
 		/>
 		<StatsCard
 			icon={commonIcons.clock}
-			value={t('estimatedTimeValue')}
-			label={t('estimatedTime')}
+			value={t('miniloppet-estimatedTimeValue')}
+			label={t('miniloppet-estimatedTime')}
 			variant="default"
 		/>
 		<StatsCard
 			icon={commonIcons.calendar}
-			value={t('startTimeValue')}
-			label={t('startTime')}
+			value={t('miniloppet-startTimeValue')}
+			label={t('miniloppet-startTime')}
 			variant="black"
 		/>
 		<StatsCard
 			icon={commonIcons.users}
-			value={t('ageLimitValue')}
-			label={t('ageLimit')}
+			value={t('miniloppet-ageLimitValue')}
+			label={t('miniloppet-ageLimit')}
 			variant="red"
 		/>
 	</div>
@@ -76,34 +56,34 @@
 	<div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2">
 		<IconCard
 			icon={commonIcons.users}
-			title={t('childFriendly')}
-			description={t('childFriendlyDesc')}
+			title={t('miniloppet-childFriendly')}
+			description={t('miniloppet-childFriendlyDesc')}
 		/>
 		<IconCard
 			icon={commonIcons.star}
-			title={t('supportiveEnvironment')}
-			description={t('supportiveEnvironmentDesc')}
+			title={t('miniloppet-supportiveEnvironment')}
+			description={t('miniloppet-supportiveEnvironmentDesc')}
 		/>
 		<IconCard
 			icon={commonIcons.mapMarked}
-			title={t('manageableDistance')}
-			description={t('manageableDistanceDesc')}
+			title={t('miniloppet-manageableDistance')}
+			description={t('miniloppet-manageableDistanceDesc')}
 		/>
 		<IconCard
 			icon={commonIcons.medal}
-			title={t('celebrationFocus')}
-			description={t('celebrationFocusDesc')}
+			title={t('miniloppet-celebrationFocus')}
+			description={t('miniloppet-celebrationFocusDesc')}
 		/>
 	</div>
 </Container>
 
 <!-- What to Expect Section -->
 <Container className="py-12">
-	<SectionHeading>{t('whatToExpect')}</SectionHeading>
+	<SectionHeading>{t('miniloppet-whatToExpect')}</SectionHeading>
 	<div class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
-		<NumberedStep number={1} title={t('step1Title')} description={t('step1Desc')} />
-		<NumberedStep number={2} title={t('step2Title')} description={t('step2Desc')} />
-		<NumberedStep number={3} title={t('step3Title')} description={t('step3Desc')} />
-		<NumberedStep number={4} title={t('step4Title')} description={t('step4Desc')} />
+		<NumberedStep number={1} title={t('miniloppet-step1Title')} description={t('miniloppet-step1Desc')} />
+		<NumberedStep number={2} title={t('miniloppet-step2Title')} description={t('miniloppet-step2Desc')} />
+		<NumberedStep number={3} title={t('miniloppet-step3Title')} description={t('miniloppet-step3Desc')} />
+		<NumberedStep number={4} title={t('miniloppet-step4Title')} description={t('miniloppet-step4Desc')} />
 	</div>
 </Container>

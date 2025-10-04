@@ -1,101 +1,101 @@
-// Funkisloppet page translations (5km fun run)
+// Funkisloppet page translations (1km para run)
 export const funkisloppetTranslations = {
 	en: {
 		// Meta
-		TITLE: 'Funkisloppet',
-		TITLE2: '5km Fun Run',
-		metaDescription:
-			'Join the fun and relaxed 5km Funkisloppet in Sandviken. Perfect for families, beginners, and those looking to enjoy the atmosphere.',
+		'funkisloppet-TITLE': 'Para Run',
+		'funkisloppet-TITLE2': '1km Para Run',
+		'funkisloppet-metaDescription':
+			'Join the inclusive 1km Para Run in Sandviken. Applications via email, perfect for all abilities.',
 
 		// Hero section
-		heroTitle: 'Funkisloppet',
-		heroSubtitle: '5km Fun Run',
-		heroDescription:
-			'A relaxed and enjoyable 5km run perfect for families, beginners, and those wanting to experience the Sandviken Marathon atmosphere without the full distance.',
+		'funkisloppet-heroTitle': 'Para Run',
+		'funkisloppet-heroSubtitle': '1km Para Run',
+		'funkisloppet-heroDescription':
+			'An inclusive 1km run for all abilities, featuring applications via email and the ability to register multiple participants.',
 
 		// Stats
-		distance: 'Distance',
-		distanceValue: '5km',
-		estimatedTime: 'Estimated Time',
-		estimatedTimeValue: '30-45 min',
-		startTime: 'Start Time',
-		startTimeValue: '10:00 AM',
-		ageLimit: 'Age Limit',
-		ageLimitValue: '8+ years',
+		'funkisloppet-distance': 'Distance',
+		'funkisloppet-distanceValue': '1km',
+		'funkisloppet-estimatedTime': 'Estimated Time',
+		'funkisloppet-estimatedTimeValue': '10-15 min',
+		'funkisloppet-startTime': 'Start Time',
+		'funkisloppet-startTimeValue': '11:00',
+		'funkisloppet-ageLimit': 'Age Limit',
+		'funkisloppet-ageLimitValue': 'No age limit',
 
 		// Features
-		familyFriendly: 'Family Friendly',
-		familyFriendlyDesc:
-			'Perfect for families with children, designed to be inclusive and welcoming for all ages and abilities.',
-		relaxedPace: 'Relaxed Pace',
-		relaxedPaceDesc:
+		'funkisloppet-familyFriendly': 'Inclusive for All',
+		'funkisloppet-familyFriendlyDesc':
+			'Open to all abilities, with applications via email allowing multiple people to be registered at once.',
+		'funkisloppet-relaxedPace': 'Relaxed Pace',
+		'funkisloppet-relaxedPaceDesc':
 			'No pressure to compete - focus on enjoying the scenic route and the festive atmosphere.',
-		scenicRoute: 'Scenic Route',
-		scenicRouteDesc:
-			'Experience the same beautiful course as the half marathon, just a shorter distance.',
-		medalFinish: 'Medal for All',
-		medalFinishDesc:
-			'Every participant receives a unique Funkisloppet medal to commemorate their achievement.',
+		'funkisloppet-scenicRoute': 'Scenic Route',
+		'funkisloppet-scenicRouteDesc':
+			'Experience the beautiful course, adapted for an enjoyable 1km journey.',
+		'funkisloppet-medalFinish': 'Complete Package',
+		'funkisloppet-medalFinishDesc':
+			'Every participant receives a t-shirt, medal, and fruit. Entry fee: 200kr.',
 
 		// What to expect
-		whatToExpect: 'What to Expect',
-		step1Title: 'Warm Welcome',
-		step1Desc: 'Arrive at Stadsparken and enjoy the festive atmosphere with music and activities.',
-		step2Title: 'Easy Start',
-		step2Desc: 'Begin your run at a comfortable pace with plenty of space and no rush.',
-		step3Title: 'Scenic Journey',
-		step3Desc:
+		'funkisloppet-whatToExpect': 'What to Expect',
+		'funkisloppet-step1Title': 'Warm Welcome',
+		'funkisloppet-step1Desc': 'Arrive at Stadsparken and enjoy the festive atmosphere with music and activities.',
+		'funkisloppet-step2Title': 'Easy Start',
+		'funkisloppet-step2Desc': 'Begin your run at a comfortable pace with plenty of space and no rush.',
+		'funkisloppet-step3Title': 'Scenic Journey',
+		'funkisloppet-step3Desc':
 			'Run through beautiful neighborhoods and along the lake shore, enjoying the support from spectators.',
-		step4Title: 'Celebration Finish',
-		step4Desc:
-			'Cross the finish line to cheers, collect your medal, and join the post-race celebrations.'
+		'funkisloppet-step4Title': 'Celebration Finish',
+		'funkisloppet-step4Desc':
+			'Cross the finish line to cheers, collect your package, and join the post-race celebrations.'
 	},
 	sv: {
 		// Meta
-		TITLE: 'Funkisloppet',
-		TITLE2: '5km Funlopp',
-		metaDescription:
-			'Delta i det roliga och avslappnade 5km Funkisloppet i Sandviken. Perfekt för familjer, nybörjare och de som vill njuta av atmosfären.',
+		'funkisloppet-TITLE': 'Funkisloppet',
+		'funkisloppet-TITLE2': '1km Funkisloppet',
+		'funkisloppet-metaDescription':
+			'Delta i det inkluderande 1km Paraloppet i Sandviken. Ansökningar via e-post, perfekt för alla förmågor.',
 
 		// Hero section
-		heroTitle: 'Funkisloppet',
-		heroSubtitle: '5km Funlopp',
-		heroDescription:
-			'Ett avslappnat och njutbart 5km lopp perfekt för familjer, nybörjare och de som vill uppleva Sandviken Marathons atmosfär utan full distans.',
+		'funkisloppet-heroTitle': 'Funkis loppet',
+		'funkisloppet-heroSubtitle': '1km Funkis loppet',
+		'funkisloppet-heroDescription':
+			'Ett inkluderande 1km lopp för alla förmågor, med ansökningar via e-post och möjlighet att registrera flera deltagare.',
 
 		// Stats
-		distance: 'Distans',
-		distanceValue: '5km',
-		estimatedTime: 'Beräknad Tid',
-		estimatedTimeValue: '30-45 min',
-		startTime: 'Starttid',
-		startTimeValue: '10:00',
-		ageLimit: 'Åldersgräns',
-		ageLimitValue: '8+ år',
+		'funkisloppet-distance': 'Distans',
+		'funkisloppet-distanceValue': '1km',
+		'funkisloppet-estimatedTime': 'Beräknad Tid',
+		'funkisloppet-estimatedTimeValue': '10-15 min',
+		'funkisloppet-startTime': 'Starttid',
+		'funkisloppet-startTimeValue': '11:00',
+		'funkisloppet-ageLimit': 'Åldersgräns',
+		'funkisloppet-ageLimitValue': 'Ingen åldersgräns',
 
 		// Features
-		familyFriendly: 'Familjevänligt',
-		familyFriendlyDesc:
-			'Perfekt för familjer med barn, designat för att vara inkluderande och välkomnande för alla åldrar och förmågor.',
-		relaxedPace: 'Avslappnat Tempo',
-		relaxedPaceDesc:
+		'funkisloppet-familyFriendly': 'Inkluderande för Alla',
+		'funkisloppet-familyFriendlyDesc':
+			'Öppet för alla förmågor, med ansökningar via e-post som tillåter flera personer att registreras samtidigt.',
+		'funkisloppet-relaxedPace': 'Avslappnat Tempo',
+		'funkisloppet-relaxedPaceDesc':
 			'Inget tryck att tävla - fokusera på att njuta av den vackra rutten och den festliga atmosfären.',
-		scenicRoute: 'Vackra Rutten',
-		scenicRouteDesc: 'Upplev samma vackra bana som halvmaran, bara kortare distans.',
-		medalFinish: 'Medalj för Alla',
-		medalFinishDesc:
-			'Varje deltagare får en unik Funkisloppet-medalj för att fira deras prestation.',
+		'funkisloppet-scenicRoute': 'Vackra Rutten',
+		'funkisloppet-scenicRouteDesc': 'Upplev den vackra banan, anpassad för en njutbar 1km resa.',
+		'funkisloppet-medalFinish': 'Komplett Paket',
+		'funkisloppet-medalFinishDesc':
+			'Varje deltagare får en t-shirt, medalj och frukt. Anmälningsavgift: 200kr.',
 
 		// What to expect
-		whatToExpect: 'Vad du Kan Förvänta Dig',
-		step1Title: 'Varm Välkomst',
-		step1Desc:
+		'funkisloppet-whatToExpect': 'Vad du Kan Förvänta Dig',
+		'funkisloppet-step1Title': 'Varm Välkomst',
+		'funkisloppet-step1Desc':
 			'Anländer till Stadsparken och njut av den festliga atmosfären med musik och aktiviteter.',
-		step2Title: 'Lätt Start',
-		step2Desc: 'Börja ditt lopp i en bekväm takt med gott om utrymme och ingen brådska.',
-		step3Title: 'Vackra Resan',
-		step3Desc: 'Spring genom vackra kvarter och längs sjöstranden, njut av stödet från åskådare.',
-		step4Title: 'Festlig Mål',
-		step4Desc: 'Korsa mållinjen till applåder, hämta din medalj och delta i efterloppets firande.'
+		'funkisloppet-step2Title': 'Lätt Start',
+		'funkisloppet-step2Desc': 'Börja ditt lopp i en bekväm takt med gott om utrymme och ingen brådska.',
+		'funkisloppet-step3Title': 'Vackra Resan',
+		'funkisloppet-step3Desc': 'Spring genom vackra kvarter och längs sjöstranden, njut av stödet från åskådare.',
+		'funkisloppet-step4Title': 'Festlig Mål',
+		'funkisloppet-step4Desc': 'Korsa mållinjen till applåder, hämta ditt paket och delta i efterloppets firande.'
 	}
 };

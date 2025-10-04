@@ -27,6 +27,70 @@
 <svelte:head>
 	<title>{t('home-officialEvent')}</title>
 	<meta name="description" content={t('home-metaDescription')} />
+	
+	<!-- Open Graph / Social Media Meta Tags -->
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Sandviken Half-Marathon 2026" />
+	<meta property="og:description" content={t('home-metaDescription')} />
+	<meta property="og:url" content="https://sandvikenhalfmarathon.com" />
+	
+	<!-- Twitter Meta Tags -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Sandviken Half-Marathon 2026" />
+	<meta name="twitter:description" content={t('home-metaDescription')} />
+	
+	<!-- Structured Data for Google -->
+	<script type="application/ld+json">
+		{JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": "SportsEvent",
+			"name": "Sandviken Half-Marathon",
+			"description": "Join us for an unforgettable running experience through the scenic landscapes of Sandviken, showcasing the perfect blend of natural beauty and industrial heritage.",
+			"startDate": "2026-08-22T11:00:00+02:00",
+			"endDate": "2026-08-22T16:00:00+02:00",
+			"eventStatus": "https://schema.org/EventScheduled",
+			"eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+			"location": {
+				"@type": "Place",
+				"name": "Stadsparken Sandviken",
+				"address": {
+					"@type": "PostalAddress",
+					"addressLocality": "Sandviken",
+					"addressCountry": "SE"
+				}
+			},
+			"organizer": {
+				"@type": "Organization",
+				"name": "Sandviken Half-Marathon",
+				"email": "traningsgruppensandviken@outlook.com"
+			},
+			"offers": {
+				"@type": "Offer",
+				"url": "https://sandvikenhalfmarathon.com/register",
+				"availability": "https://schema.org/PreOrder"
+			},
+			"subEvent": [
+				{
+					"@type": "SportsEvent",
+					"name": "Half Marathon",
+					"description": "21.1km half marathon through Sandviken",
+					"distance": "21.1 km"
+				},
+				{
+					"@type": "SportsEvent",
+					"name": "Para Run (Funkisloppet)",
+					"description": "1km inclusive run for all abilities",
+					"distance": "1 km"
+				},
+				{
+					"@type": "SportsEvent",
+					"name": "Mini Race",
+					"description": "200m fun race for children aged 2-6 years",
+					"distance": "200 m"
+				}
+			]
+		})}
+	</script>
 </svelte:head>
 
 <!-- Hero Section - Primary visual impact area to capture visitor attention -->

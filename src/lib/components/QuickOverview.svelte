@@ -104,7 +104,7 @@
 			
 			<!-- Distance badge -->
 			<div class="absolute bottom-4 left-4 rounded-lg border-2 border-white/30 bg-black/70 px-3 py-1.5 backdrop-blur-sm">
-				<span class="text-lg font-bold text-white">5 km</span>
+				<span class="text-lg font-bold text-white">1 km</span>
 			</div>
 		</div>
 
@@ -153,7 +153,7 @@
 			
 			<!-- Distance badge -->
 			<div class="absolute bottom-4 left-4 rounded-lg border-2 border-white/30 bg-black/70 px-3 py-1.5 backdrop-blur-sm">
-				<span class="text-lg font-bold text-white">3 km</span>
+				<span class="text-lg font-bold text-white">200m</span>
 			</div>
 		</div>
 

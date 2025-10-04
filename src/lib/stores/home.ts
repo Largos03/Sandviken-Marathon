@@ -34,14 +34,14 @@ export const homeTranslations = {
 		'home-learnMore': 'Learn More',
 
 		// Race cards
-		'home-halfMarathonCard': 'Half Marathon (21.1km)',
+		'home-halfMarathonCard': 'Half Marathon',
 		'home-halfMarathonCardDesc': 'The Sandviken Half-marathon course is 21.1 km long with a total elevation gain and loss of 74 m. The elevation profile is mostly flat with some gentle hills, making it relatively fast and manageable. It starts in Stadsparken Sandviken and winds through the city, extending southwards toward the lake and countryside before returning.',
 		'home-halfMarathonCardBtn': 'More info',
-		'home-tenKCard': 'Para Run (1km)',
+		'home-tenKCard': 'Para Run',
 		'home-tenKCardDesc':
 			'An inclusive 1km run for all abilities, featuring applications via email and the ability to register multiple participants. Enjoy a relaxed pace with no pressure to compete, focusing on the scenic route and festive atmosphere. Every participant receives a complete package including t-shirt, medal, and fruit.',
 		'home-tenKCardBtn': 'More info',
-		'home-teamRelayCard': 'Mini Race (200m)',
+		'home-teamRelayCard': 'Mini Race',
 		'home-teamRelayCardDesc':
 			'A fun 200m race designed specifically for children aged 2-6 years in a supportive environment. Features family-friendly activities along the route with cheerful volunteers and supporters cheering every participant. Emphasis on participation and fun rather than competition, with special recognition including t-shirt, medal, and fruit for all finishers.',
 		'home-teamRelayCardBtn': 'More info',
@@ -124,14 +124,14 @@ export const homeTranslations = {
 		'home-learnMore': 'Läs Mer',
 
 		// Race cards
-		'home-halfMarathonCard': 'Halvmaraton (21,1km)',
+		'home-halfMarathonCard': 'Halvmaraton',
 		'home-halfMarathonCardDesc': 'Sandviken Halvmarathon-banan är 21,1 km lång med en total stigning och nedstigning på 74 m. Höjdprofilen är mestadels platt med några lätta kullar, vilket gör den relativt snabb och hanterbar. Den börjar i Stadsparken Sandviken och slingrar genom staden, sträcker sig söderut mot sjön och landsbygden innan den återvänder.',
 		'home-halfMarathonCardBtn': 'Mer info',
-		'home-tenKCard': 'Funkisloppet (5km)',
+		'home-tenKCard': 'Funkisloppet',
 		'home-tenKCardDesc':
 			'Ett inkluderande 1km lopp för alla förmågor, med ansökningar via e-post och möjlighet att registrera flera deltagare. Njut av ett avslappnat tempo utan press att tävla, med fokus på den natursköna rutten och den festliga atmosfären. Varje deltagare får ett komplett paket inklusive t-shirt, medalj och frukt.',
 		'home-tenKCardBtn': 'Mer info',
-		'home-teamRelayCard': 'Mini-loppet (3km)',
+		'home-teamRelayCard': 'Mini-loppet',
 		'home-teamRelayCardDesc':
 			'Ett kul 200m lopp designat specifikt för barn i åldern 2-6 år i en stödjande miljö. Innehåller familjevänliga aktiviteter längs rutten med glada volontärer och supportrar som hejar på varje deltagare. Betoning på deltagande och kul snarare än tävling, med särskild uppmärksamhet inklusive t-shirt, medalj och frukt för alla målgångare.',
 		'home-teamRelayCardBtn': 'Mer info',

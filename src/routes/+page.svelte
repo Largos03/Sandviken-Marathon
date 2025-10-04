@@ -9,7 +9,6 @@
 	import Container from '$lib/components/Container.svelte';
 	import CountdownTimer from '$lib/components/CountdownTimer.svelte';
 	import QuickOverview from '$lib/components/QuickOverview.svelte';
-	import SchedulePreview from '$lib/components/SchedulePreview.svelte';
 	import RegistrationCTA from '$lib/components/RegistrationCTA.svelte';
 
 	// State for animation visibility
@@ -129,12 +128,6 @@
 			</div>
 			<!-- QuickOverview component displays key metrics to build trust and excitement -->
 			<QuickOverview />
-		</div>
-
-		<!-- Schedule Preview Section - Race day timeline and key events -->
-		<!-- Why included: Helps visitors understand event flow and plan their participation -->
-		<div class="mb-16">
-			<SchedulePreview />
 		</div>
 
 		<!-- Registration Call-to-Action - Primary conversion element -->

@@ -3,7 +3,7 @@ export const courseTranslations = {
 	en: {
 		// Course page
 		courseDescription:
-			'Sandviken Halvmarathon-banan är 21,1 km lång med en total stigning och nedstigning på 74 m. Höjdprofilen är mestadels platt med några lätta kullar, vilket gör den relativt snabb och hanterbar. Den börjar i Stadsparken Sandviken och slingrar genom staden, sträcker sig söderut mot sjön och landsbygden innan den återvänder. Rutten passerar genom Barrsätra, Sätra, Stensätra, Säljan och Örta stadsdelar, med delar som löper nära Storsjöns strandlinje. Banan kombinerar både urbana gator och mer naturliga/skogsområden, vilket ger en naturskön rutt som visar Sandvikens unika blandning av industriarv och naturlig skönhet.',
+			'The Sandviken Half-marathon course is 21.1 km long with a total elevation gain and loss of 74 m. The elevation profile is mostly flat with some gentle hills, making it relatively fast and manageable. It starts in Stadsparken Sandviken and winds through the city, extending southwards toward the lake and countryside before returning. The route passes through Barrsätra, Sätra, Stensätra, Säljan and Örta neighborhoods, with sections running close to the shoreline of Lake Storsjön. The course combines both urban streets and more natural/forest areas, providing a scenic route that showcases Sandviken\'s unique blend of industrial heritage and natural beauty.',
 		coursePageTitle: 'The Course | Sandviken Half-marathon',
 		coursePageIntro:
 			'Experience a meticulously designed route that showcases the best of Sandviken',
@@ -36,9 +36,9 @@ export const courseTranslations = {
 		raceDayDetails: 'Everything you need to know for a successful race day experience',
 		stadsparkenMapAlt: 'Map of stadsparken Sandviken area (Start area)',
 		startTime: 'Start Time',
-		startTimeDetails: 'Marathon starts at 11:00 AM, Half Marathon at 11:15 AM, 10K at 11:30 AM',
+		startTimeDetails: 'Half marathon start 10:00',
 		startLocation: 'Start Location',
-		startLocationDetails: 'Near Stadsparken Sandviken in Sandviken',
+		startLocationDetails: 'Near Stadsparken Sandviken',
 		supportAvailable: 'Support Available',
 		supportDetails: 'Hydration, nutrition, and medical support throughout the course',
 		moreInfo: 'More Information',
@@ -48,7 +48,7 @@ export const courseTranslations = {
 			'Your safety is our top priority. Our comprehensive risk management plan includes emergency response teams stationed throughout the course, weather monitoring systems, and clear communication protocols. All participants receive detailed safety briefings, and our course is designed with multiple access points for emergency services.',
 		staffingPlanTitle: 'Event Staff & Support',
 		staffingPlanDesc:
-			'Our race is supported by over 200 trained volunteers and professional staff, including certified medical personnel, experienced race marshals, and dedicated aid station crews. Each kilometer of the course is monitored, and our command center maintains communication with all staff throughout the event.',
+			'Supported by approximately 100 - 150 committed volunteers, with many kilometers of the track covered, and to ensure safety during the race, a bicycle handler will follow the last participant.',
 
 		// Map reveal translations
 		mapRevealTitle: 'Map Reveal Countdown',
@@ -100,7 +100,7 @@ export const courseTranslations = {
 			'Din säkerhet är vår högsta prioritet. Vår omfattande riskhanteringsplan inkluderar akutteam stationerade längs banan, system för väderövervakning och tydliga kommunikationsprotokoll. Alla deltagare får detaljerade säkerhetsbriefingar, och vår bana är utformad med flera åtkomstpunkter för räddningstjänsten.',
 		staffingPlanTitle: 'Evenemangspersonal & Support',
 		staffingPlanDesc:
-			'Vårt lopp stöds av över 200 utbildade volontärer och professionell personal, inklusive certifierad sjukvårdspersonal, erfarna lopp-marskalkar och dedikerade vätskestation-team. Varje kilometer av banan övervakas, och vår kommandocentral upprätthåller kommunikation med all personal under hela evenemanget.',
+			'Stöds av cirka 100 - 150 engagerade volontärer, med många kilometer av banan täckta, och för att säkerställa säkerheten under loppet kommer en cykelsvepare att följa den sista deltagaren.',
 
 		// Map reveal translations
 		mapRevealTitle: 'Kartavslutning Nedräkning',

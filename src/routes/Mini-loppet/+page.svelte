@@ -20,26 +20,6 @@
 <!-- Hero Section -->
 <HeroSection title={t('miniloppet-heroTitle')} description={t('miniloppet-heroDescription')} />
 
-<!-- Race Navigation -->
-<div class="border-b border-gray-200 bg-white/90 backdrop-blur-sm">
-	<div class="mx-auto max-w-6xl px-6 py-4">
-		<div class="flex items-center justify-center gap-4">
-			<span class="text-sm font-semibold text-gray-700">Mini-loppet (3km)</span>
-			<div class="text-sm text-gray-400">•</div>
-			<a
-				href="/Funkisloppet"
-				class="flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-4 py-2 text-red-700 transition-colors duration-200 hover:border-red-300 hover:bg-red-100 hover:text-red-800"
-			>
-				<span class="text-sm font-medium">Funkisloppet (5km)</span>
-				<svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"
-					></path>
-				</svg>
-			</a>
-		</div>
-	</div>
-</div>
-
 <!-- Stats Section -->
 <Container className="py-12">
 	<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">

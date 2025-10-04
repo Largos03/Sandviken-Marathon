@@ -21,7 +21,7 @@ export const aboutTranslations = {
 		aboutHistoryFirstEventDesc: 'We hope to gather 200-300 runners from all over the country.',
 		aboutHistoryGrowingCommunity: 'Growing Community',
 		aboutHistoryGrowingCommunityDesc:
-			'We expanded our race categories and welcomed more participants each year.',
+			'We hope to expand our race categories each year to include more participants.',
 		aboutHistoryNationalRecognition: 'National Recognition',
 		aboutHistoryNationalRecognitionDesc:
 			'Sandviken Half-marathon is now a key event in the Swedish running calendar.',
@@ -119,7 +119,7 @@ export const aboutTranslations = {
 		aboutHistoryFirstEventDesc: 'hoppas samla 200-300 löpare från hela landet.',
 		aboutHistoryGrowingCommunity: 'Växande Gemenskap',
 		aboutHistoryGrowingCommunityDesc:
-			'Vi utökade våra loppkategorier och välkomnade fler deltagare varje år.',
+			'Vi hoppas kunna utöka våra loppkategorier för varje år inom fler deltagare.',
 		aboutHistoryNationalRecognition: 'Nationellt Erkännande',
 		aboutHistoryNationalRecognitionDesc:
 			'Sandviken Halvmarathon är nu ett viktigt evenemang i den svenska löpkalendern.',

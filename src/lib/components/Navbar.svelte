@@ -14,7 +14,8 @@
 		faClipboard,
 		faMedal,
 		faPhone,
-		faChevronRight
+		faChevronRight,
+		faChevronDown
 	} from '@fortawesome/free-solid-svg-icons';
 
 	// Import language store
@@ -22,17 +23,29 @@
 
 	// Component state variables
 	let mobileMenuOpen = false;
+	let courseDropdownOpen = false;
+	let mobileCourseSectionOpen = false;
 	let lastScrollY = 0;
 	let menuButton: HTMLButtonElement;
 
-	// Navigation items configuration
-	const navItems = [
+	// Navigation items configuration - before Course
+	const navItemsBefore = [
 		{ href: '/', icon: faHome, key: 'home' },
-		{ href: '/about', icon: faInfoCircle, key: 'about' },
-		{ href: '/course', icon: faMapMarkerAlt, key: 'course' },
+		{ href: '/about', icon: faInfoCircle, key: 'about' }
+	];
+
+	// Navigation items configuration - after Course
+	const navItemsAfter = [
 		{ href: '/register', icon: faClipboard, key: 'register' },
 		{ href: '/results', icon: faMedal, key: 'results' },
 		{ href: '/contact', icon: faPhone, key: 'contact' }
+	];
+
+	// Course dropdown items
+	const courseItems = [
+		{ href: '/course', key: 'courseHalfMarathon' },
+		{ href: '/Funkisloppet', key: 'courseParaRun' },
+		{ href: '/Mini-loppet', key: 'courseMiniRace' }
 	];
 
 	// Mobile menu handling functions
@@ -50,6 +63,19 @@
 				document.body.style.overflow = '';
 			}
 		}
+	}
+
+	// Course dropdown handling
+	function toggleCourseDropdown(): void {
+		courseDropdownOpen = !courseDropdownOpen;
+	}
+
+	function closeCourseDropdown(): void {
+		courseDropdownOpen = false;
+	}
+
+	function toggleMobileCourseSection(): void {
+		mobileCourseSectionOpen = !mobileCourseSectionOpen;
 	}
 
 	// Language toggle function
@@ -99,14 +125,24 @@
 			}
 		};
 
+		// Close dropdown when clicking outside
+		const handleClickOutside = (e: MouseEvent) => {
+			const target = e.target as HTMLElement;
+			if (courseDropdownOpen && !target.closest('.course-dropdown-container')) {
+				closeCourseDropdown();
+			}
+		};
+
 		// Event listeners with passive scrolling for better performance
 		window.addEventListener('scroll', handleScroll, { passive: true });
 		window.addEventListener('resize', handleResize);
+		document.addEventListener('click', handleClickOutside);
 
 		// Clean up on unmount
 		return () => {
 			window.removeEventListener('scroll', handleScroll);
 			window.removeEventListener('resize', handleResize);
+			document.removeEventListener('click', handleClickOutside);
 
 			if (mobileMenuOpen && typeof document !== 'undefined') {
 				document.body.style.overflow = '';
@@ -161,9 +197,66 @@
 		</div>
 		<!-- Desktop navigation -->
 		<nav
-			class="hidden items-center justify-center gap-2 overflow-hidden text-center font-semibold text-ellipsis whitespace-nowrap md:flex"
+			class="hidden items-center justify-center gap-2 text-center font-semibold whitespace-nowrap md:flex"
 		>
-			{#each navItems as item (item.href)}
+			{#each navItemsBefore as item (item.href)}
+				<a
+					href={item.href}
+					class="group relative flex items-center justify-center px-3 py-1 text-sm font-medium text-gray-700 no-underline transition-colors duration-300 hover:text-red-600"
+				>
+					<span
+						class="text-opacity-80 mr-1.5 inline-flex h-3.5 w-3.5 items-center justify-center text-red-500"
+					>
+						<FontAwesomeIcon icon={item.icon} size="sm" />
+					</span>
+					<span>{t(item.key)}</span>
+					<span
+						class="absolute bottom-[-1px] left-0 h-0.5 w-full origin-left scale-x-0 transform rounded bg-red-600 transition-transform duration-300 group-hover:scale-x-100"
+					></span>
+				</a>
+			{/each}
+
+			<!-- Course Dropdown -->
+			<div class="course-dropdown-container relative">
+				<button
+					on:click={toggleCourseDropdown}
+					class="group relative flex items-center justify-center px-3 py-1 text-sm font-medium text-gray-700 no-underline transition-colors duration-300 hover:text-red-600"
+					aria-expanded={courseDropdownOpen}
+					aria-haspopup="true"
+				>
+					<span
+						class="text-opacity-80 mr-1.5 inline-flex h-3.5 w-3.5 items-center justify-center text-red-500"
+					>
+						<FontAwesomeIcon icon={faMapMarkerAlt} size="sm" />
+					</span>
+					<span>{t('course')}</span>
+					<span class="ml-1 inline-flex h-3 w-3 items-center justify-center transition-transform duration-200 {courseDropdownOpen ? 'rotate-180' : ''}">
+						<FontAwesomeIcon icon={faChevronDown} size="xs" />
+					</span>
+					<span
+						class="absolute bottom-[-1px] left-0 h-0.5 w-full origin-left scale-x-0 transform rounded bg-red-600 transition-transform duration-300 group-hover:scale-x-100"
+					></span>
+				</button>
+
+				{#if courseDropdownOpen}
+					<div
+						class="absolute top-full left-0 z-[100] mt-1 w-56 rounded-lg border border-gray-200 bg-white py-2 shadow-lg"
+					>
+						{#each courseItems as item (item.href)}
+							<a
+								href={item.href}
+								on:click={closeCourseDropdown}
+								class="flex items-center px-4 py-2.5 text-sm font-medium text-gray-700 transition-colors duration-150 hover:bg-gray-50 hover:text-red-600"
+							>
+								<span class="mr-2 inline-flex h-2 w-2 rounded-full bg-red-500"></span>
+								<span>{t(item.key)}</span>
+							</a>
+						{/each}
+					</div>
+				{/if}
+			</div>
+
+			{#each navItemsAfter as item (item.href)}
 				<a
 					href={item.href}
 					class="group relative flex items-center justify-center px-3 py-1 text-sm font-medium text-gray-700 no-underline transition-colors duration-300 hover:text-red-600"
@@ -237,7 +330,7 @@
 	<!-- Navigation Items -->
 	<div class="flex h-full flex-col">
 		<div class="mobile-menu-content flex-1 overflow-y-auto py-2">
-			{#each navItems as item, index (item.href)}
+			{#each navItemsBefore as item, index (item.href)}
 				<a
 					href={item.href}
 					class="group mx-3 my-1 flex items-center rounded-lg p-3 text-gray-700 no-underline transition-all duration-200 hover:bg-gray-50 hover:text-red-600 {mobileMenuOpen
@@ -245,6 +338,72 @@
 						: ''}"
 					on:click={closeMobileMenu}
 					style="animation-delay: {mobileMenuOpen ? index * 80 + 150 : 0}ms"
+				>
+					<div
+						class="mr-3 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-gray-100 text-red-600 transition-all duration-200 group-hover:bg-red-600 group-hover:text-white"
+					>
+						<FontAwesomeIcon icon={item.icon} size="sm" />
+					</div>
+					<div class="flex flex-1 flex-col">
+						<span class="text-base font-medium">{t(item.key)}</span>
+					</div>
+					<div
+						class="translate-x-1 transform opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100"
+					>
+						<FontAwesomeIcon
+							icon={faChevronRight}
+							class="h-3 w-3 text-gray-400 group-hover:text-red-500"
+						/>
+					</div>
+				</a>
+			{/each}
+
+			<!-- Course Section in Mobile Menu -->
+			<div class="mx-3 my-1 {mobileMenuOpen ? 'animate-slideIn' : ''}" style="animation-delay: {mobileMenuOpen ? navItemsBefore.length * 80 + 150 : 0}ms">
+				<button
+					on:click={toggleMobileCourseSection}
+					class="group flex w-full items-center rounded-lg p-3 text-left text-gray-700 transition-all duration-200 hover:bg-gray-50 hover:text-red-600"
+				>
+					<div
+						class="mr-3 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-gray-100 text-red-600 transition-all duration-200 group-hover:bg-red-600 group-hover:text-white"
+					>
+						<FontAwesomeIcon icon={faMapMarkerAlt} size="sm" />
+					</div>
+					<div class="flex flex-1 flex-col">
+						<span class="text-base font-medium">{t('course')}</span>
+					</div>
+					<div class="transition-transform duration-200 {mobileCourseSectionOpen ? 'rotate-90' : ''}">
+						<FontAwesomeIcon
+							icon={faChevronRight}
+							class="h-3 w-3 text-gray-400 group-hover:text-red-500"
+						/>
+					</div>
+				</button>
+
+				{#if mobileCourseSectionOpen}
+					<div class="ml-3 mt-1 space-y-1 border-l-2 border-gray-200 pl-3">
+						{#each courseItems as item (item.href)}
+							<a
+								href={item.href}
+								on:click={closeMobileMenu}
+								class="flex items-center rounded-lg px-3 py-2 text-sm font-medium text-gray-600 transition-colors duration-150 hover:bg-gray-50 hover:text-red-600"
+							>
+								<span class="mr-2 inline-flex h-1.5 w-1.5 rounded-full bg-red-500"></span>
+								<span>{t(item.key)}</span>
+							</a>
+						{/each}
+					</div>
+				{/if}
+			</div>
+
+			{#each navItemsAfter as item, index (item.href)}
+				<a
+					href={item.href}
+					class="group mx-3 my-1 flex items-center rounded-lg p-3 text-gray-700 no-underline transition-all duration-200 hover:bg-gray-50 hover:text-red-600 {mobileMenuOpen
+						? 'animate-slideIn'
+						: ''}"
+					on:click={closeMobileMenu}
+					style="animation-delay: {mobileMenuOpen ? (navItemsBefore.length + 1 + index) * 80 + 150 : 0}ms"
 				>
 					<div
 						class="mr-3 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-gray-100 text-red-600 transition-all duration-200 group-hover:bg-red-600 group-hover:text-white"

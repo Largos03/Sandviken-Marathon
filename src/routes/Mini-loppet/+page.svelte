@@ -15,6 +15,37 @@
 <svelte:head>
 	<title>{t('miniloppet-TITLE')} - {t('miniloppet-TITLE2')}</title>
 	<meta name="description" content={t('miniloppet-metaDescription')} />
+	
+	<!-- Open Graph / Social Media Meta Tags -->
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Mini Race (200m) - Sandviken Half-Marathon" />
+	<meta property="og:description" content="A fun 200m race designed specifically for children aged 2-6 years in a supportive environment." />
+	<meta property="og:url" content="https://sandvikenhalfmarathon.com/Mini-loppet" />
+	
+	<!-- Structured Data -->
+	<script type="application/ld+json">
+		{JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": "SportsEvent",
+			"name": "Mini Race (Mini-loppet)",
+			"description": "A fun 200m race designed specifically for children aged 2-6 years in a supportive environment.",
+			"distance": "200 m",
+			"startDate": "2026-08-22T11:00:00+02:00",
+			"location": {
+				"@type": "Place",
+				"name": "Stadsparken Sandviken",
+				"address": {
+					"@type": "PostalAddress",
+					"addressLocality": "Sandviken",
+					"addressCountry": "SE"
+				}
+			},
+			"organizer": {
+				"@type": "Organization",
+				"name": "Sandviken Half-Marathon"
+			}
+		})}
+	</script>
 </svelte:head>
 
 <!-- Hero Section -->

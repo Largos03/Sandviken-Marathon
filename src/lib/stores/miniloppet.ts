@@ -1,4 +1,4 @@
-// Mini-loppet page translations (3km short course)
+// Mini-loppet page translations (200m kids race for ages 2-6)
 export const miniloppetTranslations = {
 	en: {
 		// Meta
